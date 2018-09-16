@@ -64,10 +64,10 @@ class RadarDisplay(Frame):
 
         self.log.info("[Disp] Starting Main Frame")
         
-        # These are the tuples of what is selected in the listbox
-        self.app_dep = StringVar()
+        self.trigger = StringVar()
         self.refresh_rate = IntVar()
         self.graph_max = IntVar()
+        self.trigger_lvl = IntVar()
         
         # Removed as scale markers don't make sense with multiple lines
         self.y_max_scale_value = IntVar()
@@ -78,19 +78,20 @@ class RadarDisplay(Frame):
         self.dataset = []           # The dataset being displayed and graphed
         for i in range(0,MAX_LENGTH):           # set all the values to zero to ensure full dataset used.
             self.dataset.append(0)
+        self.trigger_lvl.set(SS.TRIGGER_LVL)
             
-        self.app_dep.set(SS.NO_DATA)
+        self.trigger.set(SS.NOT_TRIGGERED)
         self.y_max_scale_value.set(SS.GRAPH_DEFAULT)
         self.y_min_scale_value.set(0)
 
-        # Build the Approaching / Departing frame
-        appdep_frame = Frame(self, relief='ridge')
-        self.appdep_lbl = Label(appdep_frame, relief='sunken', textvariable=self.app_dep, width=30, anchor="center")
-        self.appdep_lbl.grid(row=0, column=0, padx=10)
-        appdep_frame.grid(row=0, column=0, pady=10)
+        # Build the Triggering  frame
+        trigger_frame = Frame(self)#, relief='ridge')
+        self.trigger_lbl = Label(trigger_frame, textvariable=self.trigger, width=20, anchor="center") #, relief='sunken')
+        self.trigger_lbl.grid(row=0, column=0)
+        trigger_frame.grid(row=0, column=0, pady=10)
 
         # Build the Start Stop Frame
-        startstop_frame = Frame(self, relief='ridge')
+        startstop_frame = Frame(self)#, relief='ridge')
         self.startstop_button = Button(startstop_frame, text='Start/Stop', command=self.start_stop).grid(row=0, column=0, padx=20)
         startstop_frame.grid(row=0, column=1, padx=10)
 
@@ -104,42 +105,52 @@ class RadarDisplay(Frame):
             self.graph_canvas.create_line(c,START_Y,c,END_Y, fill="lightblue")
 
         # Graph axis labels
-        x_max_label = Label(self.graph_canvas, relief='sunken', text='Now')
+        x_max_label = Label(self.graph_canvas, text='Now') #, relief='sunken')
         x_max_label_window = self.graph_canvas.create_window(END_X-15, END_Y, anchor=NW, window=x_max_label)
-        x_min_label = Label(self.graph_canvas, relief='sunken', text='Oldest')
+        x_min_label = Label(self.graph_canvas, text='Oldest') #, relief='sunken')
         x_min_label_window = self.graph_canvas.create_window(START_X, END_Y, anchor=NW, window=x_min_label)
         # Removed as scale markers don't make sense with multiple lines
-        y_max_label = Label(self.graph_canvas, relief='sunken', textvariable=str(self.y_max_scale_value), width=5)
+        y_max_label = Label(self.graph_canvas, textvariable=str(self.y_max_scale_value), width=5) #, relief='sunken')
         y_max_label_window = self.graph_canvas.create_window(START_LEGEND_Y, START_Y, anchor=NW, window=y_max_label)
-        y_min_label = Label(self.graph_canvas, relief='sunken', textvariable=str(self.y_min_scale_value), width=5)
+        y_min_label = Label(self.graph_canvas, textvariable=str(self.y_min_scale_value), width=5) #, relief='sunken')
         y_min_label_window = self.graph_canvas.create_window(START_LEGEND_Y, END_Y-10, anchor=NW, window=y_min_label)
         
         self.graph_canvas.pack()
         graph_frame.grid(row=1, column=0)
 
         # Build the faster / slower frame
-        fast_slow_frame = Frame(self, relief='ridge')
-        self.speed_units_lbl = Label(fast_slow_frame, relief='sunken', text="Graph Max", width=10, anchor="center")
-        self.speed_units_lbl.grid(row=0, column=0, padx=10)
-        self.speed_units_lbl = Label(fast_slow_frame, relief='sunken', text="in Hz", width=10, anchor="center")
-        self.speed_units_lbl.grid(row=1, column=0, padx=10)
-        self.speed_lbl = Label(fast_slow_frame, relief='sunken', textvariable=str(self.y_max_scale_value), width=10, anchor="center")
-        self.speed_lbl.grid(row=2, column=0, padx=10)
-        self.faster_button = Button(fast_slow_frame, text="INC", command=self.increase_max).grid(row=3, column=0, padx=10)
-        self.slower_button = Button(fast_slow_frame, text="DEC", command=self.decrease_max).grid(row=4, column=0, padx=10)
+        fast_slow_frame = Frame(self)#, relief='ridge')
+        self.graph_header_lbl = Label(fast_slow_frame, text="Graph Max", width=10, anchor="center") #, relief='sunken')
+        self.graph_header_lbl.grid(row=0, column=0, padx=10)
+        self.graph_units_lbl = Label(fast_slow_frame, text="(in Hz)", width=10, anchor="center") #, relief='sunken')
+        self.graph_units_lbl.grid(row=1, column=0, padx=10)
+        self.graph_value_lbl = Label(fast_slow_frame, textvariable=str(self.y_max_scale_value), width=10, anchor="center", relief='sunken')
+        self.graph_value_lbl.grid(row=2, column=0, padx=10)
+        self.graph_inc_button = Button(fast_slow_frame, text="INC", command=self.increase_max).grid(row=3, column=0)#, padx=10)
+        self.graph_dec_button = Button(fast_slow_frame, text="DEC", command=self.decrease_max).grid(row=4, column=0)#, padx=10)
+     
+        self.refresh_header_lbl = Label(fast_slow_frame, text="Refresh Rate", width=10, anchor="center") #, relief='sunken'
+        self.refresh_header_lbl.grid(row=6, column=0, padx=10)
+        self.refresh_units_lbl = Label(fast_slow_frame, text="(in mS)", width=10, anchor="center") #, relief='sunken')
+        self.refresh_units_lbl.grid(row=7, column=0, padx=10)
+        self.refresh_value_lbl = Label(fast_slow_frame, relief='sunken', textvariable=str(self.refresh_rate), width=10, anchor="center")
+        self.refresh_value_lbl.grid(row=8, column=0, padx=10)
+        self.refresh_faster_button = Button(fast_slow_frame, text="INC", command=self.increase_speed).grid(row=9, column=0)#, padx=10)
+        self.refresh_slower_button = Button(fast_slow_frame, text="DEC", command=self.decrease_speed).grid(row=10, column=0)#, padx=10)
 
-        self.speed_units_lbl = Label(fast_slow_frame, relief='sunken', text="Refresh Rate", width=10, anchor="center")
-        self.speed_units_lbl.grid(row=5, column=0, padx=10)
-        self.speed_units_lbl = Label(fast_slow_frame, relief='sunken', text="in mS", width=10, anchor="center")
-        self.speed_units_lbl.grid(row=6, column=0, padx=10)
-        self.speed_lbl = Label(fast_slow_frame, relief='sunken', textvariable=str(self.refresh_rate), width=10, anchor="center")
-        self.speed_lbl.grid(row=7, column=0, padx=10)
-        self.faster_button = Button(fast_slow_frame, text="INC", command=self.increase_speed).grid(row=8, column=0, padx=10)
-        self.slower_button = Button(fast_slow_frame, text="DEC", command=self.decrease_speed).grid(row=9, column=0, padx=10)
+        self.trigger_header_lbl = Label(fast_slow_frame, text="Trigger Lvl", width=10, anchor="center")
+        self.trigger_header_lbl.grid(row=11, column=0, padx=10)
+        self.trigger_units_lbl = Label(fast_slow_frame, text="(in Hz)", width=10, anchor="center")
+        self.trigger_units_lbl.grid(row=12, column=0, padx=10)
+        self.trigger_value_lbl = Label(fast_slow_frame, relief='sunken', textvariable=str(self.trigger_lvl), width=10, anchor="center")
+        self.trigger_value_lbl.grid(row=13, column=0, padx=10)
+        self.trigger_faster_button = Button(fast_slow_frame, text="INC", command=self.increase_trigger_lvl).grid(row=14, column=0)
+        self.trigger_slower_button = Button(fast_slow_frame, text="DEC", command=self.decrease_trigger_lvl).grid(row=15, column=0)
+
         fast_slow_frame.grid(row=1, column=1)
 
         # Build the exit frame
-        exit_frame = Frame(self,relief='ridge')
+        exit_frame = Frame(self) #,relief='ridge')
         self.exit_program = Button(exit_frame, text="Exit", command=self.exit_program).grid(row=0, column=1, padx=10)
         exit_frame.grid(row=2, column=1)
 
@@ -162,6 +173,24 @@ class RadarDisplay(Frame):
         self.log.debug("[DISP] Ending state of running:%s" % self.running)
         return
 
+    def increase_trigger_lvl(self):
+        """
+        Increase the threshold for the trigger level
+        """
+        self.trigger_lvl.set(self.trigger_lvl.get() + SS.TRIGGER_INCREMENT)
+        if self.trigger_lvl.get() > SS.MAX_TRIGGER_LVL:
+            self.trigger_lvl.set(SS.MAX_TRIGGER_LVL)
+        return
+
+    def decrease_trigger_lvl(self):
+        """
+        Decrease the threshold for the trigger level
+        """
+        self.trigger_lvl.set(self.trigger_lvl.get() - SS.TRIGGER_INCREMENT)
+        if self.trigger_lvl.get() < SS.MAX_TRIGGER_LVL:
+            self.trigger_lvl.set(SS.MIN_TRIGGER_LVL)
+        return
+        
     def increase_speed(self):
         """
         Increase the reading speed
@@ -368,18 +397,15 @@ class RadarDisplay(Frame):
         if len(self.dataset) > MAX_LENGTH:
             self.log.debug("[Disp] Trimming the dataset:%s" % len(self.dataset))
             self.dataset = self.dataset[-MAX_LENGTH:]        # Trim the data to the last 100 readings max
-        if len(self.dataset) > (SS.APP_DEP_MEASURE_QTY*2)+1:
-            # If we now have enough data to estimate departing or approaching
-            # Compare the last set (defined by APP_DEP_MEASURE_QTY and the previous set of vaules to determine if approaching or departing
-            new_reading = int(sum(self.dataset[-SS.APP_DEP_MEASURE_QTY:]) / SS.APP_DEP_MEASURE_QTY)
-            previous_reading = int(sum(self.dataset[-SS.APP_DEP_MEASURE_QTY*2:-SS.APP_DEP_MEASURE_QTY]) / SS.APP_DEP_MEASURE_QTY)
-            if new_reading < previous_reading:
-                self.app_dep.set(SS.DEPARTING)
-            elif previous_reading < new_reading:
-                self.app_dep.set(SS.APPROACHING)
+        if len(self.dataset) > (SS.TRIGGER_MEASURE_QTY*2)+1:
+            # If we now have enough data to estimate if it is being triggered
+            # Compare the last dataset with the trigger level and trigger accordingly
+            new_reading = int(max(self.dataset[-SS.TRIGGER_MEASURE_QTY:])) 
+            if new_reading > self.trigger_lvl.get():
+                self.trigger.set(SS.TRIGGERED + " (" + str(new_reading)+")")
             else:
-                self.app_dep.set(SS.STABLE)
-            self.log.debug("[Disp] Object is %s (old / mew readings): (%s / %s)" % (self.app_dep.get(), previous_reading, new_reading))
+                self.trigger.set(SS.NOT_TRIGGERED)
+            self.log.debug("[Disp] Object trigger level is %s (new reading): %s" % (self.trigger.get(), new_reading))
         self.log.info("[Disp] Dataset after update and trim:%s" % self.dataset)
         return
         
@@ -479,6 +505,13 @@ class DataCapture:
                         starttime = nowtime
                         current_state = state
                         break
+                elif nowtime > (starttime + SS.MAX_WAIT):
+                    # Timed out
+                    self.log.debug("[DataC] Time has exceeded, default being used")
+                    period = SS.MAX_WAIT
+                    starttime = nowtime
+                    current_state = not(state)
+                    break
             self.queue.put(period)
             #self.log.debug("[DataC] Time Period Read:%s" % period)
         return
