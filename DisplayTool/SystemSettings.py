@@ -29,4 +29,5 @@ TRIGGER_MEASURE_QTY = 20
 
 MAX_WAIT = 1        # Time in S, to wait for a trigger
 
-FREQ_PIN = 17       # The GPIO pin used for the frequency input
+FREQ_PIN = 4       # The GPIO pin used for the frequency input
+SAMPLE_HOLD = 17

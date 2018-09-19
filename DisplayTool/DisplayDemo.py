@@ -596,6 +596,8 @@ def gpio_setup():
     # Configure the GPIO for reading the frequency
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(SS.FREQ_PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+    GPIO.setup(SS.SAMPLE_HOLD, GPIO.OUT)
+    GPIO.output(SS.SAMPLE_HOLD, 1)
 
 def SetupLogging():
     """
