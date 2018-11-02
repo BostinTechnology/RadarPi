@@ -21,6 +21,7 @@ GRAPH_INC = 10             # the increment / decrement value for the y max
 
 TRIGGERED = "Triggered"
 NOT_TRIGGERED = "Monitoring"
+READY = "Ready"
 TRIGGER_LVL = 50
 MAX_TRIGGER_LVL = 1000
 MIN_TRIGGER_LVL = 5
@@ -31,3 +32,8 @@ MAX_WAIT = 1        # Time in S, to wait for a trigger
 
 FREQ_PIN = 4       # The GPIO pin used for the frequency input
 SAMPLE_HOLD = 17
+
+# LEDs
+LED_RUNNING = 14
+LED_MONITORING = 15
+LED_TRIGGERED = 18

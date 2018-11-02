@@ -69,18 +69,19 @@ class RadarDisplay(Frame):
         self.graph_max = IntVar()
         self.trigger_lvl = IntVar()
         
-        # Removed as scale markers don't make sense with multiple lines
         self.y_max_scale_value = IntVar()
         self.y_min_scale_value = IntVar()
-        
+
+        # Setup the stuff to start
         self.running = False       # When true, data is being captured.
+        self.gpio_reset()
         self.refresh_rate.set(SS.DEFAULT_REFRESH_RATE)
         self.dataset = []           # The dataset being displayed and graphed
         for i in range(0,MAX_LENGTH):           # set all the values to zero to ensure full dataset used.
             self.dataset.append(0)
         self.trigger_lvl.set(SS.TRIGGER_LVL)
             
-        self.trigger.set(SS.NOT_TRIGGERED)
+        self.trigger.set(SS.READY)
         self.y_max_scale_value.set(SS.GRAPH_DEFAULT)
         self.y_min_scale_value.set(0)
 
@@ -92,7 +93,8 @@ class RadarDisplay(Frame):
 
         # Build the Start Stop Frame
         startstop_frame = Frame(self)#, relief='ridge')
-        self.startstop_button = Button(startstop_frame, text='Start/Stop', command=self.start_stop).grid(row=0, column=0, padx=20)
+        self.startstop_button = Button(startstop_frame, text='Start/Stop', command=self.start_stop)
+        self.startstop_button.grid(row=0, column=0, padx=20)
         startstop_frame.grid(row=0, column=1, padx=10)
 
         # Build the graph canvas picture
@@ -167,10 +169,23 @@ class RadarDisplay(Frame):
         self.log.debug("[DISP] Starting state of running:%s" % self.running)
         if self.running  == False:
             # If we get here and the program is not running, we need to reset it before starting
-            self.log.debug("[DISP] Start Stop wasn't running so values are being reset:%s" % self.running)
-            self.reset()
+            self.log.debug("[DISP] Start Stop wasn't running so values are being reset")
+            self.reset()            # includes setting trigger to ready
+        else:
+            # We are currently running and therefore need to stop
+            self.trigger.set(SS.READY)
         self.running = not(self.running)
+        GPIO.output(SS.LED_RUNNING, self.running)
         self.log.debug("[DISP] Ending state of running:%s" % self.running)
+        return
+
+    def gpio_reset(self):
+        """
+        Set all the GPIO's to their default values
+        """
+        GPIO.output(SS.LED_MONITORING, 0)
+        GPIO.output(SS.LED_RUNNING, 0)
+        GPIO.output(SS.LED_TRIGGERED, 0)
         return
 
     def increase_trigger_lvl(self):
@@ -229,6 +244,7 @@ class RadarDisplay(Frame):
             self.y_max_scale_value.set(SS.GRAPH_MIN)
         
         return
+
     def reset(self):
         """
         Reset the valus back to the start for another dataset
@@ -242,6 +258,7 @@ class RadarDisplay(Frame):
         self.graph_canvas.delete('graphline')
         #clear the queue of data
 #        self.queue.queue.clear()
+        self.trigger.set(SS.READY)
         return
 
     def draw_graph(self,data_to_draw, line_no):
@@ -403,8 +420,12 @@ class RadarDisplay(Frame):
             new_reading = int(max(self.dataset[-SS.TRIGGER_MEASURE_QTY:])) 
             if new_reading > self.trigger_lvl.get():
                 self.trigger.set(SS.TRIGGERED + " (" + str(new_reading)+")")
+                GPIO.output(SS.LED_MONITORING, 0)
+                GPIO.output(SS.LED_TRIGGERED, 1)
             else:
                 self.trigger.set(SS.NOT_TRIGGERED)
+                GPIO.output(SS.LED_MONITORING, 1)
+                GPIO.output(SS.LED_TRIGGERED, 0)
             self.log.debug("[Disp] Object trigger level is %s (new reading): %s" % (self.trigger.get(), new_reading))
         self.log.info("[Disp] Dataset after update and trim:%s" % self.dataset)
         return
@@ -588,6 +609,8 @@ class DataCapture:
         Finish the application
         """
         self.capturing = False
+        time.sleep(0.5)
+        GPIO.cleanup()
         #self.thread1.join()
         sys.exit()
 
@@ -598,6 +621,10 @@ def gpio_setup():
     GPIO.setup(SS.FREQ_PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
     GPIO.setup(SS.SAMPLE_HOLD, GPIO.OUT)
     GPIO.output(SS.SAMPLE_HOLD, 1)
+    GPIO.setup(SS.LED_MONITORING, GPIO.OUT)
+    GPIO.setup(SS.LED_RUNNING, GPIO.OUT)
+    GPIO.setup(SS.LED_TRIGGERED, GPIO.OUT)
+    
 
 def SetupLogging():
     """
