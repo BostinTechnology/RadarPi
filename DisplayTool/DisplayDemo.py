@@ -612,6 +612,7 @@ class DataCapture:
         time.sleep(0.5)
         GPIO.cleanup()
         #self.thread1.join()
+        GPIO.cleanup()	# rest gpio as input to prevent damage
         sys.exit()
 
 
@@ -620,11 +621,15 @@ def gpio_setup():
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(SS.FREQ_PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
     GPIO.setup(SS.SAMPLE_HOLD, GPIO.OUT)
+<<<<<<< HEAD
     GPIO.output(SS.SAMPLE_HOLD, 1)
     GPIO.setup(SS.LED_MONITORING, GPIO.OUT)
     GPIO.setup(SS.LED_RUNNING, GPIO.OUT)
     GPIO.setup(SS.LED_TRIGGERED, GPIO.OUT)
     
+=======
+    GPIO.output(SS.SAMPLE_HOLD, 0)
+>>>>>>> 490fa17ba211db3a3b20e7a17702db9afadf0006
 
 def SetupLogging():
     """
