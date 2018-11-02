@@ -102,7 +102,7 @@ CommsRetCode SPiInitialisation(void);
  *****************************************************************************
  */
 
-CommsRetCode SPiTranscieve(uint8_t *txBuf, uint8_t *rxBuf, uint8_t bufLen) {
+CommsRetCode SPiTranscieve(uint8_t *SPitxBuf, uint8_t *SPirxBuf, uint8_t SPibufLen);
 
 
 

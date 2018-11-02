@@ -21,6 +21,7 @@
 //#include <cstdlib>
 #include <bcm2835.h>        // hardware definition library file
 #include <stdio.h>
+#include "../inc/spi_comms.h"
 
 /*
 ******************************************************************************
@@ -52,18 +53,26 @@ CommsRetCode SPiInitialisation(void){
 
 CommsRetCode SPiTranscieve(uint8_t *SPitxBuf, uint8_t *SPirxBuf, uint8_t SPibufLen) {
 
+    uint8_t     i;
+    
     // Check I have been given teh right data to work with
     if (SPibufLen < 1)
+    {
         return ERR_PARAMETERS;
+    }
         
-    char data_buffer[bufLen];      // USed for both transmit and receive buffers
+    char data_buffer[SPibufLen];      // Used for both transmit and receive buffers
 
     // Put data into the transfer buffer
-    data_buffer = SPitxBuf;
+    for (i=0; i < SPibufLen; i++)
+    {
+        data_buffer[i] = SPitxBuf[i];
+    }
+    printf("DEBUG: ABout to perform comms\n");
 
     // Perform the transfer of bufLen bytes.
     // data_buffer is both teh transmit and receive buffer
-    bcm2835_spi_transfer(&data_buffer, SPibufLen);
+    bcm2835_spi_transfern(&data_buffer[0], SPibufLen);
 
     // Put the received data back in the rxBuf
     SPirxBuf = data_buffer;
