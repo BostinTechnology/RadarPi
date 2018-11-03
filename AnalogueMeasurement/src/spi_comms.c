@@ -48,7 +48,7 @@ CommsRetCode SPiInitialisation(void){
 	bcm2835_spi_setDataMode(BCM2835_SPI_MODE3);		
 
 	//Set with CS pin to use for next transfers
-	bcm2835_spi_chipSelect(BCM2835_SPI_CS1);
+	bcm2835_spi_chipSelect(BCM2835_SPI_CS0);
 }
 
 CommsRetCode SPiTranscieve(uint8_t *SPitxBuf, uint8_t *SPirxBuf, uint8_t SPibufLen) {
@@ -67,15 +67,21 @@ CommsRetCode SPiTranscieve(uint8_t *SPitxBuf, uint8_t *SPirxBuf, uint8_t SPibufL
     for (i=0; i < SPibufLen; i++)
     {
         data_buffer[i] = SPitxBuf[i];
+        printf("Data In %d : %d\n", i, data_buffer[i]);
     }
-    printf("DEBUG: ABout to perform comms\n");
+    printf("DEBUG: About to perform comms\n");
 
     // Perform the transfer of bufLen bytes.
-    // data_buffer is both teh transmit and receive buffer
+    // data_buffer is both the transmit and receive buffer
     bcm2835_spi_transfern(&data_buffer[0], SPibufLen);
 
     // Put the received data back in the rxBuf
     SPirxBuf = data_buffer;
+    for (i=0; i < SPibufLen; i++)
+    {
+        //data_buffer[i] = SPitxBuf[i];
+        printf("Data Out %d : %d\n", i, data_buffer[i]);
+    }
 
     return ERR_NONE;
 }

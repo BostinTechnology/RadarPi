@@ -21,10 +21,10 @@
   * 
   *     If it is low, it must be brought high and then low to work
   * Format of message to MCP3202
-  *     Start Bit
-  *     Sgl / Diff bit
-  *     Odd / Sign Bit
-  *     MSBF
+  *     Start Bit               Set to 1
+  *     Sgl / Diff bit          Set to 1 for Single Ended
+  *     Odd / Sign Bit          Set to 1 as using Channel 1
+  *     MSBF                    Set to 1 to as only output MSB first
   *
   * Format of response from MCP3202
   *     Null Bit
@@ -46,6 +46,9 @@
   *
   *     Merge the upper 4 bits (AND with 0b00001111 << 4) and the lower half together
   *     4. CS High
+  *
+  * Conversion of the response
+  *     voltage read = (value received * 3.3) / 4096
   */
 
 /*
@@ -115,22 +118,22 @@ void readValuesContinously(void)
     printf("DEBUG: Into read Values Continously\n");
     uint8_t         i;
     uint8_t         msgLen = 3;               // The length of the message 
-    uint8_t         *txBuf[msgLen];
-    uint8_t         *rxBuf[msgLen];
+    uint8_t         txBuf[msgLen];
+    uint8_t         rxBuf[msgLen];
     CommsRetCode   ret;
 
     printf("DEBUG: Defined variables\n");
-    txBuf[0] = 0x01; //0b00000001;                  // Start Bit
-    txBuf[1] = 0xA0; //0b10100000;                  // Remainder of message to send
-    txBuf[2] = 0x00; //0b00000000;                  // Dummy to get MCP3202 to send return data    
+    txBuf[0] = 0x01; //0b00000001 - 001                  // Start Bit
+    txBuf[1] = 0xF0; //0b11110000 - 240                  // Remainder of message to send  
+    txBuf[2] = 0x00; //0b00000000 - 000                  // Dummy to get MCP3202 to send return data    
 
     printf("Reading Values\n");
-    ret = SPiTranscieve( *txBuf, *rxBuf, msgLen);
+    ret = SPiTranscieve( txBuf, rxBuf, msgLen);
 
     printf("Response:");
     for (i=0; i < msgLen; i++)
     {
-        printf("%x", *rxBuf[i]);
+        printf("%x", rxBuf[i]);
     }
     printf("\n");
 
