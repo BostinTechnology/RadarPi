@@ -118,9 +118,12 @@ void readValuesContinously(void)
     printf("DEBUG: Into read Values Continously\n");
     uint8_t         i;
     uint8_t         msgLen = 3;               // The length of the message 
-    uint8_t         txBuf[msgLen];
-    uint8_t         rxBuf[msgLen];
+    uint8_t         txBuf[msgLen];            // The outgoing message
+    uint8_t         rxBuf[msgLen];            // The reply from the A-D
     CommsRetCode   ret;
+    float           reading=0.00;                // The output value
+    float         supply_voltage = 3.3;     // SUpply voltage for the A-D
+    uint16_t        fsd_range=4096;           // Maximum value from A-D (12 bits)
 
     printf("DEBUG: Defined variables\n");
     txBuf[0] = 0x01; //0b00000001 - 001                  // Start Bit
@@ -128,15 +131,36 @@ void readValuesContinously(void)
     txBuf[2] = 0x00; //0b00000000 - 000                  // Dummy to get MCP3202 to send return data    
 
     printf("Reading Values\n");
-    ret = SPiTranscieve( txBuf, rxBuf, msgLen);
-
-    printf("Response:");
-    for (i=0; i < msgLen; i++)
+    do
     {
-        printf("%x", rxBuf[i]);
-    }
-    printf("\n");
+        ret = SPiTranscieve( txBuf, rxBuf, msgLen);
 
+        /* For debug purposes
+        printf("Response:");
+        for (i=0; i < msgLen; i++)
+        {
+            printf("%02x", rxBuf[i]);
+        }
+        printf("\n");
+        */
+
+        /* Shift the bits to the correct locatin
+         * the first byte back is ignored as it only there for comms
+         * the second byte is the MSByte (lower 4 bits anyway, rest are zero)
+         * the third byte is the LSByte
+         * */
+        
+        reading = (rxBuf[1] << 8) + rxBuf[2];
+        //printf("DEBUG: Reading after merge:%f\n", reading);
+
+        // Formula for calculation      Digital Output Code = 4096 * Vin
+        //                                                    ----------
+        //                                                       Vdd
+        reading = reading * (supply_voltage / fsd_range);
+
+        printf("Output from A-D:%f\n", reading);
+    } while (1);
+    
     return;
 }
 
