@@ -23,7 +23,7 @@
   * Format of message to MCP3202
   *     Start Bit               Set to 1
   *     Sgl / Diff bit          Set to 1 for Single Ended
-  *     Odd / Sign Bit          Set to 1 as using Channel 1
+  *     Odd / Sign Bit          Set to 0 as using Channel 0
   *     MSBF                    Set to 1 to as only output MSB first
   *
   * Format of response from MCP3202
@@ -200,7 +200,8 @@ float readVoltage(void) {
     //printf("DEBUG: Into read Voltage\n");
 
     txBuf[0] = 0x01; //0b00000001 - 001                  // Start Bit
-    txBuf[1] = 0xF0; //0b11110000 - 240                  // Remainder of message to send  
+    // For Custard Pi 2    txBuf[1] = 0xF0; //0b11110000 - 240                  // Remainder of message to send  
+    txBuf[1] = 0xB0; //0b10110000 -                   // Remainder of message to send  
     txBuf[2] = 0x00; //0b00000000 - 000                  // Dummy to get MCP3202 to send return data    
 
     ret = SPiTranscieve( txBuf, rxBuf, msgLen);
