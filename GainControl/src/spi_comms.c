@@ -45,7 +45,10 @@ CommsRetCode SPiInitialisation(void){
 	bcm2835_spi_setClockDivider(BCM2835_SPI_CLOCK_DIVIDER_4096);        //Could set this to BCM2835_SPI_CLOCK_DIVIDER_64 but left as current for compatibility
 
 	//Set SPI data mode
-	bcm2835_spi_setDataMode(BCM2835_SPI_MODE0);		
+	bcm2835_spi_setDataMode(BCM2835_SPI_MODE0);
+
+	// Set Bit ORder
+	bcm2835_spi_setBitOrder(BCM2835_SPI_BIT_ORDER_LSBFIRST);		
 
 	//Set with CS pin to use for next transfers
 	bcm2835_spi_chipSelect(BCM2835_SPI_CS1);
