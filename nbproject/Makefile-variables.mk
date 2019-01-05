@@ -9,19 +9,19 @@ CND_DISTDIR=dist
 # Debug configuration
 CND_PLATFORM_Debug=GNU-Linux
 CND_ARTIFACT_DIR_Debug=dist/Debug/GNU-Linux
-CND_ARTIFACT_NAME_Debug=radar
-CND_ARTIFACT_PATH_Debug=dist/Debug/GNU-Linux/radar
+CND_ARTIFACT_NAME_Debug=radarpi
+CND_ARTIFACT_PATH_Debug=dist/Debug/GNU-Linux/radarpi
 CND_PACKAGE_DIR_Debug=dist/Debug/GNU-Linux/package
-CND_PACKAGE_NAME_Debug=radar.tar
-CND_PACKAGE_PATH_Debug=dist/Debug/GNU-Linux/package/radar.tar
+CND_PACKAGE_NAME_Debug=radarpi.tar
+CND_PACKAGE_PATH_Debug=dist/Debug/GNU-Linux/package/radarpi.tar
 # Release configuration
 CND_PLATFORM_Release=GNU-MacOSX
 CND_ARTIFACT_DIR_Release=dist/Release/GNU-MacOSX
-CND_ARTIFACT_NAME_Release=radar
-CND_ARTIFACT_PATH_Release=dist/Release/GNU-MacOSX/radar
+CND_ARTIFACT_NAME_Release=radarpi
+CND_ARTIFACT_PATH_Release=dist/Release/GNU-MacOSX/radarpi
 CND_PACKAGE_DIR_Release=dist/Release/GNU-MacOSX/package
-CND_PACKAGE_NAME_Release=radar.tar
-CND_PACKAGE_PATH_Release=dist/Release/GNU-MacOSX/package/radar.tar
+CND_PACKAGE_NAME_Release=radarpi.tar
+CND_PACKAGE_PATH_Release=dist/Release/GNU-MacOSX/package/radarpi.tar
 #
 # include compiler specific variables
 #

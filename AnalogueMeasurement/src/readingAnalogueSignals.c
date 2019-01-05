@@ -109,10 +109,8 @@ int splashscreen(void)
     printf("\n***********************************************\n");
     printf("*             Bostin Technology               *\n");
     printf("*                                             *\n");
-    printf("*                NFC2 Reader                  *\n");
-    printf("*                                             *\n");
-    printf("*           Based on the ST25R3911B           *\n");
-    printf("*             demo provided by ST             *\n");
+    printf("*                  Radar Pi                   *\n");
+    printf("*            Analogue Measurement             *\n");
     printf("*                                             *\n");
     printf("*        for more info www.cognIoT.eu         *\n");
     printf("***********************************************\n");

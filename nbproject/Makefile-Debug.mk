@@ -35,6 +35,9 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
+	${OBJECTDIR}/TestProgram/src/ledControl.o \
+	${OBJECTDIR}/TestProgram/src/mainTestProgram.o \
+	${OBJECTDIR}/TestProgram/src/utilities.o \
 	${OBJECTDIR}/gpio_control.o \
 	${OBJECTDIR}/radar.o
 
@@ -57,21 +60,36 @@ LDLIBSOPTIONS=
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
-	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/radar
+	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/radarpi
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/radar: ${OBJECTFILES}
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/radarpi: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
-	${LINK.c} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/radar ${OBJECTFILES} ${LDLIBSOPTIONS}
+	${LINK.c} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/radarpi ${OBJECTFILES} ${LDLIBSOPTIONS}
+
+${OBJECTDIR}/TestProgram/src/ledControl.o: TestProgram/src/ledControl.c 
+	${MKDIR} -p ${OBJECTDIR}/TestProgram/src
+	${RM} "$@.d"
+	$(COMPILE.c) -g -Wall -ITestProgram -include TestProgram/inc -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/TestProgram/src/ledControl.o TestProgram/src/ledControl.c
+
+${OBJECTDIR}/TestProgram/src/mainTestProgram.o: TestProgram/src/mainTestProgram.c 
+	${MKDIR} -p ${OBJECTDIR}/TestProgram/src
+	${RM} "$@.d"
+	$(COMPILE.c) -g -Wall -ITestProgram -include TestProgram/inc -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/TestProgram/src/mainTestProgram.o TestProgram/src/mainTestProgram.c
+
+${OBJECTDIR}/TestProgram/src/utilities.o: TestProgram/src/utilities.c 
+	${MKDIR} -p ${OBJECTDIR}/TestProgram/src
+	${RM} "$@.d"
+	$(COMPILE.c) -g -Wall -ITestProgram -include TestProgram/inc -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/TestProgram/src/utilities.o TestProgram/src/utilities.c
 
 ${OBJECTDIR}/gpio_control.o: gpio_control.c 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.c) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/gpio_control.o gpio_control.c
+	$(COMPILE.c) -g -Wall -ITestProgram -include TestProgram/inc -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/gpio_control.o gpio_control.c
 
 ${OBJECTDIR}/radar.o: radar.c 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.c) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/radar.o radar.c
+	$(COMPILE.c) -g -Wall -ITestProgram -include TestProgram/inc -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/radar.o radar.c
 
 # Subprojects
 .build-subprojects:
@@ -79,7 +97,7 @@ ${OBJECTDIR}/radar.o: radar.c
 # Clean Targets
 .clean-conf: ${CLEAN_SUBPROJECTS}
 	${RM} -r ${CND_BUILDDIR}/${CND_CONF}
-	${RM} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/radar
+	${RM} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/radarpi
 
 # Subprojects
 .clean-subprojects:

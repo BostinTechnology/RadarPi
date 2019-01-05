@@ -33,7 +33,7 @@
 int gpio_init();							// Initialise the gpio system
 int set_gpio_for_input(int pin_no);			// Set a GPIO pin for input
 int set_gpio_for_output(int pin_no);		// Set a GPIO pin for output
-int set_gpio_value (int pin_no, int value);	// Set the value of a GPIO pin
+int set_gpio_value (int pin_no, int value);	// Set the value (0 or 1) of a GPIO pin
 int read_gpio_value(int pin_no);			// Read a GPIO pin value
 
 

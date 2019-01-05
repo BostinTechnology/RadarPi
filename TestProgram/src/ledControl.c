@@ -14,9 +14,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include "ledControl.h"
-#include "gpio_control.h"
-#include "utilities.h"
+#include "../inc/ledControl.h"
+#include "../inc/gpio_control.h"
+#include "../inc/utilities.h"
 
 /*!**************************************************************************
  * Overview:  Setup the LEDs for use and set them off
@@ -80,7 +80,7 @@ int controlMonitoringLED(int state)
 	set_gpio_value(LED_MONITORING,state);
 }
 
-*!**************************************************************************
+/*!**************************************************************************
  * Overview:  Control the Triggered LED, either on or off
  *  
  * Description: This method sets the triggered LED either on or off as requested
@@ -97,7 +97,7 @@ int controlTriggeredLED(int state)
 	set_gpio_value(LED_TRIGGERED,state);
 }
 
-*!**************************************************************************
+/*!**************************************************************************
  * Overview:  Cycle through the LEDs to test them
  *  
  * Description: This method turns each LED on and off in a timed cycle
@@ -114,26 +114,27 @@ int cycleLEDs(void)
 {
 
 	ledSetup();
-	printf("CTRL - C to end loop");
+	printf("CTRL - C to end loop\n");
 
 	do {
-		printf("Running LED");
+		printf("Running LED\n");
 		controlTriggeredLED(LED_OFF);
 		controlRunningLED(LED_ON);
 		usleep(LED_TEST_SPEED);
 
-		printf("Monitoring LED");
+		printf("Monitoring LED\n");
 		controlRunningLED(LED_OFF);
 		controlMonitoringLED(LED_ON);
 		usleep(LED_TEST_SPEED);
 
-		printf("Triggered LED");
+		printf("Triggered LED\n");
 		controlMonitoringLED(LED_OFF);
 		controlTriggeredLED(LED_ON);
 		usleep(LED_TEST_SPEED);
 		
 		
-	} while (systemloop)
+	} while (systemloop);
 
+	printf("LED test completed\n");
 	return 0;
 }

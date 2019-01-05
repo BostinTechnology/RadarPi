@@ -17,6 +17,8 @@
         </gdb_signals>
         <gdb_options>
           <DebugOptions>
+            <option name="debug_dir"
+                    value="/Users/matthew/Documents/Bostin Technology/RadarPi/."/>
           </DebugOptions>
         </gdb_options>
         <gdb_buildfirst gdb_buildfirst_overriden="false" gdb_buildfirst_old="false"/>
@@ -26,10 +28,12 @@
       </nativedebugger>
       <runprofile version="9">
         <runcommandpicklist>
+          <runcommandpicklistitem>"sudo ./testProgram"</runcommandpicklistitem>
           <runcommandpicklistitem>"${OUTPUT_PATH}"</runcommandpicklistitem>
+          <runcommandpicklistitem>"testProgram"</runcommandpicklistitem>
         </runcommandpicklist>
-        <runcommand>"${OUTPUT_PATH}"</runcommand>
-        <rundir></rundir>
+        <runcommand>"testProgram"</runcommand>
+        <rundir>/Users/matthew/Documents/Bostin Technology/RadarPi/</rundir>
         <buildfirst>true</buildfirst>
         <console-type>2</console-type>
         <terminal-type>0</terminal-type>

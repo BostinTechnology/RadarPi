@@ -13,8 +13,9 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "systemSettings.h"
-#include "ledControl.h"
+#include "../inc/systemSettings.h"
+#include "../inc/ledControl.h"
+#include "../inc/utilities.h"
 
 
 
@@ -84,6 +85,9 @@ int main(int argc, char** argv) {
 
     char option;                        // Used for menu choices
 
+	// setup the interrupt handling
+	sigSetup();
+	
 	splashScreen();
 	
     // main menu

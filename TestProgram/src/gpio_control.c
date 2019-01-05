@@ -20,7 +20,7 @@
 #include <fcntl.h>						// required by open
 #include <errno.h>						// So I can get error numbers out
 //#include <unistd.h>
-#include "gpio_control.h"				// Is this correct???
+#include "../inc/gpio_control.h"
 
 
 /* Setup the GPIO system ready for use
