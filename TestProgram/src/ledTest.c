@@ -13,7 +13,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h>
+#include <unistd.h>
 #include "../inc/ledTest.h"
 #include "../../common/inc/ledControl.h"
 #include "../../common/inc/utilities.h"

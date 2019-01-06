@@ -38,7 +38,9 @@
     </logicalFolder>
     <itemPath>Makefile_old</itemPath>
     <itemPath>TestProgram/Makefile_oldTP</itemPath>
-    <itemPath>makeFile</itemPath>
+    <itemPath>makefile</itemPath>
+    <itemPath>makefile_inc_am</itemPath>
+    <itemPath>makefile_old2</itemPath>
     <itemPath>build/readme.txt</itemPath>
   </logicalFolder>
   <sourceRootList>
@@ -89,7 +91,11 @@
       </item>
       <item path="gpio_control.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="makeFile" ex="false" tool="3" flavor2="0">
+      <item path="makefile" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="makefile_inc_am" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="makefile_old2" ex="false" tool="3" flavor2="0">
       </item>
       <item path="radar.c" ex="false" tool="0" flavor2="0">
       </item>
@@ -142,7 +148,11 @@
       </item>
       <item path="gpio_control.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="makeFile" ex="false" tool="3" flavor2="0">
+      <item path="makefile" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="makefile_inc_am" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="makefile_old2" ex="false" tool="3" flavor2="0">
       </item>
       <item path="radar.c" ex="false" tool="0" flavor2="0">
       </item>

@@ -5,7 +5,7 @@
   * 
   * Reads and decodes the analogue signals received for the Radar module
   *
-  * This software comes with no warrently and is provided as a demo application
+  * This software comes with no warrntly and is provided as a demo application
   * for use with the Bostin Technology RadarPi
   *
   * For more information    www.Cogniot.eu

@@ -3,7 +3,7 @@
   *
   * Example software provided by Bostin Technology Ltd
   *
-  * This software comes with no warrently and is provided as a demo application
+  * This software comes with no warrantly and is provided as a demo application
   * for use with the ST25R3911B NFC controller
   *
   * For more information    www.Cogniot.eu
@@ -63,7 +63,7 @@ enum {
     ERR_NONE                            =  0, /*! No error occurred */
     ERR_INITIALISATION                  =  1, /*! Unable to initialise the SPI comms */
     ERR_COMMS                           =  2, /*! Communications failure has occurred */
-    ERR_PARAMETERS                      =  3, /*! INcorrect parameters provided to the function */
+    ERR_PARAMETERS                      =  3, /*! Incorrect parameters provided to the function */
 
 };
 
