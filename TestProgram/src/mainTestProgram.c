@@ -14,8 +14,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "../inc/systemSettings.h"
-#include "../inc/ledControl.h"
-#include "../inc/utilities.h"
+#include "../inc/ledTest.h"
+#include "../../common/inc/utilities.h"
 
 
 

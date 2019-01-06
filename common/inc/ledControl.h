@@ -29,7 +29,6 @@ int ledSetup(void);					//Setup the channels for the LEDs
 int controlRunningLED(int state);		//turn the Running LED on or off
 int controlMonitoringLED(int state);		//turn the Monitoring LED on or off
 int controlTriggeredLED(int state);		//turn the Triggered LED on or off
-int cycleLEDs(void);					// cycle through the leds to test them
 
 #endif /* LEDCONTROL_H */
 

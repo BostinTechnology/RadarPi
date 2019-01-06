@@ -46,7 +46,7 @@ void sigHandler(int sig)
 			printf("Sig: Got SIGHUP\n");
 			break;
 		case SIGINT: // 2
-			// Interupt (Ctrl c From command line) - Graceful exit
+			// Interrupt (Ctrl c From command line) - Graceful exit
 			printf("Sig: Got SIGINT - Ending Routine\n");
 			systemloop=false;
 			break;
