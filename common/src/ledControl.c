@@ -16,7 +16,6 @@
 #include <unistd.h>
 #include "../inc/ledControl.h"
 #include "../inc/gpio_control.h"
-#include "../inc/utilities.h"
 
 /*!**************************************************************************
  * Overview:  Setup the LEDs for use and set them off

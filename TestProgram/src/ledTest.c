@@ -16,6 +16,7 @@
 #include <time.h>
 #include "../inc/ledTest.h"
 #include "../../common/inc/ledControl.h"
+#include "../../common/inc/utilities.h"
 
 /*!**************************************************************************
  * Overview:  Cycle through the LEDs to test them
