@@ -14,6 +14,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "../inc/ledTest.h"
+#include "../../common/inc/ledControl.h"
 
 /*!**************************************************************************
  * Overview:  Cycle through the LEDs to test them
