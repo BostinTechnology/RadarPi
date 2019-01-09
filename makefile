@@ -1,7 +1,7 @@
 ## -*- Makefile -*-
 ##
 ## User: matthew
-## Time: 06-Jan-2019 11:25:09
+## Time: 09-Jan-2019 21:04:50
 ## Makefile created by Oracle Developer Studio.
 ##
 ## This file is generated automatically.
@@ -10,20 +10,27 @@
 
 #### Compiler and tool definitions shared by all build targets #####
 CC = gcc
-BASICOPTS = -g -Wall
+BASICOPTS = -g
 CFLAGS = $(BASICOPTS)
 
 
 # Define the target directories.
-TARGETDIR_testProgram=build
+TARGETDIR_testProgram=.
 
 
-all: $(TARGETDIR_testProgram)/testProgram
+all: testProgram
 
 ## Target: testProgram
 CPPFLAGS_testProgram = \
-	-Icommon/src/
+	-Icommon/src/gpio_control.c \
+	-Icommon/src/utilities.c \
+	-Icommon/src/ledControl.c \
+	-ITestProgram/src/ledTest.c \
+	-ITestProgram/src/mainTestProgram.c
 OBJS_testProgram =  \
+	$(TARGETDIR_testProgram)/gpio_control.o \
+	$(TARGETDIR_testProgram)/utilities.o \
+	$(TARGETDIR_testProgram)/ledControl.o \
 	$(TARGETDIR_testProgram)/ledTest.o \
 	$(TARGETDIR_testProgram)/mainTestProgram.o
 USERLIBS_testProgram = $(SYSLIBS_testProgram) 
@@ -37,6 +44,15 @@ $(TARGETDIR_testProgram)/testProgram: $(TARGETDIR_testProgram) $(OBJS_testProgra
 
 
 # Compile source files into .o files
+$(TARGETDIR_testProgram)/gpio_control.o: $(TARGETDIR_testProgram) common/src/gpio_control.c
+	$(COMPILE.c) $(CFLAGS_testProgram) $(CPPFLAGS_testProgram) -o $@ common/src/gpio_control.c
+
+$(TARGETDIR_testProgram)/utilities.o: $(TARGETDIR_testProgram) common/src/utilities.c
+	$(COMPILE.c) $(CFLAGS_testProgram) $(CPPFLAGS_testProgram) -o $@ common/src/utilities.c
+
+$(TARGETDIR_testProgram)/ledControl.o: $(TARGETDIR_testProgram) common/src/ledControl.c
+	$(COMPILE.c) $(CFLAGS_testProgram) $(CPPFLAGS_testProgram) -o $@ common/src/ledControl.c
+
 $(TARGETDIR_testProgram)/ledTest.o: $(TARGETDIR_testProgram) TestProgram/src/ledTest.c
 	$(COMPILE.c) $(CFLAGS_testProgram) $(CPPFLAGS_testProgram) -o $@ TestProgram/src/ledTest.c
 
@@ -49,16 +65,11 @@ $(TARGETDIR_testProgram)/mainTestProgram.o: $(TARGETDIR_testProgram) TestProgram
 clean:
 	rm -f \
 		$(TARGETDIR_testProgram)/testProgram \
+		$(TARGETDIR_testProgram)/gpio_control.o \
+		$(TARGETDIR_testProgram)/utilities.o \
+		$(TARGETDIR_testProgram)/ledControl.o \
 		$(TARGETDIR_testProgram)/ledTest.o \
 		$(TARGETDIR_testProgram)/mainTestProgram.o
-	rm -f -r $(TARGETDIR_testProgram)
-
-
-# Create the target directory (if needed)
-$(TARGETDIR_testProgram):
-	mkdir -p $(TARGETDIR_testProgram)
-
-
 # Enable dependency checking
 .KEEP_STATE:
 .KEEP_STATE_FILE:.make.state.GNU-x86_64-Linux
