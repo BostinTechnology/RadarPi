@@ -15,6 +15,7 @@
 #include <stdlib.h>
 #include "../inc/systemSettings.h"
 #include "../inc/ledTest.h"
+#include "../inc/adcTest.h"
 #include "../../common/inc/utilities.h"
 
 
@@ -87,7 +88,7 @@ int main(int argc, char** argv) {
 
 	// setup the interrupt handling
 	sigSetup();
-	
+		
 	splashScreen();
 	
     // main menu
@@ -119,7 +120,7 @@ int main(int argc, char** argv) {
 
             case 'a':
                 /* Read ADC Output */
-				
+				cycleADCReadings();
 				break;
 
             case 'g':

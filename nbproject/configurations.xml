@@ -4,6 +4,8 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <itemPath>AnalogueMeasurement/inc/adcFunctions.h</itemPath>
+      <itemPath>TestProgram/inc/adcTest.h</itemPath>
       <itemPath>gpio_control.h</itemPath>
       <itemPath>common/inc/ledControl.h</itemPath>
       <itemPath>TestProgram/inc/ledTest.h</itemPath>
@@ -18,6 +20,8 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
+      <itemPath>AnalogueMeasurement/src/adcFunctions.c</itemPath>
+      <itemPath>TestProgram/src/adcTest.c</itemPath>
       <itemPath>gpio_control.c</itemPath>
       <itemPath>common/src/ledControl.c</itemPath>
       <itemPath>TestProgram/src/ledTest.c</itemPath>
@@ -39,8 +43,10 @@
     <itemPath>Makefile_old</itemPath>
     <itemPath>TestProgram/Makefile_oldTP</itemPath>
     <itemPath>makefile</itemPath>
+    <itemPath>makefile_cm</itemPath>
     <itemPath>makefile_inc_am</itemPath>
     <itemPath>makefile_old2</itemPath>
+    <itemPath>makefile_old3</itemPath>
     <itemPath>build/readme.txt</itemPath>
   </logicalFolder>
   <sourceRootList>
@@ -65,13 +71,27 @@
           <warningLevel>2</warningLevel>
         </cTool>
       </compileType>
+      <item path="AnalogueMeasurement/inc/adcFunctions.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="AnalogueMeasurement/src/adcFunctions.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
       <item path="Makefile_old" ex="false" tool="3" flavor2="0">
       </item>
       <item path="TestProgram/Makefile_oldTP" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="TestProgram/inc/adcTest.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="TestProgram/inc/ledTest.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="TestProgram/inc/systemSettings.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="TestProgram/src/adcTest.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="TestProgram/src/ledTest.c" ex="false" tool="0" flavor2="0">
       </item>
@@ -93,9 +113,13 @@
       </item>
       <item path="makefile" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="makefile_cm" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="makefile_inc_am" ex="false" tool="3" flavor2="0">
       </item>
       <item path="makefile_old2" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="makefile_old3" ex="false" tool="3" flavor2="0">
       </item>
       <item path="radar.c" ex="false" tool="0" flavor2="0">
       </item>
@@ -122,13 +146,27 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
+      <item path="AnalogueMeasurement/inc/adcFunctions.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="AnalogueMeasurement/src/adcFunctions.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
       <item path="Makefile_old" ex="false" tool="3" flavor2="0">
       </item>
       <item path="TestProgram/Makefile_oldTP" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="TestProgram/inc/adcTest.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="TestProgram/inc/ledTest.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="TestProgram/inc/systemSettings.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="TestProgram/src/adcTest.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="TestProgram/src/ledTest.c" ex="false" tool="0" flavor2="0">
       </item>
@@ -150,9 +188,13 @@
       </item>
       <item path="makefile" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="makefile_cm" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="makefile_inc_am" ex="false" tool="3" flavor2="0">
       </item>
       <item path="makefile_old2" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="makefile_old3" ex="false" tool="3" flavor2="0">
       </item>
       <item path="radar.c" ex="false" tool="0" flavor2="0">
       </item>

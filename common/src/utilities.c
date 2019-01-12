@@ -39,7 +39,7 @@ void waitTimer(float duration)
 
 void sigHandler(int sig)
 {
-	printf("Got Signal %d\n",sig);
+	//printf("DEBUG: Got Signal %d\n",sig);
 	switch (sig){
 		case SIGHUP:
 			// Sig HUP, Do a reload
@@ -47,7 +47,7 @@ void sigHandler(int sig)
 			break;
 		case SIGINT: // 2
 			// Interrupt (Ctrl c From command line) - Graceful exit
-			printf("Sig: Got SIGINT - Ending Routine\n");
+			// printf("DEBIUG:Sig: Got SIGINT - Ending Routine\n");
 			systemloop=false;
 			break;
 		case 15:

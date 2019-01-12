@@ -18,18 +18,6 @@
 #include "../../common/inc/ledControl.h"
 #include "../../common/inc/utilities.h"
 
-/*!**************************************************************************
- * Overview:  Cycle through the LEDs to test them
- *  
- * Description: This method turns each LED on and off in a timed cycle
- *				Requires CTRL - C to exit
- *
- * Parameters:
- * param[in] none : 
- *
- * return 0         : no error
- *****************************************************************************
- */
 
 int cycleLEDs(void)
 {

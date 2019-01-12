@@ -35,6 +35,8 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
+	${OBJECTDIR}/AnalogueMeasurement/src/adcFunctions.o \
+	${OBJECTDIR}/TestProgram/src/adcTest.o \
 	${OBJECTDIR}/TestProgram/src/ledTest.o \
 	${OBJECTDIR}/TestProgram/src/mainTestProgram.o \
 	${OBJECTDIR}/common/src/ledControl.o \
@@ -66,6 +68,16 @@ LDLIBSOPTIONS=
 ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/radarpi: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.c} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/radarpi ${OBJECTFILES} ${LDLIBSOPTIONS}
+
+${OBJECTDIR}/AnalogueMeasurement/src/adcFunctions.o: AnalogueMeasurement/src/adcFunctions.c 
+	${MKDIR} -p ${OBJECTDIR}/AnalogueMeasurement/src
+	${RM} "$@.d"
+	$(COMPILE.c) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/AnalogueMeasurement/src/adcFunctions.o AnalogueMeasurement/src/adcFunctions.c
+
+${OBJECTDIR}/TestProgram/src/adcTest.o: TestProgram/src/adcTest.c 
+	${MKDIR} -p ${OBJECTDIR}/TestProgram/src
+	${RM} "$@.d"
+	$(COMPILE.c) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/TestProgram/src/adcTest.o TestProgram/src/adcTest.c
 
 ${OBJECTDIR}/TestProgram/src/ledTest.o: TestProgram/src/ledTest.c 
 	${MKDIR} -p ${OBJECTDIR}/TestProgram/src

@@ -5,22 +5,23 @@
  */
 
 /* 
- * File:   ledRoutines.h
+ * File:   adcTest.h
  * Author: Matthew Bennett <matthew.bennett@bostintechnology.com>
  *
- * Created on 06 January 2019, 10:28
+ * Created on 12 January 2019, 08:55
  */
 
-#ifndef LEDTEST_H
-#define LEDTEST_H
+#ifndef ADCTEST_H
+#define ADCTEST_H
 
-#define		LED_TEST_SPEED				500000			//The time each LED is left on in microseconds
+#define		ADC_READING_TEST_SPEED		100			// the delay between ADC readings in uS
+
+
 
 /*!**************************************************************************
- * Overview:  Cycle through the LEDs to test them
+ * Overview:  Read the ADC Values continuously
  *  
- * Description: This method turns each LED on and off in a timed cycle
- *				Requires CTRL - C to exit
+ * Description: This method displays the current reading from the ADC
  *
  * Parameters:
  * param[in] none : 
@@ -29,8 +30,7 @@
  *****************************************************************************
  */
 
-int cycleLEDs(void);					// cycle through the leds to test them
+int cycleADCReadings(void);
 
-
-#endif /* LEDTEST_H */
+#endif /* ADCTEST_H */
 

@@ -22,8 +22,6 @@
 #define		LED_ON						1
 #define		LED_OFF						0
 
-#define		LED_TEST_SPEED				500000			//The time each LED is left on in microseconds
-
 //functions
 int ledSetup(void);					//Setup the channels for the LEDs
 int controlRunningLED(int state);		//turn the Running LED on or off

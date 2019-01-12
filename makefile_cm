@@ -1,7 +1,7 @@
 ## -*- Makefile -*-
 ##
-## User: matthew
-## Time: 12-Jan-2019 09:16:44
+## User: Matthew
+## Time: 09-Jan-2019 21:40:28
 ## Makefile created by Oracle Developer Studio.
 ##
 ## This file is generated automatically.
@@ -11,7 +11,8 @@
 #### Compiler and tool definitions shared by all build targets #####
 CC = gcc
 BASICOPTS = -g
-CFLAGS = $(BASICOPTS)
+CFLAGS = $(BASICOPTS) 
+LDLIBS = bcm2835
 
 
 # Define the target directories.
@@ -22,17 +23,14 @@ all: $(TARGETDIR_testProgram)/testProgram
 
 ## Target: testProgram
 OBJS_testProgram =  \
-	$(TARGETDIR_testProgram)/ledTest.o \
-	$(TARGETDIR_testProgram)/adcTest.o \
-	$(TARGETDIR_testProgram)/mainTestProgram.o \
-	$(TARGETDIR_testProgram)/adcFunctions.o \
-	$(TARGETDIR_testProgram)/spi_comms.o \
 	$(TARGETDIR_testProgram)/gpio_control.o \
 	$(TARGETDIR_testProgram)/utilities.o \
-	$(TARGETDIR_testProgram)/ledControl.o
-USERLIBS_testProgram = -lbcm2835 
-DEPLIBS_testProgram =  
-LDLIBS_testProgram = $(USERLIBS_testProgram)
+	$(TARGETDIR_testProgram)/ledControl.o \
+	$(TARGETDIR_testProgram)/spi_comms.o \
+	$(TARGETDIR_testProgram)/adcFunctions.o \
+	$(TARGETDIR_testProgram)/ledTest.o \
+	$(TARGETDIR_testProgram)/adcTest.o \
+	$(TARGETDIR_testProgram)/mainTestProgram.o
 
 
 # Link or archive
@@ -41,21 +39,6 @@ $(TARGETDIR_testProgram)/testProgram: $(TARGETDIR_testProgram) $(OBJS_testProgra
 
 
 # Compile source files into .o files
-$(TARGETDIR_testProgram)/ledTest.o: $(TARGETDIR_testProgram) TestProgram/src/ledTest.c
-	$(COMPILE.c) $(CFLAGS_testProgram) $(CPPFLAGS_testProgram) -o $@ TestProgram/src/ledTest.c
-
-$(TARGETDIR_testProgram)/adcTest.o: $(TARGETDIR_testProgram) TestProgram/src/adcTest.c
-	$(COMPILE.c) $(CFLAGS_testProgram) $(CPPFLAGS_testProgram) -o $@ TestProgram/src/adcTest.c
-
-$(TARGETDIR_testProgram)/mainTestProgram.o: $(TARGETDIR_testProgram) TestProgram/src/mainTestProgram.c
-	$(COMPILE.c) $(CFLAGS_testProgram) $(CPPFLAGS_testProgram) -o $@ TestProgram/src/mainTestProgram.c
-
-$(TARGETDIR_testProgram)/adcFunctions.o: $(TARGETDIR_testProgram) common/src/adcFunctions.c
-	$(COMPILE.c) $(CFLAGS_testProgram) $(CPPFLAGS_testProgram) -o $@ common/src/adcFunctions.c
-
-$(TARGETDIR_testProgram)/spi_comms.o: $(TARGETDIR_testProgram) common/src/spi_comms.c
-	$(COMPILE.c) $(CFLAGS_testProgram) $(CPPFLAGS_testProgram) -o $@ common/src/spi_comms.c
-
 $(TARGETDIR_testProgram)/gpio_control.o: $(TARGETDIR_testProgram) common/src/gpio_control.c
 	$(COMPILE.c) $(CFLAGS_testProgram) $(CPPFLAGS_testProgram) -o $@ common/src/gpio_control.c
 
@@ -65,20 +48,36 @@ $(TARGETDIR_testProgram)/utilities.o: $(TARGETDIR_testProgram) common/src/utilit
 $(TARGETDIR_testProgram)/ledControl.o: $(TARGETDIR_testProgram) common/src/ledControl.c
 	$(COMPILE.c) $(CFLAGS_testProgram) $(CPPFLAGS_testProgram) -o $@ common/src/ledControl.c
 
+$(TARGETDIR_testProgram)/spi_comms.o: $(TARGETDIR_testProgram) common/src/spi_comms.c
+	$(COMPILE.c) $(CFLAGS_testProgram) $(CPPFLAGS_testProgram) -o $@ common/src/spi_comms.c
+
+
+$(TARGETDIR_testProgram)/adcFunctions.o: $(TARGETDIR_testProgram) AnalogueMeasurement/src/adcFunctions.c
+	$(COMPILE.c) $(CFLAGS_testProgram) $(CPPFLAGS_testProgram) -o $@ AnalogueMeasurement/src/adcFunctions.c
+
+
+$(TARGETDIR_testProgram)/ledTest.o: $(TARGETDIR_testProgram) TestProgram/src/ledTest.c
+	$(COMPILE.c) $(CFLAGS_testProgram) $(CPPFLAGS_testProgram) -o $@ TestProgram/src/ledTest.c
+
+$(TARGETDIR_testProgram)/adcTest.o: $(TARGETDIR_testProgram) TestProgram/src/adcTest.c
+	$(COMPILE.c) $(CFLAGS_testProgram) $(CPPFLAGS_testProgram) -o $@ TestProgram/src/adcTest.c
+
+$(TARGETDIR_testProgram)/mainTestProgram.o: $(TARGETDIR_testProgram) TestProgram/src/mainTestProgram.c
+	$(COMPILE.c) $(CFLAGS_testProgram) $(CPPFLAGS_testProgram) -o $@ TestProgram/src/mainTestProgram.c
+
 
 
 #### Clean target deletes all generated files ####
 clean:
 	rm -f \
 		$(TARGETDIR_testProgram)/testProgram \
-		$(TARGETDIR_testProgram)/ledTest.o \
-		$(TARGETDIR_testProgram)/adcTest.o \
-		$(TARGETDIR_testProgram)/mainTestProgram.o \
-		$(TARGETDIR_testProgram)/adcFunctions.o \
-		$(TARGETDIR_testProgram)/spi_comms.o \
 		$(TARGETDIR_testProgram)/gpio_control.o \
 		$(TARGETDIR_testProgram)/utilities.o \
-		$(TARGETDIR_testProgram)/ledControl.o
+		$(TARGETDIR_testProgram)/ledControl.o \
+		$(TARGETDIR_testProgram)/spi_comms.o \
+		$(TARGETDIR_testProgram)/ledTest.o \
+		$(TARGETDIR_testProgram)/adcTest.o \
+		$(TARGETDIR_testProgram)/mainTestProgram.o
 	rm -f -r $(TARGETDIR_testProgram)
 
 
