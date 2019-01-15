@@ -16,6 +16,7 @@
 #include "../inc/systemSettings.h"
 #include "../inc/ledTest.h"
 #include "../inc/adcTest.h"
+#include "../inc/gainTest.h"
 #include "../../common/inc/utilities.h"
 
 
@@ -69,6 +70,7 @@ void helpScreen(void)
 	printf("h - Display the help screen\n");
 	printf("e - Exit program \n");
 	printf("\n");
+	return;
 }
 
 /*!****************************************************************************
@@ -125,7 +127,7 @@ int main(int argc, char** argv) {
 
             case 'g':
                 /* Set Gain Control */
-				
+				setGainValue();
 				break;
 
             case 'q':

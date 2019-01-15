@@ -19,7 +19,7 @@ int cycleADCReadings(void)
 
 	systemloop=true;				//reset the loop to true to start
 	
-	SPiInitialisation();
+	adcSPiInitialisation();
 
 	
 	printf("Reading ADC Values\n");

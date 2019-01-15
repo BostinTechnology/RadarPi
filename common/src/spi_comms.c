@@ -3,7 +3,7 @@
   *
   * Example software provided by Bostin Technology Ltd
   *
-  * This software comes with no warrently and is provided as a demo application
+  * This software comes with no warranty and is provided as a demo application
   * for use with the ST25R3911B NFC controller
   *
   * For more information    www.Cogniot.eu
@@ -23,13 +23,9 @@
 #include <stdio.h>
 #include "../inc/spi_comms.h"
 
-/*
-******************************************************************************
-* GLOBAL DEFINES
-******************************************************************************
-*/
 
-CommsRetCode SPiInitialisation(void){
+
+CommsRetCode SPiInitialisation(int clock_divider, int spi_data_mode, int bit_order, int cs_pin){
     if (!bcm2835_init())
     {
       printf("bcm2835_init failed. Are you running as root??\n");
@@ -45,10 +41,15 @@ CommsRetCode SPiInitialisation(void){
 	bcm2835_spi_setClockDivider(BCM2835_SPI_CLOCK_DIVIDER_4096);
 
 	//Set SPI data mode
-	bcm2835_spi_setDataMode(BCM2835_SPI_MODE3);		
+	bcm2835_spi_setDataMode(BCM2835_SPI_MODE3);
+	
+	// Set Bit Order
+	bcm2835_spi_setBitOrder(BCM2835_SPI_BIT_ORDER_LSBFIRST);
 
 	//Set with CS pin to use for next transfers
 	bcm2835_spi_chipSelect(BCM2835_SPI_CS0);
+	
+	return ERR_NONE;
 }
 
 CommsRetCode SPiTranscieve(uint8_t *SPitxBuf, uint8_t *SPirxBuf, uint8_t SPibufLen) {
@@ -82,4 +83,37 @@ CommsRetCode SPiTranscieve(uint8_t *SPitxBuf, uint8_t *SPirxBuf, uint8_t SPibufL
         //printf("SPirxBuf Out %d : %x\n", i, SPirxBuf[i]);             // FOr debug purposes
     }
     return ERR_NONE;
+};
+
+CommsRetCode SPiTransmit(uint8_t *SPitxBuf, uint8_t SPibufLen) {
+    uint8_t     i;
+    
+    // Check I have been given the right data to work with
+    if (SPibufLen < 1)
+    {
+        return ERR_PARAMETERS;
+    }
+        
+    char data_buffer[SPibufLen];      // Used for transmit buffer
+
+    // Put data into the transfer buffer
+    for (i=0; i < SPibufLen; i++)
+    {
+        data_buffer[i] = SPitxBuf[i];
+        //printf("SPitxBuf Data In %d : %x\n", i, data_buffer[i]);      // For debug purposes
+    }
+    //printf("DEBUG: About to perform comms\n");
+
+    // Perform the transfer of bufLen bytes.
+    // data_buffer is both the transmit and receive buffer
+    bcm2835_spi_writenb(&data_buffer[0], SPibufLen);
+
+    return ERR_NONE;
+}
+
+CommsRetCode SPiEnd(void) {
+	
+	bcm2835_spi_end();
+	
+	return ERR_NONE;
 }

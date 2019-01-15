@@ -35,10 +35,13 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
-	${OBJECTDIR}/AnalogueMeasurement/src/adcFunctions.o \
 	${OBJECTDIR}/TestProgram/src/adcTest.o \
+	${OBJECTDIR}/TestProgram/src/freqTest.o \
+	${OBJECTDIR}/TestProgram/src/gainTest.o \
 	${OBJECTDIR}/TestProgram/src/ledTest.o \
 	${OBJECTDIR}/TestProgram/src/mainTestProgram.o \
+	${OBJECTDIR}/common/src/adcFunctions.o \
+	${OBJECTDIR}/common/src/gainFunctions.o \
 	${OBJECTDIR}/common/src/ledControl.o \
 	${OBJECTDIR}/common/src/utilities.o \
 	${OBJECTDIR}/gpio_control.o \
@@ -69,15 +72,20 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/radarpi: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.c} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/radarpi ${OBJECTFILES} ${LDLIBSOPTIONS}
 
-${OBJECTDIR}/AnalogueMeasurement/src/adcFunctions.o: AnalogueMeasurement/src/adcFunctions.c 
-	${MKDIR} -p ${OBJECTDIR}/AnalogueMeasurement/src
-	${RM} "$@.d"
-	$(COMPILE.c) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/AnalogueMeasurement/src/adcFunctions.o AnalogueMeasurement/src/adcFunctions.c
-
 ${OBJECTDIR}/TestProgram/src/adcTest.o: TestProgram/src/adcTest.c 
 	${MKDIR} -p ${OBJECTDIR}/TestProgram/src
 	${RM} "$@.d"
 	$(COMPILE.c) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/TestProgram/src/adcTest.o TestProgram/src/adcTest.c
+
+${OBJECTDIR}/TestProgram/src/freqTest.o: TestProgram/src/freqTest.c 
+	${MKDIR} -p ${OBJECTDIR}/TestProgram/src
+	${RM} "$@.d"
+	$(COMPILE.c) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/TestProgram/src/freqTest.o TestProgram/src/freqTest.c
+
+${OBJECTDIR}/TestProgram/src/gainTest.o: TestProgram/src/gainTest.c 
+	${MKDIR} -p ${OBJECTDIR}/TestProgram/src
+	${RM} "$@.d"
+	$(COMPILE.c) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/TestProgram/src/gainTest.o TestProgram/src/gainTest.c
 
 ${OBJECTDIR}/TestProgram/src/ledTest.o: TestProgram/src/ledTest.c 
 	${MKDIR} -p ${OBJECTDIR}/TestProgram/src
@@ -88,6 +96,16 @@ ${OBJECTDIR}/TestProgram/src/mainTestProgram.o: TestProgram/src/mainTestProgram.
 	${MKDIR} -p ${OBJECTDIR}/TestProgram/src
 	${RM} "$@.d"
 	$(COMPILE.c) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/TestProgram/src/mainTestProgram.o TestProgram/src/mainTestProgram.c
+
+${OBJECTDIR}/common/src/adcFunctions.o: common/src/adcFunctions.c 
+	${MKDIR} -p ${OBJECTDIR}/common/src
+	${RM} "$@.d"
+	$(COMPILE.c) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/common/src/adcFunctions.o common/src/adcFunctions.c
+
+${OBJECTDIR}/common/src/gainFunctions.o: common/src/gainFunctions.c 
+	${MKDIR} -p ${OBJECTDIR}/common/src
+	${RM} "$@.d"
+	$(COMPILE.c) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/common/src/gainFunctions.o common/src/gainFunctions.c
 
 ${OBJECTDIR}/common/src/ledControl.o: common/src/ledControl.c 
 	${MKDIR} -p ${OBJECTDIR}/common/src

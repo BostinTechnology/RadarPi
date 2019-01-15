@@ -59,6 +59,18 @@ typedef uint16_t      CommsRetCode;          /* Standard Return Code type from f
 	BCM2835_SPI_MODE3 = 3,  // CPOL = 1, CPHA = 1, Clock idle high, data is clocked in on rising, edge output data (change) on falling edge
 */
 
+/*! SPi pin selections as defined in bcm2835.h
+	BCM2835_SPI_CS0 = 0			Chip select 0
+	BCM2835_SPI_CS1 = 1			Chip select 1
+	BCM2835_SPI_CS2 = 2			Chip Select 2 (ie pins CS1 and CS2 are asserted)     
+	BCM2835_SPI_CS_NONE = 3		No CS, control it yourself 
+ */
+
+/*! SPi bit order as defined in bcm2835.h
+	BCM2835_SPI_BIT_ORDER_LSBFIRST	= 0			SPi bit order, LSB first
+	BCM2835_SPI_BIT_ORDER_MSBFIRST	= 1			SPi bit order, MSB first
+ */
+
 enum {
     ERR_NONE                            =  0, /*! No error occurred */
     ERR_INITIALISATION                  =  1, /*! Unable to initialise the SPI comms */
@@ -72,15 +84,19 @@ enum {
  *****************************************************************************
  * Overview:  Setup the SPi for comms
  *  
- * Utilising the bcm2835 libraries, setup the SPI port for use
+ * Utilising the bcm2835 libraries, setup the SPI port for use, see comments 
+ * above for information or bcm2835.h
  *
- * param[in/out] ?? : None 
+ * param[in]	clock_divider	: SPI clock speed choices
+ * param[in]	spi_data_mode	: SPI data mode choices
+ * param[in]	bit_order		: SPI bit order, lsb or msb first
+ * param[in]	cs_pin			: SPi CS Pin control
  *
  * return ERR_NONE              : No error
  * return ERR_INITILISATION     : Initialisation Error
  *****************************************************************************
  */
-CommsRetCode SPiInitialisation(void);
+CommsRetCode SPiInitialisation(int clock_divider, int spi_data_mode, int bit_order, int cs_pin);
 
 
 
@@ -94,7 +110,7 @@ CommsRetCode SPiInitialisation(void);
  * 
  * param[in]  *txBuf : The data to be transmitted 
  * param[out] *rxBuf : The data that has been received
- * param[in]  bufLen : The length of the transmit AND receive buffers
+ * param[in]  SPibufLen : The length of the transmit AND receive buffers
  *
  * return ERR_NONE              : No error
  * return ERR_INITILISATION     : Initialisation Error
@@ -104,6 +120,37 @@ CommsRetCode SPiInitialisation(void);
 
 CommsRetCode SPiTranscieve(uint8_t *SPitxBuf, uint8_t *SPirxBuf, uint8_t SPibufLen);
 
+/*!
+ *****************************************************************************
+ * Overview:  Perform a SPi comms transmit only
+ *  
+ * Utilising the bcm2835 libraries, perform a transmit of data provided.
+ * 
+ * param[in]  *txBuf : The data to be transmitted 
+ * param[in]  SpibufLen : The length of the transmit buffer
+ *
+ * return ERR_NONE              : No error
+ * return ERR_INITILISATION     : Initialisation Error
+ * return ERR_COMMS             : Comms failure
+ *****************************************************************************
+ */
+CommsRetCode SPiTransmit(uint8_t *SPitxBuf, uint8_t SPibufLen);
+
+/*!
+ *****************************************************************************
+ * Overview:  Close the SPi comms port
+ *  
+ * Utilising the bcm2835 libraries, close the SPi port and return the pins to 
+ * the default state.
+ * 
+ * param[in]  ?? : none
+ *
+ * return ERR_NONE              : No error
+ * return ERR_INITILISATION     : Initialisation Error
+ * return ERR_COMMS             : Comms failure
+ *****************************************************************************
+ */
+CommsRetCode SPiEnd(void);
 
 
 #endif /*SPI_COMMS */

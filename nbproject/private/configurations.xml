@@ -31,7 +31,7 @@
           <runcommandpicklistitem>"testProgram"</runcommandpicklistitem>
         </runcommandpicklist>
         <runcommand>"testProgram"</runcommand>
-        <rundir>/Users/matthew/Documents/Bostin Technology/RadarPi/</rundir>
+        <rundir>/Users/matthew/Documents/Bostin Technology/RadarPi/build</rundir>
         <buildfirst>true</buildfirst>
         <console-type>2</console-type>
         <terminal-type>0</terminal-type>

@@ -4,8 +4,11 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
-      <itemPath>AnalogueMeasurement/inc/adcFunctions.h</itemPath>
+      <itemPath>common/inc/adcFunctions.h</itemPath>
       <itemPath>TestProgram/inc/adcTest.h</itemPath>
+      <itemPath>TestProgram/inc/freqTest.h</itemPath>
+      <itemPath>common/inc/gainFunctions.h</itemPath>
+      <itemPath>TestProgram/inc/gainTest.h</itemPath>
       <itemPath>gpio_control.h</itemPath>
       <itemPath>common/inc/ledControl.h</itemPath>
       <itemPath>TestProgram/inc/ledTest.h</itemPath>
@@ -20,8 +23,11 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
-      <itemPath>AnalogueMeasurement/src/adcFunctions.c</itemPath>
+      <itemPath>common/src/adcFunctions.c</itemPath>
       <itemPath>TestProgram/src/adcTest.c</itemPath>
+      <itemPath>TestProgram/src/freqTest.c</itemPath>
+      <itemPath>common/src/gainFunctions.c</itemPath>
+      <itemPath>TestProgram/src/gainTest.c</itemPath>
       <itemPath>gpio_control.c</itemPath>
       <itemPath>common/src/ledControl.c</itemPath>
       <itemPath>TestProgram/src/ledTest.c</itemPath>
@@ -70,22 +76,19 @@
           </incFile>
           <warningLevel>2</warningLevel>
         </cTool>
+        <asmTool>
+          <commandlineTool>as</commandlineTool>
+        </asmTool>
       </compileType>
-      <item path="AnalogueMeasurement/inc/adcFunctions.h"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="AnalogueMeasurement/src/adcFunctions.c"
-            ex="false"
-            tool="0"
-            flavor2="0">
-      </item>
       <item path="Makefile_old" ex="false" tool="3" flavor2="0">
       </item>
       <item path="TestProgram/Makefile_oldTP" ex="false" tool="3" flavor2="0">
       </item>
       <item path="TestProgram/inc/adcTest.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="TestProgram/inc/freqTest.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="TestProgram/inc/gainTest.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="TestProgram/inc/ledTest.h" ex="false" tool="3" flavor2="0">
       </item>
@@ -93,15 +96,27 @@
       </item>
       <item path="TestProgram/src/adcTest.c" ex="false" tool="0" flavor2="0">
       </item>
+      <item path="TestProgram/src/freqTest.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="TestProgram/src/gainTest.c" ex="false" tool="0" flavor2="0">
+      </item>
       <item path="TestProgram/src/ledTest.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="TestProgram/src/mainTestProgram.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="build/readme.txt" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="common/inc/adcFunctions.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="common/inc/gainFunctions.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="common/inc/ledControl.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="common/inc/utilities.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="common/src/adcFunctions.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="common/src/gainFunctions.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="common/src/ledControl.c" ex="false" tool="0" flavor2="0">
       </item>
@@ -146,21 +161,15 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
-      <item path="AnalogueMeasurement/inc/adcFunctions.h"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="AnalogueMeasurement/src/adcFunctions.c"
-            ex="false"
-            tool="0"
-            flavor2="0">
-      </item>
       <item path="Makefile_old" ex="false" tool="3" flavor2="0">
       </item>
       <item path="TestProgram/Makefile_oldTP" ex="false" tool="3" flavor2="0">
       </item>
       <item path="TestProgram/inc/adcTest.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="TestProgram/inc/freqTest.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="TestProgram/inc/gainTest.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="TestProgram/inc/ledTest.h" ex="false" tool="3" flavor2="0">
       </item>
@@ -168,15 +177,27 @@
       </item>
       <item path="TestProgram/src/adcTest.c" ex="false" tool="0" flavor2="0">
       </item>
+      <item path="TestProgram/src/freqTest.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="TestProgram/src/gainTest.c" ex="false" tool="0" flavor2="0">
+      </item>
       <item path="TestProgram/src/ledTest.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="TestProgram/src/mainTestProgram.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="build/readme.txt" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="common/inc/adcFunctions.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="common/inc/gainFunctions.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="common/inc/ledControl.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="common/inc/utilities.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="common/src/adcFunctions.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="common/src/gainFunctions.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="common/src/ledControl.c" ex="false" tool="0" flavor2="0">
       </item>

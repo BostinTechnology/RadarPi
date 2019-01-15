@@ -24,8 +24,10 @@ all: $(TARGETDIR_testProgram)/testProgram
 OBJS_testProgram =  \
 	$(TARGETDIR_testProgram)/ledTest.o \
 	$(TARGETDIR_testProgram)/adcTest.o \
+	$(TARGETDIR_testProgram)/gainTest.o \
 	$(TARGETDIR_testProgram)/mainTestProgram.o \
 	$(TARGETDIR_testProgram)/adcFunctions.o \
+	$(TARGETDIR_testProgram)/gainFunctions.o \
 	$(TARGETDIR_testProgram)/spi_comms.o \
 	$(TARGETDIR_testProgram)/gpio_control.o \
 	$(TARGETDIR_testProgram)/utilities.o \
@@ -46,6 +48,12 @@ $(TARGETDIR_testProgram)/ledTest.o: $(TARGETDIR_testProgram) TestProgram/src/led
 
 $(TARGETDIR_testProgram)/adcTest.o: $(TARGETDIR_testProgram) TestProgram/src/adcTest.c
 	$(COMPILE.c) $(CFLAGS_testProgram) $(CPPFLAGS_testProgram) -o $@ TestProgram/src/adcTest.c
+
+$(TARGETDIR_testProgram)/gainFunctions.o: $(TARGETDIR_testProgram) common/src/gainFunctions.c
+	$(COMPILE.c) $(CFLAGS_testProgram) $(CPPFLAGS_testProgram) -o $@ common/src/gainFunctions.c
+
+$(TARGETDIR_testProgram)/gainTest.o: $(TARGETDIR_testProgram) TestProgram/src/gainTest.c
+	$(COMPILE.c) $(CFLAGS_testProgram) $(CPPFLAGS_testProgram) -o $@ TestProgram/src/gainTest.c
 
 $(TARGETDIR_testProgram)/mainTestProgram.o: $(TARGETDIR_testProgram) TestProgram/src/mainTestProgram.c
 	$(COMPILE.c) $(CFLAGS_testProgram) $(CPPFLAGS_testProgram) -o $@ TestProgram/src/mainTestProgram.c
@@ -73,6 +81,7 @@ clean:
 		$(TARGETDIR_testProgram)/testProgram \
 		$(TARGETDIR_testProgram)/ledTest.o \
 		$(TARGETDIR_testProgram)/adcTest.o \
+		$(TARGETDIR_testProgram)/gainTest.o \
 		$(TARGETDIR_testProgram)/mainTestProgram.o \
 		$(TARGETDIR_testProgram)/adcFunctions.o \
 		$(TARGETDIR_testProgram)/spi_comms.o \

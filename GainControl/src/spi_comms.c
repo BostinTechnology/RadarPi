@@ -3,7 +3,7 @@
   *
   * Example software provided by Bostin Technology Ltd
   *
-  * This software comes with no warrently and is provided as a demo application
+  * This software comes with no warranty and is provided as a demo application
   * for use with the ST25R3911B NFC controller
   *
   * For more information    www.Cogniot.eu
