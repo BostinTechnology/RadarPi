@@ -59,6 +59,7 @@ int ledSetup(void)
 int controlRunningLED(int state)
 {
 	set_gpio_value(LED_RUNNING,state);
+	return 0;
 }
 
 
@@ -77,6 +78,7 @@ int controlRunningLED(int state)
 int controlMonitoringLED(int state)
 {
 	set_gpio_value(LED_MONITORING,state);
+	return 0;
 }
 
 /*!**************************************************************************
@@ -94,5 +96,6 @@ int controlMonitoringLED(int state)
 int controlTriggeredLED(int state)
 {
 	set_gpio_value(LED_TRIGGERED,state);
+	return 0;
 }
 

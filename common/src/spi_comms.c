@@ -100,13 +100,15 @@ CommsRetCode SPiTransmit(uint8_t *SPitxBuf, uint8_t SPibufLen) {
     for (i=0; i < SPibufLen; i++)
     {
         data_buffer[i] = SPitxBuf[i];
-        //printf("SPitxBuf Data In %d : %x\n", i, data_buffer[i]);      // For debug purposes
+        //printf("DEBUG: SPitxBuf Data In %d : %x\n", i, data_buffer[i]);      // For debug purposes
     }
     //printf("DEBUG: About to perform comms\n");
 
     // Perform the transfer of bufLen bytes.
     // data_buffer is both the transmit and receive buffer
     bcm2835_spi_writenb(&data_buffer[0], SPibufLen);
+	
+	//printf("DEBUG: Comms Complete\n");
 
     return ERR_NONE;
 }

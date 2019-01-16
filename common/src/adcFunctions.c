@@ -17,6 +17,8 @@ CommsRetCode adcSPiInitialisation(void) {
 						BCM2835_SPI_MODE3, 
 						BCM2835_SPI_BIT_ORDER_MSBFIRST,
 						BCM2835_SPI_CS0);
+	
+	return ERR_NONE;
 };
 
 float readVoltage(void) {
@@ -26,7 +28,7 @@ float readVoltage(void) {
     float           reading=0.00;             // The output value
     float           supply_voltage = 3.3;     // SUpply voltage for the A-D
     uint16_t        fsd_range=4096;           // Maximum value from A-D (12 bits)
-    CommsRetCode   ret;
+	CommsRetCode	ret;
     
     //printf("DEBUG: Into read Voltage\n");
 

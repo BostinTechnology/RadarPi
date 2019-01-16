@@ -19,24 +19,29 @@
 
 void setGainValue (void) {
 	
-	int		i;
-	char	option[5];
-	int		choice;
+	int				i;
+	char			option[5];
+	int				choice;
+	CommsRetCode	ret;
+	
+	ret = gainSPiInitialisation();
 	
 	printf("Choose the Gain Setting desired:\n\n");
 	printf("Choice	Gain Value\n");
 	for(i=0; i < qtyGainValues; i++) {
-		printf("%d	-	%s", i, gainValues[i].description);
+		printf("%d	-	%s\n", i, gainValues[i].description);
 	};
-	printf("99	-	return to main menu");
+	printf("99	-	return to main menu\n");
 	do {
 		fgets(option, 5, stdin);
 		//getchar();			//consumes the extra enter - not sure this is needed
 		choice = atoi (option);
-		printf("DEBUG: Choice Entered:%d", choice);
+		//printf("DEBUG: Choice Entered:%d\n", choice);
 		if (choice < 0) strcpy(option, "\0"); //option[0]="\0";			//Set option back to an empty string
 		else if (choice >= 0 && choice <= qtyGainValues) {
+			//printf("DEBUG: Setting Gain Control of %d\n", gainValues[choice].value);
 			setGainControl(gainValues[choice].value);
+			printf("Gain has been set\n\n");
 		}
 	} while (choice != 99);
 		

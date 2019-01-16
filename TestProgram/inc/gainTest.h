@@ -14,6 +14,7 @@
 #ifndef GAINTEST_H
 #define GAINTEST_H
 
+void setGainValue(void);
 
 
 #endif /* GAINTEST_H */
