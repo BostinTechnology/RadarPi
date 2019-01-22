@@ -42,6 +42,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/TestProgram/src/mainTestProgram.o \
 	${OBJECTDIR}/common/src/adcFunctions.o \
 	${OBJECTDIR}/common/src/gainFunctions.o \
+	${OBJECTDIR}/common/src/gpioFunctions.o \
 	${OBJECTDIR}/common/src/ledControl.o \
 	${OBJECTDIR}/common/src/utilities.o \
 	${OBJECTDIR}/gpio_control.o \
@@ -106,6 +107,11 @@ ${OBJECTDIR}/common/src/gainFunctions.o: common/src/gainFunctions.c
 	${MKDIR} -p ${OBJECTDIR}/common/src
 	${RM} "$@.d"
 	$(COMPILE.c) -g -Wall -ITestProgram -include TestProgram/inc -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/common/src/gainFunctions.o common/src/gainFunctions.c
+
+${OBJECTDIR}/common/src/gpioFunctions.o: common/src/gpioFunctions.c 
+	${MKDIR} -p ${OBJECTDIR}/common/src
+	${RM} "$@.d"
+	$(COMPILE.c) -g -Wall -ITestProgram -include TestProgram/inc -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/common/src/gpioFunctions.o common/src/gpioFunctions.c
 
 ${OBJECTDIR}/common/src/ledControl.o: common/src/ledControl.c 
 	${MKDIR} -p ${OBJECTDIR}/common/src

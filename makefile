@@ -25,13 +25,15 @@ OBJS_testProgram =  \
 	$(TARGETDIR_testProgram)/ledTest.o \
 	$(TARGETDIR_testProgram)/adcTest.o \
 	$(TARGETDIR_testProgram)/gainTest.o \
-	$(TARGETDIR_testProgram)/mainTestProgram.o \
+	$(TARGETDIR_testProgram)/freqTest.o \
 	$(TARGETDIR_testProgram)/adcFunctions.o \
 	$(TARGETDIR_testProgram)/gainFunctions.o \
+	$(TARGETDIR_testProgram)/gpioFunctions.o \
 	$(TARGETDIR_testProgram)/spi_comms.o \
 	$(TARGETDIR_testProgram)/gpio_control.o \
 	$(TARGETDIR_testProgram)/utilities.o \
-	$(TARGETDIR_testProgram)/ledControl.o
+	$(TARGETDIR_testProgram)/ledControl.o \
+	$(TARGETDIR_testProgram)/mainTestProgram.o
 USERLIBS_testProgram = -lbcm2835 
 DEPLIBS_testProgram =  
 LDLIBS_testProgram = $(USERLIBS_testProgram)
@@ -49,6 +51,9 @@ $(TARGETDIR_testProgram)/ledTest.o: $(TARGETDIR_testProgram) TestProgram/src/led
 $(TARGETDIR_testProgram)/adcTest.o: $(TARGETDIR_testProgram) TestProgram/src/adcTest.c
 	$(COMPILE.c) $(CFLAGS_testProgram) $(CPPFLAGS_testProgram) -o $@ TestProgram/src/adcTest.c
 
+$(TARGETDIR_testProgram)/freqTest.o: $(TARGETDIR_testProgram) TestProgram/src/freqTest.c
+	$(COMPILE.c) $(CFLAGS_testProgram) $(CPPFLAGS_testProgram) -o $@ TestProgram/src/freqTest.c
+
 $(TARGETDIR_testProgram)/gainFunctions.o: $(TARGETDIR_testProgram) common/src/gainFunctions.c
 	$(COMPILE.c) $(CFLAGS_testProgram) $(CPPFLAGS_testProgram) -o $@ common/src/gainFunctions.c
 
@@ -60,6 +65,9 @@ $(TARGETDIR_testProgram)/mainTestProgram.o: $(TARGETDIR_testProgram) TestProgram
 
 $(TARGETDIR_testProgram)/adcFunctions.o: $(TARGETDIR_testProgram) common/src/adcFunctions.c
 	$(COMPILE.c) $(CFLAGS_testProgram) $(CPPFLAGS_testProgram) -o $@ common/src/adcFunctions.c
+
+$(TARGETDIR_testProgram)/gpioFunctions.o: $(TARGETDIR_testProgram) common/src/gpioFunctions.c
+	$(COMPILE.c) $(CFLAGS_testProgram) $(CPPFLAGS_testProgram) -o $@ common/src/gpioFunctions.c
 
 $(TARGETDIR_testProgram)/spi_comms.o: $(TARGETDIR_testProgram) common/src/spi_comms.c
 	$(COMPILE.c) $(CFLAGS_testProgram) $(CPPFLAGS_testProgram) -o $@ common/src/spi_comms.c
@@ -81,9 +89,11 @@ clean:
 		$(TARGETDIR_testProgram)/testProgram \
 		$(TARGETDIR_testProgram)/ledTest.o \
 		$(TARGETDIR_testProgram)/adcTest.o \
+		$(TARGETDIR_testProgram)/freqTest.o \
 		$(TARGETDIR_testProgram)/gainTest.o \
 		$(TARGETDIR_testProgram)/mainTestProgram.o \
 		$(TARGETDIR_testProgram)/adcFunctions.o \
+		$(TARGETDIR_testProgram)/gpioFunctions.o \
 		$(TARGETDIR_testProgram)/spi_comms.o \
 		$(TARGETDIR_testProgram)/gpio_control.o \
 		$(TARGETDIR_testProgram)/utilities.o \

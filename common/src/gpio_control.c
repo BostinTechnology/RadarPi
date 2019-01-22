@@ -18,14 +18,16 @@
 #include <stdlib.h>
 #include <sys/mman.h>					// required for mmap
 #include <fcntl.h>						// required by open
+#include <unistd.h>						// required by close
 #include <errno.h>						// So I can get error numbers out
 //#include <unistd.h>
 #include "../inc/gpio_control.h"
 
+#include <stdint.h>
+// Global Variables
+static volatile uint32_t *gpio_mmap;                  // the mmap pointer for the gpio map
 
-/* Setup the GPIO system ready for use
- * extracts the map and check it is ready to use
- * Doesn't include specific pin assignments*/
+
 int gpio_init() {
   
   int gpio_mem;
@@ -60,14 +62,7 @@ int gpio_init() {
   return 0;
 }
 
-/* Function to set the GPIO pin to be an input.
- * - Requires an int for the GPIO pin to be set
- * - Returns 0 or -1 if error
- * The first 5 blocks of the map are the function select pins, each block being 32bits (4 bytes)
- * long and consisting of 3 bits per gpio pin, addressed as a single 32bit.
- * Address for gpio0 is 0 in the gpio_mmap, address for gpio9 is also 0, but different bits
- * address for gpio15 is 1 as it is the next block
- */
+
 int set_gpio_for_input(int pin_no){
 	
 	int block_addr =0;						// The address for the block
@@ -109,13 +104,7 @@ int set_gpio_for_input(int pin_no){
 
 }
 
-/* Function to set the GPIO pin to be an output
- * - Requires and int for the GPIO pin number
- * - returns 0
- * Very similar to the set_gpio_for_input above except it is writing a different value
- * For an explanation of how it works, please refer to above.
- * value to be written for output is 001, not 000 for input
- */
+
 int set_gpio_for_output(int pin_no) {
 	
 	int block_addr =0;						// The address for the block
@@ -153,15 +142,7 @@ int set_gpio_for_output(int pin_no) {
 	return 0;
 }
 
-/* For setting the output value of a GPIO pin.
- * - Requires an int for pin number and int for the value to be written (1 or 0)
- * - returns 0 or -1 if there is an error
- * To set the GPIO pin one of 2 different operations are required as the 
- * registers are organised as Set and Clear registers
- * For example, to turn the GPIO pin on, write 1 to the set register, but to turn
- * it off write 1 to the clear register
- * There are 2 registers per Set & Clear and are organised as GPIO pins 0 - 31 and 32 - 53
- */
+
 int set_gpio_value (int pin_no, int value) {
 	
 	int block_addr;							// The address for the block
@@ -201,11 +182,7 @@ int set_gpio_value (int pin_no, int value) {
 	
 }
 
-/* For reading of the GPIO value
- * - Requires an int pin number in range 0 - 53
- * - Returns an int with the value either 1 or 0 or a negative number if an error
- * To read the GPIO pin, select the register (13 or 14) and return the required bit
- */
+
 int read_gpio_value(int pin_no) {
 	
 	int block_addr;								// The block address to use

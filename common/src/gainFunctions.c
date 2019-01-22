@@ -55,7 +55,10 @@ void setGainControl(int gain_setting) {
 	txBuf[0] = txBuf[0] + (REGISTER_SELECTION);
 	
     ret = SPiTransmit( txBuf, msgLen);
-	//printf("DEBUG: Response from setGainControl SPiTransmit:%d", ret);
+	
+	if (ret!= ERR_NONE) {
+		printf("DEBUG: Response from setGainControl SPiTransmit:%d", ret);
+	}
     return;
 
 };

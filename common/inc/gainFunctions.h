@@ -40,7 +40,7 @@
 struct GAIN_DEFINITION {
 	char	description[10];
 	int		value;
-} ;
+} gainValues[qtyGainValues];
 /*! Gain Settings for G3:G0
  *  gainValues is a 2 dimensional array that contains the setting and corresponding gain value
 					G3:G0		//GAIN (V/V)		SLEW RATE (V/μs)	SMALL-SIGNAL BANDWIDTH (MHz)*/
@@ -59,7 +59,7 @@ struct GAIN_DEFINITION {
 //	{"GAIN_1X",		0b1010},	//1					2.90				2.15
 //};
 
-struct GAIN_DEFINITION gainValues[qtyGainValues];
+//struct GAIN_DEFINITION gainValues[qtyGainValues];
 
 #define	SHUTDOWN_MODE		0b0		// Set to normal mode, change this to 1 for low power mode
 #define	MEASURING_MODE		0b0		// Set to normal operation, if set to 1, inputs shorted

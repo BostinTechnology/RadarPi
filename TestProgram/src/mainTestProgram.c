@@ -17,6 +17,7 @@
 #include "../inc/ledTest.h"
 #include "../inc/adcTest.h"
 #include "../inc/gainTest.h"
+#include "../inc/freqTest.h"
 #include "../../common/inc/utilities.h"
 
 
@@ -132,7 +133,7 @@ int main(int argc, char** argv) {
 
             case 'q':
                 /* Read Frequency */
-				
+				readFrequency();
 				break;
 
             case 's':

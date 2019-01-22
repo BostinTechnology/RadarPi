@@ -12,12 +12,14 @@
  */
 
 #include <stdio.h>
+#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
-#include "../inc/gainTest.h"
+//#include "../inc/gainTest.h"
 #include "../../common/inc/gainFunctions.h"
 
-void setGainValue (void) {
+
+void setGainValue(void) {
 	
 	int				i;
 	char			option[5];
@@ -25,6 +27,10 @@ void setGainValue (void) {
 	CommsRetCode	ret;
 	
 	ret = gainSPiInitialisation();
+	
+	if (ret != ERR_NONE) {
+		return;
+	}
 	
 	printf("Choose the Gain Setting desired:\n\n");
 	printf("Choice	Gain Value\n");
@@ -44,6 +50,7 @@ void setGainValue (void) {
 			printf("Gain has been set\n\n");
 		}
 	} while (choice != 99);
-		
+	
+	
 	return;
 };

@@ -39,6 +39,9 @@ float readVoltage(void) {
 
     ret = SPiTranscieve( txBuf, rxBuf, msgLen);
 
+	if (ret != ERR_NONE){
+		return 0.0;
+	}
     /* For debug purposes
 	uint8_t i;
     printf("DEBUG:Response:");

@@ -21,13 +21,13 @@
 //#include <cstdlib>
 #include <bcm2835.h>        // hardware definition library file
 #include <stdio.h>
+#include <stdint.h>
 
 /*
 ******************************************************************************
 * GLOBAL DEFINES
 ******************************************************************************
 */
-
 
 typedef uint16_t      CommsRetCode;          /* Standard Return Code type from function. */
 
@@ -71,7 +71,7 @@ typedef uint16_t      CommsRetCode;          /* Standard Return Code type from f
 	BCM2835_SPI_BIT_ORDER_MSBFIRST	= 1			SPi bit order, MSB first
  */
 
-enum {
+enum CommsRetCodeENUM {
     ERR_NONE                            =  0, /*! No error occurred */
     ERR_INITIALISATION                  =  1, /*! Unable to initialise the SPI comms */
     ERR_COMMS                           =  2, /*! Communications failure has occurred */

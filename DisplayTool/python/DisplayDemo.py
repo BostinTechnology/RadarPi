@@ -502,9 +502,8 @@ class DataCapture:
 
     def time_period_read(self):
         """
-        This is where we handle the asynchronous I/O. For example, it may be
-        a 'select(  )'. One important thing to remember is that the thread has
-        to yield control pretty regularly, by select or otherwise.
+        This is where we sit a loop whilst capturing is true and read the gpio pin
+		has an overall timeout if unsuccessful and a bit of debouncing
         """
         self.log.info("[DataC] Starting Data Capturing thread:%s" % self.capturing)
         starttime = 0.00                    # float

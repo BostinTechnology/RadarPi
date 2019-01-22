@@ -47,7 +47,7 @@ void sigHandler(int sig)
 			break;
 		case SIGINT: // 2
 			// Interrupt (Ctrl c From command line) - Graceful exit
-			// printf("DEBIUG:Sig: Got SIGINT - Ending Routine\n");
+			printf("DEBIUG:Sig: Got SIGINT - Ending Routine\n");
 			systemloop=false;
 			break;
 		case 15:
