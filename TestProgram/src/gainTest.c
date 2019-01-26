@@ -48,6 +48,7 @@ void setGainValue(void) {
 			//printf("DEBUG: Setting Gain Control of %d\n", gainValues[choice].value);
 			setGainControl(gainValues[choice].value);
 			printf("Gain has been set\n\n");
+			choice = 99;				// exit the loop now the gain has been set
 		}
 	} while (choice != 99);
 	

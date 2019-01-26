@@ -14,6 +14,8 @@
 #ifndef FREQTEST_H
 #define FREQTEST_H
 
+#define		MAX_WAIT_TIME		3	// The maximum time allowed to register a GPIO state time in seconds.
+
 
 
 /*!**************************************************************************
@@ -43,20 +45,6 @@ void readFrequency(void);
  *****************************************************************************/
 int chooseGPIOPin (void);
 
-/*!**************************************************************************
- * Overview:  Wait for the GPIO pin to change state
- *  
- * Description: This method takes the current GPIO state and waits until the
- *				pin changes state.
- *
- * Parameters:
- * param[in]	pin		: gpio pin to monitor
- *		[in]	timeout	: float of the maximum time to wait in SECONDS
- *
- * return		0       : no time
- *				float	: duration
- *****************************************************************************/
-float measureGpioDuration(int pin_no, float timeout);
 
 #endif /* FREQTEST_H */
 

@@ -17,10 +17,9 @@
 // The various GPIO Pins that can be read
 
 #define		IF_OUT1				27	// The GPIO pin used for the frequency input, was 4 originally and also tried 11
-#define		IF_OUT_TO_PI		11
+#define		IF_OUT_TO_PI		22
 #define		SAMPLE_HOLD			17	// 
 
-#define		MAX_WAIT_TIME		30	// The maximum time allowed to register a GPIO state time in seconds.
 
 
 

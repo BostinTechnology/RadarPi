@@ -157,7 +157,7 @@ int main(int argc, char** argv) {
 				break;
 		
        }
-       fflush (stdout) ;
+       fflush (stdin) ;
     } while(option != 'e');
     
     return 0;
