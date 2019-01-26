@@ -18,43 +18,6 @@
  * Also need to drive the sample and hold pin
  */
 
-float measureGpioDuration(int pin_no, float timeout) {
-	
-	time_t		currenttime, starttime;
-	int			currentstate;				// the current GPIO state
-	int			changed = false;
-	float		duration = 0.00;			// how long it was till the state changed
-	
-
-	printf("DEBUG: Measuring the GPIO Duration\n");
-	
-	// read current state
-	currentstate = read_gpio_value(pin_no);
-	
-    // load the current time into the counter
-    currenttime = clock();
-
-    starttime = currenttime; 
-	
-	// monitor in loop till timeout or change in state
-    do {
-        currenttime = clock();
-        //printf("%ld\n", currenttime);         // debug to check it ran for the right time
-		if (read_gpio_value(pin_no) != currentstate) {
-			// GPIO has changed state
-			printf("DEBUG: GPIO has changed state, exiting\n");
-			changed = true;
-			duration = (float)((currenttime - starttime)/ CLOCKS_PER_SEC);		// Convert the number of ticks to the time
-		};
-		if (currenttime < (starttime + (timeout * CLOCKS_PER_SEC))) {
-			// timeout has been reached
-			printf("DEBUG: Timeout has been reached, exiting\n");
-			changed = true;
-		}
-    } while (changed == false);
-	
-	return duration;
-};
 
 
 int setupGpioFunctions(void) {
@@ -67,4 +30,10 @@ int setupGpioFunctions(void) {
 
 	return 0;
 };
+
+void setSampleHoldForRun(void) {
+	
+	set_gpio_value(SAMPLE_HOLD,0);
+	return;
+}
 

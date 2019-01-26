@@ -22,20 +22,7 @@
 
 #define		MAX_WAIT_TIME		30	// The maximum time allowed to register a GPIO state time in seconds.
 
-/*!**************************************************************************
- * Overview:  Wait for the GPIO pin to change state
- *  
- * Description: This method takes the current GPIO state and waits until the
- *				pin changes state.
- *
- * Parameters:
- * param[in]	pin		: gpio pin to monitor
- *		[in]	timeout	: float of the maximum time to wait in SECONDS
- *
- * return		0       : no time
- *				float	: duration
- *****************************************************************************/
-float measureGpioDuration(int pin_no, float timeout);
+
 
 /*!**************************************************************************
  * Overview:  Set the GPIO pins ready for use
@@ -52,6 +39,19 @@ float measureGpioDuration(int pin_no, float timeout);
  *				float	: duration
  *****************************************************************************/
 int setupGpioFunctions(void);
+
+/*!**************************************************************************
+ * Overview:  Set the Sample & Hold pin to running state
+ *  
+ * Description: This method sets up the Sample & Hold pin low so that it
+ *				It is in running state
+ *
+ * Parameters:
+ * param[in]	??		: none
+ *
+ * return		??      : nothing
+ *****************************************************************************/
+void setSampleHoldForRun(void);
 
 #endif /* GPIOFUNCTIONS_H */
 

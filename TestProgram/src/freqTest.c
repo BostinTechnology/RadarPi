@@ -14,7 +14,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
+#include <unistd.h>
+#include <time.h>
+
 #include "../inc/freqTest.h"
+#include "../../common/inc/gpio_control.h"
 #include "../../common/inc/gpioFunctions.h"
 #include "../../common/inc/utilities.h"
 
@@ -55,12 +60,54 @@ int chooseGPIOPin(void) {
 	};
 	
 	return chosen_pin;
-}
+};
+float measureGpioDuration(int pin_no, float timeout) {
+	
+	time_t		currenttime, starttime;
+	int			currentstate;				// the current GPIO state
+	int			changed = false;
+	float		duration = 0.00;			// how long it was till the state changed
+	
+
+	printf("DEBUG: Measuring the GPIO Duration\n");
+	
+	// read current state
+	currentstate = read_gpio_value(pin_no);
+	
+    // load the current time into the counter
+    currenttime = clock();
+
+    starttime = currenttime; 
+	
+	// monitor in loop till timeout or change in state
+    do {
+        currenttime = clock();
+        //printf("%ld\n", currenttime);         // debug to check it ran for the right time
+		if (read_gpio_value(pin_no) != currentstate) {
+			// GPIO has changed state
+			printf("DEBUG: GPIO has changed state, exiting\n");
+			changed = true;
+			duration = (float)((currenttime - starttime)/ CLOCKS_PER_SEC);		// Convert the number of ticks to the time
+		};
+		if (currenttime > (starttime + (timeout * CLOCKS_PER_SEC))) {
+			// timeout has been reached
+			printf("DEBUG: Timeout has been reached, exiting\n");
+			changed = true;
+		}
+    } while (changed == false);
+	
+	return duration;
+};
+
 
 void readFrequency(void) {
 	
-	int		measuring_pin;			// The GPIO pin to measure
-	float	time_period = 0.00;		// The time between state changes
+	int			measuring_pin;			// The GPIO pin to measure
+	float		time_period = 0.00;		// The time between state changes
+	time_t		currenttime, starttime;
+	int			currentstate;				// the current GPIO state
+	float		timeout = 3.0;
+	
 			
 	setupGpioFunctions();
 	
@@ -69,17 +116,28 @@ void readFrequency(void) {
 	
 	// loop to show frequency
 	printf("CTRL - C to end loop\n");
+	
+	// read current state
+	currentstate = read_gpio_value(measuring_pin);
+	
+    // load the current time into the starting time
+    starttime = clock(); 
 
 	do {
-		time_period = measureGpioDuration(measuring_pin, MAX_WAIT_TIME);
-		if (time_period > 0) {
+        currenttime = clock();
+        //printf("%ld\n", currenttime);         // debug to check it ran for the right time
+		if (read_gpio_value(measuring_pin) != currentstate) {
+			// GPIO has changed state
+			printf("DEBUG: GPIO has changed state, exiting\n");
+			time_period = (float)((currenttime - starttime)/ CLOCKS_PER_SEC);		// Convert the number of ticks to the time
 			printf("Frequency:%e\n", (1 / (time_period * 2)));
-		}
-		else {
-			printf("Frequency: no trigger\n");
-		}
-		
-		
+		};
+		if (currenttime > (starttime + (timeout * CLOCKS_PER_SEC))) {
+			// timeout has been reached
+			printf("DEBUG: Timeout has been reached, starting again\n");
+			starttime = clock();			// reset the timeout clock
+		};
 	} while (systemloop);
+	
 	return;
-}
+};

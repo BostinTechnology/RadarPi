@@ -48,13 +48,8 @@
                    kind="IMPORTANT_FILES_FOLDER">
       <itemPath>Makefile</itemPath>
     </logicalFolder>
-    <itemPath>Makefile_old</itemPath>
-    <itemPath>TestProgram/Makefile_oldTP</itemPath>
     <itemPath>makefile</itemPath>
-    <itemPath>makefile_cm</itemPath>
     <itemPath>makefile_inc_am</itemPath>
-    <itemPath>makefile_old2</itemPath>
-    <itemPath>makefile_old3</itemPath>
     <itemPath>build/readme.txt</itemPath>
   </logicalFolder>
   <sourceRootList>
@@ -82,10 +77,6 @@
           <commandlineTool>as</commandlineTool>
         </asmTool>
       </compileType>
-      <item path="Makefile_old" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="TestProgram/Makefile_oldTP" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="TestProgram/inc/adcTest.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="TestProgram/inc/freqTest.h" ex="false" tool="3" flavor2="0">
@@ -134,13 +125,7 @@
       </item>
       <item path="makefile" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="makefile_cm" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="makefile_inc_am" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="makefile_old2" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="makefile_old3" ex="false" tool="3" flavor2="0">
       </item>
       <item path="radar.c" ex="false" tool="0" flavor2="0">
       </item>
@@ -167,10 +152,6 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
-      <item path="Makefile_old" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="TestProgram/Makefile_oldTP" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="TestProgram/inc/adcTest.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="TestProgram/inc/freqTest.h" ex="false" tool="3" flavor2="0">
@@ -219,13 +200,7 @@
       </item>
       <item path="makefile" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="makefile_cm" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="makefile_inc_am" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="makefile_old2" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="makefile_old3" ex="false" tool="3" flavor2="0">
       </item>
       <item path="radar.c" ex="false" tool="0" flavor2="0">
       </item>

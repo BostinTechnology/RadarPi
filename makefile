@@ -85,20 +85,9 @@ $(TARGETDIR_testProgram)/ledControl.o: $(TARGETDIR_testProgram) common/src/ledCo
 
 #### Clean target deletes all generated files ####
 clean:
-	rm -f \
+	rm -f	$(OBJS_testProgram) \
 		$(TARGETDIR_testProgram)/testProgram \
-		$(TARGETDIR_testProgram)/ledTest.o \
-		$(TARGETDIR_testProgram)/adcTest.o \
-		$(TARGETDIR_testProgram)/freqTest.o \
-		$(TARGETDIR_testProgram)/gainTest.o \
-		$(TARGETDIR_testProgram)/mainTestProgram.o \
-		$(TARGETDIR_testProgram)/adcFunctions.o \
-		$(TARGETDIR_testProgram)/gpioFunctions.o \
-		$(TARGETDIR_testProgram)/spi_comms.o \
-		$(TARGETDIR_testProgram)/gpio_control.o \
-		$(TARGETDIR_testProgram)/utilities.o \
-		$(TARGETDIR_testProgram)/ledControl.o
-	rm -f -r $(TARGETDIR_testProgram)
+#	#rm -f -r $(TARGETDIR_testProgram)
 
 
 # Create the target directory (if needed)

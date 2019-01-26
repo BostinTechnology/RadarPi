@@ -42,5 +42,21 @@ void readFrequency(void);
  *				0			: zero if no pin selected
  *****************************************************************************/
 int chooseGPIOPin (void);
+
+/*!**************************************************************************
+ * Overview:  Wait for the GPIO pin to change state
+ *  
+ * Description: This method takes the current GPIO state and waits until the
+ *				pin changes state.
+ *
+ * Parameters:
+ * param[in]	pin		: gpio pin to monitor
+ *		[in]	timeout	: float of the maximum time to wait in SECONDS
+ *
+ * return		0       : no time
+ *				float	: duration
+ *****************************************************************************/
+float measureGpioDuration(int pin_no, float timeout);
+
 #endif /* FREQTEST_H */
 
