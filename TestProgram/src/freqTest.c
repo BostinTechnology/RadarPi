@@ -73,6 +73,8 @@ void readFrequency(void) {
 	
 	setupGpioFunctions();
 	
+	setSampleHoldForRun();
+	
 	// menu to choose GPIO pin to read
 	measuring_pin = chooseGPIOPin();
 	
@@ -104,6 +106,8 @@ void readFrequency(void) {
 			starttime = clock();			// reset the timeout clock
 		};
 	} while (systemloop);
+	
+	printf("Frequency Measuring completed.\n");
 	
 	return;
 };

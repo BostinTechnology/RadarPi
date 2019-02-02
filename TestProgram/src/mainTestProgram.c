@@ -19,6 +19,7 @@
 #include "../inc/gainTest.h"
 #include "../inc/freqTest.h"
 #include "../../common/inc/utilities.h"
+#include "../../common/inc/gainFunctions.h"
 
 
 
@@ -128,7 +129,7 @@ int main(int argc, char** argv) {
 
             case 'g':
                 /* Set Gain Control */
-				setGainValue();
+				selectGainValueMenu();
 				break;
 
             case 'q':
@@ -153,11 +154,12 @@ int main(int argc, char** argv) {
                 break;
 
             default:
-                printf("Unrecognised command!\n");
+                printf("Unrecognised command!:>%c<\n", option);
 				break;
 		
        }
        fflush (stdin) ;
+	   printf("\n");
     } while(option != 'e');
     
     return 0;

@@ -7,6 +7,8 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <stdbool.h>
+#include <stdlib.h>
+#include <string.h>
 #include "../inc/gainFunctions.h"
 
 struct GAIN_DEFINITION gainValues[qtyGainValues] = {
@@ -62,4 +64,42 @@ void setGainControl(int gain_setting) {
     return;
 
 };
+
+void selectGainValueMenu(void) {
+	
+	int				i;
+	char			option[5];
+	int				choice;
+	CommsRetCode	ret;
+	
+	ret = gainSPiInitialisation();
+	
+	if (ret != ERR_NONE) {
+		return;
+	}
+	
+	printf("Choose the Gain Setting desired:\n\n");
+	printf("Choice	Gain Value\n");
+	for(i=0; i < qtyGainValues; i++) {
+		printf("%d	-	%s\n", i, gainValues[i].description);
+	};
+	printf("99	-	return to main menu\n");
+	do {
+		fgets(option, 5, stdin);
+		//getchar();			//consumes the extra enter - not sure this is needed
+		choice = atoi (option);
+		//printf("DEBUG: Choice Entered:%d\n", choice);
+		if (choice < 0) strcpy(option, "\0"); //option[0]="\0";			//Set option back to an empty string
+		else if (choice >= 0 && choice <= qtyGainValues) {
+			//printf("DEBUG: Setting Gain Control of %d\n", gainValues[choice].value);
+			setGainControl(gainValues[choice].value);
+			printf("Gain has been set\n\n");
+			choice = 99;				// exit the loop now the gain has been set
+		}
+	} while (choice != 99);
+	
+	
+	return;
+};
+
 

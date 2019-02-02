@@ -52,5 +52,18 @@ int setupGpioFunctions(void);
  *****************************************************************************/
 void setSampleHoldForRun(void);
 
+/*!**************************************************************************
+ * Overview:  Set the Sample & Hold pin to HOLD state
+ *  
+ * Description: This method sets up the Sample & Hold pin high so that it
+ *				It is in HOLD state
+ *
+ * Parameters:
+ * param[in]	??		: none
+ *
+ * return		??      : nothing
+ *****************************************************************************/
+void setSampleHoldForHold(void);
+
 #endif /* GPIOFUNCTIONS_H */
 

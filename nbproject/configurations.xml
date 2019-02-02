@@ -50,6 +50,8 @@
     </logicalFolder>
     <itemPath>makefile</itemPath>
     <itemPath>makefile_inc_am</itemPath>
+    <itemPath>newComplexMakefile</itemPath>
+    <itemPath>newMakeFile</itemPath>
     <itemPath>build/readme.txt</itemPath>
   </logicalFolder>
   <sourceRootList>
@@ -127,6 +129,10 @@
       </item>
       <item path="makefile_inc_am" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="newComplexMakefile" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="newMakeFile" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="radar.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="radar.h" ex="false" tool="3" flavor2="0">
@@ -201,6 +207,10 @@
       <item path="makefile" ex="false" tool="3" flavor2="0">
       </item>
       <item path="makefile_inc_am" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="newComplexMakefile" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="newMakeFile" ex="false" tool="3" flavor2="0">
       </item>
       <item path="radar.c" ex="false" tool="0" flavor2="0">
       </item>

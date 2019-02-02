@@ -1,10 +1,8 @@
 ## -*- Makefile -*-
 ##
-## User: matthew
+## User: Matthew
 ## Time: 12-Jan-2019 09:16:44
-## Makefile created by Oracle Developer Studio.
 ##
-## This file is generated automatically.
 ##
 
 
@@ -15,84 +13,134 @@ CFLAGS = $(BASICOPTS)
 
 
 # Define the target directories.
-TARGETDIR_testProgram=build
+TARGETDIR_ALL=build
 
 
-all: $(TARGETDIR_testProgram)/testProgram
+all: $(TARGETDIR_ALL)/testProgram $(TARGETDIR_ALL)/analogueMeasurement
 
-## Target: testProgram
+# ----------------------------------------------------------------------------------------------------------------
+#       Common Objects
+# ----------------------------------------------------------------------------------------------------------------
+OBJS_common = \
+	$(TARGETDIR_ALL)/adcFunctions.o \
+	$(TARGETDIR_ALL)/gainFunctions.o \
+	$(TARGETDIR_ALL)/gpioFunctions.o \
+	$(TARGETDIR_ALL)/spi_comms.o \
+	$(TARGETDIR_ALL)/gpio_control.o \
+	$(TARGETDIR_ALL)/utilities.o \
+	$(TARGETDIR_ALL)/ledControl.o \
+
+# ----------------------------------------------------------------------------------------------------------------
+##      Target: testProgram
+# ----------------------------------------------------------------------------------------------------------------
 OBJS_testProgram =  \
-	$(TARGETDIR_testProgram)/ledTest.o \
-	$(TARGETDIR_testProgram)/adcTest.o \
-	$(TARGETDIR_testProgram)/gainTest.o \
-	$(TARGETDIR_testProgram)/freqTest.o \
-	$(TARGETDIR_testProgram)/adcFunctions.o \
-	$(TARGETDIR_testProgram)/gainFunctions.o \
-	$(TARGETDIR_testProgram)/gpioFunctions.o \
-	$(TARGETDIR_testProgram)/spi_comms.o \
-	$(TARGETDIR_testProgram)/gpio_control.o \
-	$(TARGETDIR_testProgram)/utilities.o \
-	$(TARGETDIR_testProgram)/ledControl.o \
-	$(TARGETDIR_testProgram)/mainTestProgram.o
+	$(TARGETDIR_ALL)/ledTest.o \
+	$(TARGETDIR_ALL)/adcTest.o \
+	$(TARGETDIR_ALL)/gainTest.o \
+	$(TARGETDIR_ALL)/freqTest.o \
+	$(OBJS_common) \
+	$(TARGETDIR_ALL)/mainTestProgram.o
 USERLIBS_testProgram = -lbcm2835 
 DEPLIBS_testProgram =  
 LDLIBS_testProgram = $(USERLIBS_testProgram)
 
+# ----------------------------------------------------------------------------------------------------------------
+##      Target: analogueMeasurement
+# ----------------------------------------------------------------------------------------------------------------
+OBJS_analogueMeasurement =  \
+	$(OBJS_common) \
+	$(TARGETDIR_ALL)/readingAnalogueSignals.o
+USERLIBS_analogueMeasurement = -lbcm2835 
+DEPLIBS_analogueMeasurement =  
+LDLIBS_analogueMeasurement = $(USERLIBS_analogueMeasurement)
 
-# Link or archive
-$(TARGETDIR_testProgram)/testProgram: $(TARGETDIR_testProgram) $(OBJS_testProgram) $(DEPLIBS_testProgram)
-	$(LINK.c) $(CFLAGS_testProgram) $(CPPFLAGS_testProgram) -o $@ $(OBJS_testProgram) $(LDLIBS_testProgram)
-
-
-# Compile source files into .o files
-$(TARGETDIR_testProgram)/ledTest.o: $(TARGETDIR_testProgram) TestProgram/src/ledTest.c
-	$(COMPILE.c) $(CFLAGS_testProgram) $(CPPFLAGS_testProgram) -o $@ TestProgram/src/ledTest.c
-
-$(TARGETDIR_testProgram)/adcTest.o: $(TARGETDIR_testProgram) TestProgram/src/adcTest.c
-	$(COMPILE.c) $(CFLAGS_testProgram) $(CPPFLAGS_testProgram) -o $@ TestProgram/src/adcTest.c
-
-$(TARGETDIR_testProgram)/freqTest.o: $(TARGETDIR_testProgram) TestProgram/src/freqTest.c
-	$(COMPILE.c) $(CFLAGS_testProgram) $(CPPFLAGS_testProgram) -o $@ TestProgram/src/freqTest.c
-
-$(TARGETDIR_testProgram)/gainFunctions.o: $(TARGETDIR_testProgram) common/src/gainFunctions.c
-	$(COMPILE.c) $(CFLAGS_testProgram) $(CPPFLAGS_testProgram) -o $@ common/src/gainFunctions.c
-
-$(TARGETDIR_testProgram)/gainTest.o: $(TARGETDIR_testProgram) TestProgram/src/gainTest.c
-	$(COMPILE.c) $(CFLAGS_testProgram) $(CPPFLAGS_testProgram) -o $@ TestProgram/src/gainTest.c
-
-$(TARGETDIR_testProgram)/mainTestProgram.o: $(TARGETDIR_testProgram) TestProgram/src/mainTestProgram.c
-	$(COMPILE.c) $(CFLAGS_testProgram) $(CPPFLAGS_testProgram) -o $@ TestProgram/src/mainTestProgram.c
-
-$(TARGETDIR_testProgram)/adcFunctions.o: $(TARGETDIR_testProgram) common/src/adcFunctions.c
-	$(COMPILE.c) $(CFLAGS_testProgram) $(CPPFLAGS_testProgram) -o $@ common/src/adcFunctions.c
-
-$(TARGETDIR_testProgram)/gpioFunctions.o: $(TARGETDIR_testProgram) common/src/gpioFunctions.c
-	$(COMPILE.c) $(CFLAGS_testProgram) $(CPPFLAGS_testProgram) -o $@ common/src/gpioFunctions.c
-
-$(TARGETDIR_testProgram)/spi_comms.o: $(TARGETDIR_testProgram) common/src/spi_comms.c
-	$(COMPILE.c) $(CFLAGS_testProgram) $(CPPFLAGS_testProgram) -o $@ common/src/spi_comms.c
-
-$(TARGETDIR_testProgram)/gpio_control.o: $(TARGETDIR_testProgram) common/src/gpio_control.c
-	$(COMPILE.c) $(CFLAGS_testProgram) $(CPPFLAGS_testProgram) -o $@ common/src/gpio_control.c
-
-$(TARGETDIR_testProgram)/utilities.o: $(TARGETDIR_testProgram) common/src/utilities.c
-	$(COMPILE.c) $(CFLAGS_testProgram) $(CPPFLAGS_testProgram) -o $@ common/src/utilities.c
-
-$(TARGETDIR_testProgram)/ledControl.o: $(TARGETDIR_testProgram) common/src/ledControl.c
-	$(COMPILE.c) $(CFLAGS_testProgram) $(CPPFLAGS_testProgram) -o $@ common/src/ledControl.c
+# ----------------------------------------------------------------------------------------------------------------
+##      Target: settingGainControl
+# ----------------------------------------------------------------------------------------------------------------
+OBJS_settingGainControl =  \
+	$(OBJS_common) \
+	$(TARGETDIR_ALL)/settingGainControl.o
+USERLIBS_settingGainControl = -lbcm2835 
+DEPLIBS_settingGainControl =  
+LDLIBS_settingGainControl = $(USERLIBS_settingGainControl)
 
 
+# ----------------------------------------------------------------------------------------------------------------
+#       Link or archive
+# ----------------------------------------------------------------------------------------------------------------
+$(TARGETDIR_ALL)/testProgram: $(TARGETDIR_ALL) $(OBJS_testProgram) $(DEPLIBS_testProgram)
+	$(LINK.c) $(CFLAGS)  -o $@ $(OBJS_testProgram)  $(LDLIBS_testProgram)
 
-#### Clean target deletes all generated files ####
+$(TARGETDIR_ALL)/analogueMeasurement: $(TARGETDIR_ALL) $(OBJS_analogueMeasurement) $(DEPLIBS_analogueMeasurement)
+	$(LINK.c) $(CFLAGS)  -o $@ $(OBJS_analogueMeasurement)  $(LDLIBS_analogueMeasurement)
+
+$(TARGETDIR_ALL)/gainControl: $(TARGETDIR_ALL) $(OBJS_settingGainControl) $(DEPLIBS_settingGainControl)
+	$(LINK.c) $(CFLAGS)  -o $@ $(OBJS_settingGainControl)  $(LDLIBS_settingGainControl)
+	
+# ----------------------------------------------------------------------------------------------------------------
+#       Compile source files into .o files
+# ----------------------------------------------------------------------------------------------------------------
+# ----- common ---------------------------------------------------------------------------------------------------
+$(TARGETDIR_ALL)/adcFunctions.o: $(TARGETDIR_ALL) common/src/adcFunctions.c
+	$(COMPILE.c) $(CFLAGS)  -o $@ common/src/adcFunctions.c
+
+$(TARGETDIR_ALL)/gainFunctions.o: $(TARGETDIR_ALL) common/src/gainFunctions.c
+	$(COMPILE.c) $(CFLAGS)  -o $@ common/src/gainFunctions.c
+
+$(TARGETDIR_ALL)/gpioFunctions.o: $(TARGETDIR_ALL) common/src/gpioFunctions.c
+	$(COMPILE.c) $(CFLAGS)  -o $@ common/src/gpioFunctions.c
+
+$(TARGETDIR_ALL)/gpio_control.o: $(TARGETDIR_ALL) common/src/gpio_control.c
+	$(COMPILE.c) $(CFLAGS)  -o $@ common/src/gpio_control.c
+
+$(TARGETDIR_ALL)/ledControl.o: $(TARGETDIR_ALL) common/src/ledControl.c
+	$(COMPILE.c) $(CFLAGS)  -o $@ common/src/ledControl.c
+
+$(TARGETDIR_ALL)/spi_comms.o: $(TARGETDIR_ALL) common/src/spi_comms.c
+	$(COMPILE.c) $(CFLAGS)  -o $@ common/src/spi_comms.c
+
+$(TARGETDIR_ALL)/utilities.o: $(TARGETDIR_ALL) common/src/utilities.c
+	$(COMPILE.c) $(CFLAGS)  -o $@ common/src/utilities.c
+
+# ----- testProgram ----------------------------------------------------------------------------------------------
+$(TARGETDIR_ALL)/adcTest.o: $(TARGETDIR_ALL) TestProgram/src/adcTest.c
+	$(COMPILE.c) $(CFLAGS)  -o $@ TestProgram/src/adcTest.c
+
+$(TARGETDIR_ALL)/freqTest.o: $(TARGETDIR_ALL) TestProgram/src/freqTest.c
+	$(COMPILE.c) $(CFLAGS)  -o $@ TestProgram/src/freqTest.c
+
+$(TARGETDIR_ALL)/gainTest.o: $(TARGETDIR_ALL) TestProgram/src/gainTest.c
+	$(COMPILE.c) $(CFLAGS)  -o $@ TestProgram/src/gainTest.c
+
+$(TARGETDIR_ALL)/ledTest.o: $(TARGETDIR_ALL) TestProgram/src/ledTest.c
+	$(COMPILE.c) $(CFLAGS)  -o $@ TestProgram/src/ledTest.c
+
+$(TARGETDIR_ALL)/mainTestProgram.o: $(TARGETDIR_ALL) TestProgram/src/mainTestProgram.c
+	$(COMPILE.c) $(CFLAGS)  -o $@ TestProgram/src/mainTestProgram.c
+
+# ----- analogueMeasurement --------------------------------------------------------------------------------------
+$(TARGETDIR_ALL)/readingAnalogueSignals.o: $(TARGETDIR_ALL) AnalogueMeasurement/src/readingAnalogueSignals.c
+	$(COMPILE.c) $(CFLAGS)  -o $@ AnalogueMeasurement/src/readingAnalogueSignals.c
+
+# ----- settingGainControl ---------------------------------------------------------------------------------------
+$(TARGETDIR_ALL)/settingGainControl.o: $(TARGETDIR_ALL) GainControl/src/settingGainControl.c
+	$(COMPILE.c) $(CFLAGS)  -o $@ GainControl/src/settingGainControl.c
+
+
+# ----------------------------------------------------------------------------------------------------------------
+#    Clean target deletes all generated files ####
+# ----------------------------------------------------------------------------------------------------------------
 clean:
 	rm -f	$(OBJS_testProgram) \
-		$(TARGETDIR_testProgram)/testProgram \
-#	#rm -f -r $(TARGETDIR_testProgram)
+		$(OBJS_analogueMeasurement) \
+		$(TARGETDIR_ALL)/testProgram \
+		$(TARGETDIR_ALL)/analogueMeasurement
+
 
 
 # Create the target directory (if needed)
-$(TARGETDIR_testProgram):
-	mkdir -p $(TARGETDIR_testProgram)
+$(TARGETDIR_ALL):
+	mkdir -p $(TARGETDIR_ALL)
 
 
 # Enable dependency checking

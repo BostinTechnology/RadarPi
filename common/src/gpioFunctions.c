@@ -35,5 +35,11 @@ void setSampleHoldForRun(void) {
 	
 	set_gpio_value(SAMPLE_HOLD,0);
 	return;
+};
+
+void setSampleHoldForHold(void) {
+	
+	set_gpio_value(SAMPLE_HOLD,1);
+	return;
 }
 

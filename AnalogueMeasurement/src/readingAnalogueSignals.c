@@ -230,7 +230,7 @@ int main(int argc, char** argv) {
 
     char option;                        // Used for menu choices
 
-    SPiInitialisation();
+    adcSPiInitialisation();
     // main menu
     do {
         printf(" \n\n");

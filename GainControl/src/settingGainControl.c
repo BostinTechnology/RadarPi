@@ -49,7 +49,8 @@
 #include <stdbool.h>
 #include <bcm2835.h>        // hardware definition library file
 #include <time.h>           // to enable time functions
-#include "../inc/spi_comms.h"
+#include "../../common/inc/spi_comms.h"
+#include "../../common/inc/gainFunctions.h"
 
 
 /*
@@ -104,37 +105,6 @@ int splashscreen(void)
     return (0);
 }
 
-/*!
- *****************************************************************************
- * Overview:  Sets the Gain Control to 10
- *  
- * This method using the SPi comms to send the required data byte to set the
- * gain control to 10
- *
- * Gain Register setting is described above
- *
- * param[in/out] ?? : None 
- *
- * return NOTHING         : No response
- *****************************************************************************
- */
-void setGainControl(void) {
-
-    uint8_t         msgLen = 1;               // The length of the message 
-    uint8_t         txBuf[msgLen];            // The outgoing message
-    CommsRetCode   ret;
-    
-    //printf("DEBUG: Into read Voltage\n");
-
-    // Test to see if works
-    txBuf[0] = 0x0F;
-    // The line below is the original setting for a gain of 10
-    // txBuf[0] = 0x03; //0b00000011 0x03       see above for explanation
-
-    ret = SPiTransmit( txBuf, msgLen);
-
-    return;
-}
 
 
 /******************************************************************************
@@ -145,21 +115,19 @@ void setGainControl(void) {
 
 int main(int argc, char** argv) {
 
-    char option;                        // Used for menu choices
-
-    SPiInitialisation();
+    gainSPiInitialisation();
     // main menu
 
     printf(" \n\n");
     printf("**************************************************************************\n");
-    printf("Setting Gain Control to ??\n\n");
+    printf("Setting Gain Control \n\n");
 
 
     printf("Please Enter to configure ");
 
     getchar();  // have to press enter and this consumes the enter character
 
-    setGainControl();
+    selectGainValueMenu();
     
     return 0;
 }

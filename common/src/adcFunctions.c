@@ -50,7 +50,7 @@ float readVoltage(void) {
         printf("%02x", rxBuf[i]);
     }
     printf("\n");
-    */
+    //*/
 
     /* Shift the bits to the correct location
      * the first byte back is ignored as it only there for comms
@@ -58,8 +58,8 @@ float readVoltage(void) {
      * the third byte is the LSByte
      * */
     
-    reading = (rxBuf[1] << 8) + rxBuf[2];
-    //printf("DEBUG: Reading after merge:%f\n", reading);
+    reading = ((rxBuf[1] & 0x0f) << 8)  + rxBuf[2];
+    //printf("DEBUG: Reading after merge:%fs\n", reading);
 
     // Formula for calculation      Digital Output Code = 4096 * Vin
     //                                                    ----------
@@ -69,4 +69,4 @@ float readVoltage(void) {
     //printf("DEBUG: Voltage being returned:%f\n", reading);
 
     return reading;
-}
+};
