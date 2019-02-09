@@ -16,6 +16,7 @@
 #include <unistd.h>
 #include "../inc/ledControl.h"
 #include "../inc/gpio_control.h"
+#include "../../common/inc/utilities.h"
 
 /*!**************************************************************************
  * Overview:  Setup the LEDs for use and set them off
@@ -98,4 +99,33 @@ int controlTriggeredLED(int state)
 	set_gpio_value(LED_TRIGGERED,state);
 	return 0;
 }
+
+int cycleLEDs(void)
+{
+
+	ledSetup();
+	printf("CTRL - C to end loop\n");
+
+	do {
+		printf("Running LED\n");
+		controlTriggeredLED(LED_OFF);
+		controlRunningLED(LED_ON);
+		usleep(LED_TEST_SPEED);
+
+		printf("Monitoring LED\n");
+		controlRunningLED(LED_OFF);
+		controlMonitoringLED(LED_ON);
+		usleep(LED_TEST_SPEED);
+
+		printf("Triggered LED\n");
+		controlMonitoringLED(LED_OFF);
+		controlTriggeredLED(LED_ON);
+		usleep(LED_TEST_SPEED);
+		
+		
+	} while (systemloop);
+
+	printf("LED test completed\n");
+	return 0;
+};
 

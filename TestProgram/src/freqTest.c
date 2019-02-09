@@ -61,7 +61,7 @@ int chooseGPIOPin(void) {
 	return chosen_pin;
 };
 
-void readFrequency(void) {
+void readHalfFrequency(void) {
 	
 	int			measuring_pin;			// The GPIO pin to measure
 	float		time_period = 0.00;		// The time between state changes
@@ -79,7 +79,7 @@ void readFrequency(void) {
 	measuring_pin = chooseGPIOPin();
 	
 	// loop to show frequency
-	printf("CTRL - C to end loop\n");
+	printf("CTRL - C to end loop (Half Freq)\n");
 	
 	// read current state
 	currentstate = read_gpio_value(measuring_pin);
@@ -93,17 +93,89 @@ void readFrequency(void) {
 		newstate = read_gpio_value(measuring_pin);
 		if ( newstate != currentstate) {
 			// GPIO has changed state
-			currentstate = newstate;
-			//printf("DEBUG: GPIO has changed state\n");
-			time_period = (float)(currenttime - starttime)/ CLOCKS_PER_SEC;		// Convert the number of ticks to the time
-			printf("Frequency:%f\n", (1 / (time_period * 2)));
-			starttime = clock();
+			usleep(FREQ_DEBOUNCE_TIME);
+			newstate = read_gpio_value(measuring_pin);
+			if ( newstate != currentstate) {
+				currentstate = newstate;
+				//printf("DEBUG: GPIO has changed state\n");
+				time_period = (float)(currenttime - starttime)/ CLOCKS_PER_SEC;		// Convert the number of ticks to the time
+				printf("Frequency:%f\n", (1 / (time_period * 2)));
+				starttime = clock();
+			};
 		};
 		if (currenttime > (starttime + (timeout * CLOCKS_PER_SEC))) {
 			// timeout has been reached
 			//printf("DEBUG: Timeout has been reached, starting again\n");
 			printf(".\n");
 			starttime = clock();			// reset the timeout clock
+		};
+	} while (systemloop);
+	
+	printf("Frequency Measuring completed.\n");
+	
+	return;
+};
+
+void readFullFrequency(void) {
+	
+	int			measuring_pin;			// The GPIO pin to measure
+	float		time_period = 0.00;		// The time between state changes
+	time_t		currenttime, starttime, halftime;
+	int			startstate, newstate;				// the current GPIO state
+	float		timeout = (float) MAX_WAIT_TIME;
+	int			halfcycledetected = false;					//flag to identify when the hlaf cycle has been detected
+	
+	systemloop=true;
+	
+	setupGpioFunctions();
+	
+	setSampleHoldForRun();
+	
+	// menu to choose GPIO pin to read
+	measuring_pin = chooseGPIOPin();
+	
+	// loop to show frequency
+	printf("CTRL - C to end loop (Full Freq)\n");
+	
+	// read current state
+	startstate = read_gpio_value(measuring_pin);
+	
+    // load the current time into the starting time
+    starttime = clock();
+	halftime = 0;
+
+	do {
+        currenttime = clock();
+        //printf("%ld\n", currenttime);         // debug to check it ran for the right time
+		newstate = read_gpio_value(measuring_pin);
+		if ( newstate != startstate) {
+			// GPIO has changed state
+			usleep(FREQ_DEBOUNCE_TIME);
+			newstate = read_gpio_value(measuring_pin);
+			if ( newstate != startstate) {
+				// I've detected half a cycle after de-bounce
+				//printf("DEBUG: GPIO has changed state\n");
+				startstate = newstate;
+				if (halfcycledetected) {
+					// the state has now changed twice as i detected half a cycle beforehand
+					time_period = (float)((currenttime - starttime) + halftime)/ CLOCKS_PER_SEC;		// Convert the number of ticks to the time
+					printf("Frequency:%f\n", (1 / (time_period * 2)));
+					halfcycledetected = false;	
+				}
+				else {
+					// the state has changed for the first time
+					halftime = (currenttime - starttime);
+					halfcycledetected = true;	
+				}
+				starttime = clock();				
+			};
+		};
+		if (currenttime > (starttime + (timeout * CLOCKS_PER_SEC))) {
+			// timeout has been reached
+			//printf("DEBUG: Timeout has been reached, starting again\n");
+			printf(".\n");
+			starttime = clock();			// reset the timeout clock
+			halfcycledetected = false;
 		};
 	} while (systemloop);
 	

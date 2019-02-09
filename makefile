@@ -16,7 +16,7 @@ CFLAGS = $(BASICOPTS)
 TARGETDIR_ALL=build
 
 
-all: $(TARGETDIR_ALL)/testProgram $(TARGETDIR_ALL)/analogueMeasurement
+all:    $(TARGETDIR_ALL)/testProgram $(TARGETDIR_ALL)/analogueMeasurement $(TARGETDIR_ALL)/gainControl $(TARGETDIR_ALL)/digitalDetection
 
 # ----------------------------------------------------------------------------------------------------------------
 #       Common Objects
@@ -27,16 +27,14 @@ OBJS_common = \
 	$(TARGETDIR_ALL)/gpioFunctions.o \
 	$(TARGETDIR_ALL)/spi_comms.o \
 	$(TARGETDIR_ALL)/gpio_control.o \
-	$(TARGETDIR_ALL)/utilities.o \
 	$(TARGETDIR_ALL)/ledControl.o \
+	$(TARGETDIR_ALL)/utilities.o \
 
 # ----------------------------------------------------------------------------------------------------------------
 ##      Target: testProgram
 # ----------------------------------------------------------------------------------------------------------------
 OBJS_testProgram =  \
-	$(TARGETDIR_ALL)/ledTest.o \
 	$(TARGETDIR_ALL)/adcTest.o \
-	$(TARGETDIR_ALL)/gainTest.o \
 	$(TARGETDIR_ALL)/freqTest.o \
 	$(OBJS_common) \
 	$(TARGETDIR_ALL)/mainTestProgram.o
@@ -66,6 +64,16 @@ LDLIBS_settingGainControl = $(USERLIBS_settingGainControl)
 
 
 # ----------------------------------------------------------------------------------------------------------------
+##      Target: analogueMeasurement
+# ----------------------------------------------------------------------------------------------------------------
+OBJS_digitalDetection =  \
+	$(OBJS_common) \
+	$(TARGETDIR_ALL)/readingDigitalSignals.o
+USERLIBS_digitalDetection = -lbcm2835 
+DEPLIBS_digitalDetection =  
+LDLIBS_digitalDetection = $(USERLIBS_digitalDetection)
+
+# ----------------------------------------------------------------------------------------------------------------
 #       Link or archive
 # ----------------------------------------------------------------------------------------------------------------
 $(TARGETDIR_ALL)/testProgram: $(TARGETDIR_ALL) $(OBJS_testProgram) $(DEPLIBS_testProgram)
@@ -76,6 +84,9 @@ $(TARGETDIR_ALL)/analogueMeasurement: $(TARGETDIR_ALL) $(OBJS_analogueMeasuremen
 
 $(TARGETDIR_ALL)/gainControl: $(TARGETDIR_ALL) $(OBJS_settingGainControl) $(DEPLIBS_settingGainControl)
 	$(LINK.c) $(CFLAGS)  -o $@ $(OBJS_settingGainControl)  $(LDLIBS_settingGainControl)
+
+$(TARGETDIR_ALL)/digitalDetection: $(TARGETDIR_ALL) $(OBJS_digitalDetection) $(DEPLIBS_digitalDetection)
+	$(LINK.c) $(CFLAGS)  -o $@ $(OBJS_digitalDetection)  $(LDLIBS_digitalDetection)	
 	
 # ----------------------------------------------------------------------------------------------------------------
 #       Compile source files into .o files
@@ -109,9 +120,6 @@ $(TARGETDIR_ALL)/adcTest.o: $(TARGETDIR_ALL) TestProgram/src/adcTest.c
 $(TARGETDIR_ALL)/freqTest.o: $(TARGETDIR_ALL) TestProgram/src/freqTest.c
 	$(COMPILE.c) $(CFLAGS)  -o $@ TestProgram/src/freqTest.c
 
-$(TARGETDIR_ALL)/gainTest.o: $(TARGETDIR_ALL) TestProgram/src/gainTest.c
-	$(COMPILE.c) $(CFLAGS)  -o $@ TestProgram/src/gainTest.c
-
 $(TARGETDIR_ALL)/ledTest.o: $(TARGETDIR_ALL) TestProgram/src/ledTest.c
 	$(COMPILE.c) $(CFLAGS)  -o $@ TestProgram/src/ledTest.c
 
@@ -126,6 +134,10 @@ $(TARGETDIR_ALL)/readingAnalogueSignals.o: $(TARGETDIR_ALL) AnalogueMeasurement/
 $(TARGETDIR_ALL)/settingGainControl.o: $(TARGETDIR_ALL) GainControl/src/settingGainControl.c
 	$(COMPILE.c) $(CFLAGS)  -o $@ GainControl/src/settingGainControl.c
 
+# ----- digitalDetection -----------------------------------------------------------------------------------------
+$(TARGETDIR_ALL)/readingDigitalSignals.o: $(TARGETDIR_ALL) DigitalDetection/src/readingDigitalSignals.c
+	$(COMPILE.c) $(CFLAGS)  -o $@ DigitalDetection/src/readingDigitalSignals.c
+
 
 # ----------------------------------------------------------------------------------------------------------------
 #    Clean target deletes all generated files ####
@@ -134,8 +146,9 @@ clean:
 	rm -f	$(OBJS_testProgram) \
 		$(OBJS_analogueMeasurement) \
 		$(TARGETDIR_ALL)/testProgram \
-		$(TARGETDIR_ALL)/analogueMeasurement
-
+		$(TARGETDIR_ALL)/analogueMeasurement \
+		$(TARGETDIR_ALL)/gainControl \
+		$(TARGETDIR_ALL)/digitalDetection
 
 
 # Create the target directory (if needed)

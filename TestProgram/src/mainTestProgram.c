@@ -14,10 +14,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "../inc/systemSettings.h"
-#include "../inc/ledTest.h"
 #include "../inc/adcTest.h"
-#include "../inc/gainTest.h"
 #include "../inc/freqTest.h"
+#include "../../common/inc/ledControl.h"
 #include "../../common/inc/utilities.h"
 #include "../../common/inc/gainFunctions.h"
 
@@ -68,7 +67,6 @@ void helpScreen(void)
 	printf("a - Read ADC Output\n");
 	printf("g - Set Gain Control\n");
 	printf("q - Read Frequency\n");
-	printf("s - Test Sample & Hold Function\n");
 	printf("h - Display the help screen\n");
 	printf("e - Exit program \n");
 	printf("\n");
@@ -97,6 +95,9 @@ int main(int argc, char** argv) {
 	
     // main menu
 	helpScreen();
+	
+	//set the default gain
+	setGainDefaultValue();
 	
     do {
         printf("Please select command (h for help) -> ");
@@ -134,12 +135,7 @@ int main(int argc, char** argv) {
 
             case 'q':
                 /* Read Frequency */
-				readFrequency();
-				break;
-
-            case 's':
-                /* Test Sample & Hold Function */
-				
+				readFullFrequency();
 				break;
 
             case 'h':

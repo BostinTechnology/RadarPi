@@ -38,16 +38,16 @@ CommsRetCode SPiInitialisation(int clock_divider, int spi_data_mode, int bit_ord
     }
 
 	//Set SPI clock speed
-	bcm2835_spi_setClockDivider(BCM2835_SPI_CLOCK_DIVIDER_4096);
+	bcm2835_spi_setClockDivider(clock_divider);
 
 	//Set SPI data mode
-	bcm2835_spi_setDataMode(BCM2835_SPI_MODE3);
+	bcm2835_spi_setDataMode(spi_data_mode);
 	
 	// Set Bit Order
-	bcm2835_spi_setBitOrder(BCM2835_SPI_BIT_ORDER_LSBFIRST);
+	bcm2835_spi_setBitOrder(bit_order);
 
 	//Set with CS pin to use for next transfers
-	bcm2835_spi_chipSelect(BCM2835_SPI_CS0);
+	bcm2835_spi_chipSelect(cs_pin);
 	
 	return ERR_NONE;
 }

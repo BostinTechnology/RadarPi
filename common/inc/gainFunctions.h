@@ -65,6 +65,8 @@ struct GAIN_DEFINITION {
 #define	MEASURING_MODE		0b0		// Set to normal operation, if set to 1, inputs shorted
 #define	REGISTER_SELECTION	0b1		// Set to 1 for gain register, 0 is for Vos Trim Register
 
+#define DEFAULT_GAIN_VALUE	0b0001	// Default value for the gain setting
+
 
 
 /*!
@@ -83,10 +85,10 @@ CommsRetCode gainSPiInitialisation (void);
 
 /*!
  *****************************************************************************
- * Overview:  Sets the Gain Control to 10
+ * Overview:  Sets the Gain Control to the given value
  *  
  * This method using the SPi comms to send the required data byte to set the
- * gain control to 10
+ * gain control to the supplied setting
  *
  * Gain Register setting is described above
  *
@@ -113,5 +115,34 @@ void setGainControl(int gain_setting);
  *****************************************************************************
  */
 void selectGainValueMenu(void);
+
+/*!
+ *****************************************************************************
+ * Overview:  Ends the SPI port for the ADC chip Control
+ *  
+ * This method releases the SPi port for the ADC chip
+ *
+ * param[in/out] ?? : nothing 
+ *
+ * return none   : nothing
+ *****************************************************************************
+ */
+void gainSPiEnd(void);
+
+/*!
+ *****************************************************************************
+ * Overview:  Sets the Gain Control to default value
+ *  
+ * This method using the SPi comms to send the required data byte to set the
+ * gain control to the default value
+ *
+ * Gain Register setting is described above
+ *
+ * param[in]	gain_setting : binary value require for the desired gain for bits g3:g0
+ *
+ * return NOTHING         : No response
+ *****************************************************************************
+ */
+void setGainDefaultValue(void);
 
 #endif /* GAINFUNCTIONS_H */

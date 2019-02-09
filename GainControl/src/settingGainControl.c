@@ -122,11 +122,6 @@ int main(int argc, char** argv) {
     printf("**************************************************************************\n");
     printf("Setting Gain Control \n\n");
 
-
-    printf("Please Enter to configure ");
-
-    getchar();  // have to press enter and this consumes the enter character
-
     selectGainValueMenu();
     
     return 0;

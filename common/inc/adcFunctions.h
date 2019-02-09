@@ -77,15 +77,27 @@ float readVoltage(void);
  *****************************************************************************
  * Overview:  Initialises the SPI port for the ADC chip Control
  *  
- * This method using the bcm2835 library to set the required settings to set the
- * SPi port for the ADC chip
+ * This method configures the SPi port for the ADC chip
  *
  * param[in/out] ?? : nothing 
  *
- * return NOTHING         : No response
+ * return CommsRetCode   : ERROR_NONE
  *****************************************************************************
  */
 CommsRetCode adcSPiInitialisation(void);
+
+/*!
+ *****************************************************************************
+ * Overview:  Ends the SPI port for the ADC chip Control
+ *  
+ * This method releases the SPi port for the ADC chip
+ *
+ * param[in/out] ?? : nothing 
+ *
+ * return none   : nothing
+ *****************************************************************************
+ */
+void adcSPiEnd(void);
 
 #endif /* ADCFUNCTIONS_H */
 

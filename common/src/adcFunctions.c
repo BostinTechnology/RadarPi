@@ -70,3 +70,16 @@ float readVoltage(void) {
 
     return reading;
 };
+
+void adcSPiEnd(void) {
+	CommsRetCode	ret;
+	
+	ret = SPiEnd();
+	
+	if (ret != ERR_NONE){
+		//printf("DEBUG: Error releasing SPi Port");
+		return;
+	}
+	
+	return;
+};

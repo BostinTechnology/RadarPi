@@ -35,7 +35,23 @@ CommsRetCode gainSPiInitialisation (void) {
 	
 	return ERR_NONE;
 };
+
+
+void gainSPiEnd(void) {
 	
+	CommsRetCode	ret;
+	
+	ret = SPiEnd();
+	
+	if (ret != ERR_NONE){
+		//printf("DEBUG: Error releasing SPi Port");
+		return;
+	}
+
+	
+	return;
+};
+
 void setGainControl(int gain_setting) {
 
     uint8_t         msgLen = 1;               // The length of the message 
@@ -98,8 +114,22 @@ void selectGainValueMenu(void) {
 		}
 	} while (choice != 99);
 	
-	
+	gainSPiEnd();
 	return;
 };
 
+void setGainDefaultValue(void) {
+
+	CommsRetCode	ret;
+	
+	ret = gainSPiInitialisation();
+	
+	if (ret != ERR_NONE) {
+		return;
+	}
+	
+	setGainControl(DEFAULT_GAIN_VALUE);
+	
+	gainSPiEnd();
+};
 

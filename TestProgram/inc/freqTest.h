@@ -14,22 +14,40 @@
 #ifndef FREQTEST_H
 #define FREQTEST_H
 
-#define		MAX_WAIT_TIME		3	// The maximum time allowed to register a GPIO state time in seconds.
+#define		MAX_WAIT_TIME		3		// The maximum time allowed to register a GPIO state time in seconds.
+#define		FREQ_DEBOUNCE_TIME	500		// The time in microseconds to wait for the check time
 
 
 
 /*!**************************************************************************
- * Overview: Overall function to test the GPIO pins
+ * Overview: Function to read the frequency from the GPIO pins
  *  
  * Description: This method first calls the menu choice and then measures the
- *				time and displays the frequency determined
+ *				time and displays the frequency determined.
+ *				Note: The reading is only half the time period, which is then
+ *				multiplied to give a frequency reading
  *
  * Parameters:
  * param[in]	none	: 
  *
  * return		0       : nothing
  *****************************************************************************/
-void readFrequency(void);
+void readHalfFrequency(void);
+
+/*!**************************************************************************
+ * Overview: Function to read the frequency from the GPIO pins
+ *  
+ * Description: This method first calls the menu choice and then measures the
+ *				time and displays the frequency determined.
+ *				Note: The method waits for the whole cycle to be competed before 
+ *				returning the frequency.
+ *
+ * Parameters:
+ * param[in]	none	: 
+ *
+ * return		0       : nothing
+ *****************************************************************************/
+void readFullFrequency(void);
 
 /*!**************************************************************************
  * Overview: Menu function for user selection of the GPIO pin

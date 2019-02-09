@@ -25,7 +25,7 @@
 #include <stdbool.h>
 #include <bcm2835.h>        // hardware definition library file
 #include <time.h>           // to enable time functions
-#include "../../common/inc/adcFunctions.h"
+
 
 
 /*
@@ -34,10 +34,10 @@
 ******************************************************************************
 */
 
-// Creates a dataset that includes a voltage float value and a time based time value
+// Creates a dataset that includes a frequency float value and a time based time value
 struct readings {
     int     element;
-    float   voltage;
+    float   frequency;
     time_t  readtime;
 } ;
 
@@ -73,7 +73,7 @@ int splashscreen(void)
     printf("*             Bostin Technology               *\n");
     printf("*                                             *\n");
     printf("*                  Radar Pi                   *\n");
-    printf("*            Analogue Measurement             *\n");
+    printf("*              Digital Detection              *\n");
     printf("*                                             *\n");
     printf("*        for more info www.cognIoT.eu         *\n");
     printf("***********************************************\n");
@@ -94,11 +94,11 @@ FILE *prepare_plot() {
     FILE *lp = popen("gnuplot -persistent", "w");        //persistent ensures it stays on screen when the program completes
                 //
 
-    fprintf(lp, "set title \"Voltage Levels\"\n");
+    fprintf(lp, "set title \"Frequency\"\n");
     fprintf(lp, "set xlabel \"Time (ticks)\"\n");
-    fprintf(lp, "set ylabel \"Voltage (V)\"\n");
+    fprintf(lp, "set ylabel \"Frequency (Hz)\"\n");
     fprintf(lp, "set key off\n");
-    fprintf(lp, "set yrange [0:3.5]\n");
+    fprintf(lp, "set yrange [0:500]\n");
 
     fprintf(lp, "plot '-' with lines\n");
         
@@ -154,13 +154,13 @@ void close_plot(FILE *p) {
 void readValuesContinously(void)
 {
     printf("DEBUG: Into read Values Continously\n");
-    float           voltage;
+    float           frequency;
 
     printf("Reading Values\n");
     do
     {
-        voltage = readVoltage();
-        printf("Output from A-D:%f\n", voltage);
+        frequency = readFrequency();
+        printf("Output of Frequency:%f\n", frequency);
     } while (1);
     
     return;
@@ -176,11 +176,11 @@ void readValuesContinously(void)
 void createDataset(void) {
     time_t      testendtime, testcurrenttime;
     int         testduration = 10;
-    float       voltage=0.00;
+    int			frequency=0;
     int         max_readings=2000;
-    //float       dataset[max_readings][2];           // dataset is 2000 readings by 2 values (voltage and time)
+    //float       dataset[max_readings][2];           // dataset is 2000 readings by 2 values (frequency and time)
     int         i=0;
-    struct readings dataset[max_readings];
+    struct		readings dataset[max_readings];
     FILE        *gnu_plot = prepare_plot();         // create instance for plotting
 
     printf("Creating dataset of values...\n");
@@ -191,20 +191,20 @@ void createDataset(void) {
     do {
         
         testcurrenttime = clock();
-        voltage = readVoltage();
+        frequency = readFrequency();
         dataset[i].element = i;
-        dataset[i].voltage = voltage;
+        dataset[i].frequency = frequency;
         dataset[i].readtime = testcurrenttime;
-        //printf("Dataset:%d  Test Time:%ld  Voltage:%f\n", dataset[i].element, dataset[i].readtime, dataset[i].voltage);
+        //printf("Dataset:%d  Test Time:%ld  frequency:%d\n", dataset[i].element, dataset[i].readtime, dataset[i].frequency);
         i++;
     } while ((testcurrenttime < testendtime) & (i < max_readings));
 
     for (i=0; i < max_readings; i = i + 50) {
-        printf("Voltage:%f  Time:%ld\n", dataset[i].voltage, dataset[i].readtime);
+        printf("Frequency:%lf  Time:%ld\n", dataset[i].frequency, dataset[i].readtime);
     }
 
     for (i=0; i < max_readings; i++) {
-        add_data_to_plot(gnu_plot, dataset[i].readtime, dataset[i].voltage, i);
+        add_data_to_plot(gnu_plot, dataset[i].readtime, dataset[i].frequency, i);
     }
     
     execute_plot(gnu_plot);
@@ -230,14 +230,13 @@ int main(int argc, char** argv) {
 
     char option;                        // Used for menu choices
 
-    adcSPiInitialisation();
     // main menu
     do {
         printf(" \n\n");
         printf("**************************************************************************\n");
         printf("Available commands: -\n\n");
-        printf("c - Read Voltage Continuously\n");
-        printf("d - Create dataset of Voltage & time for 30 seconds\n");
+        printf("c - Read Frequency Continuously\n");
+        printf("d - Create dataset of Frequency & time for 30 seconds\n");
         printf("e - Exit program \n");
         printf("\n");
 
@@ -250,13 +249,13 @@ int main(int argc, char** argv) {
         switch (option)
         {
             case 'c':
-                /* Read voltage continuously */
+                /* Read frequency continuously */
                 printf("Reading Values...\n");
                 readValuesContinously();
                 break;
 
             case 'd':
-                /* Create a dataset of voltage and time for 30 seconds */
+                /* Create a dataset of frequency and time for 30 seconds */
                 printf("Creating dataset...\n");
                 createDataset();
 

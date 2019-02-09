@@ -33,6 +33,9 @@ int cycleADCReadings(void)
 	} while (systemloop);
 
 	printf("ADC test completed\n");
+	
+	adcSPiEnd();
+	
 	return 0;
 }
 
