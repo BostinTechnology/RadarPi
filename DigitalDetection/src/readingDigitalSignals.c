@@ -26,6 +26,8 @@
 #include <bcm2835.h>        // hardware definition library file
 #include <time.h>           // to enable time functions
 
+#include "../../common/inc/gpioFunctions.h"
+
 
 
 /*
@@ -153,13 +155,20 @@ void close_plot(FILE *p) {
 /*************************************************************************/
 void readValuesContinously(void)
 {
+	int		pin;
     printf("DEBUG: Into read Values Continously\n");
     float           frequency;
+	
+	pin = chooseGPIOPin();
+	
+	setupGpioFunctions();
+	
+	setSampleHoldForRun();
 
     printf("Reading Values\n");
     do
     {
-        frequency = readFrequency();
+        frequency = returnFullFrequency(pin);
         printf("Output of Frequency:%f\n", frequency);
     } while (1);
     
@@ -179,10 +188,16 @@ void createDataset(void) {
     int			frequency=0;
     int         max_readings=2000;
     //float       dataset[max_readings][2];           // dataset is 2000 readings by 2 values (frequency and time)
-    int         i=0;
+    int         i=0, pin;
     struct		readings dataset[max_readings];
     FILE        *gnu_plot = prepare_plot();         // create instance for plotting
 
+	pin = chooseGPIOPin();
+
+	setupGpioFunctions();
+	
+	setSampleHoldForRun();
+	
     printf("Creating dataset of values...\n");
 
     testcurrenttime = clock();                       // capture the test start time
@@ -191,7 +206,7 @@ void createDataset(void) {
     do {
         
         testcurrenttime = clock();
-        frequency = readFrequency();
+        frequency = returnFullFrequency(pin);
         dataset[i].element = i;
         dataset[i].frequency = frequency;
         dataset[i].readtime = testcurrenttime;

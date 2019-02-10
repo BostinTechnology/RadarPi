@@ -13,6 +13,7 @@
       <itemPath>gpio_control.h</itemPath>
       <itemPath>common/inc/ledControl.h</itemPath>
       <itemPath>TestProgram/inc/ledTest.h</itemPath>
+      <itemPath>TestProgram/inc/mainTestProgram.h</itemPath>
       <itemPath>radar.h</itemPath>
       <itemPath>TestProgram/inc/systemSettings.h</itemPath>
       <itemPath>common/inc/utilities.h</itemPath>
@@ -86,6 +87,8 @@
       <item path="TestProgram/inc/gainTest.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="TestProgram/inc/ledTest.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="TestProgram/inc/mainTestProgram.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="TestProgram/inc/systemSettings.h" ex="false" tool="3" flavor2="0">
       </item>
@@ -165,6 +168,8 @@
       <item path="TestProgram/inc/gainTest.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="TestProgram/inc/ledTest.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="TestProgram/inc/mainTestProgram.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="TestProgram/inc/systemSettings.h" ex="false" tool="3" flavor2="0">
       </item>

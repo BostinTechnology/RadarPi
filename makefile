@@ -35,7 +35,6 @@ OBJS_common = \
 # ----------------------------------------------------------------------------------------------------------------
 OBJS_testProgram =  \
 	$(TARGETDIR_ALL)/adcTest.o \
-	$(TARGETDIR_ALL)/freqTest.o \
 	$(OBJS_common) \
 	$(TARGETDIR_ALL)/mainTestProgram.o
 USERLIBS_testProgram = -lbcm2835 
@@ -116,9 +115,6 @@ $(TARGETDIR_ALL)/utilities.o: $(TARGETDIR_ALL) common/src/utilities.c
 # ----- testProgram ----------------------------------------------------------------------------------------------
 $(TARGETDIR_ALL)/adcTest.o: $(TARGETDIR_ALL) TestProgram/src/adcTest.c
 	$(COMPILE.c) $(CFLAGS)  -o $@ TestProgram/src/adcTest.c
-
-$(TARGETDIR_ALL)/freqTest.o: $(TARGETDIR_ALL) TestProgram/src/freqTest.c
-	$(COMPILE.c) $(CFLAGS)  -o $@ TestProgram/src/freqTest.c
 
 $(TARGETDIR_ALL)/ledTest.o: $(TARGETDIR_ALL) TestProgram/src/ledTest.c
 	$(COMPILE.c) $(CFLAGS)  -o $@ TestProgram/src/ledTest.c
