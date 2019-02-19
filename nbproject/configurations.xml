@@ -13,6 +13,7 @@
       <itemPath>gpio_control.h</itemPath>
       <itemPath>common/inc/ledControl.h</itemPath>
       <itemPath>TestProgram/inc/ledTest.h</itemPath>
+      <itemPath>SampleSoftware/inc/mainSampleSoftware.h</itemPath>
       <itemPath>TestProgram/inc/mainTestProgram.h</itemPath>
       <itemPath>radar.h</itemPath>
       <itemPath>TestProgram/inc/systemSettings.h</itemPath>
@@ -34,6 +35,7 @@
       <itemPath>gpio_control.c</itemPath>
       <itemPath>common/src/ledControl.c</itemPath>
       <itemPath>TestProgram/src/ledTest.c</itemPath>
+      <itemPath>SampleSoftware/src/mainSampleSoftware.c</itemPath>
       <itemPath>TestProgram/src/mainTestProgram.c</itemPath>
       <itemPath>radar.c</itemPath>
       <itemPath>common/src/utilities.c</itemPath>
@@ -80,6 +82,16 @@
           <commandlineTool>as</commandlineTool>
         </asmTool>
       </compileType>
+      <item path="SampleSoftware/inc/mainSampleSoftware.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="SampleSoftware/src/mainSampleSoftware.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
       <item path="TestProgram/inc/adcTest.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="TestProgram/inc/freqTest.h" ex="false" tool="3" flavor2="0">
@@ -161,6 +173,16 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
+      <item path="SampleSoftware/inc/mainSampleSoftware.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="SampleSoftware/src/mainSampleSoftware.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
       <item path="TestProgram/inc/adcTest.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="TestProgram/inc/freqTest.h" ex="false" tool="3" flavor2="0">

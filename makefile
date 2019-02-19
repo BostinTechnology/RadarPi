@@ -16,7 +16,7 @@ CFLAGS = $(BASICOPTS)
 TARGETDIR_ALL=build
 
 
-all:    $(TARGETDIR_ALL)/testProgram $(TARGETDIR_ALL)/analogueMeasurement $(TARGETDIR_ALL)/gainControl $(TARGETDIR_ALL)/digitalDetection
+all:    $(TARGETDIR_ALL)/testProgram $(TARGETDIR_ALL)/analogueMeasurement $(TARGETDIR_ALL)/gainControl $(TARGETDIR_ALL)/digitalDetection $(TARGETDIR_ALL)/sampleSoftware
 
 # ----------------------------------------------------------------------------------------------------------------
 #       Common Objects
@@ -63,7 +63,7 @@ LDLIBS_settingGainControl = $(USERLIBS_settingGainControl)
 
 
 # ----------------------------------------------------------------------------------------------------------------
-##      Target: analogueMeasurement
+##      Target: digitalDetection
 # ----------------------------------------------------------------------------------------------------------------
 OBJS_digitalDetection =  \
 	$(OBJS_common) \
@@ -71,6 +71,16 @@ OBJS_digitalDetection =  \
 USERLIBS_digitalDetection = -lbcm2835 
 DEPLIBS_digitalDetection =  
 LDLIBS_digitalDetection = $(USERLIBS_digitalDetection)
+
+# ----------------------------------------------------------------------------------------------------------------
+##      Target: sampleSoftware
+# ----------------------------------------------------------------------------------------------------------------
+OBJS_sampleSoftware =  \
+	$(OBJS_common) \
+	$(TARGETDIR_ALL)/mainSampleSoftware.o
+USERLIBS_sampleSoftware = -lbcm2835 
+DEPLIBS_sampleSoftware =  
+LDLIBS_sampleSoftware = $(USERLIBS_digitalDetection)
 
 # ----------------------------------------------------------------------------------------------------------------
 #       Link or archive
@@ -86,7 +96,9 @@ $(TARGETDIR_ALL)/gainControl: $(TARGETDIR_ALL) $(OBJS_settingGainControl) $(DEPL
 
 $(TARGETDIR_ALL)/digitalDetection: $(TARGETDIR_ALL) $(OBJS_digitalDetection) $(DEPLIBS_digitalDetection)
 	$(LINK.c) $(CFLAGS)  -o $@ $(OBJS_digitalDetection)  $(LDLIBS_digitalDetection)	
-	
+
+$(TARGETDIR_ALL)/sampleSoftware: $(TARGETDIR_ALL) $(OBJS_sampleSoftware) $(DEPLIBS_sampleSoftware)
+	$(LINK.c) $(CFLAGS)  -o $@ $(OBJS_sampleSoftware)  $(LDLIBS_sampleSoftware)		
 # ----------------------------------------------------------------------------------------------------------------
 #       Compile source files into .o files
 # ----------------------------------------------------------------------------------------------------------------
@@ -134,6 +146,9 @@ $(TARGETDIR_ALL)/settingGainControl.o: $(TARGETDIR_ALL) GainControl/src/settingG
 $(TARGETDIR_ALL)/readingDigitalSignals.o: $(TARGETDIR_ALL) DigitalDetection/src/readingDigitalSignals.c
 	$(COMPILE.c) $(CFLAGS)  -o $@ DigitalDetection/src/readingDigitalSignals.c
 
+# ----- sampleSoftware -----------------------------------------------------------------------------------------
+$(TARGETDIR_ALL)/mainSampleSoftware.o: $(TARGETDIR_ALL) SampleSoftware/src/mainSampleSoftware.c
+	$(COMPILE.c) $(CFLAGS)  -o $@ SampleSoftware/src/mainSampleSoftware.c
 
 # ----------------------------------------------------------------------------------------------------------------
 #    Clean target deletes all generated files ####

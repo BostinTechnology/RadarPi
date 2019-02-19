@@ -101,6 +101,19 @@ void readFullFrequency(void);
 /*!**************************************************************************
  * Overview: Function to return the frequency from the GPIO pins
  *  
+ * Description: This method only uses half the cycle and no debounce, but is
+ *				similar to readFullFrequency above.
+ *
+ * Parameters:
+ * param[in]	measuring_pin	: the pin to be used.
+ *
+ * return		float       : frequency
+ *****************************************************************************/
+float returnRawFrequency(int measuring_pin);
+
+/*!**************************************************************************
+ * Overview: Function to return the frequency from the GPIO pins
+ *  
  * Description: This method waits for the whole cycle to be competed before 
  *				returning the frequency.
  *				Requires setupGpioFunctions() & setSampleHoldForRun() to be run 
