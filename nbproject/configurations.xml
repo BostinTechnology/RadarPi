@@ -57,9 +57,6 @@
     <itemPath>newMakeFile</itemPath>
     <itemPath>build/readme.txt</itemPath>
   </logicalFolder>
-  <sourceRootList>
-    <Elem>TestProgram</Elem>
-  </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
     <conf name="Debug" type="1">
