@@ -108,7 +108,6 @@
                     <property name="can_focus">False</property>
                     <property name="hexpand">True</property>
                     <property name="vexpand">True</property>
-                    <signal name="draw" handler="on_draw" swapped="no"/>
                   </object>
                   <packing>
                     <property name="left_attach">0</property>
