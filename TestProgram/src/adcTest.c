@@ -13,6 +13,7 @@
 #include "../../common/inc/adcFunctions.h"
 
 
+
 int cycleADCReadings(void)
 {
 	float adc_value;
