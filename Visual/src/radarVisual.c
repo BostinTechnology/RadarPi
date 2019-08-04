@@ -35,12 +35,14 @@ gfloat f (gfloat x)
 }
 
 void on_draw (GtkWidget *drawing, struct app_widgets *widget) {
+	//ToDo: cr needs to be initialised, but I don't know with what.
 	cairo_t *cr;
     GdkRectangle da;            /* GtkDrawingArea size */
     gdouble dx = 5.0, dy = 5.0; /* Pixels between each point */
     gdouble i, clip_x1 = 0.0, clip_y1 = 0.0, clip_x2 = 0.0, clip_y2 = 0.0;
-    GdkWindow *window = gtk_widget_get_window(widget->w_adc_drg_canvas);	// I Think this needs to be the drawing canvas
-
+	
+	GdkWindow *window = gtk_widget_get_window(drawing);	// I Think this needs to be the drawing canvas
+	
     /* Determine GtkDrawingArea dimensions */
     gdk_window_get_geometry (window,
             &da.x,
@@ -48,19 +50,24 @@ void on_draw (GtkWidget *drawing, struct app_widgets *widget) {
             &da.width,
             &da.height);
 
-    /* Draw on a black background */
+	printf("Got window geometry\n");
+	
+	/* Draw on a black background */
     cairo_set_source_rgb (cr, 0.0, 0.0, 0.0);
     cairo_paint (cr);
+	printf("drawn on black background\n");
 
     /* Change the transformation matrix */
     cairo_translate (cr, da.width / 2, da.height / 2);
     cairo_scale (cr, ZOOM_X, -ZOOM_Y);
-
+	printf("changed the transformation matrix");
+	
     /* Determine the data points to calculate (ie. those in the clipping zone */
     cairo_device_to_user_distance (cr, &dx, &dy);
     cairo_clip_extents (cr, &clip_x1, &clip_y1, &clip_x2, &clip_y2);
     cairo_set_line_width (cr, dx);
-
+	printf("Determined the data points\n");
+	
     /* Draws x and y axis */
     cairo_set_source_rgb (cr, 0.0, 1.0, 0.0);
     cairo_move_to (cr, clip_x1, 0.0);
@@ -68,16 +75,20 @@ void on_draw (GtkWidget *drawing, struct app_widgets *widget) {
     cairo_move_to (cr, 0.0, clip_y1);
     cairo_line_to (cr, 0.0, clip_y2);
     cairo_stroke (cr);
-
+	printf("drawn x and y axis\n");
+	
     /* Link each data point */
-    for (i = clip_x1; i < clip_x2; i += dx)
-        cairo_line_to (cr, i, f (i));
-
+	for (i = clip_x1; i < clip_x2; i += dx)
+		cairo_line_to (cr, i, f (i));
+	
+	printf("Linked data points\n");
+	
     /* Draw the curve */
     cairo_set_source_rgba (cr, 1, 0.2, 0.2, 0.6);
     cairo_stroke (cr);
+	printf("Drawn teh curve\n");
 
-    return FALSE;
+    return;
 }
 
 
@@ -119,7 +130,7 @@ void on_menu_file_connect(struct app_widgets *widget) {
 
 void on_btn_startstop_adc_clicked(GtkButton *button, struct app_widgets *widget) {
 	
-	int			status;
+	//int			status;
     printf("ADC button has been clicked\n");
 	
 	//on_draw(widget->w_adc_drg_canvas);		//How do i trigger starting of the drawing?
@@ -128,7 +139,7 @@ void on_btn_startstop_adc_clicked(GtkButton *button, struct app_widgets *widget)
 
 void on_btn_startstop_dig_clicked(GtkButton *button, struct app_widgets *widget) {
 	
-	int			status;
+	//int			status;
     printf("Dig button has been clicked\n");
 	
 	return;
@@ -136,7 +147,7 @@ void on_btn_startstop_dig_clicked(GtkButton *button, struct app_widgets *widget)
 
 void on_btn_startstop_raw_clicked(GtkButton *button, struct app_widgets *widget) {
 	
-	int			status;
+	//int			status;
     printf("Raw button has been clicked\n");
 	
 	return;
