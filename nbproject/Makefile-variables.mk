@@ -9,11 +9,11 @@ CND_DISTDIR=dist
 # Debug configuration
 CND_PLATFORM_Debug=GNU-Linux
 CND_ARTIFACT_DIR_Debug=dist/Debug/GNU-Linux
-CND_ARTIFACT_NAME_Debug=radarpi
-CND_ARTIFACT_PATH_Debug=dist/Debug/GNU-Linux/radarpi
+CND_ARTIFACT_NAME_Debug=RadarPi
+CND_ARTIFACT_PATH_Debug=dist/Debug/GNU-Linux/RadarPi
 CND_PACKAGE_DIR_Debug=dist/Debug/GNU-Linux/package
-CND_PACKAGE_NAME_Debug=radarpi.tar
-CND_PACKAGE_PATH_Debug=dist/Debug/GNU-Linux/package/radarpi.tar
+CND_PACKAGE_NAME_Debug=radarpi.zip
+CND_PACKAGE_PATH_Debug=dist/Debug/GNU-Linux/package/radarpi.zip
 # Release configuration
 CND_PLATFORM_Release=GNU-MacOSX
 CND_ARTIFACT_DIR_Release=dist/Release/GNU-MacOSX
