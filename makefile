@@ -10,13 +10,14 @@
 CC = gcc
 BASICOPTS = -g -Wall
 CFLAGS = $(BASICOPTS)
-
+PTHREAD=-pthread
 
 # Define the target directories.
 TARGETDIR_ALL=build
 
 
-all:    $(TARGETDIR_ALL)/testProgram $(TARGETDIR_ALL)/analogueMeasurement $(TARGETDIR_ALL)/gainControl $(TARGETDIR_ALL)/digitalDetection $(TARGETDIR_ALL)/sampleSoftware
+all:    $(TARGETDIR_ALL)/analogueMeasurement $(TARGETDIR_ALL)/testProgram $(TARGETDIR_ALL)/gainControl \
+	$(TARGETDIR_ALL)/digitalDetection $(TARGETDIR_ALL)/sampleSoftware $(TARGETDIR_ALL)/radarVisual
 
 # ----------------------------------------------------------------------------------------------------------------
 #       Common Objects
@@ -34,8 +35,8 @@ OBJS_common = \
 ##      Target: testProgram
 # ----------------------------------------------------------------------------------------------------------------
 OBJS_testProgram =  \
-	$(TARGETDIR_ALL)/adcTest.o \
 	$(OBJS_common) \
+	$(TARGETDIR_ALL)/adcTest.o \
 	$(TARGETDIR_ALL)/mainTestProgram.o
 USERLIBS_testProgram = -lbcm2835 
 DEPLIBS_testProgram =  
@@ -80,8 +81,18 @@ OBJS_sampleSoftware =  \
 	$(TARGETDIR_ALL)/mainSampleSoftware.o
 USERLIBS_sampleSoftware = -lbcm2835 
 DEPLIBS_sampleSoftware =  
-LDLIBS_sampleSoftware = $(USERLIBS_digitalDetection)
+LDLIBS_sampleSoftware = $(USERLIBS_sampleSoftwaren)
 
+# ----------------------------------------------------------------------------------------------------------------
+##      Target: radarVisual
+# ----------------------------------------------------------------------------------------------------------------
+OBJS_radarVisual =  \
+	$(OBJS_common) \
+	$(TARGETDIR_ALL)/radarVisual.o
+USERLIBS_radarVisual = -lbcm2835 -lm
+GTKLIB =`pkg-config --cflags --libs gtk+-3.0`
+DEPLIBS_radarVisual =  
+LDLIBS_radarVisual = $(PTHREAD) $(USERLIBS_radarVisual) -export-dynamic
 # ----------------------------------------------------------------------------------------------------------------
 #       Link or archive
 # ----------------------------------------------------------------------------------------------------------------
@@ -99,6 +110,9 @@ $(TARGETDIR_ALL)/digitalDetection: $(TARGETDIR_ALL) $(OBJS_digitalDetection) $(D
 
 $(TARGETDIR_ALL)/sampleSoftware: $(TARGETDIR_ALL) $(OBJS_sampleSoftware) $(DEPLIBS_sampleSoftware)
 	$(LINK.c) $(CFLAGS)  -o $@ $(OBJS_sampleSoftware)  $(LDLIBS_sampleSoftware)		
+
+$(TARGETDIR_ALL)/radarVisual: $(TARGETDIR_ALL) $(OBJS_radarVisual) $(DEPLIBS_radarVisual)
+	$(LINK.c) $(CFLAGS)  $(GTKLIB) -o $@ $(OBJS_radarVisual)  $(LDLIBS_radarVisual)
 # ----------------------------------------------------------------------------------------------------------------
 #       Compile source files into .o files
 # ----------------------------------------------------------------------------------------------------------------
@@ -150,6 +164,10 @@ $(TARGETDIR_ALL)/readingDigitalSignals.o: $(TARGETDIR_ALL) DigitalDetection/src/
 $(TARGETDIR_ALL)/mainSampleSoftware.o: $(TARGETDIR_ALL) SampleSoftware/src/mainSampleSoftware.c
 	$(COMPILE.c) $(CFLAGS)  -o $@ SampleSoftware/src/mainSampleSoftware.c
 
+# ----- sampleSoftware -----------------------------------------------------------------------------------------
+$(TARGETDIR_ALL)/radarVisual.o: $(TARGETDIR_ALL) Visual/src/radarVisual.c
+	$(COMPILE.c) $(GTKLIB) $(CFLAGS)  -o $@ Visual/src/radarVisual.c
+	
 # ----------------------------------------------------------------------------------------------------------------
 #    Clean target deletes all generated files ####
 # ----------------------------------------------------------------------------------------------------------------
