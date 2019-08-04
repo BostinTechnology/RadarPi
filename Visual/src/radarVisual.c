@@ -16,14 +16,71 @@
 #include <string.h>
 
 #include <gtk-3.0/gtk/gtk.h>
+#include <math.h>
+#include <cairo.h>
 
-#include "rfidVisual.h"
-#include "lib_rfid/inc/rfid.h"
+#include "../inc/radarVisual.h"
 
 
-//ToDo: Mode in the Mode Box needs to be centralised and smaller, allowing version to be wider.
-//ToDo: Mode selection pictures needs to include words, and have only 1 selected, not all 3!
-//ToDo: How do I all the user to set the value for polling delay?
+// Copied from elsewhere, need to modify it to test the frame.
+#define WIDTH   640
+#define HEIGHT  480
+
+#define ZOOM_X  100.0
+#define ZOOM_Y  100.0
+
+gfloat f (gfloat x)
+{
+    return 0.03 * pow (x, 3);
+}
+
+void on_draw (GtkWidget *drawing, struct app_widgets *widget) {
+	cairo_t *cr;
+    GdkRectangle da;            /* GtkDrawingArea size */
+    gdouble dx = 5.0, dy = 5.0; /* Pixels between each point */
+    gdouble i, clip_x1 = 0.0, clip_y1 = 0.0, clip_x2 = 0.0, clip_y2 = 0.0;
+    GdkWindow *window = gtk_widget_get_window(widget->w_adc_drg_canvas);	// I Think this needs to be the drawing canvas
+
+    /* Determine GtkDrawingArea dimensions */
+    gdk_window_get_geometry (window,
+            &da.x,
+            &da.y,
+            &da.width,
+            &da.height);
+
+    /* Draw on a black background */
+    cairo_set_source_rgb (cr, 0.0, 0.0, 0.0);
+    cairo_paint (cr);
+
+    /* Change the transformation matrix */
+    cairo_translate (cr, da.width / 2, da.height / 2);
+    cairo_scale (cr, ZOOM_X, -ZOOM_Y);
+
+    /* Determine the data points to calculate (ie. those in the clipping zone */
+    cairo_device_to_user_distance (cr, &dx, &dy);
+    cairo_clip_extents (cr, &clip_x1, &clip_y1, &clip_x2, &clip_y2);
+    cairo_set_line_width (cr, dx);
+
+    /* Draws x and y axis */
+    cairo_set_source_rgb (cr, 0.0, 1.0, 0.0);
+    cairo_move_to (cr, clip_x1, 0.0);
+    cairo_line_to (cr, clip_x2, 0.0);
+    cairo_move_to (cr, 0.0, clip_y1);
+    cairo_line_to (cr, 0.0, clip_y2);
+    cairo_stroke (cr);
+
+    /* Link each data point */
+    for (i = clip_x1; i < clip_x2; i += dx)
+        cairo_line_to (cr, i, f (i));
+
+    /* Draw the curve */
+    cairo_set_source_rgba (cr, 1, 0.2, 0.2, 0.6);
+    cairo_stroke (cr);
+
+    return FALSE;
+}
+
+
 
 /*
  * function to open and configure the serial port
@@ -34,8 +91,8 @@ int open_serial_port( struct app_widgets *widget) {
 	int		status = 1;
     // Open the serial port
     
-    status = setupComms(&widget->conn);
-	printf("Opened the serial port:%d\n", widget->conn);
+    //status = setupComms(&widget->conn);
+	printf("Opened the serial port:%d\n", widget->SPiconn);
     
     return status;
 }
@@ -56,107 +113,34 @@ void on_menu_file_connect(struct app_widgets *widget) {
     printf("In On Menu File connect\n");
     
 	open_serial_port(widget);
-    get_version_info(widget);
-	get_mode_info(widget);
+    //get_version_info(widget);
+	//get_mode_info(widget);
 }
 
-void on_btn_reset_clicked(GtkButton *button, struct app_widgets *widget) {
+void on_btn_startstop_adc_clicked(GtkButton *button, struct app_widgets *widget) {
 	
 	int			status;
-    printf("Reset button has been clicked\n");
+    printf("ADC button has been clicked\n");
 	
-	status = resetReader(widget->conn);
+	//on_draw(widget->w_adc_drg_canvas);		//How do i trigger starting of the drawing?
+	return;
+}
+
+void on_btn_startstop_dig_clicked(GtkButton *button, struct app_widgets *widget) {
 	
-	if (status ==0 ) {
-		printf("Factory Reset Complete\n");
-	}
-	else {
-		printf("Factory Reset failed\n");
-	}
+	int			status;
+    printf("Dig button has been clicked\n");
 	
 	return;
 }
 
-void on_radiobutton_toggled(GtkButton *button, struct app_widgets *widget) {
+void on_btn_startstop_raw_clicked(GtkButton *button, struct app_widgets *widget) {
 	
-	char			mode;
-	mode = '\0';
-    printf("Radiobuttons for mode has changed\n");
+	int			status;
+    printf("Raw button has been clicked\n");
 	
-	if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget->w_radbut_mode_a_pg2))) {
-        printf("Mode a selected\n");
-		mode = 'A';
-    }
-    else if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget->w_radbut_mode_b_pg2))) {
-        printf("Mode b selected\n");
-		mode = 'B';
-    }
-    else if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget->w_radbut_mode_c_pg2))) {
-        printf("Mode C selected\n");
-		mode = 'C';
-    }
-	
-	setReaderMode(widget->conn, mode);
 	return;
 }
-
-void get_version_info(struct app_widgets *widget) {
-
-    char            version[101];
-    int				count = 0;
-	int				response = 1;
-	GtkTextBuffer	*buffer;
-	
-	version[0] = '\0';
-    
-    do {
-		response = readVersion(widget->conn, version, MAX_FIRMWARE_LENGTH);
-        
-        printf("size of Version: %d\n", sizeof(version)/sizeof(version[0]));        // returns 100
-        count ++;
-
-    } while  ((count < 5) && (response != EXIT_SUCCESS));
-    
-    if (response == EXIT_SUCCESS) {
-        printf("status is zero\n");
-		// Get and then set the buffer
-		buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (widget->w_txt_version_info_box));
-		printf("Got the buffer\n");
-		gtk_text_buffer_set_text(buffer, version, -1);
-        printf("set the text\n");
-
-    }
-    
-    return;
-}
-
-void get_mode_info(struct app_widgets *widget) {
-
-    char            mode[1];
-    int				count = 0;
-    int             connection;
-	int				response = EXIT_FAILURE;
-	
-	mode[0] = '\0';
-    
-    connection = widget->conn;
-    do {
-        response = readMode(connection, mode);
-        
-        printf("Mode Information: >>%s<<\n", mode);
-        count ++;
-
-    } while  ((count < 5) && (response != EXIT_SUCCESS));
-    
-    if (response == EXIT_SUCCESS) {
-        gtk_entry_set_text(GTK_ENTRY(widget->w_txt_mode_box), mode);
-                            
-        printf("set the text\n");
-    }
-    
-    return;
-}
-
 /*
  * 
  */
@@ -175,7 +159,7 @@ int main(int argc, char** argv) {
 
     // build the gui
     builder = gtk_builder_new();
-    gtk_builder_add_from_file (builder, "gui/main_window.glade", &err);
+    gtk_builder_add_from_file (builder, "../Visual/gui/main_window.glade", &err);
 	
 	//Bug: If the application is run from the build directory, it doesn't find the glade file.
 	//		 Does this mean that the XML file is not incorporated into the executable??
@@ -190,18 +174,12 @@ int main(int argc, char** argv) {
     window = GTK_WIDGET(gtk_builder_get_object(builder, "main_application_window"));
     
     // build the structure of widget pointers
-    widgets->w_txt_tag_id_pg0  = GTK_WIDGET(gtk_builder_get_object(builder, "txt_tag_id_pg0"));
-    widgets->w_txt_view_page_block_info_pg0  = GTK_WIDGET(gtk_builder_get_object(builder, "txt_view_page_block_info_pg01"));
-    widgets->w_radbut_tag_present_pg0  = GTK_WIDGET(gtk_builder_get_object(builder, "radbut_tag_present_pg0"));
-    widgets->w_txt_tag_id_pg1  = GTK_WIDGET(gtk_builder_get_object(builder, "txt_tag_id_pg1"));
-    widgets->w_txt_view_page_block_info_pg1  = GTK_WIDGET(gtk_builder_get_object(builder, "txt_view_page_block_info_pg1"));
-    widgets->w_radbut_tag_present_pg1  = GTK_WIDGET(gtk_builder_get_object(builder, "radbut_tag_present_pg1"));
-	widgets->w_radbut_mode_a_pg2 = GTK_WIDGET(gtk_builder_get_object(builder, "radbut_mode_a_pg2"));
-	widgets->w_radbut_mode_b_pg2 = GTK_WIDGET(gtk_builder_get_object(builder, "radbut_mode_b_pg2"));
-	widgets->w_radbut_mode_c_pg2 = GTK_WIDGET(gtk_builder_get_object(builder, "radbut_mode_c_pg2"));
-    widgets->w_but_factory_reset  = GTK_WIDGET(gtk_builder_get_object(builder, "but_factory_reset"));
-    widgets->w_txt_version_info_box  = GTK_WIDGET(gtk_builder_get_object(builder, "txt_version_info_box"));
-    widgets->w_txt_mode_box  = GTK_WIDGET(gtk_builder_get_object(builder, "txt_mode_box"));
+    widgets->w_adc_drg_canvas  = GTK_WIDGET(gtk_builder_get_object(builder, "adc_drg_canvas"));
+    widgets->w_dig_drg_canvas  = GTK_WIDGET(gtk_builder_get_object(builder, "dig_drg_canvas"));
+    widgets->w_raw_drg_canvas  = GTK_WIDGET(gtk_builder_get_object(builder, "raw_drg_canvas"));
+    widgets->w_but_startstop_adc1  = GTK_WIDGET(gtk_builder_get_object(builder, "but_startstop_adc1"));
+    widgets->w_but_startstop_dig  = GTK_WIDGET(gtk_builder_get_object(builder, "but_startstop_dig"));
+    widgets->w_but_startstop_raw  = GTK_WIDGET(gtk_builder_get_object(builder, "but_startstop_raw"));
     
     // connect the widgets to the signal handler
     gtk_builder_connect_signals(builder, widgets);    // note: second parameter points to widgets

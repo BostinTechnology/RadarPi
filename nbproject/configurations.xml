@@ -6,17 +6,11 @@
                    projectFiles="true">
       <itemPath>common/inc/adcFunctions.h</itemPath>
       <itemPath>TestProgram/inc/adcTest.h</itemPath>
-      <itemPath>TestProgram/inc/freqTest.h</itemPath>
       <itemPath>common/inc/gainFunctions.h</itemPath>
-      <itemPath>TestProgram/inc/gainTest.h</itemPath>
       <itemPath>common/inc/gpioFunctions.h</itemPath>
-      <itemPath>gpio_control.h</itemPath>
       <itemPath>common/inc/ledControl.h</itemPath>
-      <itemPath>TestProgram/inc/ledTest.h</itemPath>
       <itemPath>SampleSoftware/inc/mainSampleSoftware.h</itemPath>
       <itemPath>TestProgram/inc/mainTestProgram.h</itemPath>
-      <itemPath>radar.h</itemPath>
-      <itemPath>TestProgram/inc/systemSettings.h</itemPath>
       <itemPath>common/inc/utilities.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
@@ -28,16 +22,11 @@
                    projectFiles="true">
       <itemPath>common/src/adcFunctions.c</itemPath>
       <itemPath>TestProgram/src/adcTest.c</itemPath>
-      <itemPath>TestProgram/src/freqTest.c</itemPath>
       <itemPath>common/src/gainFunctions.c</itemPath>
-      <itemPath>TestProgram/src/gainTest.c</itemPath>
       <itemPath>common/src/gpioFunctions.c</itemPath>
-      <itemPath>gpio_control.c</itemPath>
       <itemPath>common/src/ledControl.c</itemPath>
-      <itemPath>TestProgram/src/ledTest.c</itemPath>
       <itemPath>SampleSoftware/src/mainSampleSoftware.c</itemPath>
       <itemPath>TestProgram/src/mainTestProgram.c</itemPath>
-      <itemPath>radar.c</itemPath>
       <itemPath>common/src/utilities.c</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
@@ -52,11 +41,12 @@
       <itemPath>Makefile</itemPath>
     </logicalFolder>
     <itemPath>makefile</itemPath>
-    <itemPath>makefile_inc_am</itemPath>
-    <itemPath>newComplexMakefile</itemPath>
-    <itemPath>newMakeFile</itemPath>
     <itemPath>build/readme.txt</itemPath>
   </logicalFolder>
+  <sourceFolderFilter>^(nbproject|build)$</sourceFolderFilter>
+  <sourceRootList>
+    <Elem>TestProgram</Elem>
+  </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
     <conf name="Debug" type="1">
@@ -67,18 +57,26 @@
       </toolsSet>
       <compileType>
         <cTool>
-          <incDir>
-            <pElem>TestProgram</pElem>
-          </incDir>
-          <incFile>
-            <pElem>TestProgram/inc</pElem>
-          </incFile>
           <warningLevel>2</warningLevel>
         </cTool>
         <asmTool>
           <commandlineTool>as</commandlineTool>
         </asmTool>
+        <linkerTool>
+          <output>${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/RadarPi</output>
+        </linkerTool>
       </compileType>
+      <packaging>
+        <packType>Zip</packType>
+        <packFileList>
+          <packFileListElem type="File"
+                            to="${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}"
+                            from="${OUTPUT_PATH}"
+                            perm="644"
+                            owner="root"
+                            group="bin"/>
+        </packFileList>
+      </packaging>
       <item path="SampleSoftware/inc/mainSampleSoftware.h"
             ex="false"
             tool="3"
@@ -91,23 +89,9 @@
       </item>
       <item path="TestProgram/inc/adcTest.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="TestProgram/inc/freqTest.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="TestProgram/inc/gainTest.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="TestProgram/inc/ledTest.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="TestProgram/inc/mainTestProgram.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="TestProgram/inc/systemSettings.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="TestProgram/src/adcTest.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="TestProgram/src/freqTest.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="TestProgram/src/gainTest.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="TestProgram/src/ledTest.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="TestProgram/src/mainTestProgram.c" ex="false" tool="0" flavor2="0">
       </item>
@@ -133,21 +117,7 @@
       </item>
       <item path="common/src/utilities.c" ex="false" tool="0" flavor2="0">
       </item>
-      <item path="gpio_control.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="gpio_control.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="makefile" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="makefile_inc_am" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="newComplexMakefile" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="newMakeFile" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="radar.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="radar.h" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
     <conf name="Release" type="1">
@@ -182,23 +152,9 @@
       </item>
       <item path="TestProgram/inc/adcTest.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="TestProgram/inc/freqTest.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="TestProgram/inc/gainTest.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="TestProgram/inc/ledTest.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="TestProgram/inc/mainTestProgram.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="TestProgram/inc/systemSettings.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="TestProgram/src/adcTest.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="TestProgram/src/freqTest.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="TestProgram/src/gainTest.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="TestProgram/src/ledTest.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="TestProgram/src/mainTestProgram.c" ex="false" tool="0" flavor2="0">
       </item>
@@ -224,21 +180,7 @@
       </item>
       <item path="common/src/utilities.c" ex="false" tool="0" flavor2="0">
       </item>
-      <item path="gpio_control.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="gpio_control.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="makefile" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="makefile_inc_am" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="newComplexMakefile" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="newMakeFile" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="radar.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="radar.h" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
   </confs>

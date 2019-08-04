@@ -16,20 +16,14 @@
 
 struct app_widgets {
     // All the widgets on the form go into here
-    GtkWidget *w_txt_tag_id_pg0;
-    GtkWidget *w_txt_view_page_block_info_pg0;    
-    GtkWidget *w_radbut_tag_present_pg0;
-    GtkWidget *w_txt_tag_id_pg1;
-    GtkWidget *w_txt_view_page_block_info_pg1;
-    GtkWidget *w_radbut_tag_present_pg1;
-    GtkWidget *w_but_factory_reset;
-	GtkWidget *w_radbut_mode_a_pg2;
-	GtkWidget *w_radbut_mode_b_pg2;
-	GtkWidget *w_radbut_mode_c_pg2;
-    GtkWidget *w_txt_version_info_box;
-    GtkWidget *w_txt_mode_box;
-    // also the serial connection
-    int        conn;
+    GtkWidget *w_adc_drg_canvas;
+    GtkWidget *w_dig_drg_canvas;    
+    GtkWidget *w_raw_drg_canvas;
+    GtkWidget *w_but_startstop_adc1;
+    GtkWidget *w_but_startstop_dig;
+    GtkWidget *w_but_startstop_raw;
+    // also the SPI connection
+    int        SPiconn;
 } ;
 
 
