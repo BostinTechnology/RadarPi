@@ -34,9 +34,10 @@ gfloat f (gfloat x)
     return 0.03 * pow (x, 3);
 }
 
-void on_draw (GtkWidget *drawing, struct app_widgets *widget) {
-	//ToDo: cr needs to be initialised, but I don't know with what.
-	cairo_t *cr;
+void on_draw (GtkWidget *drawing, cairo_t *cr, struct app_widgets *widget) {
+	//Info: cr is passed as an extra parameter which is set in the glade file as user data.
+	// Need to check this is right before I conclude I know what I am doing
+
     GdkRectangle da;            /* GtkDrawingArea size */
     gdouble dx = 5.0, dy = 5.0; /* Pixels between each point */
     gdouble i, clip_x1 = 0.0, clip_y1 = 0.0, clip_x2 = 0.0, clip_y2 = 0.0;

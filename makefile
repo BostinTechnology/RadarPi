@@ -81,7 +81,7 @@ OBJS_sampleSoftware =  \
 	$(TARGETDIR_ALL)/mainSampleSoftware.o
 USERLIBS_sampleSoftware = -lbcm2835 
 DEPLIBS_sampleSoftware =  
-LDLIBS_sampleSoftware = $(USERLIBS_sampleSoftwaren)
+LDLIBS_sampleSoftware = $(USERLIBS_sampleSoftware)
 
 # ----------------------------------------------------------------------------------------------------------------
 ##      Target: radarVisual
@@ -172,12 +172,13 @@ $(TARGETDIR_ALL)/radarVisual.o: $(TARGETDIR_ALL) Visual/src/radarVisual.c
 #    Clean target deletes all generated files ####
 # ----------------------------------------------------------------------------------------------------------------
 clean:
-	rm -f	$(OBJS_testProgram) \
-		$(OBJS_analogueMeasurement) \
-		$(TARGETDIR_ALL)/testProgram \
+	rm -f	$(TARGETDIR_ALL)/testProgram \
 		$(TARGETDIR_ALL)/analogueMeasurement \
 		$(TARGETDIR_ALL)/gainControl \
-		$(TARGETDIR_ALL)/digitalDetection
+		$(TARGETDIR_ALL)/digitalDetection \
+		$(TARGETDIR_ALL)/sampleSoftware \
+		$(TARGETDIR_ALL)/radarVisual \
+		$(TARGETDIR_ALL)/*.o
 
 
 # Create the target directory (if needed)

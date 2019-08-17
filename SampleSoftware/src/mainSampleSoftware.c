@@ -15,6 +15,7 @@
 #include "../../common/inc/gainFunctions.h"
 #include "../../common/inc/gpioFunctions.h"
 #include "../../common/inc/utilities.h"
+#include "../../common/inc/adcFunctions.h"
 
 /*!**************************************************************************
  * Overview:  Display the Bostin Technology introduction screen
