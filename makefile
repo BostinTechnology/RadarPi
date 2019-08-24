@@ -1,4 +1,4 @@
-## -*- Makefile -*-
+## -*- makefile -*-
 ##
 ## User: Matthew
 ## Time: 12-Jan-2019 09:16:44

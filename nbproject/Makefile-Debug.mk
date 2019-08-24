@@ -28,7 +28,7 @@ CND_DISTDIR=dist
 CND_BUILDDIR=build
 
 # Include project Makefile
-include Makefile
+include makefile
 
 # Object Directory
 OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
@@ -69,42 +69,42 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/RadarPi: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.c} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/RadarPi ${OBJECTFILES} ${LDLIBSOPTIONS}
 
-${OBJECTDIR}/SampleSoftware/src/mainSampleSoftware.o: SampleSoftware/src/mainSampleSoftware.c 
+${OBJECTDIR}/SampleSoftware/src/mainSampleSoftware.o: SampleSoftware/src/mainSampleSoftware.c
 	${MKDIR} -p ${OBJECTDIR}/SampleSoftware/src
 	${RM} "$@.d"
 	$(COMPILE.c) -g -Wall -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/SampleSoftware/src/mainSampleSoftware.o SampleSoftware/src/mainSampleSoftware.c
 
-${OBJECTDIR}/TestProgram/src/adcTest.o: TestProgram/src/adcTest.c 
+${OBJECTDIR}/TestProgram/src/adcTest.o: TestProgram/src/adcTest.c
 	${MKDIR} -p ${OBJECTDIR}/TestProgram/src
 	${RM} "$@.d"
 	$(COMPILE.c) -g -Wall -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/TestProgram/src/adcTest.o TestProgram/src/adcTest.c
 
-${OBJECTDIR}/TestProgram/src/mainTestProgram.o: TestProgram/src/mainTestProgram.c 
+${OBJECTDIR}/TestProgram/src/mainTestProgram.o: TestProgram/src/mainTestProgram.c
 	${MKDIR} -p ${OBJECTDIR}/TestProgram/src
 	${RM} "$@.d"
 	$(COMPILE.c) -g -Wall -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/TestProgram/src/mainTestProgram.o TestProgram/src/mainTestProgram.c
 
-${OBJECTDIR}/common/src/adcFunctions.o: common/src/adcFunctions.c 
+${OBJECTDIR}/common/src/adcFunctions.o: common/src/adcFunctions.c
 	${MKDIR} -p ${OBJECTDIR}/common/src
 	${RM} "$@.d"
 	$(COMPILE.c) -g -Wall -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/common/src/adcFunctions.o common/src/adcFunctions.c
 
-${OBJECTDIR}/common/src/gainFunctions.o: common/src/gainFunctions.c 
+${OBJECTDIR}/common/src/gainFunctions.o: common/src/gainFunctions.c
 	${MKDIR} -p ${OBJECTDIR}/common/src
 	${RM} "$@.d"
 	$(COMPILE.c) -g -Wall -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/common/src/gainFunctions.o common/src/gainFunctions.c
 
-${OBJECTDIR}/common/src/gpioFunctions.o: common/src/gpioFunctions.c 
+${OBJECTDIR}/common/src/gpioFunctions.o: common/src/gpioFunctions.c
 	${MKDIR} -p ${OBJECTDIR}/common/src
 	${RM} "$@.d"
 	$(COMPILE.c) -g -Wall -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/common/src/gpioFunctions.o common/src/gpioFunctions.c
 
-${OBJECTDIR}/common/src/ledControl.o: common/src/ledControl.c 
+${OBJECTDIR}/common/src/ledControl.o: common/src/ledControl.c
 	${MKDIR} -p ${OBJECTDIR}/common/src
 	${RM} "$@.d"
 	$(COMPILE.c) -g -Wall -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/common/src/ledControl.o common/src/ledControl.c
 
-${OBJECTDIR}/common/src/utilities.o: common/src/utilities.c 
+${OBJECTDIR}/common/src/utilities.o: common/src/utilities.c
 	${MKDIR} -p ${OBJECTDIR}/common/src
 	${RM} "$@.d"
 	$(COMPILE.c) -g -Wall -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/common/src/utilities.o common/src/utilities.c
@@ -115,7 +115,6 @@ ${OBJECTDIR}/common/src/utilities.o: common/src/utilities.c
 # Clean Targets
 .clean-conf: ${CLEAN_SUBPROJECTS}
 	${RM} -r ${CND_BUILDDIR}/${CND_CONF}
-	${RM} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/RadarPi
 
 # Subprojects
 .clean-subprojects:

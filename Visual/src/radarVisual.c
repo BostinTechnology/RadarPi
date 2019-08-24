@@ -18,6 +18,8 @@
 #include <gtk-3.0/gtk/gtk.h>
 #include <math.h>
 #include <cairo.h>
+#include <unistd.h>
+#include <pthread.h>
 
 #include "../inc/radarVisual.h"
 
@@ -29,68 +31,8 @@
 #define ZOOM_X  100.0
 #define ZOOM_Y  100.0
 
-gfloat f (gfloat x)
-{
-    return 0.03 * pow (x, 3);
-}
-
-void on_draw (GtkWidget *drawing, cairo_t *cr, struct app_widgets *widget) {
-	//Info: cr is passed as an extra parameter which is set in the glade file as user data.
-	// Need to check this is right before I conclude I know what I am doing
-
-    GdkRectangle da;            /* GtkDrawingArea size */
-    gdouble dx = 5.0, dy = 5.0; /* Pixels between each point */
-    gdouble i, clip_x1 = 0.0, clip_y1 = 0.0, clip_x2 = 0.0, clip_y2 = 0.0;
-	
-	GdkWindow *window = gtk_widget_get_window(drawing);	// I Think this needs to be the drawing canvas
-	
-    /* Determine GtkDrawingArea dimensions */
-    gdk_window_get_geometry (window,
-            &da.x,
-            &da.y,
-            &da.width,
-            &da.height);
-
-	printf("Got window geometry\n");
-	
-	/* Draw on a black background */
-    cairo_set_source_rgb (cr, 0.0, 0.0, 0.0);
-    cairo_paint (cr);
-	printf("drawn on black background\n");
-
-    /* Change the transformation matrix */
-    cairo_translate (cr, da.width / 2, da.height / 2);
-    cairo_scale (cr, ZOOM_X, -ZOOM_Y);
-	printf("changed the transformation matrix");
-	
-    /* Determine the data points to calculate (ie. those in the clipping zone */
-    cairo_device_to_user_distance (cr, &dx, &dy);
-    cairo_clip_extents (cr, &clip_x1, &clip_y1, &clip_x2, &clip_y2);
-    cairo_set_line_width (cr, dx);
-	printf("Determined the data points\n");
-	
-    /* Draws x and y axis */
-    cairo_set_source_rgb (cr, 0.0, 1.0, 0.0);
-    cairo_move_to (cr, clip_x1, 0.0);
-    cairo_line_to (cr, clip_x2, 0.0);
-    cairo_move_to (cr, 0.0, clip_y1);
-    cairo_line_to (cr, 0.0, clip_y2);
-    cairo_stroke (cr);
-	printf("drawn x and y axis\n");
-	
-    /* Link each data point */
-	for (i = clip_x1; i < clip_x2; i += dx)
-		cairo_line_to (cr, i, f (i));
-	
-	printf("Linked data points\n");
-	
-    /* Draw the curve */
-    cairo_set_source_rgba (cr, 1, 0.2, 0.2, 0.6);
-    cairo_stroke (cr);
-	printf("Drawn teh curve\n");
-
-    return;
-}
+// Used to check if the drawing thread is currently working or not
+// static int currently_drawing = 0;
 
 
 
@@ -153,6 +95,94 @@ void on_btn_startstop_raw_clicked(GtkButton *button, struct app_widgets *widget)
 	
 	return;
 }
+
+void on_but_startstop_clicked(GtkButton *button, struct app_widgets *widget) {
+	
+}
+
+void on_but_set_gain_clicked(GtkButton *button, struct app_widgets *widget) {
+	
+}
+
+
+gfloat f (gfloat x)
+{
+    return 0.03 * pow (x, 3);
+}
+
+void on_draw (GtkWidget *drawing, cairo_t *cr, struct app_widgets *widget) {
+	//Info: cr is passed as an extra parameter which is set in the glade file as user data.
+
+    GdkRectangle da;            /* GtkDrawingArea size */
+    gdouble dx = 5.0, dy = 5.0; /* Pixels between each point */
+    gdouble i, clip_x1 = 0.0, clip_y1 = 0.0, clip_x2 = 0.0, clip_y2 = 0.0;
+	
+	GdkWindow *window = gtk_widget_get_window(drawing);	// I Think this needs to be the drawing canvas
+	
+    /* Determine GtkDrawingArea dimensions */
+    gdk_window_get_geometry (window,
+            &da.x,
+            &da.y,
+            &da.width,
+            &da.height);
+
+	printf("Got window geometry\n");
+	
+	/* Draw on a black background */
+    cairo_set_source_rgb (cr, 0.0, 0.0, 0.0);
+    cairo_paint (cr);
+	printf("drawn on black background\n");
+
+    /* Change the transformation matrix */
+    cairo_translate (cr, da.width / 2, da.height / 2);
+    cairo_scale (cr, ZOOM_X, -ZOOM_Y);
+	printf("changed the transformation matrix");
+	
+    /* Determine the data points to calculate (ie. those in the clipping zone */
+    cairo_device_to_user_distance (cr, &dx, &dy);
+    cairo_clip_extents (cr, &clip_x1, &clip_y1, &clip_x2, &clip_y2);
+    cairo_set_line_width (cr, dx);
+	printf("Determined the data points\n");
+	
+    /* Draws x and y axis */
+    cairo_set_source_rgb (cr, 0.0, 1.0, 0.0);
+    cairo_move_to (cr, clip_x1, 0.0);
+    cairo_line_to (cr, clip_x2, 0.0);
+    cairo_move_to (cr, 0.0, clip_y1);
+    cairo_line_to (cr, 0.0, clip_y2);
+    cairo_stroke (cr);
+	printf("drawn x and y axis\n");
+	
+    /* Link each data point */
+	for (i = clip_x1; i < clip_x2; i += dx)
+		cairo_line_to (cr, i, f (i));
+	
+	printf("Linked data points\n");
+	
+    /* Draw the curve */
+    cairo_set_source_rgba (cr, 1, 0.2, 0.2, 0.6);
+    cairo_stroke (cr);
+	printf("Drawn the curve\n");
+    return;
+}
+
+gboolean timer_exe(struct app_widgets *widget) {
+    printf("In timer trigger\n");
+    
+    // triggers the redraw of the window
+    gtk_widget_queue_draw (widget->w_adc_drg_canvas);
+    
+    return TRUE;
+}
+
+gboolean timer_exe2(GtkWidget *widget) {
+    printf("In timer trigger\n");
+    
+    // triggers the redraw of the window
+    gtk_widget_queue_draw (widget);
+    
+    return TRUE;
+}
 /*
  * 
  */
@@ -203,6 +233,13 @@ int main(int argc, char** argv) {
     
 	// ToDo: need to get this to try and if fail, report to the user. Maybe have it only run by the menu item rather than automatic.
     on_menu_file_connect(widgets);
+
+    // trigger a timeout function to redraw frequently
+    //gdk_threads_add_timeout(333, (GSourceFunc)timer_exe, widgets);
+    //gdk_threads_add_timeout(333, timer_exe, widgets);
+    //gdk_threads_add_idle_full((GSourceFunc)timer_exe, (gpointer)widgets);
+    gdk_threads_add_timeout(333, (GSourceFunc)timer_exe, (gpointer)widgets);
+
 
     
     gtk_widget_show(window);                

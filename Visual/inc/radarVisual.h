@@ -16,14 +16,14 @@
 
 struct app_widgets {
     // All the widgets on the form go into here
-    GtkWidget *w_adc_drg_canvas;
-    GtkWidget *w_dig_drg_canvas;    
-    GtkWidget *w_raw_drg_canvas;
-    GtkWidget *w_but_startstop_adc1;
-    GtkWidget *w_but_startstop_dig;
-    GtkWidget *w_but_startstop_raw;
+    GtkWidget   *w_adc_drg_canvas;
+    GtkWidget   *w_dig_drg_canvas;    
+    GtkWidget   *w_raw_drg_canvas;
+    GtkWidget   *w_but_startstop_adc1;
+    GtkWidget   *w_but_startstop_dig;
+    GtkWidget   *w_but_startstop_raw;
     // also the SPI connection
-    int        SPiconn;
+    int         SPiconn;
 } ;
 
 

@@ -63,6 +63,22 @@ cd "${TOP}"
 makeDirectory "${NBTMPDIR}/radarpi/bin"
 copyFileToTmpDir "${OUTPUT_PATH}" "${NBTMPDIR}/${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}" 0644
 
+cd "${TOP}"
+makeDirectory "${NBTMPDIR}/radarpi/bin"
+copyFileToTmpDir "${OUTPUT_PATH}" "${NBTMPDIR}/${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}" 0755
+
+cd "${TOP}"
+makeDirectory "${NBTMPDIR}/radarpi/bin"
+copyFileToTmpDir "${OUTPUT_PATH}" "${NBTMPDIR}/${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}" 0755
+
+cd "${TOP}"
+makeDirectory "${NBTMPDIR}/radarpi/bin"
+copyFileToTmpDir "${OUTPUT_PATH}" "${NBTMPDIR}/${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}" 0755
+
+cd "${TOP}"
+makeDirectory "${NBTMPDIR}/radarpi/bin"
+copyFileToTmpDir "${OUTPUT_PATH}" "${NBTMPDIR}/${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}" 0755
+
 
 # Generate zip file
 cd "${TOP}"
