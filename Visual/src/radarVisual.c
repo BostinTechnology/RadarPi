@@ -14,6 +14,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
 
 #include <gtk-3.0/gtk/gtk.h>
 #include <math.h>
@@ -22,23 +23,62 @@
 #include <pthread.h>
 
 #include "../inc/radarVisual.h"
+#include "../../common/inc/radar.h"
 
 
-// Copied from elsewhere, need to modify it to test the frame.
-#define WIDTH   640
-#define HEIGHT  480
-
-#define ZOOM_X  100.0
-#define ZOOM_Y  100.0
-
-// Used to check if the drawing thread is currently working or not
-// static int currently_drawing = 0;
-
-
-
+//Bug:
 /*
- * function to open and configure the serial port
+ (radarVisual:2165): GLib-GObject-WARNING **: invalid cast from 'GtkAdjustment' to 'GtkWidget'
  */
+
+/*******************************************************************************
+ *
+ *  To Do List
+ *  ==========
+ *
+ *  DONE    2   Create a single H file for all the common stuff
+ *              a What is the right way of doing this, is there a structure or a method for this?
+ *  DONE    8   Make Gain control structure contain required allowable values and use these in scale
+ *  DONE    3   On GUI remove the bits at the bottom as they are not needed
+ *  DONE    1   Get gain setting to only allow values available from the device
+ *  DONE    16  Link the Mode Info at the bottom to the mode selected
+ *  DONE    17  Link the Gain Setting at the bottom of the screen to the gain selected
+ *  10  Implement the smoothing algorithm in the common code
+ *  4   Convert SPi to use ioctl as this doesn't require elevated privileges
+ *  5   Both gain and ADC use SPI, but on different lines, so I need to change serial port to spi port
+ *          a How do I have different settings for the same port?
+ *  17  Link gain setting to actually setting the gain value
+ *  6   Rewrite common to be a better library
+ *          a Not sure what this looks like - emailed CM
+ *  19  Integrate program with reading of values as required by radiobutton setting
+ *  7   Integrate LEDs into common library
+ *  9   Code tidy up
+ *          a Update comments and check they are correct
+ *          b Update function descriptions in h files to ensure they are correct
+ *          c Remove redundant code
+ *  11  Update existing programs with changes above
+ *          ** Some of them need to be removed as no longer required **
+ *          a readingAnalogueSignals
+ *          b settingGainControl
+ *              i This needs to have the menu in it, not the common
+ *          c mainTestProgram
+ *          d mainSampleSoftware
+ *          e readingDigitalSignals
+ *  12  Check which VCC the gain chip is operating at and set the GAIN_VCC accordingly
+ *  13  Write instructions on how to compile into application
+ *  14  Write a licence header for all files and update them accordingly - emailed DB
+ *  15  Write some instructions on how to use the application
+ *  16  Add tick marks to the scale
+ *  18  When starting up, set the value of the mode to unknown and not the first radiobutton
+ *  20  Add scale and associated code to set the reading speed
+ *  21  On run timer trigger when capturing values (running = true)
+
+ * 
+ * 
+ *      
+
+ */
+
 
 int open_serial_port( struct app_widgets *widget) {
     
@@ -71,39 +111,123 @@ void on_menu_file_connect(struct app_widgets *widget) {
 	//get_mode_info(widget);
 }
 
-void on_btn_startstop_adc_clicked(GtkButton *button, struct app_widgets *widget) {
+void on_btn_startstop_clicked(GtkButton *button, struct app_widgets *widget) {
 	
 	//int			status;
-    printf("ADC button has been clicked\n");
-	
-	//on_draw(widget->w_adc_drg_canvas);		//How do i trigger starting of the drawing?
-	return;
-}
-
-void on_btn_startstop_dig_clicked(GtkButton *button, struct app_widgets *widget) {
-	
-	//int			status;
-    printf("Dig button has been clicked\n");
-	
-	return;
-}
-
-void on_btn_startstop_raw_clicked(GtkButton *button, struct app_widgets *widget) {
-	
-	//int			status;
-    printf("Raw button has been clicked\n");
+    printf("Start / Stop button has been clicked\n");
+    
+    widget->running = !widget->running;
+    
+    if (widget->running) {
+        printf("Currently Running\n");
+    }
+    else {
+        printf("Currently NOT running\n");
+    }
 	
 	return;
 }
 
-void on_but_startstop_clicked(GtkButton *button, struct app_widgets *widget) {
+void on_btn_set_gain_clicked(GtkButton *button, struct app_widgets *widget) {
 	
+    char            conv[15];               // location for temporary conversion
+    int             i = 0;
+    
+    //ToDo: Convert this so it uses the list from gainFunctions.c
+    int             allowed_values[] = {0.2,1,10,20,30,40,60,80,120,157};
+    int             allowed_values_size = sizeof(allowed_values)/sizeof(allowed_values[0]);
+    int             set_value = 0;
+
+    printf("Set Gain button has been clicked\n");
+    
+    widget->gain_value = gtk_range_get_value(GTK_RANGE(widget->w_scale_gainctrl));
+    printf("Gain Value Set:%d\n", widget->gain_value);
+    
+    // Need to get the value and determine where it actually is in the allowed values
+    // and then write it back.
+    
+    printf("Size of array:%d\n", allowed_values_size);
+    
+    // Iterate through the list checking if the gain_value is greater than value given    
+    i = 0;
+    while(allowed_values[i] < widget->gain_value) {
+        i++;
+
+        if (i == (allowed_values_size)) {
+            break;
+        }
+    };
+    
+    printf("Identified Entry:%d Posn:%d\n", allowed_values[i], i);
+    
+    // Got the upper position, now check what value to set_value to
+    if (i == 0) {
+        // the value selected is smaller than the lowest value in the list
+        set_value = allowed_values[0];
+    }
+    else if (i == allowed_values_size) {
+        // Reached the end of the list, set it to the max value
+        set_value = allowed_values[i-1];
+    }
+    else {
+        // Find the value between 2 limits
+        if ((widget->gain_value - allowed_values[i-1]) < (allowed_values[i] - widget->gain_value)) {
+            set_value = allowed_values[i-1];
+        }
+        else {
+            set_value = allowed_values[i];
+        }
+    }
+
+    gtk_range_set_value(GTK_RANGE(widget->w_scale_gainctrl), set_value);
+    // set values of slider and gain setting box.
+    
+    sprintf(conv, "%d", set_value);
+    printf("Converted:%s\n", conv);
+    
+    gtk_entry_set_text(GTK_ENTRY(widget->w_txt_gain_setting), conv);
+    printf("set the text\n");
+	
+	return;
 }
 
-void on_but_set_gain_clicked(GtkButton *button, struct app_widgets *widget) {
+void on_radiobutton_toggled(GtkButton *button, struct app_widgets *widget) {
+    
+	char			mode;
+    char            mode_full[15] = {'\0'};
+    //GtkTextBuffer	*buffer;
+	mode = '\0';
+    
+    printf("Radiobuttons for mode has changed\n");
 	
+	if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget->w_radbut_raw))) {
+        printf("Raw mode selected\n");
+		mode = 'R';
+        strcpy(mode_full, "ADC Raw");
+    }
+    else if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget->w_radbut_digital))) {
+        printf("Digital mode selected\n");
+		mode = 'D';
+        strcpy(mode_full, "Digital");
+    }
+    else if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget->w_radbut_adc))) {
+        printf("ADC mode selected\n");
+		mode = 'A';
+        strcpy(mode_full, "ADC Smoothed");
+    }
+    else {
+        printf("Error occurred unknown mode selected\n");
+        mode = '\0';
+        strcpy(mode_full, "Unknown");
+    }
+    
+    printf("Selected Mode:%c\n", mode);
+    
+    gtk_entry_set_text(GTK_ENTRY(widget->w_txt_mode_info), mode_full);
+    printf("set the text\n");
+    
+    return;
 }
-
 
 gfloat f (gfloat x)
 {
@@ -168,21 +292,15 @@ void on_draw (GtkWidget *drawing, cairo_t *cr, struct app_widgets *widget) {
 
 gboolean timer_exe(struct app_widgets *widget) {
     printf("In timer trigger\n");
-    
+     
     // triggers the redraw of the window
-    gtk_widget_queue_draw (widget->w_adc_drg_canvas);
+    gtk_widget_queue_draw (widget->w_canvas_graph);
     
+    // The function must return TRUE to trigger the next instance
+    // If it returns false, it stops.
     return TRUE;
 }
 
-gboolean timer_exe2(GtkWidget *widget) {
-    printf("In timer trigger\n");
-    
-    // triggers the redraw of the window
-    gtk_widget_queue_draw (widget);
-    
-    return TRUE;
-}
 /*
  * 
  */
@@ -203,7 +321,7 @@ int main(int argc, char** argv) {
     builder = gtk_builder_new();
     gtk_builder_add_from_file (builder, "../Visual/gui/main_window.glade", &err);
 	
-	//Bug: If the application is run from the build directory, it doesn't find the glade file.
+	//Bug: If the application is NOT run from the build directory, it doesn't find the glade file.
 	//		 Does this mean that the XML file is not incorporated into the executable??
     
     // check if the GUI has opened.
@@ -216,28 +334,30 @@ int main(int argc, char** argv) {
     window = GTK_WIDGET(gtk_builder_get_object(builder, "main_application_window"));
     
     // build the structure of widget pointers
-    widgets->w_adc_drg_canvas  = GTK_WIDGET(gtk_builder_get_object(builder, "adc_drg_canvas"));
-    widgets->w_dig_drg_canvas  = GTK_WIDGET(gtk_builder_get_object(builder, "dig_drg_canvas"));
-    widgets->w_raw_drg_canvas  = GTK_WIDGET(gtk_builder_get_object(builder, "raw_drg_canvas"));
-    widgets->w_but_startstop_adc1  = GTK_WIDGET(gtk_builder_get_object(builder, "but_startstop_adc1"));
-    widgets->w_but_startstop_dig  = GTK_WIDGET(gtk_builder_get_object(builder, "but_startstop_dig"));
-    widgets->w_but_startstop_raw  = GTK_WIDGET(gtk_builder_get_object(builder, "but_startstop_raw"));
+    widgets->w_radbut_adc       = GTK_WIDGET(gtk_builder_get_object(builder, "radbut_adc"));
+    widgets->w_radbut_digital   = GTK_WIDGET(gtk_builder_get_object(builder, "radbut_digital"));
+    widgets->w_radbut_raw       = GTK_WIDGET(gtk_builder_get_object(builder, "radbut_raw"));
+    widgets->w_scale_gainctrl   = GTK_WIDGET(gtk_builder_get_object(builder, "scale_gainctrl"));
+    widgets->w_btn_set_gain     = GTK_WIDGET(gtk_builder_get_object(builder, "btn_set_gain"));
+    widgets->w_canvas_graph     = GTK_WIDGET(gtk_builder_get_object(builder, "canvas_graph"));
+    widgets->w_btn_startstop    = GTK_WIDGET(gtk_builder_get_object(builder, "btn_startstop"));
+    widgets->w_txt_mode_info    = GTK_WIDGET(gtk_builder_get_object(builder, "txt_mode_info"));
+    widgets->w_txt_gain_setting = GTK_WIDGET(gtk_builder_get_object(builder, "txt_gain_setting"));
+    widgets->w_adj_gainctrl     = GTK_ADJUSTMENT(gtk_builder_get_object(builder, "adj_gainctrl"));
+    
     
     // connect the widgets to the signal handler
     gtk_builder_connect_signals(builder, widgets);    // note: second parameter points to widgets
     g_object_unref(builder);
     
-    // Set the status of the various boxes etc.
-	//ToDo: need to set the txt_version_info box to not editable.
-    //gtk_text_view_set_editable(GtkTextView (widgets->w_txt_version_info_box), FALSE);
-    
 	// ToDo: need to get this to try and if fail, report to the user. Maybe have it only run by the menu item rather than automatic.
     on_menu_file_connect(widgets);
 
-    // trigger a timeout function to redraw frequently
-    //gdk_threads_add_timeout(333, (GSourceFunc)timer_exe, widgets);
-    //gdk_threads_add_timeout(333, timer_exe, widgets);
-    //gdk_threads_add_idle_full((GSourceFunc)timer_exe, (gpointer)widgets);
+    // Set the variables to their initial state
+    widgets->running = false;                       // Not running initially
+
+    
+    // Set a timeout running to refresh the screen when running
     gdk_threads_add_timeout(333, (GSourceFunc)timer_exe, (gpointer)widgets);
 
 
