@@ -14,18 +14,37 @@
 #ifndef RFIDVISUAL_H
 #define RFIDVISUAL_H
 
+#include <stdbool.h>
+#include <gtk-3.0/gtk/gtk.h>
+
 struct app_widgets {
-    // All the widgets on the form go into here
-    GtkWidget   *w_adc_drg_canvas;
-    GtkWidget   *w_dig_drg_canvas;    
-    GtkWidget   *w_raw_drg_canvas;
-    GtkWidget   *w_but_startstop_adc1;
-    GtkWidget   *w_but_startstop_dig;
-    GtkWidget   *w_but_startstop_raw;
+    // All the widgets on the Glade form go into here
+    GtkWidget   *w_canvas_graph;
+    GtkWidget   *w_btn_startstop;    
+    GtkWidget   *w_btn_set_gain;
+    GtkWidget   *w_scale_gainctrl;
+    GtkWidget   *w_radbut_raw;
+    GtkWidget   *w_radbut_digital;
+    GtkWidget   *w_radbut_adc;
+    GtkAdjustment   *w_adj_gainctrl;
+    GtkWidget   *w_txt_mode_info;
+    GtkWidget   *w_txt_gain_setting;
+    // Plus other variables I want to use
+    bool        running;                    // When true, gathers data to show in the graph
+    int         gain_value;                 // The gain value from the slider
     // also the SPI connection
     int         SPiconn;
 } ;
 
+// Used by Cairo draw.
+#define ZOOM_X  100.0
+#define ZOOM_Y  100.0
+
+#define GAIN_RANGE     
+
+//Timers for the application refresh / data collection - all in mS
+#define SCREEN_REFRESH_TIMER    333
+#define DATA_REFRESH_TIMER      333
 
 //ToDo: improve the commentary for the functions
 

@@ -16,14 +16,11 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <time.h>
-#include "../inc/mainTestProgram.h"
+
 #include "../inc/adcTest.h"
-#include "../../common/inc/ledControl.h"
-#include "../../common/inc/utilities.h"
-#include "../../common/inc/gainFunctions.h"
-#include "../../common/inc/gpioFunctions.h"
-#include "../../common/inc/adcFunctions.h"
-#include "../../common/inc/gpio_control.h"
+#include "../inc/mainTestProgram.h"
+#include "../../common/inc/radar.h"
+
 
 /*!**************************************************************************
  * Overview:  Perform the full test routine

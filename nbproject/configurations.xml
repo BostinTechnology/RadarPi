@@ -11,6 +11,7 @@
       <itemPath>common/inc/ledControl.h</itemPath>
       <itemPath>SampleSoftware/inc/mainSampleSoftware.h</itemPath>
       <itemPath>TestProgram/inc/mainTestProgram.h</itemPath>
+      <itemPath>common/inc/radar.h</itemPath>
       <itemPath>common/inc/utilities.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
@@ -90,6 +91,18 @@
                             perm="755"
                             owner="root"
                             group="bin"/>
+          <packFileListElem type="File"
+                            to="${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}"
+                            from="${OUTPUT_PATH}"
+                            perm="755"
+                            owner="root"
+                            group="bin"/>
+          <packFileListElem type="File"
+                            to="${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}"
+                            from="${OUTPUT_PATH}"
+                            perm="755"
+                            owner="root"
+                            group="bin"/>
         </packFileList>
       </packaging>
       <item path="SampleSoftware/inc/mainSampleSoftware.h"
@@ -119,6 +132,8 @@
       <item path="common/inc/gpioFunctions.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="common/inc/ledControl.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="common/inc/radar.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="common/inc/utilities.h" ex="false" tool="3" flavor2="0">
       </item>
@@ -182,6 +197,8 @@
       <item path="common/inc/gpioFunctions.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="common/inc/ledControl.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="common/inc/radar.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="common/inc/utilities.h" ex="false" tool="3" flavor2="0">
       </item>

@@ -26,7 +26,7 @@
 #include <bcm2835.h>        // hardware definition library file
 #include <time.h>           // to enable time functions
 
-#include "../../common/inc/gpioFunctions.h"
+#include "../../common/inc/radar.h"
 
 
 

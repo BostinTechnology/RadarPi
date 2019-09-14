@@ -25,12 +25,6 @@
 #include "../inc/radarVisual.h"
 #include "../../common/inc/radar.h"
 
-
-//Bug:
-/*
- (radarVisual:2165): GLib-GObject-WARNING **: invalid cast from 'GtkAdjustment' to 'GtkWidget'
- */
-
 /*******************************************************************************
  *
  *  To Do List
@@ -43,14 +37,35 @@
  *  DONE    1   Get gain setting to only allow values available from the device
  *  DONE    16  Link the Mode Info at the bottom to the mode selected
  *  DONE    17  Link the Gain Setting at the bottom of the screen to the gain selected
+ *  19  Integrate program with reading of values as required by radiobutton setting
+ *          a Firstly get random value to add in
+ *          a2 Change to using time and value
+ *              This may need more linkedList functions (max and min values)
+ *              It will also need 2 data values, not 1
+ *          b Change to default source
+ *          c Change to required source
+ *  CM 22  Updated linked lists to add a delete function
+ *  CM 23  Update linked lists to include a counter and a maximum number of values
+ *          a update structure to have the 2 variables
+ *          b when exceeded, remove the tail.
  *  10  Implement the smoothing algorithm in the common code
- *  4   Convert SPi to use ioctl as this doesn't require elevated privileges
+ *          see filter.c and filter.h
+ *          The code is very short, but it takes quite a lot of processing power to run!
+ *              It’s probably clear to you, but just pass each measured level to the relevant 
+ *              filter and after the appropriate delay (until it has enough samples) it will 
+ *              return the filtered values. notch_filter_100 will (obviously!) filters out the 
+ *              [harmonics] of the 50Hz interference.  The coefficients are dependent on the 
+ *              clock frequency, which I believe is 16MHz, so will need adjusting if you use a 
+ *              different clock frequency.
+ *  24  Change gainFunctions to use typedef struct ...
+ *          See the gainfunctions.h file
  *  5   Both gain and ADC use SPI, but on different lines, so I need to change serial port to spi port
  *          a How do I have different settings for the same port?
+ *          b If the gain setting is done within the code and doesn't return the port, it can open and close it
+ *          c In the ADC reading, it needs to return the port so it can be used when reading new values
  *  17  Link gain setting to actually setting the gain value
  *  6   Rewrite common to be a better library
  *          a Not sure what this looks like - emailed CM
- *  19  Integrate program with reading of values as required by radiobutton setting
  *  7   Integrate LEDs into common library
  *  9   Code tidy up
  *          a Update comments and check they are correct
@@ -72,6 +87,8 @@
  *  18  When starting up, set the value of the mode to unknown and not the first radiobutton
  *  20  Add scale and associated code to set the reading speed
  *  21  On run timer trigger when capturing values (running = true)
+ *  4   Convert SPi to use ioctl as this doesn't require elevated privileges
+ *          No sure this is requried as program runs on
 
  * 
  * 
@@ -187,6 +204,8 @@ void on_btn_set_gain_clicked(GtkButton *button, struct app_widgets *widget) {
     
     gtk_entry_set_text(GTK_ENTRY(widget->w_txt_gain_setting), conv);
     printf("set the text\n");
+    
+    //ToDo: Write the new gain setting to the board
 	
 	return;
 }
@@ -231,6 +250,7 @@ void on_radiobutton_toggled(GtkButton *button, struct app_widgets *widget) {
 
 gfloat f (gfloat x)
 {
+    // to the power calculation x to the power of y
     return 0.03 * pow (x, 3);
 }
 
@@ -251,6 +271,11 @@ void on_draw (GtkWidget *drawing, cairo_t *cr, struct app_widgets *widget) {
             &da.height);
 
 	printf("Got window geometry\n");
+    printf("X coord:%d ", da.x);
+    printf("Y coord:%d ", da.y);
+    printf("Width  :%d ", da.width);
+    printf("Height :%d\n", da.height);
+    // X coord:5 Y coord:5 Width  :500 Height :307
 	
 	/* Draw on a black background */
     cairo_set_source_rgb (cr, 0.0, 0.0, 0.0);
@@ -260,13 +285,21 @@ void on_draw (GtkWidget *drawing, cairo_t *cr, struct app_widgets *widget) {
     /* Change the transformation matrix */
     cairo_translate (cr, da.width / 2, da.height / 2);
     cairo_scale (cr, ZOOM_X, -ZOOM_Y);
-	printf("changed the transformation matrix");
+	printf("changed the transformation matrix\n");
 	
     /* Determine the data points to calculate (ie. those in the clipping zone */
     cairo_device_to_user_distance (cr, &dx, &dy);
     cairo_clip_extents (cr, &clip_x1, &clip_y1, &clip_x2, &clip_y2);
     cairo_set_line_width (cr, dx);
 	printf("Determined the data points\n");
+    printf("dx:%lf dy:%lf\n", dx, dy);
+    printf("clip_x1:%lf ", clip_x1);
+    printf("clip_y1:%lf ", clip_y1);
+    printf("clip_x2:%lf ", clip_x2);
+    printf("clip_y2:%lf\n", clip_y2);
+    //dx:0.050000 dy:-0.050000 
+    //clip_x1:-2.500000 clip_y1:-1.540000 clip_x2:2.500000 clip_y2:1.530000
+
 	
     /* Draws x and y axis */
     cairo_set_source_rgb (cr, 0.0, 1.0, 0.0);
@@ -277,9 +310,10 @@ void on_draw (GtkWidget *drawing, cairo_t *cr, struct app_widgets *widget) {
     cairo_stroke (cr);
 	printf("drawn x and y axis\n");
 	
+    //ToDo: Implement linked lists here...
     /* Link each data point */
 	for (i = clip_x1; i < clip_x2; i += dx)
-		cairo_line_to (cr, i, f (i));
+		cairo_line_to (cr, i, f (i));       //Draws a line from the current position, to the new coordinates
 	
 	printf("Linked data points\n");
 	
@@ -290,17 +324,28 @@ void on_draw (GtkWidget *drawing, cairo_t *cr, struct app_widgets *widget) {
     return;
 }
 
-gboolean timer_exe(struct app_widgets *widget) {
-    printf("In timer trigger\n");
+gboolean screen_timer_exe(struct app_widgets *widget) {
+    printf("In screen refresh timer trigger\n");
      
     // triggers the redraw of the window
     gtk_widget_queue_draw (widget->w_canvas_graph);
     
     // The function must return TRUE to trigger the next instance
     // If it returns false, it stops.
-    return TRUE;
+    return true;
 }
 
+gboolean data_timer_exe(struct app_widgets *widget) {
+    printf("In data timer\n");
+    
+    //Get some data
+    
+    /* Version 1: Get some random data and put it into a linked list*/
+    
+    //ToDo: Implement linked lists here...
+    
+    return true;
+}
 /*
  * 
  */
@@ -357,8 +402,9 @@ int main(int argc, char** argv) {
     widgets->running = false;                       // Not running initially
 
     
-    // Set a timeout running to refresh the screen when running
-    gdk_threads_add_timeout(333, (GSourceFunc)timer_exe, (gpointer)widgets);
+    // Set a timeout running to refresh the screen
+    gdk_threads_add_timeout(SCREEN_REFRESH_TIMER, (GSourceFunc)screen_timer_exe, (gpointer)widgets);
+    gdk_threads_add_timeout(DATA_REFRESH_TIMER, (GSourceFunc)data_timer_exe, (gpointer)widgets);
 
 
     
