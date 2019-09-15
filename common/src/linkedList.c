@@ -12,7 +12,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#include "linkedList.h"
+#include "../inc/linkedList.h"
 
 void	listInitialise	(Linkedlist *list)
 {
@@ -24,11 +24,11 @@ void	listInitialise	(Linkedlist *list)
 }
 
 
-void	listAddHead		(Linkedlist *list, void* data)
+void	listAddHead		(Linkedlist *list, int reading)
 {
 	// Create new node
 	Node	*node	= (Node*) malloc(sizeof(Node));
-	node->data = data;
+	node->reading = reading;
 	
     // Check if the list is empty
 	if (list->listHead == NULL) 
@@ -49,11 +49,11 @@ void	listAddHead		(Linkedlist *list, void* data)
     return;
 }
 
-void	listAddTail		(Linkedlist *list, void* data)
+void	listAddTail		(Linkedlist *list, int reading)
 {
     // Create new node
 	Node	*node	= (Node*) malloc(sizeof(Node));
-	node->data = data;
+	node->reading = reading;
 	node->nextnode	=	NULL;
 
     // Check if the list is empty, if so create a new list
@@ -76,15 +76,15 @@ void	listAddTail		(Linkedlist *list, void* data)
 }
 
 // Insert a new node after the current node
-void	listInsertNode	(Linkedlist *list, void* data, Node *currentnode)
+void	listInsertNode	(Linkedlist *list, int reading, Node *currentnode)
 {
     // Check if there is a next node, if not pass to listAddTail
     if (currentnode->nextnode == NULL) {
-        listAddTail(list, data);            // Should this be &list, &data????
+        listAddTail(list, reading);            // Should this be &list, &data????
     }
     // Create new node
 	Node	*newnode	= (Node*) malloc(sizeof(Node));
-	newnode->data = data;
+	newnode->reading = reading;
 	newnode->nextnode	= NULL;
     
     // Check if the list is empty, if so create as a new list, else link the pointers
@@ -107,7 +107,7 @@ void	listInsertNode	(Linkedlist *list, void* data, Node *currentnode)
 }
 
 // Delete the given node
-void	listDeleteNode	(Linkedlist *list, void* data, Node *deletenode)
+void	listDeleteNode	(Linkedlist *list, int reading, Node *deletenode)
 {
     // 
     

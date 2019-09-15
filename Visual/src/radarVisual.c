@@ -23,7 +23,7 @@
 #include <pthread.h>
 
 #include "../inc/radarVisual.h"
-#include "../../common/inc/radar.h"
+
 
 /*******************************************************************************
  *
@@ -40,7 +40,10 @@
  *  19  Integrate program with reading of values as required by radiobutton setting
  *          a Firstly get random value to add in
  *          a2 Change to using time and value
- *              This may need more linkedList functions (max and min values)
+ *              This may need more linkedList functions / values
+ *                  max data value
+ *                  min data value
+ *                  quantity of readings
  *              It will also need 2 data values, not 1
  *          b Change to default source
  *          c Change to required source
@@ -256,6 +259,8 @@ gfloat f (gfloat x)
 
 void on_draw (GtkWidget *drawing, cairo_t *cr, struct app_widgets *widget) {
 	//Info: cr is passed as an extra parameter which is set in the glade file as user data.
+    
+    int count = 0;
 
     GdkRectangle da;            /* GtkDrawingArea size */
     gdouble dx = 5.0, dy = 5.0; /* Pixels between each point */
@@ -311,9 +316,32 @@ void on_draw (GtkWidget *drawing, cairo_t *cr, struct app_widgets *widget) {
 	printf("drawn x and y axis\n");
 	
     //ToDo: Implement linked lists here...
+    //      scroll through the list till either
+    //          reached end
+    //          100 data points added
     /* Link each data point */
-	for (i = clip_x1; i < clip_x2; i += dx)
-		cairo_line_to (cr, i, f (i));       //Draws a line from the current position, to the new coordinates
+	//for (i = clip_x1; i < clip_x2; i += dx)
+	//	cairo_line_to (cr, i, f (i));       //Draws a line from the current position, to the new coordinates
+    
+    /* clip_y1 and clip_y2 provide the max and min values
+     * scale factor is (coord range / value range) which is dy
+     */
+    
+    Node *current;
+    int     scale = 0;
+    //scale = 
+    current = widget->list.listHead;
+    do {
+        //Bug: Scaling is not working for these values.
+        //      Y values are too big!
+        //      X values are not -2.5 to 2.5, they are 0 to 100
+        
+        // Increase in increments of dx
+        cairo_line_to(cr, count * dx, current->reading);
+        printf("Reading:%d  Data:%d\n", count, current->reading);
+        current = current->nextnode;
+        count ++;
+    } while ((count < 100) && (current->nextnode != NULL));
 	
 	printf("Linked data points\n");
 	
@@ -338,11 +366,17 @@ gboolean screen_timer_exe(struct app_widgets *widget) {
 gboolean data_timer_exe(struct app_widgets *widget) {
     printf("In data timer\n");
     
-    //Get some data
-    
-    /* Version 1: Get some random data and put it into a linked list*/
-    
     //ToDo: Implement linked lists here...
+    /* Version 1: Get some random data and put it into a linked list*/
+    int value = 0;
+    
+    //Get some data
+    // Data needs to be in the range of -2.5 to 2.5.
+    // take the int given by rand, get the remainder (%) when divided by 5 and subtract 2.5 to get it in the range required.
+    value = (rand() % 5) - 2.5;
+    
+    // Add a new value to the start of the list every time it runs
+    listAddHead(&widget->list, value);
     
     return true;
 }
@@ -358,6 +392,8 @@ int main(int argc, char** argv) {
     
     // instantiate structure, allocating memory for it
     struct app_widgets	*widgets = g_slice_new(struct app_widgets);
+    
+    listInitialise(&widgets->list);
     
     // initialise GTK library and pass it in command line parameters
     gtk_init(&argc, &argv);

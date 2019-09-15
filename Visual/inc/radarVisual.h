@@ -15,6 +15,7 @@
 #define RFIDVISUAL_H
 
 #include <stdbool.h>
+#include "../../common/inc/radar.h"
 #include <gtk-3.0/gtk/gtk.h>
 
 struct app_widgets {
@@ -34,6 +35,7 @@ struct app_widgets {
     int         gain_value;                 // The gain value from the slider
     // also the SPI connection
     int         SPiconn;
+    Linkedlist  list;
 } ;
 
 // Used by Cairo draw.

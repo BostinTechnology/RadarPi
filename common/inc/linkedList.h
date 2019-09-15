@@ -12,7 +12,7 @@
 
 typedef struct _node 
 {
-	void 	*data;
+	int 	reading;
 	struct	_node *prevnode;
 	struct	_node *nextnode;
 } Node;
@@ -27,8 +27,8 @@ typedef struct _linkedlist
 
 
 void	listInitialise	(Linkedlist *list);
-void	listAddHead		(Linkedlist *list, void *data);
-void	listAddTail		(Linkedlist *list, void *data);
-void	listInsertNode	(Linkedlist *list, void* data, Node *currentnode);	
-void	listDeleteNode	(Linkedlist *list, void *data, Node *currentnode);
+void	listAddHead		(Linkedlist *list, int reading);
+void	listAddTail		(Linkedlist *list, int reading);
+void	listInsertNode	(Linkedlist *list, int reading, Node *currentnode);	
+void	listDeleteNode	(Linkedlist *list, int reading, Node *currentnode);
 void	listPrintNode	(Linkedlist *list);

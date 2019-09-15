@@ -30,6 +30,7 @@ OBJS_common = \
 	$(TARGETDIR_ALL)/gpio_control.o \
 	$(TARGETDIR_ALL)/ledControl.o \
 	$(TARGETDIR_ALL)/utilities.o \
+	$(TARGETDIR_ALL)/linkedList.o \
 
 # ----------------------------------------------------------------------------------------------------------------
 ##      Target: testProgram
@@ -137,6 +138,9 @@ $(TARGETDIR_ALL)/spi_comms.o: $(TARGETDIR_ALL) common/src/spi_comms.c
 
 $(TARGETDIR_ALL)/utilities.o: $(TARGETDIR_ALL) common/src/utilities.c
 	$(COMPILE.c) $(CFLAGS)  -o $@ common/src/utilities.c
+
+$(TARGETDIR_ALL)/linkedList.o: $(TARGETDIR_ALL) common/src/linkedList.c
+	$(COMPILE.c) $(CFLAGS)  -o $@ common/src/linkedList.c
 
 # ----- testProgram ----------------------------------------------------------------------------------------------
 $(TARGETDIR_ALL)/adcTest.o: $(TARGETDIR_ALL) TestProgram/src/adcTest.c
