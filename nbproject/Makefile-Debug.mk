@@ -42,7 +42,12 @@ OBJECTFILES= \
 	${OBJECTDIR}/common/src/gainFunctions.o \
 	${OBJECTDIR}/common/src/gpioFunctions.o \
 	${OBJECTDIR}/common/src/ledControl.o \
-	${OBJECTDIR}/common/src/utilities.o
+	${OBJECTDIR}/common/src/utilities.o \
+	${OBJECTDIR}/nbproject/newfile.o \
+	${OBJECTDIR}/nbproject/newfile1.o \
+	${OBJECTDIR}/nbproject/newfile2.o \
+	${OBJECTDIR}/nbproject/newmain.o \
+	${OBJECTDIR}/newmain.o
 
 
 # C Compiler Flags
@@ -108,6 +113,31 @@ ${OBJECTDIR}/common/src/utilities.o: common/src/utilities.c
 	${MKDIR} -p ${OBJECTDIR}/common/src
 	${RM} "$@.d"
 	$(COMPILE.c) -g -Wall -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/common/src/utilities.o common/src/utilities.c
+
+${OBJECTDIR}/nbproject/newfile.o: nbproject/newfile.c
+	${MKDIR} -p ${OBJECTDIR}/nbproject
+	${RM} "$@.d"
+	$(COMPILE.c) -g -Wall -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/nbproject/newfile.o nbproject/newfile.c
+
+${OBJECTDIR}/nbproject/newfile1.o: nbproject/newfile1.c
+	${MKDIR} -p ${OBJECTDIR}/nbproject
+	${RM} "$@.d"
+	$(COMPILE.c) -g -Wall -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/nbproject/newfile1.o nbproject/newfile1.c
+
+${OBJECTDIR}/nbproject/newfile2.o: nbproject/newfile2.c
+	${MKDIR} -p ${OBJECTDIR}/nbproject
+	${RM} "$@.d"
+	$(COMPILE.c) -g -Wall -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/nbproject/newfile2.o nbproject/newfile2.c
+
+${OBJECTDIR}/nbproject/newmain.o: nbproject/newmain.c
+	${MKDIR} -p ${OBJECTDIR}/nbproject
+	${RM} "$@.d"
+	$(COMPILE.c) -g -Wall -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/nbproject/newmain.o nbproject/newmain.c
+
+${OBJECTDIR}/newmain.o: newmain.c
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.c) -g -Wall -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/newmain.o newmain.c
 
 # Subprojects
 .build-subprojects:

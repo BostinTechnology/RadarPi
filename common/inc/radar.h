@@ -17,6 +17,9 @@
  * 
  *      ALl functions are listed here
  */
+
+//ToDo: Update headers for all files based on new template.
+
 #ifndef RADAR_H
 #define RADAR_H
 

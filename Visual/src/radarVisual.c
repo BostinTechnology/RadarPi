@@ -288,8 +288,11 @@ void on_draw (GtkWidget *drawing, cairo_t *cr, struct app_widgets *widget) {
 	printf("drawn on black background\n");
 
     /* Change the transformation matrix */
-    cairo_translate (cr, da.width / 2, da.height / 2);
-    cairo_scale (cr, ZOOM_X, -ZOOM_Y);
+    // Move zero points:cairo_translate (cr, da.width / 2, da.height / 2);
+    // translate moves the 0,0 by the values given
+    cairo_translate (cr, -da.width, -da.height);
+    // Move zero points:cairo_scale (cr, ZOOM_X, -ZOOM_Y);
+	cairo_scale (cr, 95, 95);
 	printf("changed the transformation matrix\n");
 	
     /* Determine the data points to calculate (ie. those in the clipping zone */
@@ -299,19 +302,23 @@ void on_draw (GtkWidget *drawing, cairo_t *cr, struct app_widgets *widget) {
 	printf("Determined the data points\n");
     printf("dx:%lf dy:%lf\n", dx, dy);
     printf("clip_x1:%lf ", clip_x1);
-    printf("clip_y1:%lf ", clip_y1);
     printf("clip_x2:%lf ", clip_x2);
+    printf("clip_y1:%lf ", clip_y1);
     printf("clip_y2:%lf\n", clip_y2);
-    //dx:0.050000 dy:-0.050000 
-    //clip_x1:-2.500000 clip_y1:-1.540000 clip_x2:2.500000 clip_y2:1.530000
+    // Move zero points:dx:0.050000 dy:-0.050000 
+    // Move zero points:clip_x1:-2.500000 clip_y1:-1.540000 clip_x2:2.500000 clip_y2:1.530000
+    //dx:5.000000 dy:5.000000
+    //clip_x1:-500.000000 clip_y1:-307.000000 clip_x2:0.000000 clip_y2:0.000000
 
 	
     /* Draws x and y axis */
     cairo_set_source_rgb (cr, 0.0, 1.0, 0.0);
-    cairo_move_to (cr, clip_x1, 0.0);
-    cairo_line_to (cr, clip_x2, 0.0);
-    cairo_move_to (cr, 0.0, clip_y1);
-    cairo_line_to (cr, 0.0, clip_y2);
+    // horizontal axis
+    cairo_move_to (cr, clip_x1, clip_y2);
+    cairo_line_to (cr, clip_x2, clip_y2);
+    // vertical axis
+    cairo_move_to (cr, clip_x1, clip_y1);
+    cairo_line_to (cr, clip_x1, clip_y2);
     cairo_stroke (cr);
 	printf("drawn x and y axis\n");
 	
@@ -337,7 +344,7 @@ void on_draw (GtkWidget *drawing, cairo_t *cr, struct app_widgets *widget) {
         //      X values are not -2.5 to 2.5, they are 0 to 100
         
         // Increase in increments of dx
-        cairo_line_to(cr, count * dx, current->reading);
+        cairo_line_to(cr, count * dx, 0.50); //clip_y2 - current->reading);
         printf("Reading:%d  Data:%d\n", count, current->reading);
         current = current->nextnode;
         count ++;
@@ -373,8 +380,9 @@ gboolean data_timer_exe(struct app_widgets *widget) {
     //Get some data
     // Data needs to be in the range of -2.5 to 2.5.
     // take the int given by rand, get the remainder (%) when divided by 5 and subtract 2.5 to get it in the range required.
-    value = (rand() % 5) - 2.5;
+    // Move zero points:value = (rand() % 5) - 2.5;
     
+    value = (rand() % 300);
     // Add a new value to the start of the list every time it runs
     listAddHead(&widget->list, value);
     

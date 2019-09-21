@@ -59,7 +59,7 @@
 
 #include "spi_comms.h"
 
-/*!
+/*
  *****************************************************************************
  * Overview:  Read the voltage from the ADC chip Control
  *  
