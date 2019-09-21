@@ -16,8 +16,12 @@ PTHREAD=-pthread
 TARGETDIR_ALL=build
 
 
-all:    $(TARGETDIR_ALL)/analogueMeasurement $(TARGETDIR_ALL)/testProgram $(TARGETDIR_ALL)/gainControl \
+all:    $(TARGETDIR_ALL)/gainControl $(TARGETDIR_ALL)/analogueMeasurement $(TARGETDIR_ALL)/testProgram $(TARGETDIR_ALL)/gainControl \
 	$(TARGETDIR_ALL)/digitalDetection $(TARGETDIR_ALL)/sampleSoftware $(TARGETDIR_ALL)/radarVisual
+
+gain:	$(TARGETDIR_ALL)/gainControl
+	
+visual:	$(TARGETDIR_ALL)/radarVisual
 
 # ----------------------------------------------------------------------------------------------------------------
 #       Common Objects

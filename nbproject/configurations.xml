@@ -6,12 +6,12 @@
                    projectFiles="true">
       <itemPath>common/inc/adcFunctions.h</itemPath>
       <itemPath>TestProgram/inc/adcTest.h</itemPath>
+      <itemPath>nbproject/default_header.h</itemPath>
       <itemPath>common/inc/gainFunctions.h</itemPath>
       <itemPath>common/inc/gpioFunctions.h</itemPath>
       <itemPath>common/inc/ledControl.h</itemPath>
       <itemPath>SampleSoftware/inc/mainSampleSoftware.h</itemPath>
       <itemPath>TestProgram/inc/mainTestProgram.h</itemPath>
-      <itemPath>nbproject/newfile.h</itemPath>
       <itemPath>common/inc/radar.h</itemPath>
       <itemPath>common/inc/utilities.h</itemPath>
     </logicalFolder>
@@ -24,12 +24,12 @@
                    projectFiles="true">
       <itemPath>common/src/adcFunctions.c</itemPath>
       <itemPath>TestProgram/src/adcTest.c</itemPath>
+      <itemPath>default_header.c</itemPath>
       <itemPath>common/src/gainFunctions.c</itemPath>
       <itemPath>common/src/gpioFunctions.c</itemPath>
       <itemPath>common/src/ledControl.c</itemPath>
       <itemPath>SampleSoftware/src/mainSampleSoftware.c</itemPath>
       <itemPath>TestProgram/src/mainTestProgram.c</itemPath>
-      <itemPath>nbproject/newfile.c</itemPath>
       <itemPath>nbproject/newfile1.c</itemPath>
       <itemPath>nbproject/newfile2.c</itemPath>
       <itemPath>newmain.c</itemPath>
@@ -160,13 +160,13 @@
       </item>
       <item path="common/src/utilities.c" ex="false" tool="0" flavor2="0">
       </item>
+      <item path="default_header.c" ex="false" tool="0" flavor2="0">
+      </item>
       <item path="makefile" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="nbproject/default_header.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="nbproject/licenseheader.txt" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="nbproject/newfile.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="nbproject/newfile.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="nbproject/newfile1.c" ex="false" tool="0" flavor2="0">
       </item>
@@ -239,13 +239,13 @@
       </item>
       <item path="common/src/utilities.c" ex="false" tool="0" flavor2="0">
       </item>
+      <item path="default_header.c" ex="false" tool="0" flavor2="0">
+      </item>
       <item path="makefile" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="nbproject/default_header.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="nbproject/licenseheader.txt" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="nbproject/newfile.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="nbproject/newfile.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="nbproject/newfile1.c" ex="false" tool="0" flavor2="0">
       </item>

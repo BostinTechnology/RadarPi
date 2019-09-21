@@ -37,11 +37,11 @@
 
 #define	qtyGainValues		11		//The number of values in the gainValues structure
 
-struct GAIN_DEFINITION {
+typedef struct GAIN_DEFINITION {
 	char	description[10];
 	int		value;
     int     gain;
-} gainValues[qtyGainValues];
+} gainValuesDef;
 
 
 /* First in this file, create a 
@@ -58,6 +58,26 @@ struct GAIN_DEFINITION {
  *      etc
  *  }
  ]*/
+//gainValuesDef gainValues[qtyGainValues] = {
+
+gainValuesDef gainValues[] = {
+/*! Gain Settings for G3:G0
+ *  gainValues is a 2 dimensional array that contains the setting and corresponding gain value
+					G3:G0		GAIN (V/V)		SLEW RATE (V/μs)	SMALL-SIGNAL BANDWIDTH (MHz)*/
+	{"GAIN_1",		0b0000, 	1},					//2.90				2.15
+	{"GAIN_10",		0b0001,     10},				//8.99				2.40
+	{"GAIN_20",		0b0010,     20},				//8.70				1.95
+	{"GAIN_30",		0b0011,     30},				//12.80				3.40
+	{"GAIN_40",		0b0100,     40},				//12.50				2.15
+	{"GAIN_60",		0b0101,     60},				//13.31				2.60
+	{"GAIN_80",		0b0110,     80},				//12.15				1.91
+	{"GAIN_120",	0b0111,     120},				//18.53				2.30
+	{"GAIN_157",	0b1000,     157},				//16.49				1.78
+	{"GAIN_VCC",	0b1001,     0.2},  //(VCC = 5V)	2.86				1.95
+                                  //0.25 (VCC = 3.3V)
+	{"GAIN_1X",		0b1010,     1},					//2.90				2.15
+};
+
 
 #define	SHUTDOWN_MODE		0b0		// Set to normal mode, change this to 1 for low power mode
 #define	MEASURING_MODE		0b0		// Set to normal operation, if set to 1, inputs shorted

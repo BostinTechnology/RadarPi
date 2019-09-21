@@ -43,7 +43,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/common/src/gpioFunctions.o \
 	${OBJECTDIR}/common/src/ledControl.o \
 	${OBJECTDIR}/common/src/utilities.o \
-	${OBJECTDIR}/nbproject/newfile.o \
+	${OBJECTDIR}/default_header.o \
 	${OBJECTDIR}/nbproject/newfile1.o \
 	${OBJECTDIR}/nbproject/newfile2.o \
 	${OBJECTDIR}/nbproject/newmain.o \
@@ -114,10 +114,10 @@ ${OBJECTDIR}/common/src/utilities.o: common/src/utilities.c
 	${RM} "$@.d"
 	$(COMPILE.c) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/common/src/utilities.o common/src/utilities.c
 
-${OBJECTDIR}/nbproject/newfile.o: nbproject/newfile.c
-	${MKDIR} -p ${OBJECTDIR}/nbproject
+${OBJECTDIR}/default_header.o: default_header.c
+	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/nbproject/newfile.o nbproject/newfile.c
+	$(COMPILE.c) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/default_header.o default_header.c
 
 ${OBJECTDIR}/nbproject/newfile1.o: nbproject/newfile1.c
 	${MKDIR} -p ${OBJECTDIR}/nbproject
