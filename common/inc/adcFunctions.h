@@ -57,8 +57,12 @@
 #define ADCFUNCTIONS_H
 
 
-#include "spi_comms.h"
+#include "rdr_spi_comms.h"
 
+// The list below is the failure modes possible
+#define     ADC_EXIT_SUCCESS        0
+#define     ADC_NO_RESPONSE         1
+#define     ADC_SETUP_ERROR         2
 /*
  *****************************************************************************
  * Overview:  Read the voltage from the ADC chip Control
@@ -66,12 +70,12 @@
  * This method using the bcm2835 library to read the value from the ADC chip
  * and convert it to a real voltage reading
  *
- * param[in/out] ? : nothing 
+ * param[out] reading   : the value of the adc port 
  *
- * return float         : voltage reading
+ * return status        : success / failure status
  *****************************************************************************
  */
-float readVoltage(void);
+int readVoltage(float *reading);
 
 /*!
  *****************************************************************************
@@ -81,10 +85,10 @@ float readVoltage(void);
  *
  * param[in/out] ?? : nothing 
  *
- * return CommsRetCode   : ERROR_NONE
+ * return status   : failure mode or success
  *****************************************************************************
  */
-CommsRetCode adcSPiInitialisation(void);
+int adcSPiInitialisation(void);
 
 /*!
  *****************************************************************************
@@ -94,10 +98,10 @@ CommsRetCode adcSPiInitialisation(void);
  *
  * param[in/out] ?? : nothing 
  *
- * return none   : nothing
+ * return status   : failure mode or success
  *****************************************************************************
  */
-void adcSPiEnd(void);
+int adcSPiEnd(void);
 
 #endif /* ADCFUNCTIONS_H */
 

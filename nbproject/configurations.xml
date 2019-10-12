@@ -13,7 +13,7 @@
       <itemPath>SampleSoftware/inc/mainSampleSoftware.h</itemPath>
       <itemPath>TestProgram/inc/mainTestProgram.h</itemPath>
       <itemPath>common/inc/radar.h</itemPath>
-      <itemPath>common/inc/utilities.h</itemPath>
+      <itemPath>common/inc/rdr_utilities.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
@@ -34,7 +34,8 @@
       <itemPath>nbproject/newfile2.c</itemPath>
       <itemPath>newmain.c</itemPath>
       <itemPath>nbproject/newmain.c</itemPath>
-      <itemPath>common/src/utilities.c</itemPath>
+      <itemPath>common/src/radar.c</itemPath>
+      <itemPath>common/src/rdr_utilities.c</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
                    displayName="Test Files"
@@ -116,6 +117,12 @@
                             perm="755"
                             owner="root"
                             group="bin"/>
+          <packFileListElem type="File"
+                            to="${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}"
+                            from="${OUTPUT_PATH}"
+                            perm="755"
+                            owner="root"
+                            group="bin"/>
         </packFileList>
       </packaging>
       <item path="SampleSoftware/inc/mainSampleSoftware.h"
@@ -148,7 +155,7 @@
       </item>
       <item path="common/inc/radar.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="common/inc/utilities.h" ex="false" tool="3" flavor2="0">
+      <item path="common/inc/rdr_utilities.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="common/src/adcFunctions.c" ex="false" tool="0" flavor2="0">
       </item>
@@ -158,7 +165,9 @@
       </item>
       <item path="common/src/ledControl.c" ex="false" tool="0" flavor2="0">
       </item>
-      <item path="common/src/utilities.c" ex="false" tool="0" flavor2="0">
+      <item path="common/src/radar.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="common/src/rdr_utilities.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="default_header.c" ex="false" tool="0" flavor2="0">
       </item>
@@ -227,7 +236,7 @@
       </item>
       <item path="common/inc/radar.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="common/inc/utilities.h" ex="false" tool="3" flavor2="0">
+      <item path="common/inc/rdr_utilities.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="common/src/adcFunctions.c" ex="false" tool="0" flavor2="0">
       </item>
@@ -237,7 +246,9 @@
       </item>
       <item path="common/src/ledControl.c" ex="false" tool="0" flavor2="0">
       </item>
-      <item path="common/src/utilities.c" ex="false" tool="0" flavor2="0">
+      <item path="common/src/radar.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="common/src/rdr_utilities.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="default_header.c" ex="false" tool="0" flavor2="0">
       </item>

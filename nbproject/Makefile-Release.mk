@@ -42,7 +42,8 @@ OBJECTFILES= \
 	${OBJECTDIR}/common/src/gainFunctions.o \
 	${OBJECTDIR}/common/src/gpioFunctions.o \
 	${OBJECTDIR}/common/src/ledControl.o \
-	${OBJECTDIR}/common/src/utilities.o \
+	${OBJECTDIR}/common/src/radar.o \
+	${OBJECTDIR}/common/src/rdr_utilities.o \
 	${OBJECTDIR}/default_header.o \
 	${OBJECTDIR}/nbproject/newfile1.o \
 	${OBJECTDIR}/nbproject/newfile2.o \
@@ -109,10 +110,15 @@ ${OBJECTDIR}/common/src/ledControl.o: common/src/ledControl.c
 	${RM} "$@.d"
 	$(COMPILE.c) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/common/src/ledControl.o common/src/ledControl.c
 
-${OBJECTDIR}/common/src/utilities.o: common/src/utilities.c
+${OBJECTDIR}/common/src/radar.o: common/src/radar.c
 	${MKDIR} -p ${OBJECTDIR}/common/src
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/common/src/utilities.o common/src/utilities.c
+	$(COMPILE.c) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/common/src/radar.o common/src/radar.c
+
+${OBJECTDIR}/common/src/rdr_utilities.o: common/src/rdr_utilities.c
+	${MKDIR} -p ${OBJECTDIR}/common/src
+	${RM} "$@.d"
+	$(COMPILE.c) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/common/src/rdr_utilities.o common/src/rdr_utilities.c
 
 ${OBJECTDIR}/default_header.o: default_header.c
 	${MKDIR} -p ${OBJECTDIR}

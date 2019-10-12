@@ -5,14 +5,14 @@
  */
 
 /* 
- * File:   utilities.h
+ * File:   rdr_utilities.h
  * Author: Matthew Bennett <matthew.bennett@bostintechnology.com>
  *
  * Created on 08 December 2018, 21:15
  */
 
-#ifndef UTILITIES_H
-#define UTILITIES_H
+#ifndef RDR_UTILITIES_H
+#define RDR_UTILITIES_H
 
 extern volatile int systemloop;
 
@@ -21,5 +21,5 @@ void waitTimer(float duration);				//wait for the given time (float)
 void sigHandler(int sig);
 void sigSetup(void);
 
-#endif /* UTILITIES_H */
+#endif /* RDR_UTILITIES_H */
 

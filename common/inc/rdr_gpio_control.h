@@ -11,10 +11,10 @@
  * Created on 22 August 2018, 15:54
  */
 
+#include <stdint.h>
 
-
-#ifndef GPIO_CONTROL_HEADER
-#define GPIO_CONTROL_HEADER
+#ifndef RDR_GPIO_CONTROL_HEADER
+#define RDR_GPIO_CONTROL_HEADER
 
 #define BLOCK_SIZE		(4*1024)
 
@@ -29,6 +29,17 @@
 #define GPIO_CLEAR_OFFSET				10			// GPCLR0 Pin Output Clear registers
 #define GPIO_LEVEL_OFFSET				13			// GPLEV0 Pin Level register
 
+typedef uint16_t      GPIORetCode;          /* Standard Return Code type from function. */
+
+
+#define     GPIO_ERR_NONE                           0 /*! No error occurred */
+#define     GPIO_ERR_INITIALISATION                 1 /*! Unable to initialise the GPIO ports */
+#define     GPIO_ERR_SET_OUTPUT                     2 /*! Unable to set a port value */
+#define     GPIO_ERR_READ_INPUT                     3 /*! Unable to read a value from a port */
+
+
+//GToDo: Need to implement GPIORetCode
+//ToDo: Reformat the information about each of the functions
 
 // functions
 /* Setup the GPIO system ready for use
@@ -71,11 +82,11 @@ int set_gpio_value (int pin_no, int value);	// Set the value (0 or 1) of a GPIO 
  * - Returns an int with the value either 1 or 0 or a negative number if an error
  * To read the GPIO pin, select the register (13 or 14) and return the required bit
  */
-int read_gpio_value(int pin_no);			// Read a GPIO pin value
+int read_gpio_value(int pin_no, int *value);			// Read a GPIO pin value
 
 
 
 
-#endif
+#endif /*RDR_GPIO_CONTROL_HEADER */
 
 

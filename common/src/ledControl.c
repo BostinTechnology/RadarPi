@@ -15,8 +15,8 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include "../inc/ledControl.h"
-#include "../inc/gpio_control.h"
-#include "../../common/inc/utilities.h"
+#include "../inc/rdr_gpio_control.h"
+#include "../../common/inc/rdr_utilities.h"
 
 /*!**************************************************************************
  * Overview:  Setup the LEDs for use and set them off
@@ -32,17 +32,23 @@
  */
 int ledSetup(void)
 {
-	gpio_init();
+    int      status = LED_ERR_NONE;
+    
+	status = gpio_init();
 	
-	set_gpio_for_output(LED_RUNNING);
-	set_gpio_for_output(LED_MONITORING);
-	set_gpio_for_output(LED_TRIGGERED);
+    status += set_gpio_for_output(LED_RUNNING);
+	status += set_gpio_for_output(LED_MONITORING);
+	status += set_gpio_for_output(LED_TRIGGERED);
 	
-	set_gpio_value(LED_RUNNING,LED_OFF);
-	set_gpio_value(LED_MONITORING,LED_OFF);
-	set_gpio_value(LED_TRIGGERED,LED_OFF);
-	
-	return 0;
+    if (status == GPIO_ERR_NONE) {
+    	status += set_gpio_value(LED_RUNNING,LED_OFF);
+        status += set_gpio_value(LED_MONITORING,LED_OFF);
+        status += set_gpio_value(LED_TRIGGERED,LED_OFF);
+	}
+    if (status != GPIO_ERR_NONE) {
+        status = LED_ERR_SETUP;
+    };
+	return status;
 }
 
 /*!**************************************************************************
@@ -59,8 +65,12 @@ int ledSetup(void)
 
 int controlRunningLED(int state)
 {
-	set_gpio_value(LED_RUNNING,state);
-	return 0;
+	int     status = LED_ERR_NONE;
+    status = set_gpio_value(LED_RUNNING,state);
+    if (status != GPIO_ERR_NONE) {
+        status = LED_ERR_SET_LED_RUNNING;
+    };
+	return status;
 }
 
 
@@ -78,8 +88,12 @@ int controlRunningLED(int state)
 
 int controlMonitoringLED(int state)
 {
-	set_gpio_value(LED_MONITORING,state);
-	return 0;
+    int     status = LED_ERR_NONE;
+    status = set_gpio_value(LED_MONITORING,state);
+    if (status != GPIO_ERR_NONE) {
+        status = LED_ERR_SET_LED_MONITORING;
+    };
+	return status;
 }
 
 /*!**************************************************************************
@@ -96,36 +110,46 @@ int controlMonitoringLED(int state)
 
 int controlTriggeredLED(int state)
 {
-	set_gpio_value(LED_TRIGGERED,state);
-	return 0;
+    int     status = LED_ERR_NONE;
+    status = set_gpio_value(LED_TRIGGERED,state);
+    if (status != GPIO_ERR_NONE) {
+        status = LED_ERR_SET_LED_TRIGGERED;
+    };
+	return status;
 }
 
 int cycleLEDs(void)
 {
+    int status = LED_ERR_NONE;
+	status = ledSetup();
+    if (status != LED_ERR_NONE) {
+        printf("CTRL - C to end loop\n");
 
-	ledSetup();
-	printf("CTRL - C to end loop\n");
+        do {
+            printf("Running LED\n");
+            status += controlTriggeredLED(LED_OFF);
+            status += controlRunningLED(LED_ON);
+            usleep(LED_TEST_SPEED);
 
-	do {
-		printf("Running LED\n");
-		controlTriggeredLED(LED_OFF);
-		controlRunningLED(LED_ON);
-		usleep(LED_TEST_SPEED);
+            printf("Monitoring LED\n");
+            status += controlRunningLED(LED_OFF);
+            status += controlMonitoringLED(LED_ON);
+            usleep(LED_TEST_SPEED);
 
-		printf("Monitoring LED\n");
-		controlRunningLED(LED_OFF);
-		controlMonitoringLED(LED_ON);
-		usleep(LED_TEST_SPEED);
+            printf("Triggered LED\n");
+            status += controlMonitoringLED(LED_OFF);
+            status += controlTriggeredLED(LED_ON);
+            usleep(LED_TEST_SPEED);
 
-		printf("Triggered LED\n");
-		controlMonitoringLED(LED_OFF);
-		controlTriggeredLED(LED_ON);
-		usleep(LED_TEST_SPEED);
-		
-		
-	} while (systemloop);
 
-	printf("LED test completed\n");
-	return 0;
+        } while ((systemloop) && (status != LED_ERR_NONE));
+    }
+    if (status == LED_ERR_NONE) {
+        printf("LED test completed\n");
+    }
+    else {
+        printf("LED test failed\n");
+    }
+	return status;
 };
 

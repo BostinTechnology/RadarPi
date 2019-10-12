@@ -10,8 +10,8 @@
   *
 ******************************************************************************/
 
-#ifndef SPI_COMMS
-#define SPI_COMMS
+#ifndef RDR_SPI_COMMS
+#define RDR_SPI_COMMS
 /*
  ******************************************************************************
  * INCLUDES
@@ -72,10 +72,10 @@ typedef uint16_t      CommsRetCode;          /* Standard Return Code type from f
  */
 
 enum CommsRetCodeENUM {
-    ERR_NONE                            =  0, /*! No error occurred */
-    ERR_INITIALISATION                  =  1, /*! Unable to initialise the SPI comms */
-    ERR_COMMS                           =  2, /*! Communications failure has occurred */
-    ERR_PARAMETERS                      =  3, /*! Incorrect parameters provided to the function */
+    SPI_ERR_NONE                            =  0, /*! No error occurred */
+    SPI_ERR_INITIALISATION                  =  1, /*! Unable to initialise the SPI comms */
+    SPI_ERR_COMMS                           =  2, /*! Communications failure has occurred */
+    SPI_ERR_PARAMETERS                      =  3, /*! Incorrect parameters provided to the function */
 
 };
 
@@ -153,4 +153,4 @@ CommsRetCode SPiTransmit(uint8_t *SPitxBuf, uint8_t SPibufLen);
 CommsRetCode SPiEnd(void);
 
 
-#endif /*SPI_COMMS */
+#endif /*RDR_SPI_COMMS */

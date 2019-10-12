@@ -23,6 +23,102 @@
 
 
 /*!**************************************************************************
+ * Overview: Menu function for user selection of the GPIO pin
+ *  
+ * Description: This method provides the user with a menu of choice to choose
+ *				which GPIO pin is to be measured
+ *
+ * Parameters:
+ * param[in]	none	: 
+ *
+ * return		gpio_pin    : GPIO pin
+ *				0			: zero if no pin selected
+ *****************************************************************************/
+
+int chooseGPIOPin(void) {
+
+	int		chosen_pin = 0;			// the GPIO pin selected, zero if not chosen
+	char	option;
+	char	manual_no[5];
+	
+	printf("Please choose which GPIO Pin to measure\n");
+	printf("1 - IF Out1\n");
+	printf("2 - IF Out to Pi\n");
+	printf("3 - Manual Entry\n");
+	printf("e - Return to main menu\n");
+	
+	option = getchar();
+	switch (option)	{
+		case '1':
+			chosen_pin = IF_OUT1;
+			break;
+		case '2':
+			chosen_pin = IF_OUT_TO_PI;
+			break;
+		case '3':
+			printf("Please enter the GPIO number:\n");
+			fgets(manual_no, 5, stdin);
+			chosen_pin = atoi(manual_no);
+			break;
+		case 'e':
+			chosen_pin=0;
+			break;
+	};
+	return chosen_pin;
+};
+
+
+
+//ToDo: Need to change this routine so that it calls other functions and not the low level ones.
+
+
+/*!**************************************************************************
+ * Overview: Function to read the frequency from the GPIO pins
+ *  
+ * Description: This method first calls the menu choice and then measures the
+ *				time and displays the frequency determined.
+ *				Note: The method waits for the whole cycle to be competed before 
+ *				returning the frequency.
+ *
+ * Parameters:
+ * param[in]	none	: 
+ *
+ * return		0       : nothing
+ *****************************************************************************/
+void readFullFrequency(void) {
+	
+	int			measuring_pin;			// The GPIO pin to measure
+	float		frequency = 0.00;		// The time between state changes
+	
+	systemloop=true;
+	
+	setupGpioFunctions();
+	
+	setSampleHoldForRun();
+	
+	// menu to choose GPIO pin to read
+	measuring_pin = chooseGPIOPin();
+	
+	// loop to show frequency
+	printf("CTRL - C to end loop (Full Freq)\n");
+	
+
+	do {
+        frequency = returnFullFrequency(&frequency, measuring_pin);
+					
+        printf("Frequency:%f\n", frequency);
+
+	} while (systemloop);
+	
+	printf("Frequency Measuring completed.\n");
+	
+	return;
+};
+
+
+
+
+/*!**************************************************************************
  * Overview:  Perform the full test routine
  *  
  * Description: This method runs through the full test cycle
@@ -48,6 +144,7 @@ void fullTestRoutine(void) {
 	int		qtygainvalues = 4;
 	//int		testgainvalues[qtygainvalues][2];
 	int		test_counter;
+    int     status;
 	
 	int testgainvalues[4][2] = { {0b0000, 1}, {0b0001, 10}, {0b0100, 40}, {0b1000, 157}	};
 	
@@ -60,7 +157,7 @@ void fullTestRoutine(void) {
 	starttime = clock();
 	do {
 		
-		freq = returnFullFrequency(IF_OUT_TO_PI);
+		status = returnFullFrequency(&freq, IF_OUT_TO_PI);
 		printf("Frequency Read:%f\n", freq);
 		if (((freq + (freq * FREQ_TOLERANCE)) < INPUT_FREQUENCY) &&
 				((freq - (freq * FREQ_TOLERANCE)) > INPUT_FREQUENCY)) {
@@ -68,7 +165,7 @@ void fullTestRoutine(void) {
 			printf("'\n\nFrequency read is within tolerance\n");
 		}
 		
-	} while ((test_passed == false) && (systemloop));
+	} while (((test_passed == false) && (systemloop)) || (status !=0));
 	printf("Frequency test result:%d\n", test_passed);
 	
 	// ADC test
@@ -82,7 +179,7 @@ void fullTestRoutine(void) {
 		// Run in a loop for a short time to measure the maximum voltage measured
 		starttime = clock();
 		do {
-			measured_v = readVoltage();
+			status = readVoltage(&measured_v);
 			if (measured_v > max_v) {
 				max_v = measured_v;
 				starttime = clock();

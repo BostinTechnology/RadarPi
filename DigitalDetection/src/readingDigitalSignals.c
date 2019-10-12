@@ -25,6 +25,8 @@
 #include <stdbool.h>
 #include <bcm2835.h>        // hardware definition library file
 #include <time.h>           // to enable time functions
+#include <stdlib.h>
+#include <unistd.h>
 
 #include "../../common/inc/radar.h"
 
@@ -150,6 +152,51 @@ void close_plot(FILE *p) {
     return;
 }
 
+/*!**************************************************************************
+ * Overview: Menu function for user selection of the GPIO pin
+ *  
+ * Description: This method provides the user with a menu of choice to choose
+ *				which GPIO pin is to be measured
+ *
+ * Parameters:
+ * param[in]	none	: 
+ *
+ * return		gpio_pin    : GPIO pin
+ *				0			: zero if no pin selected
+ *****************************************************************************/
+
+int chooseGPIOPin(void) {
+
+	int		chosen_pin = 0;			// the GPIO pin selected, zero if not chosen
+	char	option;
+	char	manual_no[5];
+	
+	printf("Please choose which GPIO Pin to measure\n");
+	printf("1 - IF Out1\n");
+	printf("2 - IF Out to Pi\n");
+	printf("3 - Manual Entry\n");
+	printf("e - Return to main menu\n");
+	
+	option = getchar();
+	switch (option)	{
+		case '1':
+			chosen_pin = IF_OUT1;
+			break;
+		case '2':
+			chosen_pin = IF_OUT_TO_PI;
+			break;
+		case '3':
+			printf("Please enter the GPIO number:\n");
+			fgets(manual_no, 5, stdin);
+			chosen_pin = atoi(manual_no);
+			break;
+		case 'e':
+			chosen_pin=0;
+			break;
+	};
+	return chosen_pin;
+};
+
 
 
 /*************************************************************************/
@@ -158,6 +205,7 @@ void readValuesContinously(void)
 	int		pin;
     printf("DEBUG: Into read Values Continously\n");
     float           frequency;
+    int     status;
 	
 	pin = chooseGPIOPin();
 	
@@ -168,9 +216,9 @@ void readValuesContinously(void)
     printf("Reading Values\n");
     do
     {
-        frequency = returnFullFrequency(pin);
+        status = returnFullFrequency(&frequency, pin);
         printf("Output of Frequency:%f\n", frequency);
-    } while (1);
+    } while (status != 0);
     
     return;
 }
@@ -185,12 +233,13 @@ void readValuesContinously(void)
 void createDataset(void) {
     time_t      testendtime, testcurrenttime;
     int         testduration = 10;
-    int			frequency=0;
+    float			frequency=0.0;
     int         max_readings=2000;
     //float       dataset[max_readings][2];           // dataset is 2000 readings by 2 values (frequency and time)
     int         i=0, pin;
     struct		readings dataset[max_readings];
     FILE        *gnu_plot = prepare_plot();         // create instance for plotting
+    int         status;
 
 	pin = chooseGPIOPin();
 
@@ -206,12 +255,14 @@ void createDataset(void) {
     do {
         
         testcurrenttime = clock();
-        frequency = returnFullFrequency(pin);
-        dataset[i].element = i;
-        dataset[i].frequency = frequency;
-        dataset[i].readtime = testcurrenttime;
-        //printf("Dataset:%d  Test Time:%ld  frequency:%d\n", dataset[i].element, dataset[i].readtime, dataset[i].frequency);
-        i++;
+        status = returnFullFrequency(&frequency, pin);
+        if (status == 0) {
+            dataset[i].element = i;
+            dataset[i].frequency = frequency;
+            dataset[i].readtime = testcurrenttime;
+            //printf("Dataset:%d  Test Time:%ld  frequency:%d\n", dataset[i].element, dataset[i].readtime, dataset[i].frequency);
+            i++;
+        }
     } while ((testcurrenttime < testendtime) & (i < max_readings));
 
     for (i=0; i < max_readings; i = i + 50) {

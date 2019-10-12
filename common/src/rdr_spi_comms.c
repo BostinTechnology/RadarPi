@@ -21,7 +21,7 @@
 //#include <cstdlib>
 #include <bcm2835.h>        // hardware definition library file
 #include <stdio.h>
-#include "../inc/spi_comms.h"
+#include "../inc/rdr_spi_comms.h"
 
 
 
@@ -29,12 +29,12 @@ CommsRetCode SPiInitialisation(int clock_divider, int spi_data_mode, int bit_ord
     if (!bcm2835_init())
     {
       printf("bcm2835_init failed. Are you running as root??\n");
-      return ERR_INITIALISATION;
+      return SPI_ERR_INITIALISATION;
     }
     if (!bcm2835_spi_begin())
     {
       printf("bcm2835_spi_begin failed. Are you running as root??\n");
-        return ERR_INITIALISATION;
+        return SPI_ERR_INITIALISATION;
     }
 
 	//Set SPI clock speed
@@ -49,7 +49,7 @@ CommsRetCode SPiInitialisation(int clock_divider, int spi_data_mode, int bit_ord
 	//Set with CS pin to use for next transfers
 	bcm2835_spi_chipSelect(cs_pin);
 	
-	return ERR_NONE;
+	return SPI_ERR_NONE;
 }
 
 CommsRetCode SPiTranscieve(uint8_t *SPitxBuf, uint8_t *SPirxBuf, uint8_t SPibufLen) {
@@ -59,7 +59,7 @@ CommsRetCode SPiTranscieve(uint8_t *SPitxBuf, uint8_t *SPirxBuf, uint8_t SPibufL
     // Check I have been given teh right data to work with
     if (SPibufLen < 1)
     {
-        return ERR_PARAMETERS;
+        return SPI_ERR_PARAMETERS;
     }
         
     char data_buffer[SPibufLen];      // Used for both transmit and receive buffers
@@ -82,7 +82,7 @@ CommsRetCode SPiTranscieve(uint8_t *SPitxBuf, uint8_t *SPirxBuf, uint8_t SPibufL
         SPirxBuf[i] = data_buffer[i];
         //printf("SPirxBuf Out %d : %x\n", i, SPirxBuf[i]);             // FOr debug purposes
     }
-    return ERR_NONE;
+    return SPI_ERR_NONE;
 };
 
 CommsRetCode SPiTransmit(uint8_t *SPitxBuf, uint8_t SPibufLen) {
@@ -91,7 +91,7 @@ CommsRetCode SPiTransmit(uint8_t *SPitxBuf, uint8_t SPibufLen) {
     // Check I have been given the right data to work with
     if (SPibufLen < 1)
     {
-        return ERR_PARAMETERS;
+        return SPI_ERR_PARAMETERS;
     }
         
     char data_buffer[SPibufLen];      // Used for transmit buffer
@@ -110,12 +110,12 @@ CommsRetCode SPiTransmit(uint8_t *SPitxBuf, uint8_t SPibufLen) {
 	
 	//printf("DEBUG: Comms Complete\n");
 
-    return ERR_NONE;
+    return SPI_ERR_NONE;
 }
 
 CommsRetCode SPiEnd(void) {
 	
 	bcm2835_spi_end();
 	
-	return ERR_NONE;
+	return SPI_ERR_NONE;
 }

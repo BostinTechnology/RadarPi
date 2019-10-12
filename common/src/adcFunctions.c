@@ -12,23 +12,31 @@
 #include "../inc/adcFunctions.h"
 
 
-CommsRetCode adcSPiInitialisation(void) {
-	SPiInitialisation(	BCM2835_SPI_CLOCK_DIVIDER_4096, 
+int adcSPiInitialisation(void) {
+    
+    CommsRetCode    status;
+    
+	status = SPiInitialisation(	BCM2835_SPI_CLOCK_DIVIDER_4096, 
 						BCM2835_SPI_MODE3, 
 						BCM2835_SPI_BIT_ORDER_MSBFIRST,
 						BCM2835_SPI_CS0);
 	
-	return ERR_NONE;
+    //ToDo: Update response based on status
+    if (status != SPI_ERR_NONE) {
+        return ADC_SETUP_ERROR;
+    }
+	return ADC_EXIT_SUCCESS;
 };
 
-float readVoltage(void) {
+int readVoltage(float *reading) {
     uint8_t         msgLen = 3;               // The length of the message 
     uint8_t         txBuf[msgLen];            // The outgoing message
     uint8_t         rxBuf[msgLen];            // The reply from the A-D
-    float           reading=0.00;             // The output value
     float           supply_voltage = 3.3;     // SUpply voltage for the A-D
     uint16_t        fsd_range=4096;           // Maximum value from A-D (12 bits)
 	CommsRetCode	ret;
+    
+    //ToDo: rxBuf needs to be set to zero's first
     
     //printf("DEBUG: Into read Voltage\n");
 
@@ -39,8 +47,9 @@ float readVoltage(void) {
 
     ret = SPiTranscieve( txBuf, rxBuf, msgLen);
 
-	if (ret != ERR_NONE){
-		return 0.0;
+	if (ret != SPI_ERR_NONE){
+        *reading = 0.0;
+		return ADC_NO_RESPONSE;
 	}
     /* For debug purposes
 	uint8_t i;
@@ -58,28 +67,28 @@ float readVoltage(void) {
      * the third byte is the LSByte
      * */
     
-    reading = ((rxBuf[1] & 0x0f) << 8)  + rxBuf[2];
+    *reading = ((rxBuf[1] & 0x0f) << 8)  + rxBuf[2];
     //printf("DEBUG: Reading after merge:%fs\n", reading);
 
     // Formula for calculation      Digital Output Code = 4096 * Vin
     //                                                    ----------
     //                                                       Vdd
-    reading = reading * (supply_voltage / fsd_range);
+    *reading = *reading * (supply_voltage / fsd_range);
 
     //printf("DEBUG: Voltage being returned:%f\n", reading);
 
-    return reading;
+    return ADC_EXIT_SUCCESS;
 };
 
-void adcSPiEnd(void) {
+int adcSPiEnd(void) {
 	CommsRetCode	ret;
 	
 	ret = SPiEnd();
 	
-	if (ret != ERR_NONE){
+	if (ret != SPI_ERR_NONE){
 		//printf("DEBUG: Error releasing SPi Port");
-		return;
+		return ADC_NO_RESPONSE;
 	}
 	
-	return;
+	return ADC_EXIT_SUCCESS;
 };

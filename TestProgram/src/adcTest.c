@@ -9,7 +9,7 @@
 #include <stdbool.h>
 #include <unistd.h>
 #include "../inc/adcTest.h"
-#include "../../common/inc/utilities.h"
+#include "../../common/inc/rdr_utilities.h"
 #include "../../common/inc/adcFunctions.h"
 
 
@@ -17,7 +17,8 @@
 int cycleADCReadings(void)
 {
 	float adc_value;
-
+    int     status;
+    
 	systemloop=true;				//reset the loop to true to start
 	
 	adcSPiInitialisation();
@@ -27,9 +28,14 @@ int cycleADCReadings(void)
 	printf("CTRL - C to end loop\n");
 
 	do {
-		adc_value = readVoltage();
-		printf("ADC Readings:%f\n", adc_value);
-		usleep(ADC_READING_TEST_SPEED);
+		status = readVoltage(&adc_value);
+        if (status == EXIT_SUCCESS) {
+    		printf("ADC Readings:%f\n", adc_value);
+        	usleep(ADC_READING_TEST_SPEED);
+        }
+        else {
+            systemloop = false;
+        }
 		
 	} while (systemloop);
 

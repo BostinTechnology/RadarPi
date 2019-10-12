@@ -57,6 +57,7 @@ void digitalDetectionFiltered(void) {
 	
 	float	freq;
 	time_t	trigger_time, trigger_timeout;
+    int     status;
 	
 	trigger_timeout = (TRIGGER_TIMEOUT * CLOCKS_PER_SEC);
 	systemloop = true;
@@ -66,7 +67,7 @@ void digitalDetectionFiltered(void) {
 	// In a loop, using systemloop to exit
 	do {
 		// Read the whole frequency, using the deglitch s/w it and then report it
-		freq = returnFullFrequency(IF_OUT_TO_PI);
+		status = returnFullFrequency(&freq, IF_OUT_TO_PI);
 
 		// If over a threshold, turn the LED on, recording the on time
 		if (freq > FREQUENCY_TRIGGER) {
@@ -96,12 +97,16 @@ void digitalDetectionFiltered(void) {
 			controlRunningLED(LED_ON);
 			trigger_time = 0;
 		};
+        if (status !=0) {
+            systemloop = false;
+        }
 	} while (systemloop);
 	//
 };
 
 void digitalDetectionRaw(void) {
 	float	freq;
+    int     status;
 
 	systemloop = true;
 	
@@ -110,7 +115,7 @@ void digitalDetectionRaw(void) {
 	// In a loop, using systemloop to exit
 	do {
 		// Read the whole frequency, using the deglitch s/w it and then report it
-		freq = returnFullFrequency(IF_OUT_TO_PI);
+		status = returnFullFrequency(&freq, IF_OUT_TO_PI);
 
 		// If over a threshold, turn the LED on, recording the on time
 		if (freq > FREQUENCY_TRIGGER) {
@@ -125,6 +130,9 @@ void digitalDetectionRaw(void) {
 			controlTriggeredLED(LED_OFF);
 			controlRunningLED(LED_ON);
 		};
+        if (status != EXIT_SUCCESS) {
+            systemloop = false;
+        }
 	} while (systemloop);
 	//	
 };
@@ -133,6 +141,7 @@ void adcMeasurement(void) {
 		
 	float	volts;
 	time_t	trigger_time, trigger_timeout;
+    int     status;
 	
 	trigger_timeout = (TRIGGER_TIMEOUT * CLOCKS_PER_SEC);
 	systemloop = true;
@@ -144,8 +153,12 @@ void adcMeasurement(void) {
 	// In a loop, using systemloop to exit
 	do {
 		// Read the voltage and then report it
-		volts = readVoltage();
+		status = readVoltage(&volts);
 
+        if (status != EXIT_SUCCESS) {
+            systemloop = false;
+        }
+        
 		// If over a threshold, turn the LED on, recording the on time
 		if (volts > VOLTAGE_TRIGGER) {
 			// frequency threshold has been exceeded, set trigger time.

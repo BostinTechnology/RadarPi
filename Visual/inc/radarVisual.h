@@ -15,8 +15,10 @@
 #define RFIDVISUAL_H
 
 #include <stdbool.h>
-#include "../../common/inc/radar.h"
+#include "../inc/linkedList.h"
 #include <gtk-3.0/gtk/gtk.h>
+#include "../../common/inc/radar.h"
+
 
 struct app_widgets {
     // All the widgets on the Glade form go into here

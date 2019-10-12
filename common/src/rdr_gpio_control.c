@@ -21,7 +21,7 @@
 #include <unistd.h>						// required by close
 #include <errno.h>						// So I can get error numbers out
 //#include <unistd.h>
-#include "../inc/gpio_control.h"
+#include "../inc/rdr_gpio_control.h"
 
 #include <stdint.h>
 // Global Variables
@@ -37,7 +37,7 @@ int gpio_init() {
   gpio_mem = open("/dev/gpiomem", O_RDWR | O_SYNC);
   if (gpio_mem < 0) {
       printf("Failed to open GPIO Memory, try checking permissions.\n");
-      exit(-1);
+      exit (GPIO_ERR_INITIALISATION);
     };
   
   // mmap the gpio, will return a pointer to the mapped error, returns MAP_FAILED on error
@@ -56,10 +56,10 @@ int gpio_init() {
   if (gpio_mmap == MAP_FAILED) {
 	  // failed to load the map, display the error information
 	  printf("Failed to load the mmap with error:%p - reason:%d\n", gpio_mmap, errno);
-	  exit(-1);
+	  exit (GPIO_ERR_INITIALISATION);
   };
   
-  return 0;
+  return GPIO_ERR_NONE;
 }
 
 
@@ -72,7 +72,7 @@ int set_gpio_for_input(int pin_no){
 	// Check if the requested pin is within the available range
 	if ((pin_no < LOWEST_GPIO_PIN) | (pin_no > HIGHEST_GPIO_PIN)) {
 		printf("Requested GPIO Pin (%d) is outside allowed range of 0 - 53\n", pin_no);
-		return -1;
+		return GPIO_ERR_INITIALISATION;
 	};
 	
 	// set the block number to a tenth of the pin number, ignoring remainder as block_addr is an int
@@ -100,7 +100,7 @@ int set_gpio_for_input(int pin_no){
 	// Set the relevant map address to itself bitwise AND'd (&) with setting
 	*(gpio_mmap + block_addr) &= setting;
 			
-	return 0;
+	return GPIO_ERR_NONE;
 
 }
 
@@ -114,7 +114,7 @@ int set_gpio_for_output(int pin_no) {
 	// Check if the requested pin is within the available range
 	if ((pin_no < LOWEST_GPIO_PIN) | (pin_no > HIGHEST_GPIO_PIN)) {
 		printf("Requested GPIO Pin (%d) is outside allowed range of 0 - 53\n", pin_no);
-		return -1;
+		return GPIO_ERR_INITIALISATION;
 	};
 	
 	// set the block number to a tenth of the pin number, ignoring remainder as block_addr is an int
@@ -139,7 +139,7 @@ int set_gpio_for_output(int pin_no) {
 	// Set the relevant map address to itself bitwise OR'd (|) with setting
 	*(gpio_mmap + block_addr) |= setting;
 			
-	return 0;
+	return GPIO_ERR_NONE;
 }
 
 
@@ -152,11 +152,11 @@ int set_gpio_value (int pin_no, int value) {
 	// Check the input parameters are within the available range
 	if ((pin_no < LOWEST_GPIO_PIN) | (pin_no > HIGHEST_GPIO_PIN)) {
 		printf("Requested GPIO Pin (%d) is outside allowed range of 0 - 53\n", pin_no);
-		return -1;
+		return GPIO_ERR_SET_OUTPUT;
 	};
 	if ((value < 0) | (value > 1)) {
 		printf("Requested value (%i) is outside allowed range of 0 - 1\n", value);
-		return -1;
+		return GPIO_ERR_SET_OUTPUT;
 	};
 	
 	// Set the Register address based on the value requested
@@ -178,22 +178,21 @@ int set_gpio_value (int pin_no, int value) {
 	
 	*(gpio_mmap + block_addr) = setting;
 	
-	return 0;
+	return GPIO_ERR_NONE;
 	
 }
 
 
-int read_gpio_value(int pin_no) {
+int read_gpio_value(int pin_no, int *value) {
 	
 	int block_addr;								// The block address to use
 	long mask = 0x0001;							// The starting value of the mask
 	long reading;								// The returned value form the register
-	int value;									// The converted int to return
 	
 	// Check the input parameters are within the available range
 	if ((pin_no < LOWEST_GPIO_PIN) | (pin_no > HIGHEST_GPIO_PIN)) {
 		printf("Requested GPIO Pin (%d) is outside allowed range of 0 - 53\n", pin_no);
-		return -1;
+		return GPIO_ERR_READ_INPUT;
 	};
 	
 	// Work out the block number;
@@ -213,7 +212,7 @@ int read_gpio_value(int pin_no) {
 	reading = *(gpio_mmap + block_addr) & mask;
 	
 	// Shift the bit back, converting to an int at the same time by throwing away the upper part.
-	value = (int)(reading >> (pin_no%32));
+	*value = (int)(reading >> (pin_no%32));
 	
-	return value;
+	return GPIO_ERR_NONE;
 }

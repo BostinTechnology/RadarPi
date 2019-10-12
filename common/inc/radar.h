@@ -27,9 +27,19 @@
 #include    "gainFunctions.h"
 #include    "gpioFunctions.h"
 #include    "ledControl.h"
-#include    "utilities.h"
-#include    "linkedList.h"
+#include    "rdr_utilities.h"
 
+
+/*! *****************************************************************************
+ * Overview:  Return the software version
+ *  
+ * This method returns the current software version
+ *
+ * param[out]    version : string containing the full version size 
+ *
+ * return EXIT_SUCCESS         : success
+ ******************************************************************************/
+int versionInfo(char *version);
 
 #endif /* RADAR_H */
 

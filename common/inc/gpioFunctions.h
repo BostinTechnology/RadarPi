@@ -16,6 +16,8 @@
 
 // The various GPIO Pins that can be read
 
+//ToDo: Add some details about these PINS in here
+
 #define		IF_OUT1				27	// The GPIO pin used for the frequency input, was 4 originally and also tried 11
 #define		IF_OUT_TO_PI		22
 #define		SAMPLE_HOLD			17	// 
@@ -34,11 +36,10 @@
  *				Sets SAMPLE_HOLD for output
  *
  * Parameters:
- * param[in]	pin		: gpio pin to monitor
- *		[in]	timeout	: float of the maximum time to wait
+ * param[in]	none
  *
- * return		0       : no time
- *				float	: duration
+ * return		0       : successful
+ *			
  *****************************************************************************/
 int setupGpioFunctions(void);
 
@@ -51,9 +52,9 @@ int setupGpioFunctions(void);
  * Parameters:
  * param[in]	??		: none
  *
- * return		??      : nothing
+ * return		0      : successful
  *****************************************************************************/
-void setSampleHoldForRun(void);
+int setSampleHoldForRun(void);
 
 /*!**************************************************************************
  * Overview:  Set the Sample & Hold pin to HOLD state
@@ -64,39 +65,10 @@ void setSampleHoldForRun(void);
  * Parameters:
  * param[in]	??		: none
  *
- * return		??      : nothing
+ * return		0      : successful
  *****************************************************************************/
-void setSampleHoldForHold(void);
+int setSampleHoldForHold(void);
 
-/*!**************************************************************************
- * Overview: Function to read the frequency from the GPIO pins
- *  
- * Description: This method first calls the menu choice and then measures the
- *				time and displays the frequency determined.
- *				Note: The reading is only half the time period, which is then
- *				multiplied to give a frequency reading
- *
- * Parameters:
- * param[in]	none	: 
- *
- * return		0       : nothing
- *****************************************************************************/
-void readHalfFrequency(void);
-
-/*!**************************************************************************
- * Overview: Function to read the frequency from the GPIO pins
- *  
- * Description: This method first calls the menu choice and then measures the
- *				time and displays the frequency determined.
- *				Note: The method waits for the whole cycle to be competed before 
- *				returning the frequency.
- *
- * Parameters:
- * param[in]	none	: 
- *
- * return		0       : nothing
- *****************************************************************************/
-void readFullFrequency(void);
 
 /*!**************************************************************************
  * Overview: Function to return the frequency from the GPIO pins
@@ -105,11 +77,12 @@ void readFullFrequency(void);
  *				similar to readFullFrequency above.
  *
  * Parameters:
+ * param[out]   frequency       : A float of the frequency measured
  * param[in]	measuring_pin	: the pin to be used.
  *
- * return		float       : frequency
+ * return		status       : 0 = success
  *****************************************************************************/
-float returnRawFrequency(int measuring_pin);
+int returnRawFrequency(float *frequency, int measuring_pin);
 
 /*!**************************************************************************
  * Overview: Function to return the frequency from the GPIO pins
@@ -120,25 +93,13 @@ float returnRawFrequency(int measuring_pin);
  *				first
  *
  * Parameters:
+ * param[out]   frequency       : A float of the frequency measured
  * param[in]	measuring_pin	: the pin to be used.
  *
- * return		float       : frequency
+ * return		status       : 0 = success
  *****************************************************************************/
-float returnFullFrequency(int measuring_pin);
+int returnFullFrequency(float *frequency, int measuring_pin);
 
-/*!**************************************************************************
- * Overview: Menu function for user selection of the GPIO pin
- *  
- * Description: This method provides the user with a menu of choice to choose
- *				which GPIO pin is to be measured
- *
- * Parameters:
- * param[in]	none	: 
- *
- * return		gpio_pin    : GPIO pin
- *				0			: zero if no pin selected
- *****************************************************************************/
-int chooseGPIOPin (void);
 
 #endif /* GPIOFUNCTIONS_H */
 

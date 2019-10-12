@@ -154,15 +154,16 @@ void close_plot(FILE *p) {
 /*************************************************************************/
 void readValuesContinously(void)
 {
-    printf("DEBUG: Into read Values Continously\n");
+    printf("DEBUG: Into read Values Continuously\n");
     float           voltage;
+    int             status;
 
     printf("Reading Values\n");
     do
     {
-        voltage = readVoltage();
+        status = readVoltage(&voltage);
         printf("Output from A-D:%f\n", voltage);
-    } while (1);
+    } while (!status);
     
     return;
 }
@@ -180,7 +181,7 @@ void createDataset(void) {
     float       voltage=0.00;
     int         max_readings=2000;
     //float       dataset[max_readings][2];           // dataset is 2000 readings by 2 values (voltage and time)
-    int         i=0;
+    int         i=0, status;
     struct readings dataset[max_readings];
     FILE        *gnu_plot = prepare_plot();         // create instance for plotting
 
@@ -192,7 +193,7 @@ void createDataset(void) {
     do {
         
         testcurrenttime = clock();
-        voltage = readVoltage();
+        status = readVoltage(&voltage);
         dataset[i].element = i;
         dataset[i].voltage = voltage;
         dataset[i].readtime = testcurrenttime;

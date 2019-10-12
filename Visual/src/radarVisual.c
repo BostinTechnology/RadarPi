@@ -16,13 +16,13 @@
 #include <string.h>
 #include <stdbool.h>
 
-#include <gtk-3.0/gtk/gtk.h>
 #include <math.h>
 #include <cairo.h>
 #include <unistd.h>
 #include <pthread.h>
 
 #include "../inc/radarVisual.h"
+
 
 
 /*******************************************************************************
@@ -38,7 +38,7 @@
  *  DONE    16  Link the Mode Info at the bottom to the mode selected
  *  DONE    17  Link the Gain Setting at the bottom of the screen to the gain selected
  *  19  Integrate program with reading of values as required by radiobutton setting
- *          a Firstly get random value to add in
+ *  DONE    a Firstly get random value to add in
  *          a2 Change to using time and value
  *              This may need more linkedList functions / values
  *                  max data value
@@ -68,7 +68,23 @@
  *          c In the ADC reading, it needs to return the port so it can be used when reading new values
  *  17  Link gain setting to actually setting the gain value
  *  6   Rewrite common to be a better library
- *          a Not sure what this looks like - emailed CM
+ *          a Return success status
+ * DONE         gainFunctions
+ * DONE         rdr_spi_comms
+ * DONE         gpioFunctions
+ * DONE         rdr_gpio_control
+ * DONE         adcFunctions
+ *              filter
+ * DONE         ledControl
+ * N/A          rdr_utilities
+ *          b Passing parameters into methods
+ *          c Receiving data from methods
+ * DONE         e filenames - rdr_ for internal functions
+ * DONE         f versioning
+ *          g ports for communications
+ *          h header file commenting format
+ *          i Split gainFunctions into user functions and internal functions
+ *          j gpioFunctions needs to return values by parameter, not function name
  *  7   Integrate LEDs into common library
  *  9   Code tidy up
  *          a Update comments and check they are correct
@@ -85,6 +101,22 @@
  *  12  Check which VCC the gain chip is operating at and set the GAIN_VCC accordingly
  *  13  Write instructions on how to compile into application
  *  14  Write a licence header for all files and update them accordingly - emailed DB
+ * File:   <filename>
+ * Author: <insert name here>
+ *
+ * Created on <insert date>
+ * 
+ *Example code for <insert description>
+ *
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation as version 2 of the License.
+ *
+ * For more information refer to www.BostinTechnology.com
+ * 
+ 
+
  *  15  Write some instructions on how to use the application
  *  16  Add tick marks to the scale
  *  18  When starting up, set the value of the mode to unknown and not the first radiobutton

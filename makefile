@@ -30,11 +30,12 @@ OBJS_common = \
 	$(TARGETDIR_ALL)/adcFunctions.o \
 	$(TARGETDIR_ALL)/gainFunctions.o \
 	$(TARGETDIR_ALL)/gpioFunctions.o \
-	$(TARGETDIR_ALL)/spi_comms.o \
-	$(TARGETDIR_ALL)/gpio_control.o \
+	$(TARGETDIR_ALL)/rdr_spi_comms.o \
+	$(TARGETDIR_ALL)/rdr_gpio_control.o \
 	$(TARGETDIR_ALL)/ledControl.o \
-	$(TARGETDIR_ALL)/utilities.o \
-	$(TARGETDIR_ALL)/linkedList.o \
+	$(TARGETDIR_ALL)/rdr_utilities.o \
+	$(TARGETDIR_ALL)/radar.o \
+
 
 # ----------------------------------------------------------------------------------------------------------------
 ##      Target: testProgram
@@ -93,7 +94,9 @@ LDLIBS_sampleSoftware = $(USERLIBS_sampleSoftware)
 # ----------------------------------------------------------------------------------------------------------------
 OBJS_radarVisual =  \
 	$(OBJS_common) \
+	$(TARGETDIR_ALL)/linkedList.o \
 	$(TARGETDIR_ALL)/radarVisual.o
+
 USERLIBS_radarVisual = -lbcm2835 -lm
 GTKLIB =`pkg-config --cflags --libs gtk+-3.0`
 DEPLIBS_radarVisual =  
@@ -131,20 +134,20 @@ $(TARGETDIR_ALL)/gainFunctions.o: $(TARGETDIR_ALL) common/src/gainFunctions.c
 $(TARGETDIR_ALL)/gpioFunctions.o: $(TARGETDIR_ALL) common/src/gpioFunctions.c
 	$(COMPILE.c) $(CFLAGS)  -o $@ common/src/gpioFunctions.c
 
-$(TARGETDIR_ALL)/gpio_control.o: $(TARGETDIR_ALL) common/src/gpio_control.c
-	$(COMPILE.c) $(CFLAGS)  -o $@ common/src/gpio_control.c
+$(TARGETDIR_ALL)/rdr_gpio_control.o: $(TARGETDIR_ALL) common/src/rdr_gpio_control.c
+	$(COMPILE.c) $(CFLAGS)  -o $@ common/src/rdr_gpio_control.c
 
 $(TARGETDIR_ALL)/ledControl.o: $(TARGETDIR_ALL) common/src/ledControl.c
 	$(COMPILE.c) $(CFLAGS)  -o $@ common/src/ledControl.c
 
-$(TARGETDIR_ALL)/spi_comms.o: $(TARGETDIR_ALL) common/src/spi_comms.c
-	$(COMPILE.c) $(CFLAGS)  -o $@ common/src/spi_comms.c
+$(TARGETDIR_ALL)/rdr_spi_comms.o: $(TARGETDIR_ALL) common/src/rdr_spi_comms.c
+	$(COMPILE.c) $(CFLAGS)  -o $@ common/src/rdr_spi_comms.c
 
-$(TARGETDIR_ALL)/utilities.o: $(TARGETDIR_ALL) common/src/utilities.c
-	$(COMPILE.c) $(CFLAGS)  -o $@ common/src/utilities.c
+$(TARGETDIR_ALL)/rdr_utilities.o: $(TARGETDIR_ALL) common/src/rdr_utilities.c
+	$(COMPILE.c) $(CFLAGS)  -o $@ common/src/rdr_utilities.c
 
-$(TARGETDIR_ALL)/linkedList.o: $(TARGETDIR_ALL) common/src/linkedList.c
-	$(COMPILE.c) $(CFLAGS)  -o $@ common/src/linkedList.c
+$(TARGETDIR_ALL)/radar.o: $(TARGETDIR_ALL) common/src/radar.c
+	$(COMPILE.c) $(CFLAGS)  -o $@ common/src/radar.c
 
 # ----- testProgram ----------------------------------------------------------------------------------------------
 $(TARGETDIR_ALL)/adcTest.o: $(TARGETDIR_ALL) TestProgram/src/adcTest.c
@@ -173,6 +176,9 @@ $(TARGETDIR_ALL)/mainSampleSoftware.o: $(TARGETDIR_ALL) SampleSoftware/src/mainS
 	$(COMPILE.c) $(CFLAGS)  -o $@ SampleSoftware/src/mainSampleSoftware.c
 
 # ----- sampleSoftware -----------------------------------------------------------------------------------------
+$(TARGETDIR_ALL)/linkedList.o: $(TARGETDIR_ALL) Visual/src/linkedList.c
+	$(COMPILE.c) $(CFLAGS)  -o $@ Visual/src/linkedList.c
+
 $(TARGETDIR_ALL)/radarVisual.o: $(TARGETDIR_ALL) Visual/src/radarVisual.c
 	$(COMPILE.c) $(GTKLIB) $(CFLAGS)  -o $@ Visual/src/radarVisual.c
 	
