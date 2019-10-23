@@ -48,6 +48,7 @@
                    kind="IMPORTANT_FILES_FOLDER">
       <itemPath>Makefile</itemPath>
     </logicalFolder>
+    <itemPath>Visual/src/errorText</itemPath>
     <itemPath>nbproject/licenseheader.txt</itemPath>
     <itemPath>makefile</itemPath>
     <itemPath>build/readme.txt</itemPath>
@@ -123,6 +124,12 @@
                             perm="755"
                             owner="root"
                             group="bin"/>
+          <packFileListElem type="File"
+                            to="${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}"
+                            from="${OUTPUT_PATH}"
+                            perm="755"
+                            owner="root"
+                            group="bin"/>
         </packFileList>
       </packaging>
       <item path="SampleSoftware/inc/mainSampleSoftware.h"
@@ -142,6 +149,8 @@
       <item path="TestProgram/src/adcTest.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="TestProgram/src/mainTestProgram.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="Visual/src/errorText" ex="false" tool="3" flavor2="0">
       </item>
       <item path="build/readme.txt" ex="false" tool="3" flavor2="0">
       </item>
@@ -223,6 +232,8 @@
       <item path="TestProgram/src/adcTest.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="TestProgram/src/mainTestProgram.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="Visual/src/errorText" ex="false" tool="3" flavor2="0">
       </item>
       <item path="build/readme.txt" ex="false" tool="3" flavor2="0">
       </item>

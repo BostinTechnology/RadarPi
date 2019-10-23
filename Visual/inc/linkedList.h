@@ -12,7 +12,7 @@
 
 typedef struct _node 
 {
-	int 	reading;
+	float 	reading;
 	struct	_node *prevnode;
 	struct	_node *nextnode;
 } Node;
@@ -22,13 +22,16 @@ typedef struct _linkedlist
 	Node *listHead;
 	Node *listTail;
 	Node *currentNode;
+    float   max_reading;
+    float   min_reading;
+    int     qty_readings;
 } Linkedlist;
 
 
 
 void	listInitialise	(Linkedlist *list);
-void	listAddHead		(Linkedlist *list, int reading);
-void	listAddTail		(Linkedlist *list, int reading);
-void	listInsertNode	(Linkedlist *list, int reading, Node *currentnode);	
-void	listDeleteNode	(Linkedlist *list, int reading, Node *currentnode);
+void	listAddHead		(Linkedlist *list, float reading);
+void	listAddTail		(Linkedlist *list, float reading);
+void	listInsertNode	(Linkedlist *list, float reading, Node *currentnode);	
+void	listDeleteNode	(Linkedlist *list, float reading, Node *currentnode);
 void	listPrintNode	(Linkedlist *list);

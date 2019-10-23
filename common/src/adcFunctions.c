@@ -75,7 +75,7 @@ int readVoltage(float *reading) {
     //                                                       Vdd
     *reading = *reading * (supply_voltage / fsd_range);
 
-    //printf("DEBUG: Voltage being returned:%f\n", reading);
+    //printf("DEBUG: Voltage being returned:%f\n", *reading);
 
     return ADC_EXIT_SUCCESS;
 };

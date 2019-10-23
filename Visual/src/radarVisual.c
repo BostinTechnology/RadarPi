@@ -29,28 +29,36 @@
  *
  *  To Do List
  *  ==========
+ * 
+ * FIXED    BUG: There is something wrong with the graphing / linked list as the values don't match. When I have multiple data values
+ *      in the linked list, the quantity graphed DON'T include the ones that were captured before switching to graph mode
+ *      Could it be to do with the LinkedList within the structure NOT being a pointer.
+ *      It would appear that the first value captured in the data timer is then not printed on the graph. I would guess it
+ *      could be something to do with how I initialise the nodes within linkedlist.
  *
  *  DONE    2   Create a single H file for all the common stuff
  *              a What is the right way of doing this, is there a structure or a method for this?
- *  DONE    8   Make Gain control structure contain required allowable values and use these in scale
- *  DONE    3   On GUI remove the bits at the bottom as they are not needed
- *  DONE    1   Get gain setting to only allow values available from the device
- *  DONE    16  Link the Mode Info at the bottom to the mode selected
- *  DONE    17  Link the Gain Setting at the bottom of the screen to the gain selected
+ *              b What should I do about the various return status'
+ *                  Should these be different value ranges
  *  19  Integrate program with reading of values as required by radiobutton setting
  *  DONE    a Firstly get random value to add in
  *          a2 Change to using time and value
- *              This may need more linkedList functions / values
- *                  max data value
- *                  min data value
- *                  quantity of readings
+ *      Not sure this is needed as values are captured in threads and therefore at a fixed time.
+ *  DONE        This may need more linkedList functions / values
+ *  DONE            max data value
+ *  DONE            min data value
+ *  DONE            quantity of readings
  *              It will also need 2 data values, not 1
+ *  DONE    a3 Change to use a scale values
+ *  DONE        Need to move translate_example2 into radarVisual to get it drawing lines!
+ *          a4 Change to have fixed max (3V3) and min values (0V)
  *          b Change to default source
  *          c Change to required source
  *  CM 22  Updated linked lists to add a delete function
- *  CM 23  Update linked lists to include a counter and a maximum number of values
- *          a update structure to have the 2 variables
- *          b when exceeded, remove the tail.
+ * DONE CM 23  Update linked lists to include a counter and a maximum number of values
+ * DONE     Counter added
+ * DONE     a update structure to have the 2 variables, max reading, min reading
+ *          b max number of values to store & when exceeded, remove the tail.
  *  10  Implement the smoothing algorithm in the common code
  *          see filter.c and filter.h
  *          The code is very short, but it takes quite a lot of processing power to run!
@@ -128,6 +136,11 @@
  * 
  * 
  *      
+ *  DONE    8   Make Gain control structure contain required allowable values and use these in scale
+ *  DONE    3   On GUI remove the bits at the bottom as they are not needed
+ *  DONE    1   Get gain setting to only allow values available from the device
+ *  DONE    16  Link the Mode Info at the bottom to the mode selected
+ *  DONE    17  Link the Gain Setting at the bottom of the screen to the gain selected
 
  */
 
@@ -293,10 +306,15 @@ void on_draw (GtkWidget *drawing, cairo_t *cr, struct app_widgets *widget) {
 	//Info: cr is passed as an extra parameter which is set in the glade file as user data.
     
     int count = 0;
+    double x_scale, y_scale;
 
     GdkRectangle da;            /* GtkDrawingArea size */
     gdouble dx = 5.0, dy = 5.0; /* Pixels between each point */
     gdouble i, clip_x1 = 0.0, clip_y1 = 0.0, clip_x2 = 0.0, clip_y2 = 0.0;
+    gdouble left_margin = 5.0, bottom_margin = 5.0;         /* gap between edge and lines, percentage */
+
+    Node *current;          // USed by the linked lists.
+
 	
 	GdkWindow *window = gtk_widget_get_window(drawing);	// I Think this needs to be the drawing canvas
 	
@@ -319,17 +337,43 @@ void on_draw (GtkWidget *drawing, cairo_t *cr, struct app_widgets *widget) {
     cairo_paint (cr);
 	printf("drawn on black background\n");
 
-    /* Change the transformation matrix */
-    // Move zero points:cairo_translate (cr, da.width / 2, da.height / 2);
-    // translate moves the 0,0 by the values given
-    cairo_translate (cr, -da.width, -da.height);
+    // Set how the devie to usder layer translate - keeping it the same.
+    cairo_translate (cr, 0, 0);
+    
     // Move zero points:cairo_scale (cr, ZOOM_X, -ZOOM_Y);
-	cairo_scale (cr, 95, 95);
+	//cairo_scale (cr, 95, 95);
+	cairo_scale (cr, (da.width/100), (da.height/100));
 	printf("changed the transformation matrix\n");
 	
     /* Determine the data points to calculate (ie. those in the clipping zone */
     cairo_device_to_user_distance (cr, &dx, &dy);
     cairo_clip_extents (cr, &clip_x1, &clip_y1, &clip_x2, &clip_y2);
+    
+	
+    /* Draws x and y axis */
+    cairo_set_source_rgb (cr, 0.0, 1.0, 0.0);
+    // horizontal axis
+    cairo_move_to (cr, clip_x1+left_margin, clip_y2-bottom_margin);
+    cairo_line_to (cr, clip_x2, clip_y2-bottom_margin);
+    // vertical axis
+    cairo_move_to (cr, clip_x1+left_margin, clip_y1);
+    cairo_line_to (cr, clip_x1+left_margin, clip_y2-bottom_margin);
+    cairo_stroke (cr);
+	printf("drawn x and y axis\n");
+
+    // No values to draw, so just return at this point.
+    if (widget->list.qty_readings == 0) {
+        //Noting to draw
+        printf("Nothing to draw\n");
+        return;
+    }
+    
+    // Calculate the x and y scale
+    /*  X Scale is determined by the drawing scale divided by the quantity of readings
+        The Y scale is determined by the quantity of readings divided by max minus min*/
+    x_scale = ((clip_x2 - clip_x1 - left_margin) / widget->list.qty_readings);
+    y_scale = ((clip_y2 - clip_x1 - bottom_margin) / (widget->list.max_reading - widget->list.min_reading));
+    
     cairo_set_line_width (cr, dx);
 	printf("Determined the data points\n");
     printf("dx:%lf dy:%lf\n", dx, dy);
@@ -337,50 +381,35 @@ void on_draw (GtkWidget *drawing, cairo_t *cr, struct app_widgets *widget) {
     printf("clip_x2:%lf ", clip_x2);
     printf("clip_y1:%lf ", clip_y1);
     printf("clip_y2:%lf\n", clip_y2);
-    // Move zero points:dx:0.050000 dy:-0.050000 
-    // Move zero points:clip_x1:-2.500000 clip_y1:-1.540000 clip_x2:2.500000 clip_y2:1.530000
-    //dx:5.000000 dy:5.000000
-    //clip_x1:-500.000000 clip_y1:-307.000000 clip_x2:0.000000 clip_y2:0.000000
+    printf("qty readings:%d ", widget->list.qty_readings);
+    printf("max reading:%f ", widget->list.max_reading);
+    printf("min reading:%f ", widget->list.min_reading);
+    printf("X scale:%lf ", x_scale);
+    printf("Y scale:%lf\n", y_scale);
+    //dx:0.052632 dy:0.052632
+    //clip_x1:5.263158 clip_x2:10.526316 clip_y1:3.231579 clip_y2:6.463158
+    //qty readings:34 max reading:3.295972 min reading:0.918457 X scale:0.154799 Y scale:0.504729
 
-	
-    /* Draws x and y axis */
-    cairo_set_source_rgb (cr, 0.0, 1.0, 0.0);
-    // horizontal axis
-    cairo_move_to (cr, clip_x1, clip_y2);
-    cairo_line_to (cr, clip_x2, clip_y2);
-    // vertical axis
-    cairo_move_to (cr, clip_x1, clip_y1);
-    cairo_line_to (cr, clip_x1, clip_y2);
-    cairo_stroke (cr);
-	printf("drawn x and y axis\n");
-	
-    //ToDo: Implement linked lists here...
-    //      scroll through the list till either
-    //          reached end
-    //          100 data points added
-    /* Link each data point */
-	//for (i = clip_x1; i < clip_x2; i += dx)
-	//	cairo_line_to (cr, i, f (i));       //Draws a line from the current position, to the new coordinates
-    
-    /* clip_y1 and clip_y2 provide the max and min values
-     * scale factor is (coord range / value range) which is dy
-     */
-    
-    Node *current;
-    int     scale = 0;
-    //scale = 
+
     current = widget->list.listHead;
+    cairo_line_to(cr, 50, 50);
+    // Draw the graph
+    // Move to the first reading, before cycling through
+    //                  move to the left + margin
+    //                                        move to the bottom, up the margin (0,0 is at the top)
+    //                                                                    move up to the reading
+    cairo_move_to (cr, (clip_x1+left_margin), (clip_y2 - bottom_margin) - ((current->reading - widget->list.min_reading) * y_scale));
+
     do {
-        //Bug: Scaling is not working for these values.
-        //      Y values are too big!
-        //      X values are not -2.5 to 2.5, they are 0 to 100
-        
-        // Increase in increments of dx
-        cairo_line_to(cr, count * dx, 0.50); //clip_y2 - current->reading);
-        printf("Reading:%d  Data:%d\n", count, current->reading);
+        //                  move across a step in x scale plus the margin
+        //                                                 starting from the bottom, less the margin
+        //                                                                            move up the reading in y scale
+        cairo_line_to (cr, (count * x_scale)+left_margin, (clip_y2 - bottom_margin) - ((current->reading - widget->list.min_reading) * y_scale));      //Draws a line from the current position, to the new coordinates
+
+        printf("Reading:%d  Data:%f\n", count, current->reading);
         current = current->nextnode;
         count ++;
-    } while ((count < 100) && (current->nextnode != NULL));
+    } while (count < widget->list.qty_readings);
 	
 	printf("Linked data points\n");
 	
@@ -407,18 +436,68 @@ gboolean data_timer_exe(struct app_widgets *widget) {
     
     //ToDo: Implement linked lists here...
     /* Version 1: Get some random data and put it into a linked list*/
-    int value = 0;
+    int reply = 0;              // the reply status from the code
+    float   reading = 0.0;
     
     //Get some data
-    // Data needs to be in the range of -2.5 to 2.5.
-    // take the int given by rand, get the remainder (%) when divided by 5 and subtract 2.5 to get it in the range required.
-    // Move zero points:value = (rand() % 5) - 2.5;
     
-    value = (rand() % 300);
-    // Add a new value to the start of the list every time it runs
-    listAddHead(&widget->list, value);
+    // Random number generation
+    //int value = 0;
+    //value = (rand() % 300);
+    //// Add a new value to the start of the list every time it runs
+    //listAddHead(&widget->list, value);
+    
+    // Get data from the default source
+    
+    reply = adcSPiInitialisation();
+    if (reply == ADC_EXIT_SUCCESS) {
+        reply = readVoltage(&reading);
+        adcSPiEnd();
+    }
+    printf("Voltage read:%f\n", reading);
+    //// Add a new value to the start of the list every time it runs
+    listAddHead(&widget->list, reading);
     
     return true;
+}
+/* Some sample code to check why my linked list is not working correctly
+ */
+void printLinkedlist(struct app_widgets *widget) {
+    Node *current;          // Used by the linked lists.
+    int count = 0;
+    
+    printf("Testing Linked List Output\n");
+    printf("==========================\n");
+   
+    printf("qty readings:%d\n", widget->list.qty_readings);
+    printf("max reading:%f\n", widget->list.max_reading);
+    printf("min reading:%f\n\n", widget->list.min_reading);
+
+    current = widget->list.listHead;
+
+    do {
+
+        printf("Reading:%d  Data:%f\n", count, current->reading);
+        current = current->nextnode;
+        count ++;
+    } while ((count < widget->list.qty_readings));// && (current->nextnode != NULL));
+}
+
+void testLinkedlist(struct app_widgets *widget) {
+    
+    //// Add a new value to the start of the list every time it runs
+    listAddHead(&widget->list, 0.1);
+    
+    printLinkedlist(widget);
+    
+    listAddHead(&widget->list, 0.2);
+    listAddHead(&widget->list, 1.3);
+    listAddHead(&widget->list, 2.4);
+    listAddHead(&widget->list, 3.5);
+    
+    printLinkedlist(widget);
+    
+    
 }
 /*
  * 
@@ -434,6 +513,10 @@ int main(int argc, char** argv) {
     struct app_widgets	*widgets = g_slice_new(struct app_widgets);
     
     listInitialise(&widgets->list);
+    
+    testLinkedlist(widgets);
+    
+    return 0;
     
     // initialise GTK library and pass it in command line parameters
     gtk_init(&argc, &argv);

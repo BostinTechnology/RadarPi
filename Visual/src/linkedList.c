@@ -20,11 +20,14 @@ void	listInitialise	(Linkedlist *list)
 	list->listHead = NULL;
 	list->listTail = NULL;
 	list->currentNode = NULL;
+    list->max_reading = 0.0;
+    list->min_reading = 0.0;
+    list->qty_readings = 0;
 
 }
 
 
-void	listAddHead		(Linkedlist *list, int reading)
+void	listAddHead		(Linkedlist *list, float reading)
 {
 	// Create new node
 	Node	*node	= (Node*) malloc(sizeof(Node));
@@ -34,13 +37,24 @@ void	listAddHead		(Linkedlist *list, int reading)
 	if (list->listHead == NULL) 
 	{
 		list->listTail = node;
+        list->max_reading = reading;
+        list->min_reading = reading;
+        list->qty_readings = 1;
 		node->nextnode = NULL;
 		node->prevnode = NULL;
+        
 	}
 	else  // list already exists
 	{
 		node->nextnode = list->listHead;
 		list->listHead->prevnode = node;
+        if (reading > list->max_reading) {
+            list->max_reading = reading;
+        };
+        if (reading < list->min_reading) {
+            list->min_reading = reading;
+        };
+        list->qty_readings ++;
 	}
 	
 	// update the list structure with a new head
@@ -49,7 +63,7 @@ void	listAddHead		(Linkedlist *list, int reading)
     return;
 }
 
-void	listAddTail		(Linkedlist *list, int reading)
+void	listAddTail		(Linkedlist *list, float reading)
 {
     // Create new node
 	Node	*node	= (Node*) malloc(sizeof(Node));
@@ -60,6 +74,9 @@ void	listAddTail		(Linkedlist *list, int reading)
 	if (list->listHead == NULL)
 	{
 		list->listHead = node;
+        list->max_reading = reading;
+        list->min_reading = reading;
+        list->qty_readings = 1;
 		node->nextnode = NULL;
 		node->prevnode = NULL;
 	}
@@ -67,6 +84,13 @@ void	listAddTail		(Linkedlist *list, int reading)
 	{
 		list->listTail->nextnode = node;
 		node->prevnode = list->listTail;
+        if (reading > list->max_reading) {
+            list->max_reading = reading;
+        };
+        if (reading < list->min_reading) {
+            list->min_reading = reading;
+        };
+        list->qty_readings ++;
 	}
 	
 	// Update the list structure with a new tail
@@ -76,7 +100,7 @@ void	listAddTail		(Linkedlist *list, int reading)
 }
 
 // Insert a new node after the current node
-void	listInsertNode	(Linkedlist *list, int reading, Node *currentnode)
+void	listInsertNode	(Linkedlist *list, float reading, Node *currentnode)
 {
     // Check if there is a next node, if not pass to listAddTail
     if (currentnode->nextnode == NULL) {
@@ -92,6 +116,9 @@ void	listInsertNode	(Linkedlist *list, int reading, Node *currentnode)
 		list->listHead = newnode;
 		newnode->nextnode = NULL;
 		newnode->prevnode = NULL;
+        list->max_reading = reading;
+        list->min_reading = reading;
+        list->qty_readings = 1;
 	}
     else {
         
@@ -101,15 +128,24 @@ void	listInsertNode	(Linkedlist *list, int reading, Node *currentnode)
         newnode->prevnode = currentnode;
         // current node -> next node to be the new node's address
         currentnode->nextnode = newnode;
+        if (reading > list->max_reading) {
+            list->max_reading = reading;
+        };
+        if (reading < list->min_reading) {
+            list->min_reading = reading;
+        };
+        list->qty_readings ++;
     }
 
     return;
 }
 
 // Delete the given node
-void	listDeleteNode	(Linkedlist *list, int reading, Node *deletenode)
+void	listDeleteNode	(Linkedlist *list, float reading, Node *deletenode)
 {
     // 
+    
+    // ToDo: This will require a new max and min value being calculated
     
 }
 
