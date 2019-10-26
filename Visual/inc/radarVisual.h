@@ -22,22 +22,22 @@
 
 struct app_widgets {
     // All the widgets on the Glade form go into here
-    GtkWidget   *w_canvas_graph;
-    GtkWidget   *w_btn_startstop;    
-    GtkWidget   *w_btn_set_gain;
-    GtkWidget   *w_scale_gainctrl;
-    GtkWidget   *w_radbut_raw;
-    GtkWidget   *w_radbut_digital;
-    GtkWidget   *w_radbut_adc;
+    GtkWidget       *w_canvas_graph;
+    GtkWidget       *w_btn_startstop;    
+    GtkWidget       *w_btn_set_gain;
+    GtkWidget       *w_scale_gainctrl;
+    GtkWidget       *w_radbut_raw;
+    GtkWidget       *w_radbut_digital;
+    GtkWidget       *w_radbut_adc;
     GtkAdjustment   *w_adj_gainctrl;
-    GtkWidget   *w_txt_mode_info;
-    GtkWidget   *w_txt_gain_setting;
+    GtkWidget       *w_txt_mode_info;
+    GtkWidget       *w_txt_gain_setting;
     // Plus other variables I want to use
-    bool        running;                    // When true, gathers data to show in the graph
-    int         gain_value;                 // The gain value from the slider
+    bool            running;                    // When true, gathers data to show in the graph
+    int             gain_value;                 // The gain value from the slider
     // also the SPI connection
-    int         SPiconn;
-    Linkedlist  list;
+    int             SPiconn;
+    Linkedlist      list;
 } ;
 
 // Used by Cairo draw.
@@ -49,6 +49,9 @@ struct app_widgets {
 //Timers for the application refresh / data collection - all in mS
 #define SCREEN_REFRESH_TIMER    333
 #define DATA_REFRESH_TIMER      333
+
+#define MAX_VOLTAGE             3.3
+#define MIN_VOLTAGE             0.0
 
 //ToDo: improve the commentary for the functions
 

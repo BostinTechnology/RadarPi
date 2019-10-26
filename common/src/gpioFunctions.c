@@ -1,7 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/* 
+ * File:   gpioFunctions.h
+ * Author: Matthew Bennett <matthew.bennett@bostintechnology.com>
+ *
+ * Created on 18 January 2019, 22:14
+ * 
+ * Example code for the functions required to manage the GPIO ports
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation as version 2 of the License.
+ *
+ * For more information refer to www.BostinTechnology.com
  */
 
 #include <stdio.h>
@@ -22,19 +31,19 @@ int setupGpioFunctions(void) {
 	set_gpio_for_input(IF_OUT_TO_PI);
 	set_gpio_for_output(SAMPLE_HOLD);
 
-	return GPIO_ERR_NONE;
+	return GPIO_EXIT_SUCCESS;
 };
 
 int setSampleHoldForRun(void) {
 	
 	set_gpio_value(SAMPLE_HOLD,0);
-	return GPIO_ERR_NONE;
+	return GPIO_EXIT_SUCCESS;
 };
 
 int setSampleHoldForHold(void) {
 	
 	set_gpio_value(SAMPLE_HOLD,1);
-	return GPIO_ERR_NONE;
+	return GPIO_EXIT_SUCCESS;
 };
 
 int returnRawFrequency(float *frequency, int measuring_pin) {
@@ -71,7 +80,7 @@ int returnRawFrequency(float *frequency, int measuring_pin) {
 			*frequency = 0;
 			starttime = clock();			// reset the timeout clock
 		};
-        if (status != GPIO_ERR_NONE) {
+        if (status != GPIO_EXIT_SUCCESS) {
             *frequency = 0;
             completed = true;
         }
@@ -131,7 +140,7 @@ int returnFullFrequency(float *frequency, int measuring_pin) {
 			//printf("DEBUG: Timeout has been reached\n");
 			completed = true;
 		};
-        if (status != GPIO_ERR_NONE) {
+        if (status != GPIO_EXIT_SUCCESS) {
             *frequency = 0;
             completed = true;
         }

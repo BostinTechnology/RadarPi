@@ -1,21 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /* 
  * File:   radar.h
  * Author: Matthew Bennett <matthew.bennett@bostintechnology.com>
  *
  * Created on 27 August 2019, 09:04
- */
-
-/*
- *  Structure
- *      functions include gpio_control & spi_comms (or ioctl_spi_comms) in their routines
  * 
- *      ALl functions are listed here
+ * This is the main include file to be used by any external calling program
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation as version 2 of the License.
+ *
+ * For more information refer to www.BostinTechnology.com
  */
 
 //ToDo: Update headers for all files based on new template.
@@ -28,6 +23,8 @@
 #include    "gpioFunctions.h"
 #include    "ledControl.h"
 #include    "rdr_utilities.h"
+#include    "filter.h"
+#include    "rdr_gpio_control.h"
 
 
 /*! *****************************************************************************

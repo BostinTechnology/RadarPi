@@ -1,14 +1,18 @@
-
-/******************************************************************************
-  *
-  * Example software provided by Bostin Technology Ltd
-  *
-  * This software comes with no warrantly and is provided as a demo application
-  * for use with the ST25R3911B NFC controller
-  *
-  * For more information    www.Cogniot.eu
-  *
-******************************************************************************/
+/* 
+ * File:   rdr_spi_comms.h
+ * 
+ * Author: Matthew Bennett <matthew.bennett@bostintechnology.com>
+ *
+ * Created on 18 January 2019, 22:14
+ * 
+ * Example header file for the low level SPI comms
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation as version 2 of the License.
+ *
+ * For more information refer to www.BostinTechnology.com
+ */
 
 #ifndef RDR_SPI_COMMS
 #define RDR_SPI_COMMS

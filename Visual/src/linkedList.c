@@ -150,7 +150,22 @@ void	listDeleteNode	(Linkedlist *list, float reading, Node *deletenode)
 }
 
 
-void	listPrintNode	(Linkedlist *list)
+void listPrintNode (Linkedlist *list)
 {
 	
 }
+
+
+void listSetMax (Linkedlist *list, float maxvalue)
+{
+    list->max_reading = maxvalue;
+    
+}
+
+
+void listSetMin (Linkedlist *list, float minvalue)
+{
+    list->min_reading = minvalue;
+}
+
+

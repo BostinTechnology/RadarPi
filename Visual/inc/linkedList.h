@@ -29,9 +29,12 @@ typedef struct _linkedlist
 
 
 
-void	listInitialise	(Linkedlist *list);
-void	listAddHead		(Linkedlist *list, float reading);
-void	listAddTail		(Linkedlist *list, float reading);
-void	listInsertNode	(Linkedlist *list, float reading, Node *currentnode);	
-void	listDeleteNode	(Linkedlist *list, float reading, Node *currentnode);
-void	listPrintNode	(Linkedlist *list);
+void	listInitialise      (Linkedlist *list);
+void	listAddHead         (Linkedlist *list, float reading);
+void	listAddTail         (Linkedlist *list, float reading);
+void	listInsertNode      (Linkedlist *list, float reading, Node *currentnode);	
+void	listDeleteNode      (Linkedlist *list, float reading, Node *currentnode);
+void	listPrintNode       (Linkedlist *list);
+void    listSetMax          (Linkedlist *list, float maxvalue);
+void    listSetMin          (Linkedlist *list, float minvalue);
+

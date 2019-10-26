@@ -1,14 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /* 
  * File:   gpioFunctions.h
  * Author: Matthew Bennett <matthew.bennett@bostintechnology.com>
  *
  * Created on 18 January 2019, 22:14
+ * 
+ * Example header file for the functions required to manage the GPIO ports
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation as version 2 of the License.
+ *
+ * For more information refer to www.BostinTechnology.com
  */
 
 #ifndef GPIOFUNCTIONS_H
@@ -74,7 +76,7 @@ int setSampleHoldForHold(void);
  * Overview: Function to return the frequency from the GPIO pins
  *  
  * Description: This method only uses half the cycle and no debounce, but is
- *				similar to readFullFrequency above.
+ *				similar to readFullFrequency below.
  *
  * Parameters:
  * param[out]   frequency       : A float of the frequency measured

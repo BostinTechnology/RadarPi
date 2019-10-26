@@ -3,6 +3,14 @@
  * Author: Matthew Bennett <matthew.bennett@bostintechnology.com>
  *
  * Created on 12 January 2019, 21:03
+ * 
+ * Example header file to provide the functions to set the gain, including comms
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation as version 2 of the License.
+ *
+ * For more information refer to www.BostinTechnology.com
  */
 
  /**********************************************************************

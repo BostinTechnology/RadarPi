@@ -1,19 +1,19 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 /* 
- * File:   gpio_control.c
+ * File:   gpio_control.h
  * Author: Matthew
  *
  * Created on 22 August 2018, 15:54
- */
-/* Setup the device ready for GPIO control
- * This doesn't specifically set any pins for input or output
+ * 
+ * Example code to provide the low level functions for GPIO control
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation as version 2 of the License.
+ *
+ * For more information refer to www.BostinTechnology.com
  */
 
-// Includes
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/mman.h>					// required for mmap
@@ -59,7 +59,7 @@ int gpio_init() {
 	  exit (GPIO_ERR_INITIALISATION);
   };
   
-  return GPIO_ERR_NONE;
+  return GPIO_EXIT_SUCCESS;
 }
 
 
@@ -100,7 +100,7 @@ int set_gpio_for_input(int pin_no){
 	// Set the relevant map address to itself bitwise AND'd (&) with setting
 	*(gpio_mmap + block_addr) &= setting;
 			
-	return GPIO_ERR_NONE;
+	return GPIO_EXIT_SUCCESS;
 
 }
 
@@ -139,7 +139,7 @@ int set_gpio_for_output(int pin_no) {
 	// Set the relevant map address to itself bitwise OR'd (|) with setting
 	*(gpio_mmap + block_addr) |= setting;
 			
-	return GPIO_ERR_NONE;
+	return GPIO_EXIT_SUCCESS;
 }
 
 
@@ -178,7 +178,7 @@ int set_gpio_value (int pin_no, int value) {
 	
 	*(gpio_mmap + block_addr) = setting;
 	
-	return GPIO_ERR_NONE;
+	return GPIO_EXIT_SUCCESS;
 	
 }
 
@@ -214,5 +214,5 @@ int read_gpio_value(int pin_no, int *value) {
 	// Shift the bit back, converting to an int at the same time by throwing away the upper part.
 	*value = (int)(reading >> (pin_no%32));
 	
-	return GPIO_ERR_NONE;
+	return GPIO_EXIT_SUCCESS;
 }

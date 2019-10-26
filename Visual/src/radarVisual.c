@@ -30,51 +30,39 @@
  *  To Do List
  *  ==========
  * 
- * FIXED    BUG: There is something wrong with the graphing / linked list as the values don't match. When I have multiple data values
- *      in the linked list, the quantity graphed DON'T include the ones that were captured before switching to graph mode
- *      Could it be to do with the LinkedList within the structure NOT being a pointer.
- *      It would appear that the first value captured in the data timer is then not printed on the graph. I would guess it
- *      could be something to do with how I initialise the nodes within linkedlist.
- *
  *  DONE    2   Create a single H file for all the common stuff
- *              a What is the right way of doing this, is there a structure or a method for this?
- *              b What should I do about the various return status'
+ *  DONE            a What is the right way of doing this, is there a structure or a method for this?
+ *  DONE            b What should I do about the various return status'
  *                  Should these be different value ranges
  *  19  Integrate program with reading of values as required by radiobutton setting
  *  DONE    a Firstly get random value to add in
  *          a2 Change to using time and value
+ *             It will also need 2 data values, not 1
  *      Not sure this is needed as values are captured in threads and therefore at a fixed time.
  *  DONE        This may need more linkedList functions / values
  *  DONE            max data value
  *  DONE            min data value
  *  DONE            quantity of readings
- *              It will also need 2 data values, not 1
  *  DONE    a3 Change to use a scale values
  *  DONE        Need to move translate_example2 into radarVisual to get it drawing lines!
- *          a4 Change to have fixed max (3V3) and min values (0V)
- *          b Change to default source
- *          c Change to required source
+ *  DONE    a4 Change to have fixed max (3V3) and min values (0V)
+ *  DONE    b Change to default source
+ *  DONE    c Change to required source
+ *  DONE        c2 Implement other sources
+ *  DONE        Raw
+ *  DONE        Filtered - see 10 below
+ *  DONE        Frequency via digital
+ *          d Check the gpio pin connections & re-write them to reflect the new hardware
+ *          e Check the filter code to use, high or notches
  *  CM 22  Updated linked lists to add a delete function
- * DONE CM 23  Update linked lists to include a counter and a maximum number of values
+ * DONE 23  Update linked lists to include a counter and a maximum number of values
  * DONE     Counter added
  * DONE     a update structure to have the 2 variables, max reading, min reading
  *          b max number of values to store & when exceeded, remove the tail.
- *  10  Implement the smoothing algorithm in the common code
- *          see filter.c and filter.h
- *          The code is very short, but it takes quite a lot of processing power to run!
- *              It’s probably clear to you, but just pass each measured level to the relevant 
- *              filter and after the appropriate delay (until it has enough samples) it will 
- *              return the filtered values. notch_filter_100 will (obviously!) filters out the 
- *              [harmonics] of the 50Hz interference.  The coefficients are dependent on the 
- *              clock frequency, which I believe is 16MHz, so will need adjusting if you use a 
- *              different clock frequency.
+
  *  24  Change gainFunctions to use typedef struct ...
  *          See the gainfunctions.h file
- *  5   Both gain and ADC use SPI, but on different lines, so I need to change serial port to spi port
- *          a How do I have different settings for the same port?
- *          b If the gain setting is done within the code and doesn't return the port, it can open and close it
- *          c In the ADC reading, it needs to return the port so it can be used when reading new values
- *  17  Link gain setting to actually setting the gain value
+ * DONE 17  Link gain setting to actually setting the gain value
  *  6   Rewrite common to be a better library
  *          a Return success status
  * DONE         gainFunctions
@@ -82,17 +70,17 @@
  * DONE         gpioFunctions
  * DONE         rdr_gpio_control
  * DONE         adcFunctions
- *              filter
+ * N/A          filter
  * DONE         ledControl
  * N/A          rdr_utilities
- *          b Passing parameters into methods
- *          c Receiving data from methods
+ * DONE         b Passing parameters into methods
+ * DONE         c Receiving data from methods
  * DONE         e filenames - rdr_ for internal functions
  * DONE         f versioning
- *          g ports for communications
- *          h header file commenting format
+ * DONE         g ports for communications
+ * DONE         h header file commenting format
  *          i Split gainFunctions into user functions and internal functions
- *          j gpioFunctions needs to return values by parameter, not function name
+ * DONE         j gpioFunctions needs to return values by parameter, not function name
  *  7   Integrate LEDs into common library
  *  9   Code tidy up
  *          a Update comments and check they are correct
@@ -108,31 +96,13 @@
  *          e readingDigitalSignals
  *  12  Check which VCC the gain chip is operating at and set the GAIN_VCC accordingly
  *  13  Write instructions on how to compile into application
- *  14  Write a licence header for all files and update them accordingly - emailed DB
- * File:   <filename>
- * Author: <insert name here>
- *
- * Created on <insert date>
- * 
- *Example code for <insert description>
- *
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation as version 2 of the License.
- *
- * For more information refer to www.BostinTechnology.com
- * 
- 
-
+ * DONE  14  Write a licence header for all files and update them accordingly - emailed DB
  *  15  Write some instructions on how to use the application
  *  16  Add tick marks to the scale
  *  18  When starting up, set the value of the mode to unknown and not the first radiobutton
  *  20  Add scale and associated code to set the reading speed
  *  21  On run timer trigger when capturing values (running = true)
  *  4   Convert SPi to use ioctl as this doesn't require elevated privileges
- *          No sure this is requried as program runs on
-
  * 
  * 
  *      
@@ -141,6 +111,24 @@
  *  DONE    1   Get gain setting to only allow values available from the device
  *  DONE    16  Link the Mode Info at the bottom to the mode selected
  *  DONE    17  Link the Gain Setting at the bottom of the screen to the gain selected
+ *  FIXED    BUG: There is something wrong with the graphing / linked list as the values don't match. When I have multiple data values
+ *      in the linked list, the quantity graphed DON'T include the ones that were captured before switching to graph mode
+ *      Could it be to do with the LinkedList within the structure NOT being a pointer.
+ *      It would appear that the first value captured in the data timer is then not printed on the graph. I would guess it
+ *      could be something to do with how I initialise the nodes within linkedlist.
+  * DONE 10  Implement the smoothing algorithm in the common code
+ *          see filter.c and filter.h
+ *          The code is very short, but it takes quite a lot of processing power to run!
+ *              It’s probably clear to you, but just pass each measured level to the relevant 
+ *              filter and after the appropriate delay (until it has enough samples) it will 
+ *              return the filtered values. notch_filter_100 will (obviously!) filters out the 
+ *              [harmonics] of the 50Hz interference.  The coefficients are dependent on the 
+ *              clock frequency, which I believe is 16MHz, so will need adjusting if you use a 
+ *              different clock frequency.
+ * DONE  5   Both gain and ADC use SPI, but on different lines, so I need to change serial port to spi port
+ * DONE         a How do I have different settings for the same port?
+ * DONE         b If the gain setting is done within the code and doesn't return the port, it can open and close it
+ * DONE         c In the ADC reading, it needs to return the port so it can be used when reading new values
 
  */
 
@@ -202,6 +190,7 @@ void on_btn_set_gain_clicked(GtkButton *button, struct app_widgets *widget) {
     int             allowed_values[] = {0.2,1,10,20,30,40,60,80,120,157};
     int             allowed_values_size = sizeof(allowed_values)/sizeof(allowed_values[0]);
     int             set_value = 0;
+    CommsRetCode    status = 0;
 
     printf("Set Gain button has been clicked\n");
     
@@ -252,8 +241,16 @@ void on_btn_set_gain_clicked(GtkButton *button, struct app_widgets *widget) {
     
     gtk_entry_set_text(GTK_ENTRY(widget->w_txt_gain_setting), conv);
     printf("set the text\n");
-    
-    //ToDo: Write the new gain setting to the board
+
+    //Write the new gain setting to the board    
+    status = gainSPiInitialisation ();
+    if (status != SPI_ERR_NONE) {
+        status = setGainControl(set_value);
+        if (status != SPI_ERR_NONE) {
+            status = gainSPiEnd();
+        }
+    };
+
 	
 	return;
 }
@@ -372,7 +369,11 @@ void on_draw (GtkWidget *drawing, cairo_t *cr, struct app_widgets *widget) {
     /*  X Scale is determined by the drawing scale divided by the quantity of readings
         The Y scale is determined by the quantity of readings divided by max minus min*/
     x_scale = ((clip_x2 - clip_x1 - left_margin) / widget->list.qty_readings);
+    // The one below sets the scale based on max and min readings.
     y_scale = ((clip_y2 - clip_x1 - bottom_margin) / (widget->list.max_reading - widget->list.min_reading));
+    
+    // There was a thought to use a fixed scale of 0 to 3v3, but in one mode it reads frequency, and therefore this isn't any use
+    //y_scale = ((clip_y2 - clip_x1 - bottom_margin) / MAX_VOLTAGE);      // Y Scale is 0 to 3V3 fixed.
     
     cairo_set_line_width (cr, dx);
 	printf("Determined the data points\n");
@@ -386,9 +387,6 @@ void on_draw (GtkWidget *drawing, cairo_t *cr, struct app_widgets *widget) {
     printf("min reading:%f ", widget->list.min_reading);
     printf("X scale:%lf ", x_scale);
     printf("Y scale:%lf\n", y_scale);
-    //dx:0.052632 dy:0.052632
-    //clip_x1:5.263158 clip_x2:10.526316 clip_y1:3.231579 clip_y2:6.463158
-    //qty readings:34 max reading:3.295972 min reading:0.918457 X scale:0.154799 Y scale:0.504729
 
 
     current = widget->list.listHead;
@@ -446,14 +444,47 @@ gboolean data_timer_exe(struct app_widgets *widget) {
     //value = (rand() % 300);
     //// Add a new value to the start of the list every time it runs
     //listAddHead(&widget->list, value);
-    
-    // Get data from the default source
-    
-    reply = adcSPiInitialisation();
-    if (reply == ADC_EXIT_SUCCESS) {
-        reply = readVoltage(&reading);
-        adcSPiEnd();
+
+    /* Need to set maximum & minimum values here as part of mode because the digital mode
+     * returns frequency, not voltage
+     * So I need to add functions to set max and set min and allow draw to use max and min.
+     */
+    if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget->w_radbut_raw))) {
+
+        printf("Raw data mode selected\n");
+        reply = adcSPiInitialisation();
+        if (reply == ADC_EXIT_SUCCESS) {
+            reply = readVoltage(&reading);
+            adcSPiEnd();
+        }
+        // In this mode, max and min are based on the voltage output of the adc, hence set to max and min here
+        listSetMax(&widget->list, MAX_VOLTAGE);
+        listSetMin(&widget->list, MIN_VOLTAGE);
     }
+    else if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget->w_radbut_digital))) {
+        printf("Digital data mode selected\n");
+        reply = setupGpioFunctions();
+        if (reply == GPIO_EXIT_SUCCESS) {
+            reply = setSampleHoldForRun();
+            if (reply == GPIO_EXIT_SUCCESS) {
+                reply = returnFullFrequency(&reading, IF_OUT_TO_PI);
+            }
+        }
+    }
+    else if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget->w_radbut_adc))) {
+        printf("ADC data mode selected\n");
+        // Add filter here with ADC
+        reply = adcSPiInitialisation();
+        if (reply == ADC_EXIT_SUCCESS) {
+            reply = readVoltage(&reading);
+            reading = highpass_filter (reading);
+            adcSPiEnd();
+        }
+        // In this mode, max and min are based on the voltage output of the adc, hence set to max and min here
+        listSetMax(&widget->list, MAX_VOLTAGE);
+        listSetMin(&widget->list, MIN_VOLTAGE);
+    };
+
     printf("Voltage read:%f\n", reading);
     //// Add a new value to the start of the list every time it runs
     listAddHead(&widget->list, reading);
@@ -513,6 +544,7 @@ int main(int argc, char** argv) {
     struct app_widgets	*widgets = g_slice_new(struct app_widgets);
     
     listInitialise(&widgets->list);
+    init_filter();
     
     testLinkedlist(widgets);
     

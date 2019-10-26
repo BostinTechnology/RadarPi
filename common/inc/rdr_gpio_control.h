@@ -1,14 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /* 
  * File:   gpio_control.h
  * Author: Matthew
  *
  * Created on 22 August 2018, 15:54
+ * 
+ * Example header file to provide the low level functions for GPIO control
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation as version 2 of the License.
+ *
+ * For more information refer to www.BostinTechnology.com
  */
 
 #include <stdint.h>
@@ -32,7 +34,7 @@
 typedef uint16_t      GPIORetCode;          /* Standard Return Code type from function. */
 
 
-#define     GPIO_ERR_NONE                           0 /*! No error occurred */
+#define     GPIO_EXIT_SUCCESS                       0 /*! No error occurred */
 #define     GPIO_ERR_INITIALISATION                 1 /*! Unable to initialise the GPIO ports */
 #define     GPIO_ERR_SET_OUTPUT                     2 /*! Unable to set a port value */
 #define     GPIO_ERR_READ_INPUT                     3 /*! Unable to read a value from a port */
