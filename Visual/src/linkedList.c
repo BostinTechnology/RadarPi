@@ -1,13 +1,22 @@
-/* ========================================================================== */
-/*                                                                            */
-/*   linkedLists.c                                                            */
-/*   (c) 2019 Ciaran Morgan                                                   */
-/*                                                                            */
-/*   Implementation of a double linked list                                   */
-/*                                                                            */
-/*   Added extra test for mid list insertion                                  */
-/*                                                                            */
-/* ========================================================================== */
+/* 
+ * File:   linkedList.c
+ * Author: Ciaran Morgan <ciaran.morgan@bostintechnology.com>
+ *
+ * Created on 21 September 2019, 10:20
+ * 
+ * Example code for providing double linked lists. Linked lists are a collection of structures
+ * that can be accessed in a similar fashion to an array, but held in memory.
+ * Each element points at it's predessor and sucessor and the overall structure holds
+ * the first and last values
+ *
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation as version 2 of the License.
+ *
+ * For more information refer to www.BostinTechnology.com
+ *
+ */
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -141,7 +150,7 @@ void	listInsertNode	(Linkedlist *list, float reading, Node *currentnode)
 }
 
 // Delete the given node
-void	listDeleteNode	(Linkedlist *list, float reading, Node *deletenode)
+void	listDeleteNode	(Linkedlist *list, Node *deletenode)
 {
     // 
     
@@ -149,11 +158,6 @@ void	listDeleteNode	(Linkedlist *list, float reading, Node *deletenode)
     
 }
 
-
-void listPrintNode (Linkedlist *list)
-{
-	
-}
 
 
 void listSetMax (Linkedlist *list, float maxvalue)

@@ -51,19 +51,33 @@
     <itemPath>Visual/src/errorText</itemPath>
     <itemPath>nbproject/licenseheader.txt</itemPath>
     <itemPath>makefile</itemPath>
+    <itemPath>newComplexMakefile</itemPath>
     <itemPath>build/readme.txt</itemPath>
   </logicalFolder>
   <sourceFolderFilter>^(nbproject|build)$</sourceFolderFilter>
+  <sourceRootList>
+    <Elem>.</Elem>
+  </sourceRootList>
   <projectmakefile>makefile</projectmakefile>
   <confs>
     <conf name="Debug" type="1">
       <toolsSet>
         <compilerSet>GNU|GNU</compilerSet>
         <dependencyChecking>true</dependencyChecking>
-        <rebuildPropChanged>false</rebuildPropChanged>
+        <rebuildPropChanged>true</rebuildPropChanged>
       </toolsSet>
       <compileType>
         <cTool>
+          <incDir>
+            <pElem>AnalogueMeasurement</pElem>
+            <pElem>DigitalDetection</pElem>
+            <pElem>GainControl</pElem>
+            <pElem>SampleSoftware</pElem>
+            <pElem>TestProgram</pElem>
+            <pElem>Visual</pElem>
+            <pElem>common</pElem>
+            <pElem>nbproject</pElem>
+          </incDir>
           <warningLevel>2</warningLevel>
         </cTool>
         <asmTool>
@@ -80,6 +94,18 @@
                             to="${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}"
                             from="${OUTPUT_PATH}"
                             perm="644"
+                            owner="root"
+                            group="bin"/>
+          <packFileListElem type="File"
+                            to="${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}"
+                            from="${OUTPUT_PATH}"
+                            perm="755"
+                            owner="root"
+                            group="bin"/>
+          <packFileListElem type="File"
+                            to="${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}"
+                            from="${OUTPUT_PATH}"
+                            perm="755"
                             owner="root"
                             group="bin"/>
           <packFileListElem type="File"
@@ -198,6 +224,8 @@
       </item>
       <item path="nbproject/newmain.c" ex="false" tool="0" flavor2="0">
       </item>
+      <item path="newComplexMakefile" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="newmain.c" ex="false" tool="0" flavor2="0">
       </item>
     </conf>
@@ -280,6 +308,8 @@
       <item path="nbproject/newfile2.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="nbproject/newmain.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="newComplexMakefile" ex="false" tool="3" flavor2="0">
       </item>
       <item path="newmain.c" ex="false" tool="0" flavor2="0">
       </item>

@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -29,76 +30,25 @@
  *
  *  To Do List
  *  ==========
- * 
+ * 25   Check the gpio pin connections & re-write them to reflect the new hardware
+ * 26   Check the filter code to use, high or notches
+ * 27   On linkedLists, add a maximum number of readings to store & when exceeded, remove the tail.
  *  DONE    2   Create a single H file for all the common stuff
  *  DONE            a What is the right way of doing this, is there a structure or a method for this?
  *  DONE            b What should I do about the various return status'
  *                  Should these be different value ranges
- *  19  Integrate program with reading of values as required by radiobutton setting
- *  DONE    a Firstly get random value to add in
- *          a2 Change to using time and value
- *             It will also need 2 data values, not 1
- *      Not sure this is needed as values are captured in threads and therefore at a fixed time.
- *  DONE        This may need more linkedList functions / values
- *  DONE            max data value
- *  DONE            min data value
- *  DONE            quantity of readings
- *  DONE    a3 Change to use a scale values
- *  DONE        Need to move translate_example2 into radarVisual to get it drawing lines!
- *  DONE    a4 Change to have fixed max (3V3) and min values (0V)
- *  DONE    b Change to default source
- *  DONE    c Change to required source
- *  DONE        c2 Implement other sources
- *  DONE        Raw
- *  DONE        Filtered - see 10 below
- *  DONE        Frequency via digital
- *          d Check the gpio pin connections & re-write them to reflect the new hardware
- *          e Check the filter code to use, high or notches
  *  CM 22  Updated linked lists to add a delete function
- * DONE 23  Update linked lists to include a counter and a maximum number of values
- * DONE     Counter added
- * DONE     a update structure to have the 2 variables, max reading, min reading
- *          b max number of values to store & when exceeded, remove the tail.
-
  *  24  Change gainFunctions to use typedef struct ...
  *          See the gainfunctions.h file
- * DONE 17  Link gain setting to actually setting the gain value
- *  6   Rewrite common to be a better library
- *          a Return success status
- * DONE         gainFunctions
- * DONE         rdr_spi_comms
- * DONE         gpioFunctions
- * DONE         rdr_gpio_control
- * DONE         adcFunctions
- * N/A          filter
- * DONE         ledControl
- * N/A          rdr_utilities
- * DONE         b Passing parameters into methods
- * DONE         c Receiving data from methods
- * DONE         e filenames - rdr_ for internal functions
- * DONE         f versioning
- * DONE         g ports for communications
- * DONE         h header file commenting format
  *          i Split gainFunctions into user functions and internal functions
- * DONE         j gpioFunctions needs to return values by parameter, not function name
  *  7   Integrate LEDs into common library
  *  9   Code tidy up
  *          a Update comments and check they are correct
  *          b Update function descriptions in h files to ensure they are correct
  *          c Remove redundant code
- *  11  Update existing programs with changes above
- *          ** Some of them need to be removed as no longer required **
- *          a readingAnalogueSignals
- *          b settingGainControl
- *              i This needs to have the menu in it, not the common
- *          c mainTestProgram
- *          d mainSampleSoftware
- *          e readingDigitalSignals
- *  12  Check which VCC the gain chip is operating at and set the GAIN_VCC accordingly
  *  13  Write instructions on how to compile into application
- * DONE  14  Write a licence header for all files and update them accordingly - emailed DB
  *  15  Write some instructions on how to use the application
- *  16  Add tick marks to the scale
+ *  16  Add tick marks to the scale for gain setting
  *  18  When starting up, set the value of the mode to unknown and not the first radiobutton
  *  20  Add scale and associated code to set the reading speed
  *  21  On run timer trigger when capturing values (running = true)
@@ -129,7 +79,58 @@
  * DONE         a How do I have different settings for the same port?
  * DONE         b If the gain setting is done within the code and doesn't return the port, it can open and close it
  * DONE         c In the ADC reading, it needs to return the port so it can be used when reading new values
+ *  DONE    19  Integrate program with reading of values as required by radiobutton setting
+ *  DONE    a Firstly get random value to add in
+ *  NOT REQD        a2 Change to using time and value
+ *  NOT REQD           It will also need 2 data values, not 1
+ *  NOT REQD    Not sure this is needed as values are captured in threads and therefore at a fixed time.
+ *  DONE        This may need more linkedList functions / values
+ *  DONE            max data value
+ *  DONE            min data value
+ *  DONE            quantity of readings
+ *  DONE    a3 Change to use a scale values
+ *  DONE        Need to move translate_example2 into radarVisual to get it drawing lines!
+ *  DONE    a4 Change to have fixed max (3V3) and min values (0V)
+ *  DONE    b Change to default source
+ *  DONE    c Change to required source
+ *  DONE        c2 Implement other sources
+ *  DONE        Raw
+ *  DONE        Filtered - see 10 below
+ *  DONE        Frequency via digital
+ * DONE 23  Update linked lists to include a counter and a maximum number of values
+ * DONE     Counter added
+ * DONE     a update structure to have the 2 variables, max reading, min reading
+ * DONE 6   Rewrite common to be a better library
+ * DONE         a Return success status
+ * DONE         gainFunctions
+ * DONE         rdr_spi_comms
+ * DONE         gpioFunctions
+ * DONE         rdr_gpio_control
+ * DONE         adcFunctions
+ * N/A          filter
+ * DONE         ledControl
+ * N/A          rdr_utilities
+ * DONE         b Passing parameters into methods
+ * DONE         c Receiving data from methods
+ * DONE         e filenames - rdr_ for internal functions
+ * DONE         f versioning
+ * DONE         g ports for communications
+ * DONE         h header file commenting format
+ * DONE         j gpioFunctions needs to return values by parameter, not function name
+ * DONE 17  Link gain setting to actually setting the gain value
+ * DONE  12  Check which VCC the gain chip is operating at and set the GAIN_VCC accordingly
+ * DONE  14  Write a licence header for all files and update them accordingly - emailed DB
+ * DONE 11  Update existing programs with changes above
+ * DONE         ** Some of them need to be removed as no longer required **
+ * DONE         a readingAnalogueSignals
+ * DONE         b gainControl
+ * DONE             i This needs to have the menu in it, not the common
+ * DONE         c mainTestProgram
+ * DONE         d mainSampleSoftware
+ * DONE         e readingDigitalSignals
 
+ * 
+ * 
  */
 
 
@@ -507,8 +508,6 @@ int main(int argc, char** argv) {
     
     listInitialise(&widgets->list);
     init_filter();
-    
-    return 0;
     
     // initialise GTK library and pass it in command line parameters
     gtk_init(&argc, &argv);

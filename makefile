@@ -35,7 +35,7 @@ OBJS_common = \
 	$(TARGETDIR_ALL)/ledControl.o \
 	$(TARGETDIR_ALL)/rdr_utilities.o \
 	$(TARGETDIR_ALL)/radar.o \
-	$(TARGETDIR_ALL)/filter.o \
+	$(TARGETDIR_ALL)/filterFunctions.o \
 
 
 # ----------------------------------------------------------------------------------------------------------------
@@ -150,8 +150,8 @@ $(TARGETDIR_ALL)/rdr_utilities.o: $(TARGETDIR_ALL) common/src/rdr_utilities.c
 $(TARGETDIR_ALL)/radar.o: $(TARGETDIR_ALL) common/src/radar.c
 	$(COMPILE.c) $(CFLAGS)  -o $@ common/src/radar.c
 
-$(TARGETDIR_ALL)/filter.o: $(TARGETDIR_ALL) common/src/filter.c
-	$(COMPILE.c) $(CFLAGS)  -o $@ common/src/filter.c
+$(TARGETDIR_ALL)/filterFunctions.o: $(TARGETDIR_ALL) common/src/filterFunctions.c
+	$(COMPILE.c) $(CFLAGS)  -o $@ common/src/filterFunctions.c
 	
 # ----- testProgram ----------------------------------------------------------------------------------------------
 $(TARGETDIR_ALL)/adcTest.o: $(TARGETDIR_ALL) TestProgram/src/adcTest.c

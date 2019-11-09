@@ -11,7 +11,7 @@
  *
  * For more information refer to www.BostinTechnology.com
  */
-#include "../inc/filter.h"
+#include "../inc/filterFunctions.h"
 
 
 #define NZEROS 4

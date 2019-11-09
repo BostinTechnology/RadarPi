@@ -13,9 +13,9 @@
  */
 
 /**********************************************************************
-  * Development Notes
+  * Development Notes for addressing the ADC.
   *
-  * Use leading zero's to get the required number of bits
+  * Use leading zero's to get the required number of bits (12) to be sent
   *
   * Initial Comms by bringing CS low, clock out on falling edge, data in on the rising edge
   * 

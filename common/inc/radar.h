@@ -23,7 +23,7 @@
 #include    "gpioFunctions.h"
 #include    "ledControl.h"
 #include    "rdr_utilities.h"
-#include    "filter.h"
+#include    "filterFunctions.h"
 #include    "rdr_gpio_control.h"
 
 
