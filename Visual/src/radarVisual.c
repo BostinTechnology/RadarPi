@@ -307,7 +307,7 @@ void on_draw (GtkWidget *drawing, cairo_t *cr, struct app_widgets *widget) {
 
     GdkRectangle da;            /* GtkDrawingArea size */
     gdouble dx = 5.0, dy = 5.0; /* Pixels between each point */
-    gdouble i, clip_x1 = 0.0, clip_y1 = 0.0, clip_x2 = 0.0, clip_y2 = 0.0;
+    gdouble clip_x1 = 0.0, clip_y1 = 0.0, clip_x2 = 0.0, clip_y2 = 0.0;
     gdouble left_margin = 5.0, bottom_margin = 5.0;         /* gap between edge and lines, percentage */
 
     Node *current;          // USed by the linked lists.
@@ -491,45 +491,7 @@ gboolean data_timer_exe(struct app_widgets *widget) {
     
     return true;
 }
-/* Some sample code to check why my linked list is not working correctly
- */
-void printLinkedlist(struct app_widgets *widget) {
-    Node *current;          // Used by the linked lists.
-    int count = 0;
-    
-    printf("Testing Linked List Output\n");
-    printf("==========================\n");
-   
-    printf("qty readings:%d\n", widget->list.qty_readings);
-    printf("max reading:%f\n", widget->list.max_reading);
-    printf("min reading:%f\n\n", widget->list.min_reading);
 
-    current = widget->list.listHead;
-
-    do {
-
-        printf("Reading:%d  Data:%f\n", count, current->reading);
-        current = current->nextnode;
-        count ++;
-    } while ((count < widget->list.qty_readings));// && (current->nextnode != NULL));
-}
-
-void testLinkedlist(struct app_widgets *widget) {
-    
-    //// Add a new value to the start of the list every time it runs
-    listAddHead(&widget->list, 0.1);
-    
-    printLinkedlist(widget);
-    
-    listAddHead(&widget->list, 0.2);
-    listAddHead(&widget->list, 1.3);
-    listAddHead(&widget->list, 2.4);
-    listAddHead(&widget->list, 3.5);
-    
-    printLinkedlist(widget);
-    
-    
-}
 /*
  * 
  */
@@ -545,8 +507,6 @@ int main(int argc, char** argv) {
     
     listInitialise(&widgets->list);
     init_filter();
-    
-    testLinkedlist(widgets);
     
     return 0;
     

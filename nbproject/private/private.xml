@@ -4,15 +4,11 @@
         <activeConfTypeElem>1</activeConfTypeElem>
         <activeConfIndexElem>0</activeConfIndexElem>
     </data>
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="1"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/matthew/Documents/Bostin%20Technology/RadarPi/TestProgram/src/mainTestProgram.c</file>
-            <file>file:/Users/matthew/Documents/Bostin%20Technology/RadarPi/common/src/adcFunctions.c</file>
             <file>file:/Users/matthew/Documents/Bostin%20Technology/RadarPi/Visual/inc/radarVisual.h</file>
-            <file>file:/Users/matthew/Documents/Bostin%20Technology/RadarPi/common/inc/adcFunctions.h</file>
             <file>file:/Users/matthew/Documents/Bostin%20Technology/RadarPi/Visual/src/radarVisual.c</file>
-            <file>file:/Users/matthew/Documents/Bostin%20Technology/RadarPi/common/inc/radar.h</file>
         </group>
     </open-files>
 </project-private>
