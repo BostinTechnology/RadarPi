@@ -77,7 +77,8 @@ int setSampleHoldForHold(void);
  *  
  * Description: This method only uses half the cycle and no debounce, but is
  *				similar to readFullFrequency below.
- *
+ *				Requires setupGpioFunctions() & setSampleHoldForRun() to be run 
+ *				first
  * Parameters:
  * param[out]   frequency       : A float of the frequency measured
  * param[in]	measuring_pin	: the pin to be used.

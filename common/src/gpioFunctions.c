@@ -123,7 +123,7 @@ int returnFullFrequency(float *frequency, int measuring_pin) {
 				if (halfcycledetected) {
 					// the state has now changed twice as i detected half a cycle beforehand
 					time_period = (float)((currenttime - starttime) + halftime)/ CLOCKS_PER_SEC;		// Convert the number of ticks to the time
-					*frequency = (1 / (time_period * 2));
+					*frequency = (1 / (time_period));           //Was (time_period * 2). 
 					halfcycledetected = false;
 					completed = true;
 				}
@@ -138,6 +138,7 @@ int returnFullFrequency(float *frequency, int measuring_pin) {
 		if (currenttime > (starttime + (timeout * CLOCKS_PER_SEC))) {
 			// timeout has been reached
 			//printf("DEBUG: Timeout has been reached\n");
+            *frequency = 0;         // Added to 
 			completed = true;
 		};
         if (status != GPIO_EXIT_SUCCESS) {

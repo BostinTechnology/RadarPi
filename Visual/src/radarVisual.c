@@ -31,6 +31,7 @@
  *  To Do List
  *  ==========
  * 25   Check the gpio pin connections & re-write them to reflect the new hardware
+ *          Emailed DB to check
  * 26   Check the filter code to use, high or notches
  * 27   On linkedLists, add a maximum number of readings to store & when exceeded, remove the tail.
  *  DONE    2   Create a single H file for all the common stuff
