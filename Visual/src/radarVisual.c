@@ -30,10 +30,34 @@
  *
  *  To Do List
  *  ==========
+ * ToDo: Reduce screen updating for Ciaran, too much data on screen.
+ * 
+ * BUG: It would appear that there is an issue with the GUI, it only appears to let you
+ *      update the screen once it has triggered.
+ * 
+ * BUG: bcm2835_init: gpio mmap failed: Cannot allocate memory
+ *      bcm2835_init failed. Are you running as root?
+ * 
+ *      Happens in data timer, ONLY whilst in ADC mode.
+ * 
+ * BUG: Operating in digital data mode, data is collected rapidly, but graph is only updated 
+ *      at a very slow rate, maybe every 50 or 100 readings.
+ * 
+ * BUG: Running radarVisual, running in ADC Raw mode, data values are int's, not floats.
+ * 
+ * BUG: In data timer, it is continually refreshing the spi and gpio stuff. This should be done once only
+ *      Consider moving it to the area when you choose mode, not get data...
+ *      Be careful of the gain, this is a different SPI channel.
+ * 
  * 25   Check the gpio pin connections & re-write them to reflect the new hardware
- *          Emailed DB to check
+ *      IF_OUT_DIGITAL - Used for frequency counting - it's the raw signal digitised, GPIO 4
+ *              No gain control on this pin.
+ *      IF_OUT_PGA - Digital output, but amplified
+ *      IF_OUT_TO_PI - for movement detection, post gain control
+ *
  * 26   Check the filter code to use, high or notches
- * 27   On linkedLists, add a maximum number of readings to store & when exceeded, remove the tail.
+ *          Take this out for the Pi. Is there an alternative out there?
+ * 27   On linkedLists, add a maximum number of readings to store & when exceeded, remove the tail. **URGENT
  *  DONE    2   Create a single H file for all the common stuff
  *  DONE            a What is the right way of doing this, is there a structure or a method for this?
  *  DONE            b What should I do about the various return status'
@@ -43,9 +67,11 @@
  *          See the gainfunctions.h file
  *          i Split gainFunctions into user functions and internal functions
  *  7   Integrate LEDs into common library
+ *          Not required at this time, integrate into the application instead.
  *  9   Code tidy up
  *          a Update comments and check they are correct
  *          b Update function descriptions in h files to ensure they are correct
+ *              LEDControl
  *          c Remove redundant code
  *  13  Write instructions on how to compile into application
  *  15  Write some instructions on how to use the application
@@ -54,7 +80,7 @@
  *  20  Add scale and associated code to set the reading speed
  *  21  On run timer trigger when capturing values (running = true)
  *  4   Convert SPi to use ioctl as this doesn't require elevated privileges
- * 
+ *  28  Change the GUI to give control over refresh time and data collection time
  * 
  *      
  *  DONE    8   Make Gain control structure contain required allowable values and use these in scale

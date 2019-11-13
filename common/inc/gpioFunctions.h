@@ -20,9 +20,9 @@
 
 //ToDo: Add some details about these PINS in here
 
-#define		IF_OUT1				27	// The GPIO pin used for the frequency input, was 4 originally and also tried 11
+#define		IF_OUT1				27	// New name is IF_OUT_PGA   The GPIO pin used for the frequency input, was 4 originally and also tried 11
 #define		IF_OUT_TO_PI		22
-#define		SAMPLE_HOLD			17	// 
+#define		SAMPLE_HOLD			17	// GPIO17
 
 #define		MAX_WAIT_TIME		3		// The maximum time allowed to register a GPIO state time in seconds.
 #define		FREQ_DEBOUNCE_TIME	500		// The time in microseconds to wait for the check time
