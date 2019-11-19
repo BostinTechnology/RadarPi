@@ -158,7 +158,7 @@ void	listDeleteNode	(Linkedlist *list, Node *deletenode)
     
 }
 
-void	listDeleteTail      (Linkedlist *list, int recalc);
+void	listDeleteTail      (Linkedlist *list, int recalc)
 {
  /* Overview: Delete the tail node from the list. If recalc is true, the routine
  *         will recalculate the max and min values of the list
@@ -179,7 +179,7 @@ void	listDeleteTail      (Linkedlist *list, int recalc);
     
 }
 
-void	listDeleteHead      (Linkedlist *list, int recalc);
+void	listDeleteHead      (Linkedlist *list, int recalc)
 {
      /* Overview: Delete the head node from the list. If recalc is true, the routine
  *         will recalculate the max and min values of the list
