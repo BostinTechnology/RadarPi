@@ -189,6 +189,7 @@ void on_menu_file_connect(struct app_widgets *widget) {
 void on_btn_startstop_clicked(GtkButton *button, struct app_widgets *widget) {
 	
 	//int			status;
+    int         reply;
     printf("Start / Stop button has been clicked\n");
     
     widget->running = !widget->running;
@@ -206,11 +207,11 @@ void on_btn_startstop_clicked(GtkButton *button, struct app_widgets *widget) {
             if (reply == GPIO_EXIT_SUCCESS) {
                 reply = setSampleHoldForRun();
             }
-        };
+        }
 
     }
     else {
-        printf("Currently NOT running\n");=	
+        printf("Currently NOT running\n");	
         if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget->w_radbut_raw))) {
             adcSPiEnd();
         }
@@ -285,7 +286,7 @@ void on_btn_set_gain_clicked(GtkButton *button, struct app_widgets *widget) {
     //Write the new gain setting to the board    
     status = gainSPiInitialisation ();
     if (status != SPI_ERR_NONE) {
-        status = setGainControl(set_value);
+        status = setGa488inControl(set_value);
         if (status != SPI_ERR_NONE) {
             status = gainSPiEnd();
         }
