@@ -486,7 +486,7 @@ gboolean data_timer_exe(struct app_widgets *widget) {
     
     if (widget->running != true) {
         // It is currently not running, therefore don't capture any values.
-        if (widget->list->listHead != NULL) {
+        if (widget->list.listHead != NULL) {
             // List is initialised and needs to be cleared ahead of the a new list running.
             listInitialise(&widget->list);
         }
