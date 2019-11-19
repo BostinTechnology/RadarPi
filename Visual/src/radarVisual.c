@@ -218,7 +218,7 @@ void on_btn_startstop_clicked(GtkButton *button, struct app_widgets *widget) {
         else if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget->w_radbut_adc))) {
             adcSPiEnd();
         };
-
+    }
 	return;
 }
 
@@ -286,7 +286,7 @@ void on_btn_set_gain_clicked(GtkButton *button, struct app_widgets *widget) {
     //Write the new gain setting to the board    
     status = gainSPiInitialisation ();
     if (status != SPI_ERR_NONE) {
-        status = setGa488inControl(set_value);
+        status = setGainControl(set_value);
         if (status != SPI_ERR_NONE) {
             status = gainSPiEnd();
         }
