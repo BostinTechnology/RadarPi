@@ -23,6 +23,7 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <stdbool.h>
+#include <stdlib.h>
 #include <bcm2835.h>        // hardware definition library file
 #include <time.h>           // to enable time functions
 
@@ -194,11 +195,15 @@ void createDataset(void) {
         
         testcurrenttime = clock();
         status = readVoltage(&voltage);
-        dataset[i].element = i;
-        dataset[i].voltage = voltage;
-        dataset[i].readtime = testcurrenttime;
-        //printf("Dataset:%d  Test Time:%ld  Voltage:%f\n", dataset[i].element, dataset[i].readtime, dataset[i].voltage);
-        i++;
+        if (status == ADC_EXIT_SUCCESS) {
+            dataset[i].element = i;
+            dataset[i].voltage = voltage;
+            dataset[i].readtime = testcurrenttime;
+            //printf("Dataset:%d  Test Time:%ld  Voltage:%f\n", dataset[i].element, dataset[i].readtime, dataset[i].voltage);
+            i++;
+        } else {
+            printf("Reading failed\n");
+        }
     } while ((testcurrenttime < testendtime) & (i < max_readings));
 
     for (i=0; i < max_readings; i = i + 50) {
@@ -231,8 +236,13 @@ void createDataset(void) {
 int main(int argc, char** argv) {
 
     char option;                        // Used for menu choices
+    int status;
 
-    adcSPiInitialisation();
+    status = adcSPiInitialisation();
+    if (status != ADC_EXIT_SUCCESS) {
+        printf("Failed two initialise comms, aborting\n");
+        exit(status);
+    }
     // main menu
     do {
         printf(" \n\n");
@@ -273,6 +283,6 @@ int main(int argc, char** argv) {
        }
        fflush (stdout) ;
     } while(option != 'e');
-    
+    adcSPiEnd();
     return 0;
 }

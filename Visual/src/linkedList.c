@@ -158,6 +158,45 @@ void	listDeleteNode	(Linkedlist *list, Node *deletenode)
     
 }
 
+void	listDeleteTail      (Linkedlist *list, int recalc);
+{
+ /* Overview: Delete the tail node from the list. If recalc is true, the routine
+ *         will recalculate the max and min values of the list
+ *
+ * param[in]    *list : A pointer to the linked list
+ * param[in]    recalc : Set to true or false 
+ *
+ * return status meanings         
+ *          0 : success
+ *          1 : invalid parameters */
+    
+    // ToDo: This will require a new max and min value being calculated
+    
+    // Set the pointers of the *listtail node to the previous node
+    //      Check if the previous node exists, else it is the only node
+    
+    
+    
+}
+
+void	listDeleteHead      (Linkedlist *list, int recalc);
+{
+     /* Overview: Delete the head node from the list. If recalc is true, the routine
+ *         will recalculate the max and min values of the list
+ *
+ * param[in]    *list : A pointer to the linked list 
+ * param[in]    recalc : Set to true or false
+ *
+ * return status meanings         
+ *          0 : success
+ *          1 : invalid parameters */
+    
+    // ToDo: This will require a new max and min value being calculated
+    
+    // Set the pointers of the *listhead to the next node
+    //   need to cehck there is a next node first, else it should be something else.
+    
+}
 
 
 void listSetMax (Linkedlist *list, float maxvalue)

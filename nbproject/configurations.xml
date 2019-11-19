@@ -68,16 +68,6 @@
       </toolsSet>
       <compileType>
         <cTool>
-          <incDir>
-            <pElem>AnalogueMeasurement</pElem>
-            <pElem>DigitalDetection</pElem>
-            <pElem>GainControl</pElem>
-            <pElem>SampleSoftware</pElem>
-            <pElem>TestProgram</pElem>
-            <pElem>Visual</pElem>
-            <pElem>common</pElem>
-            <pElem>nbproject</pElem>
-          </incDir>
           <warningLevel>2</warningLevel>
         </cTool>
         <asmTool>
@@ -94,6 +84,12 @@
                             to="${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}"
                             from="${OUTPUT_PATH}"
                             perm="644"
+                            owner="root"
+                            group="bin"/>
+          <packFileListElem type="File"
+                            to="${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}"
+                            from="${OUTPUT_PATH}"
+                            perm="755"
                             owner="root"
                             group="bin"/>
           <packFileListElem type="File"

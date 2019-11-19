@@ -78,72 +78,72 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/RadarPi: ${OBJECTFILES}
 ${OBJECTDIR}/SampleSoftware/src/mainSampleSoftware.o: SampleSoftware/src/mainSampleSoftware.c nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} -p ${OBJECTDIR}/SampleSoftware/src
 	${RM} "$@.d"
-	$(COMPILE.c) -g -Wall -IAnalogueMeasurement -IDigitalDetection -IGainControl -ISampleSoftware -ITestProgram -IVisual -Icommon -Inbproject -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/SampleSoftware/src/mainSampleSoftware.o SampleSoftware/src/mainSampleSoftware.c
+	$(COMPILE.c) -g -Wall -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/SampleSoftware/src/mainSampleSoftware.o SampleSoftware/src/mainSampleSoftware.c
 
 ${OBJECTDIR}/TestProgram/src/adcTest.o: TestProgram/src/adcTest.c nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} -p ${OBJECTDIR}/TestProgram/src
 	${RM} "$@.d"
-	$(COMPILE.c) -g -Wall -IAnalogueMeasurement -IDigitalDetection -IGainControl -ISampleSoftware -ITestProgram -IVisual -Icommon -Inbproject -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/TestProgram/src/adcTest.o TestProgram/src/adcTest.c
+	$(COMPILE.c) -g -Wall -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/TestProgram/src/adcTest.o TestProgram/src/adcTest.c
 
 ${OBJECTDIR}/TestProgram/src/mainTestProgram.o: TestProgram/src/mainTestProgram.c nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} -p ${OBJECTDIR}/TestProgram/src
 	${RM} "$@.d"
-	$(COMPILE.c) -g -Wall -IAnalogueMeasurement -IDigitalDetection -IGainControl -ISampleSoftware -ITestProgram -IVisual -Icommon -Inbproject -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/TestProgram/src/mainTestProgram.o TestProgram/src/mainTestProgram.c
+	$(COMPILE.c) -g -Wall -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/TestProgram/src/mainTestProgram.o TestProgram/src/mainTestProgram.c
 
 ${OBJECTDIR}/common/src/adcFunctions.o: common/src/adcFunctions.c nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} -p ${OBJECTDIR}/common/src
 	${RM} "$@.d"
-	$(COMPILE.c) -g -Wall -IAnalogueMeasurement -IDigitalDetection -IGainControl -ISampleSoftware -ITestProgram -IVisual -Icommon -Inbproject -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/common/src/adcFunctions.o common/src/adcFunctions.c
+	$(COMPILE.c) -g -Wall -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/common/src/adcFunctions.o common/src/adcFunctions.c
 
 ${OBJECTDIR}/common/src/gainFunctions.o: common/src/gainFunctions.c nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} -p ${OBJECTDIR}/common/src
 	${RM} "$@.d"
-	$(COMPILE.c) -g -Wall -IAnalogueMeasurement -IDigitalDetection -IGainControl -ISampleSoftware -ITestProgram -IVisual -Icommon -Inbproject -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/common/src/gainFunctions.o common/src/gainFunctions.c
+	$(COMPILE.c) -g -Wall -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/common/src/gainFunctions.o common/src/gainFunctions.c
 
 ${OBJECTDIR}/common/src/gpioFunctions.o: common/src/gpioFunctions.c nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} -p ${OBJECTDIR}/common/src
 	${RM} "$@.d"
-	$(COMPILE.c) -g -Wall -IAnalogueMeasurement -IDigitalDetection -IGainControl -ISampleSoftware -ITestProgram -IVisual -Icommon -Inbproject -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/common/src/gpioFunctions.o common/src/gpioFunctions.c
+	$(COMPILE.c) -g -Wall -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/common/src/gpioFunctions.o common/src/gpioFunctions.c
 
 ${OBJECTDIR}/common/src/ledControl.o: common/src/ledControl.c nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} -p ${OBJECTDIR}/common/src
 	${RM} "$@.d"
-	$(COMPILE.c) -g -Wall -IAnalogueMeasurement -IDigitalDetection -IGainControl -ISampleSoftware -ITestProgram -IVisual -Icommon -Inbproject -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/common/src/ledControl.o common/src/ledControl.c
+	$(COMPILE.c) -g -Wall -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/common/src/ledControl.o common/src/ledControl.c
 
 ${OBJECTDIR}/common/src/radar.o: common/src/radar.c nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} -p ${OBJECTDIR}/common/src
 	${RM} "$@.d"
-	$(COMPILE.c) -g -Wall -IAnalogueMeasurement -IDigitalDetection -IGainControl -ISampleSoftware -ITestProgram -IVisual -Icommon -Inbproject -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/common/src/radar.o common/src/radar.c
+	$(COMPILE.c) -g -Wall -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/common/src/radar.o common/src/radar.c
 
 ${OBJECTDIR}/common/src/rdr_utilities.o: common/src/rdr_utilities.c nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} -p ${OBJECTDIR}/common/src
 	${RM} "$@.d"
-	$(COMPILE.c) -g -Wall -IAnalogueMeasurement -IDigitalDetection -IGainControl -ISampleSoftware -ITestProgram -IVisual -Icommon -Inbproject -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/common/src/rdr_utilities.o common/src/rdr_utilities.c
+	$(COMPILE.c) -g -Wall -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/common/src/rdr_utilities.o common/src/rdr_utilities.c
 
 ${OBJECTDIR}/default_header.o: default_header.c nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.c) -g -Wall -IAnalogueMeasurement -IDigitalDetection -IGainControl -ISampleSoftware -ITestProgram -IVisual -Icommon -Inbproject -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/default_header.o default_header.c
+	$(COMPILE.c) -g -Wall -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/default_header.o default_header.c
 
 ${OBJECTDIR}/nbproject/newfile1.o: nbproject/newfile1.c nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} -p ${OBJECTDIR}/nbproject
 	${RM} "$@.d"
-	$(COMPILE.c) -g -Wall -IAnalogueMeasurement -IDigitalDetection -IGainControl -ISampleSoftware -ITestProgram -IVisual -Icommon -Inbproject -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/nbproject/newfile1.o nbproject/newfile1.c
+	$(COMPILE.c) -g -Wall -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/nbproject/newfile1.o nbproject/newfile1.c
 
 ${OBJECTDIR}/nbproject/newfile2.o: nbproject/newfile2.c nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} -p ${OBJECTDIR}/nbproject
 	${RM} "$@.d"
-	$(COMPILE.c) -g -Wall -IAnalogueMeasurement -IDigitalDetection -IGainControl -ISampleSoftware -ITestProgram -IVisual -Icommon -Inbproject -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/nbproject/newfile2.o nbproject/newfile2.c
+	$(COMPILE.c) -g -Wall -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/nbproject/newfile2.o nbproject/newfile2.c
 
 ${OBJECTDIR}/nbproject/newmain.o: nbproject/newmain.c nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} -p ${OBJECTDIR}/nbproject
 	${RM} "$@.d"
-	$(COMPILE.c) -g -Wall -IAnalogueMeasurement -IDigitalDetection -IGainControl -ISampleSoftware -ITestProgram -IVisual -Icommon -Inbproject -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/nbproject/newmain.o nbproject/newmain.c
+	$(COMPILE.c) -g -Wall -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/nbproject/newmain.o nbproject/newmain.c
 
 ${OBJECTDIR}/newmain.o: newmain.c nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.c) -g -Wall -IAnalogueMeasurement -IDigitalDetection -IGainControl -ISampleSoftware -ITestProgram -IVisual -Icommon -Inbproject -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/newmain.o newmain.c
+	$(COMPILE.c) -g -Wall -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/newmain.o newmain.c
 
 # Subprojects
 .build-subprojects:

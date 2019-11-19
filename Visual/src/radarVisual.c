@@ -32,23 +32,14 @@
  *  ==========
  * ToDo: Reduce screen updating for Ciaran, too much data on screen.
  * 
- * BUG: It would appear that there is an issue with the GUI, it only appears to let you
- *      update the screen once it has triggered.
+ * BUGS in Git!!!!
  * 
- * BUG: bcm2835_init: gpio mmap failed: Cannot allocate memory
- *      bcm2835_init failed. Are you running as root?
- * 
- *      Happens in data timer, ONLY whilst in ADC mode.
- * 
- * BUG: Operating in digital data mode, data is collected rapidly, but graph is only updated 
- *      at a very slow rate, maybe every 50 or 100 readings.
- * 
- * BUG: Running radarVisual, running in ADC Raw mode, data values are int's, not floats.
- * 
- * BUG: In data timer, it is continually refreshing the spi and gpio stuff. This should be done once only
- *      Consider moving it to the area when you choose mode, not get data...
- *      Be careful of the gain, this is a different SPI channel.
- * 
+ * 31   Add in way of knowing it is running or not, a coloured circle maybe.
+ * 30   Is it worth changing the Set for gain to set for all Config...
+ *          Would need to change the text on screen a little and maybe set it 
+ *          to active or greyed out.
+ *          Either way the screen needs to be clearer
+ * 32   Does the Sample and Hold signal need to be set to run for all modes, includes ADC?
  * 25   Check the gpio pin connections & re-write them to reflect the new hardware
  *      IF_OUT_DIGITAL - Used for frequency counting - it's the raw signal digitised, GPIO 4
  *              No gain control on this pin.
@@ -155,7 +146,10 @@
  * DONE         c mainTestProgram
  * DONE         d mainSampleSoftware
  * DONE         e readingDigitalSignals
-
+ * DONE 29   Need to incorporate Start / Stop functionality
+ * DONE         a Add in bus setup and closure into it
+ * DONE         b Add in data running on or off
+ * DONE         c Add in screen data refresh runing or not
  * 
  * 
  */
@@ -201,11 +195,29 @@ void on_btn_startstop_clicked(GtkButton *button, struct app_widgets *widget) {
     
     if (widget->running) {
         printf("Currently Running\n");
+        if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget->w_radbut_raw))) {
+            reply = adcSPiInitialisation();
+        }
+        else if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget->w_radbut_adc))) {
+            reply = adcSPiInitialisation();
+        }
+        else if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget->w_radbut_digital))) {
+            reply = setupGpioFunctions();
+            if (reply == GPIO_EXIT_SUCCESS) {
+                reply = setSampleHoldForRun();
+            }
+        };
+
     }
     else {
-        printf("Currently NOT running\n");
-    }
-	
+        printf("Currently NOT running\n");=	
+        if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget->w_radbut_raw))) {
+            adcSPiEnd();
+        }
+        else if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget->w_radbut_adc))) {
+            adcSPiEnd();
+        };
+
 	return;
 }
 
@@ -448,6 +460,12 @@ void on_draw (GtkWidget *drawing, cairo_t *cr, struct app_widgets *widget) {
 
 gboolean screen_timer_exe(struct app_widgets *widget) {
     printf("In screen refresh timer trigger\n");
+    
+    if (widget->running != true) {
+        // It is currently not running, therefore don't refresh the screen.
+        return true;
+    }
+
      
     // triggers the redraw of the window
     gtk_widget_queue_draw (widget->w_canvas_graph);
@@ -465,6 +483,14 @@ gboolean data_timer_exe(struct app_widgets *widget) {
     int reply = 0;              // the reply status from the code
     float   reading = 0.0;
     
+    if (widget->running != true) {
+        // It is currently not running, therefore don't capture any values.
+        if (widget->list->listHead != NULL) {
+            // List is initialised and needs to be cleared ahead of the a new list running.
+            listInitialise(&widget->list);
+        }
+        return true;
+    }
     //Get some data
     
     // Random number generation
@@ -480,10 +506,19 @@ gboolean data_timer_exe(struct app_widgets *widget) {
     if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget->w_radbut_raw))) {
 
         printf("Raw data mode selected\n");
-        reply = adcSPiInitialisation();
         if (reply == ADC_EXIT_SUCCESS) {
             reply = readVoltage(&reading);
-            adcSPiEnd();
+        }
+        // In this mode, max and min are based on the voltage output of the adc, hence set to max and min here
+        listSetMax(&widget->list, MAX_VOLTAGE);
+        listSetMin(&widget->list, MIN_VOLTAGE);
+    }
+    else if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget->w_radbut_adc))) {
+        printf("ADC data mode selected\n");
+        // Add filter here with ADC
+        if (reply == ADC_EXIT_SUCCESS) {
+            reply = readVoltage(&reading);
+            reading = highpass_filter (reading);
         }
         // In this mode, max and min are based on the voltage output of the adc, hence set to max and min here
         listSetMax(&widget->list, MAX_VOLTAGE);
@@ -491,26 +526,9 @@ gboolean data_timer_exe(struct app_widgets *widget) {
     }
     else if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget->w_radbut_digital))) {
         printf("Digital data mode selected\n");
-        reply = setupGpioFunctions();
         if (reply == GPIO_EXIT_SUCCESS) {
-            reply = setSampleHoldForRun();
-            if (reply == GPIO_EXIT_SUCCESS) {
-                reply = returnFullFrequency(&reading, IF_OUT_TO_PI);
-            }
+            reply = returnFullFrequency(&reading, IF_OUT_TO_PI);
         }
-    }
-    else if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget->w_radbut_adc))) {
-        printf("ADC data mode selected\n");
-        // Add filter here with ADC
-        reply = adcSPiInitialisation();
-        if (reply == ADC_EXIT_SUCCESS) {
-            reply = readVoltage(&reading);
-            reading = highpass_filter (reading);
-            adcSPiEnd();
-        }
-        // In this mode, max and min are based on the voltage output of the adc, hence set to max and min here
-        listSetMax(&widget->list, MAX_VOLTAGE);
-        listSetMin(&widget->list, MIN_VOLTAGE);
     };
 
     printf("Voltage read:%f\n", reading);
