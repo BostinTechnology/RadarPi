@@ -109,6 +109,7 @@
                 <property name="name">Config</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <signal name="focus" handler="on_btn_config_clicked" swapped="no"/>
                 <child>
                   <object class="GtkButtonBox" id="radio_button_box">
                     <property name="name">radio_button_collection</property>
