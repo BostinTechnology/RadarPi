@@ -34,12 +34,20 @@
  * 
  * BUGS in Git!!!!
  * 
+ * 33   Change Set button so it sets, a new function 
+ * DONE         Operating mode
+ * DONE         Gain
+ * DONE         Updates info boxes
+ * DONE         Change button to set, not set gain.
+ * DONE         Remove on Radiobutton clicked and move it to the set routine.
+ * 34   Need to find a way of capturing the current values after setting. Consider having hidden values 
+ *      in the form to hide them in, alternativily have global variables
+ * 32   Does the Sample and Hold signal need to be set to run for all modes, includes ADC?
  * 31   Add in way of knowing it is running or not, a coloured circle maybe.
  * 30   Is it worth changing the Set for gain to set for all Config...
  *          Would need to change the text on screen a little and maybe set it 
  *          to active or greyed out.
  *          Either way the screen needs to be clearer
- * 32   Does the Sample and Hold signal need to be set to run for all modes, includes ADC?
  * 25   Check the gpio pin connections & re-write them to reflect the new hardware
  *      IF_OUT_DIGITAL - Used for frequency counting - it's the raw signal digitised, GPIO 4
  *              No gain control on this pin.
@@ -196,6 +204,7 @@ void on_btn_startstop_clicked(GtkButton *button, struct app_widgets *widget) {
     
     if (widget->running) {
         printf("Currently Running\n");
+        gtk_entry_set_text(GTK_ENTRY(widgets->w_txt_status), "Running");
         if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget->w_radbut_raw))) {
             reply = adcSPiInitialisation();
         }
@@ -208,10 +217,10 @@ void on_btn_startstop_clicked(GtkButton *button, struct app_widgets *widget) {
                 reply = setSampleHoldForRun();
             }
         }
-
     }
     else {
         printf("Currently NOT running\n");	
+        gtk_entry_set_text(GTK_ENTRY(widgets->w_txt_status), "Not Running");
         if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget->w_radbut_raw))) {
             adcSPiEnd();
         }
@@ -222,7 +231,126 @@ void on_btn_startstop_clicked(GtkButton *button, struct app_widgets *widget) {
 	return;
 }
 
-void on_btn_set_gain_clicked(GtkButton *button, struct app_widgets *widget) {
+void on_btn_config_clicked(GtkButton *button, struct app_widgets *widget){
+    
+    widget->running = false;
+    gtk_entry_set_text(GTK_ENTRY(widgets->w_txt_status), "Not Running");
+    return;
+}
+
+int set_gain(GtkButton *button, struct app_widgets *widget) {
+	
+    char            conv[15];               // location for temporary conversion
+    int             i = 0;
+    
+    //ToDo: Convert this so it uses the list from gainFunctions.c
+    int             allowed_values[] = {0.2,1,10,20,30,40,60,80,120,157};
+    int             allowed_values_size = sizeof(allowed_values)/sizeof(allowed_values[0]);
+    int             set_value = 0;
+    CommsRetCode    status = 0;
+
+    widget->gain_value = gtk_range_get_value(GTK_RANGE(widget->w_scale_gainctrl));
+    printf("Gain Value Set:%d\n", widget->gain_value);
+    
+    // Need to get the value and determine where it actually is in the allowed values
+    // and then write it back.
+    
+    // Iterate through the list checking if the gain_value is greater than value given    
+    i = 0;
+    while(allowed_values[i] < widget->gain_value) {
+        i++;
+        if (i == allowed_values_size) {
+            break;
+        }
+    };
+    
+    printf("Identified Entry:%d Posn:%d\n", allowed_values[i], i);
+    
+    // Got the upper position, now check what value to set_value to
+    if (i == 0) {
+        // the value selected is smaller than the lowest value in the list
+        set_value = allowed_values[0];
+    }
+    else if (i == allowed_values_size) {
+        // Reached the end of the list, set it to the max value
+        set_value = allowed_values[i-1];
+    }
+    else {
+        // Find the value between 2 limits
+        if ((widget->gain_value - allowed_values[i-1]) < (allowed_values[i] - widget->gain_value)) {
+            set_value = allowed_values[i-1];
+        }
+        else {
+            set_value = allowed_values[i];
+        }
+    }
+
+    // set values of slider and gain setting box.
+    
+    sprintf(conv, "%d", set_value);
+    printf("Converted:%s\n", conv);
+
+    //Write the new gain setting to the board    
+    status = gainSPiInitialisation ();
+    if (status != SPI_ERR_NONE) {
+        status = setGainControl(set_value);
+        if (status != SPI_ERR_NONE) {
+            // Gain has been set, now end comms and set the boxes / slider
+            gainSPiEnd();
+            gtk_entry_set_text(GTK_ENTRY(widget->w_txt_gain_setting), conv);
+            gtk_range_set_value(GTK_RANGE(widget->w_scale_gainctrl), set_value);
+        };
+    };
+
+	return status;
+}
+
+void on_btn_set_clicked(GtkButton *button, struct app_widgets *widget) {
+
+    int     status;
+    char    mode_full[15] = {'\0'};
+
+    // Set the gain from the slider
+    status = set_gain(button, widget);
+    
+    if (status != SPI_ERR_NONE) {
+        printf("Failed to set gain\n");
+        //ToDo: Reset back to pre change. - Use on_btn_ignore clicked
+    }
+    
+    // Set the info box Mode    
+	if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget->w_radbut_raw))) {
+        strcpy(mode_full, "ADC Raw");
+    }
+    else if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget->w_radbut_digital))) {
+        strcpy(mode_full, "Digital");
+    }
+    else if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget->w_radbut_adc))) {
+        strcpy(mode_full, "ADC Smoothed");
+    }
+    else {
+        printf("Error occurred unknown mode selected\n");
+        strcpy(mode_full, "Unknown");
+    }
+    gtk_entry_set_text(GTK_ENTRY(widget->w_txt_mode_info), mode_full);
+    printf("set the mode\n");
+    
+}
+
+void on_btn_ignore_clicked(GtkButton *button, struct app_widgets *widget) {
+
+    // Set the gain back to teh old value
+    printf("Not yet implemented\n");
+    
+    
+    // Set the info boxes
+    //      Mode
+    //      Gain
+    
+    return;
+}
+
+void old_on_btn_set_gain_clicked(GtkButton *button, struct app_widgets *widget) {
 	
     char            conv[15];               // location for temporary conversion
     int             i = 0;
@@ -296,7 +424,7 @@ void on_btn_set_gain_clicked(GtkButton *button, struct app_widgets *widget) {
 	return;
 }
 
-void on_radiobutton_toggled(GtkButton *button, struct app_widgets *widget) {
+void old_on_radiobutton_toggled(GtkButton *button, struct app_widgets *widget) {
     
 	char			mode;
     char            mode_full[15] = {'\0'};
@@ -479,8 +607,6 @@ gboolean screen_timer_exe(struct app_widgets *widget) {
 gboolean data_timer_exe(struct app_widgets *widget) {
     printf("In data timer\n");
     
-    //ToDo: Implement linked lists here...
-    /* Version 1: Get some random data and put it into a linked list*/
     int reply = 0;              // the reply status from the code
     float   reading = 0.0;
     
@@ -495,10 +621,11 @@ gboolean data_timer_exe(struct app_widgets *widget) {
     //Get some data
     
     // Random number generation
-    //int value = 0;
-    //value = (rand() % 300);
-    //// Add a new value to the start of the list every time it runs
-    //listAddHead(&widget->list, value);
+    printf("random number generator\n");
+    reading = (rand() % 300);
+    // Add a new value to the start of the list every time it runs
+    listAddHead(&widget->list, reading);
+    return true;
 
     /* Need to set maximum & minimum values here as part of mode because the digital mode
      * returns frequency, not voltage
@@ -585,6 +712,7 @@ int main(int argc, char** argv) {
     widgets->w_txt_mode_info    = GTK_WIDGET(gtk_builder_get_object(builder, "txt_mode_info"));
     widgets->w_txt_gain_setting = GTK_WIDGET(gtk_builder_get_object(builder, "txt_gain_setting"));
     widgets->w_adj_gainctrl     = GTK_ADJUSTMENT(gtk_builder_get_object(builder, "adj_gainctrl"));
+    widgets->w_txt_status       = GTK_WIDGET(gtk_builder_get_object(builder, "txt_status"));
     
     
     // connect the widgets to the signal handler
