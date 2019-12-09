@@ -40,30 +40,28 @@
  * 34   Need to find a way of capturing the current values after setting. Consider having hidden values 
  *      in the form to hide them in, alternatively have global variables
  * 32   The Sample and Hold signal needs to be set to run for all modes, including ADC
- * 31   Add in way of knowing it is running or not, a coloured circle maybe.
- * DONE 30   Is it worth changing the Set for gain to set for all Config...
- * DONE         Would need to change the text on screen a little and maybe set it 
- * DONE         to active or greyed out.
- * DONE         Either way the screen needs to be clearer
  * 25   Check the gpio pin connections & re-write them to reflect the new hardware
  *      IF_OUT_DIGITAL - Used for frequency counting - it's the raw signal digitised, GPIO 4
  *              No gain control on this pin.
  *      IF_OUT_PGA - Digital output, but amplified
  *      IF_OUT_TO_PI - for movement detection, post gain control
- *
  * 26   Check the filter code to use, high or notches
  *          Take this out for the Pi. Is there an alternative out there?
- * 27   On linkedLists, add a maximum number of readings to store & when exceeded, remove the tail. **URGENT
- *  DONE    2   Create a single H file for all the common stuff
- *  DONE            a What is the right way of doing this, is there a structure or a method for this?
- *  DONE            b What should I do about the various return status'
- *                  Should these be different value ranges
+
+ * 37   Change the error messages to be
+ *          positive responses are even numbers
+ *          failed responses are odd numbers
+ *          I can then change the checks to only look for a 0b00000001 to know it has failed
+ *          Make all the error states different numbers.
  *  22  Updated linked lists to add a delete function
  *  24  Change gainFunctions to use typedef struct ...
  *          See the gainfunctions.h file
  *          i Split gainFunctions into user functions and internal functions
  *  7   Integrate LEDs into common library
  *          Not required at this time, integrate into the application instead.
+ * 38   Improve the graphing, the lines are very thick!
+ * 
+ * 
  *  9   Code tidy up
  *          a Update comments and check they are correct
  *          b Update function descriptions in h files to ensure they are correct
@@ -162,7 +160,15 @@
  * DONE         Change button to set, not set gain.
  * DONE         Remove on Radiobutton clicked and move it to the set routine.
  * DONE ToDo: Reduce screen updating for Ciaran, too much data on screen.
-
+ * DONE 31   Add in way of knowing it is running or not, a coloured circle maybe.
+ * DONE 30   Is it worth changing the Set for gain to set for all Config...
+ * DONE         Would need to change the text on screen a little and maybe set it 
+ * DONE         to active or greyed out.
+ * DONE         Either way the screen needs to be clearer
+ * DONE 27   On linkedLists, add a maximum number of readings to store & when exceeded, remove the tail. **URGENT
+ *  DONE    2   Create a single H file for all the common stuff
+ *  DONE            a What is the right way of doing this, is there a structure or a method for this?
+ *  DONE            b What should I do about the various return status'
  * 
  */
 
@@ -208,7 +214,7 @@ void on_btn_startstop_clicked(GtkButton *button, struct app_widgets *widget) {
     
     if (widget->running) {
         printf("Currently Running\n");
-        gtk_entry_set_text(GTK_ENTRY(widgets->w_txt_status), "Running");
+        gtk_entry_set_text(GTK_ENTRY(widget->w_txt_status), "Running");
         if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget->w_radbut_raw))) {
             reply = adcSPiInitialisation();
         }
@@ -224,7 +230,7 @@ void on_btn_startstop_clicked(GtkButton *button, struct app_widgets *widget) {
     }
     else {
         printf("Currently NOT running\n");	
-        gtk_entry_set_text(GTK_ENTRY(widgets->w_txt_status), "Not Running");
+        gtk_entry_set_text(GTK_ENTRY(widget->w_txt_status), "Not Running");
         if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget->w_radbut_raw))) {
             adcSPiEnd();
         }
@@ -238,7 +244,7 @@ void on_btn_startstop_clicked(GtkButton *button, struct app_widgets *widget) {
 void on_btn_config_clicked(GtkButton *button, struct app_widgets *widget){
     
     widget->running = false;
-    gtk_entry_set_text(GTK_ENTRY(widgets->w_txt_status), "Not Running");
+    gtk_entry_set_text(GTK_ENTRY(widget->w_txt_status), "Not Running");
     return;
 }
 
@@ -305,6 +311,10 @@ int set_gain(GtkButton *button, struct app_widgets *widget) {
             gtk_range_set_value(GTK_RANGE(widget->w_scale_gainctrl), set_value);
         };
     };
+    if (status !=SPI_ERR_NONE) {
+        gtk_entry_set_text(GTK_ENTRY(widget->w_txt_gain_setting), "Error");
+        gtk_range_set_value(GTK_RANGE(widget->w_scale_gainctrl), 0);
+    }
 
 	return status;
 }
@@ -338,6 +348,10 @@ void on_btn_set_clicked(GtkButton *button, struct app_widgets *widget) {
     }
     gtk_entry_set_text(GTK_ENTRY(widget->w_txt_mode_info), mode_full);
     printf("set the mode\n");
+    
+    gtk_label_set_text(GTK_LABEL(widget->w_lbl_user_message), "");
+    
+    return
     
 }
 
@@ -713,17 +727,18 @@ int main(int argc, char** argv) {
     window = GTK_WIDGET(gtk_builder_get_object(builder, "main_application_window"));
     
     // build the structure of widget pointers
-    widgets->w_radbut_adc       = GTK_WIDGET(gtk_builder_get_object(builder, "radbut_adc"));
-    widgets->w_radbut_digital   = GTK_WIDGET(gtk_builder_get_object(builder, "radbut_digital"));
-    widgets->w_radbut_raw       = GTK_WIDGET(gtk_builder_get_object(builder, "radbut_raw"));
-    widgets->w_scale_gainctrl   = GTK_WIDGET(gtk_builder_get_object(builder, "scale_gainctrl"));
-    widgets->w_btn_set_gain     = GTK_WIDGET(gtk_builder_get_object(builder, "btn_set_gain"));
-    widgets->w_canvas_graph     = GTK_WIDGET(gtk_builder_get_object(builder, "canvas_graph"));
-    widgets->w_btn_startstop    = GTK_WIDGET(gtk_builder_get_object(builder, "btn_startstop"));
-    widgets->w_txt_mode_info    = GTK_WIDGET(gtk_builder_get_object(builder, "txt_mode_info"));
-    widgets->w_txt_gain_setting = GTK_WIDGET(gtk_builder_get_object(builder, "txt_gain_setting"));
-    widgets->w_adj_gainctrl     = GTK_ADJUSTMENT(gtk_builder_get_object(builder, "adj_gainctrl"));
-    widgets->w_txt_status       = GTK_WIDGET(gtk_builder_get_object(builder, "txt_status"));
+    widgets->w_radbut_adc           = GTK_WIDGET(gtk_builder_get_object(builder, "radbut_adc"));
+    widgets->w_radbut_digital       = GTK_WIDGET(gtk_builder_get_object(builder, "radbut_digital"));
+    widgets->w_radbut_raw           = GTK_WIDGET(gtk_builder_get_object(builder, "radbut_raw"));
+    widgets->w_scale_gainctrl       = GTK_WIDGET(gtk_builder_get_object(builder, "scale_gainctrl"));
+    widgets->w_btn_set_gain         = GTK_WIDGET(gtk_builder_get_object(builder, "btn_set_gain"));
+    widgets->w_canvas_graph         = GTK_WIDGET(gtk_builder_get_object(builder, "canvas_graph"));
+    widgets->w_btn_startstop        = GTK_WIDGET(gtk_builder_get_object(builder, "btn_startstop"));
+    widgets->w_txt_mode_info        = GTK_WIDGET(gtk_builder_get_object(builder, "txt_mode_info"));
+    widgets->w_txt_gain_setting     = GTK_WIDGET(gtk_builder_get_object(builder, "txt_gain_setting"));
+    widgets->w_adj_gainctrl         = GTK_ADJUSTMENT(gtk_builder_get_object(builder, "adj_gainctrl"));
+    widgets->w_txt_status           = GTK_WIDGET(gtk_builder_get_object(builder, "txt_status"));
+    widgets->w_lbl_user_message     = GTK_WIDGET(gtk_builder_get_object(builder, "lbl_user_message"));
     
     
     // connect the widgets to the signal handler

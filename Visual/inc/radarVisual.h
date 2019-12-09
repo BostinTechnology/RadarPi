@@ -33,6 +33,7 @@ struct app_widgets {
     GtkWidget       *w_txt_mode_info;
     GtkWidget       *w_txt_gain_setting;
     GtkWidget       *w_txt_status;
+    GtkWidget       *w_lbl_user_message;
     // Plus other variables I want to use
     bool            running;                    // When true, gathers data to show in the graph
     int             gain_value;                 // The gain value from the slider
