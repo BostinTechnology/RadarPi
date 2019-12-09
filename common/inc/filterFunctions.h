@@ -25,7 +25,7 @@
  * return the filtered value (or zero until enough values processed)
  *****************************************************************************
  */
-short   highpass_filter (short next_sample);
+float   highpass_filter (float next_sample);
 
  /*
  *****************************************************************************
@@ -38,7 +38,7 @@ short   highpass_filter (short next_sample);
  * return the filtered value (or zero until enough values processed)
  *****************************************************************************
  */
-short   notch_filter_100 (short next_sample);
+float   notch_filter_100 (float next_sample);
 
 /*
  *****************************************************************************
@@ -51,7 +51,7 @@ short   notch_filter_100 (short next_sample);
  * return the filtered value (or zero until enough values processed)
  *****************************************************************************
  */
-short   notch_filter_120 (short next_sample);
+float   notch_filter_120 (float next_sample);
 
 /*
  *****************************************************************************

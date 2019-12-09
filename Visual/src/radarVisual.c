@@ -30,24 +30,21 @@
  *
  *  To Do List
  *  ==========
- * ToDo: Reduce screen updating for Ciaran, too much data on screen.
  * 
  * BUGS in Git!!!!
  * 
- * 33   Change Set button so it sets, a new function 
- * DONE         Operating mode
- * DONE         Gain
- * DONE         Updates info boxes
- * DONE         Change button to set, not set gain.
- * DONE         Remove on Radiobutton clicked and move it to the set routine.
+ * 35   Mode, Gain and Status need to be set at the beginning of the routines.
+ *      when the software first starts up, it is blank, how do we get it with set values.
+ * 36   On the config page, I need to add in a message box to prompt either Set or Ignore.
+ *      I wonder if I can force it to not change screens until one or the other is pressed.
  * 34   Need to find a way of capturing the current values after setting. Consider having hidden values 
- *      in the form to hide them in, alternativily have global variables
- * 32   Does the Sample and Hold signal need to be set to run for all modes, includes ADC?
+ *      in the form to hide them in, alternatively have global variables
+ * 32   The Sample and Hold signal needs to be set to run for all modes, including ADC
  * 31   Add in way of knowing it is running or not, a coloured circle maybe.
- * 30   Is it worth changing the Set for gain to set for all Config...
- *          Would need to change the text on screen a little and maybe set it 
- *          to active or greyed out.
- *          Either way the screen needs to be clearer
+ * DONE 30   Is it worth changing the Set for gain to set for all Config...
+ * DONE         Would need to change the text on screen a little and maybe set it 
+ * DONE         to active or greyed out.
+ * DONE         Either way the screen needs to be clearer
  * 25   Check the gpio pin connections & re-write them to reflect the new hardware
  *      IF_OUT_DIGITAL - Used for frequency counting - it's the raw signal digitised, GPIO 4
  *              No gain control on this pin.
@@ -61,7 +58,7 @@
  *  DONE            a What is the right way of doing this, is there a structure or a method for this?
  *  DONE            b What should I do about the various return status'
  *                  Should these be different value ranges
- *  CM 22  Updated linked lists to add a delete function
+ *  22  Updated linked lists to add a delete function
  *  24  Change gainFunctions to use typedef struct ...
  *          See the gainfunctions.h file
  *          i Split gainFunctions into user functions and internal functions
@@ -158,7 +155,14 @@
  * DONE         a Add in bus setup and closure into it
  * DONE         b Add in data running on or off
  * DONE         c Add in screen data refresh runing or not
- * 
+ * DONE 33   Change Set button so it sets, a new function 
+ * DONE         Operating mode
+ * DONE         Gain
+ * DONE         Updates info boxes
+ * DONE         Change button to set, not set gain.
+ * DONE         Remove on Radiobutton clicked and move it to the set routine.
+ * DONE ToDo: Reduce screen updating for Ciaran, too much data on screen.
+
  * 
  */
 
@@ -491,17 +495,18 @@ void on_draw (GtkWidget *drawing, cairo_t *cr, struct app_widgets *widget) {
             &da.width,
             &da.height);
 
-	printf("Got window geometry\n");
-    printf("X coord:%d ", da.x);
-    printf("Y coord:%d ", da.y);
-    printf("Width  :%d ", da.width);
-    printf("Height :%d\n", da.height);
+    //Debug comments
+	//printf("Got window geometry\n");
+    //printf("X coord:%d ", da.x);
+    //printf("Y coord:%d ", da.y);
+    //printf("Width  :%d ", da.width);
+    //printf("Height :%d\n", da.height);
     // X coord:5 Y coord:5 Width  :500 Height :307
 	
 	/* Draw on a black background */
     cairo_set_source_rgb (cr, 0.0, 0.0, 0.0);
     cairo_paint (cr);
-	printf("drawn on black background\n");
+	//printf("drawn on black background\n");        //Debug comment
 
     // Set how the devie to usder layer translate - keeping it the same.
     cairo_translate (cr, 0, 0);
@@ -509,7 +514,7 @@ void on_draw (GtkWidget *drawing, cairo_t *cr, struct app_widgets *widget) {
     // Move zero points:cairo_scale (cr, ZOOM_X, -ZOOM_Y);
 	//cairo_scale (cr, 95, 95);
 	cairo_scale (cr, (da.width/100), (da.height/100));
-	printf("changed the transformation matrix\n");
+	//printf("changed the transformation matrix\n");        //Debug comment
 	
     /* Determine the data points to calculate (ie. those in the clipping zone */
     cairo_device_to_user_distance (cr, &dx, &dy);
@@ -525,7 +530,7 @@ void on_draw (GtkWidget *drawing, cairo_t *cr, struct app_widgets *widget) {
     cairo_move_to (cr, clip_x1+left_margin, clip_y1);
     cairo_line_to (cr, clip_x1+left_margin, clip_y2-bottom_margin);
     cairo_stroke (cr);
-	printf("drawn x and y axis\n");
+	//printf("drawn x and y axis\n");        //Debug comment
 
     // No values to draw, so just return at this point.
     if (widget->list.qty_readings == 0) {
@@ -545,6 +550,7 @@ void on_draw (GtkWidget *drawing, cairo_t *cr, struct app_widgets *widget) {
     //y_scale = ((clip_y2 - clip_x1 - bottom_margin) / MAX_VOLTAGE);      // Y Scale is 0 to 3V3 fixed.
     
     cairo_set_line_width (cr, dx);
+    //Debug comments
 	printf("Determined the data points\n");
     printf("dx:%lf dy:%lf\n", dx, dy);
     printf("clip_x1:%lf ", clip_x1);
@@ -567,18 +573,23 @@ void on_draw (GtkWidget *drawing, cairo_t *cr, struct app_widgets *widget) {
     //                                                                    move up to the reading
     cairo_move_to (cr, (clip_x1+left_margin), (clip_y2 - bottom_margin) - ((current->reading - widget->list.min_reading) * y_scale));
 
+    printf("Latest 5 readings ONLY\n");        // Debug comment
+
     do {
         //                  move across a step in x scale plus the margin
         //                                                 starting from the bottom, less the margin
         //                                                                            move up the reading in y scale
         cairo_line_to (cr, (count * x_scale)+left_margin, (clip_y2 - bottom_margin) - ((current->reading - widget->list.min_reading) * y_scale));      //Draws a line from the current position, to the new coordinates
 
-        printf("Reading:%d  Data:%f\n", count, current->reading);
+        // Debug messaging, print 5 newest readings only
+        if (count < 5) {
+            printf("Reading:%d  Data:%f\n", count, current->reading);
+        }
         current = current->nextnode;
         count ++;
     } while (count < widget->list.qty_readings);
 	
-	printf("Linked data points\n");
+	//printf("Linked data points\n");        //Debug comment
 	
     /* Draw the curve */
     cairo_set_source_rgba (cr, 1, 0.2, 0.2, 0.6);
