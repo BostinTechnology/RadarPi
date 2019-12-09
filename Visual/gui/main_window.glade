@@ -447,7 +447,7 @@ switching to 'Output'</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="width_chars">12</property>
-            <property name="text" translatable="yes">- - -</property>
+            <property name="text" translatable="yes">Not Running</property>
           </object>
           <packing>
             <property name="left_attach">3</property>
