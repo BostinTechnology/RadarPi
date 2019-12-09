@@ -33,13 +33,8 @@
  * 
  * BUGS in Git!!!!
  * 
- * 35   Mode, Gain and Status need to be set at the beginning of the routines.
- *      when the software first starts up, it is blank, how do we get it with set values.
- * 36   On the config page, I need to add in a message box to prompt either Set or Ignore.
- *      I wonder if I can force it to not change screens until one or the other is pressed.
  * 34   Need to find a way of capturing the current values after setting. Consider having hidden values 
  *      in the form to hide them in, alternatively have global variables
- * 32   The Sample and Hold signal needs to be set to run for all modes, including ADC
  * 25   Check the gpio pin connections & re-write them to reflect the new hardware
  *      IF_OUT_DIGITAL - Used for frequency counting - it's the raw signal digitised, GPIO 4
  *              No gain control on this pin.
@@ -169,6 +164,11 @@
  *  DONE    2   Create a single H file for all the common stuff
  *  DONE            a What is the right way of doing this, is there a structure or a method for this?
  *  DONE            b What should I do about the various return status'
+ * DONE 35   Mode, Gain and Status need to be set at the beginning of the routines.
+ * DONE      when the software first starts up, it is blank, how do we get it with set values.
+ * DONE 36   On the config page, I need to add in a message box to prompt either Set or Ignore.
+ * DONE      I wonder if I can force it to not change screens until one or the other is pressed.
+ * DONE 32   The Sample and Hold signal needs to be set to run for all modes, including ADC
  * 
  */
 
@@ -222,10 +222,7 @@ void on_btn_startstop_clicked(GtkButton *button, struct app_widgets *widget) {
             reply = adcSPiInitialisation();
         }
         else if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget->w_radbut_digital))) {
-            reply = setupGpioFunctions();
-            if (reply == GPIO_EXIT_SUCCESS) {
-                reply = setSampleHoldForRun();
-            }
+            // nothing required.
         }
     }
     else {
@@ -351,7 +348,7 @@ void on_btn_set_clicked(GtkButton *button, struct app_widgets *widget) {
     
     gtk_label_set_text(GTK_LABEL(widget->w_lbl_user_message), "");
     
-    return
+    return;
     
 }
 
@@ -698,6 +695,7 @@ int main(int argc, char** argv) {
     
     GtkBuilder      *builder; 
     GtkWidget       *window;
+    int             status;
     
     GError                  *err = NULL;    // holds any error that occurs within GTK
     
@@ -706,6 +704,17 @@ int main(int argc, char** argv) {
     
     listInitialise(&widgets->list);
     init_filter();
+    
+    status = setupGpioFunctions();
+    if (status == GPIO_EXIT_SUCCESS) {
+        status = setSampleHoldForRun();
+        printf("Sample & Hold set to Run\n");
+    }
+    if (status != GPIO_EXIT_SUCCESS) {
+        printf("Unable to setup GPIO, please check and re-run\n");
+        return status;
+    }
+
     
     // initialise GTK library and pass it in command line parameters
     gtk_init(&argc, &argv);
