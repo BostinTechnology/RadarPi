@@ -643,11 +643,11 @@ gboolean data_timer_exe(struct app_widgets *widget) {
     //Get some data
     
     // Random number generation
-    printf("random number generator\n");
-    reading = (rand() % 300);
+    //printf("random number generator\n");
+    //reading = (rand() % 300);
     // Add a new value to the start of the list every time it runs
-    listAddHead(&widget->list, reading);
-    return true;
+    //listAddHead(&widget->list, reading);
+    //return true;
 
     /* Need to set maximum & minimum values here as part of mode because the digital mode
      * returns frequency, not voltage
