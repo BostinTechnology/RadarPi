@@ -33,8 +33,8 @@
  * 
  * BUGS in Git!!!!
  * 
- * 34   Need to find a way of capturing the current values after setting. Consider having hidden values 
- *      in the form to hide them in, alternatively have global variables
+ * 39   Remerge branch into master, delete branch. 
+ *      - Create a new branch for v2 boards
  * 25   Check the gpio pin connections & re-write them to reflect the new hardware
  *      IF_OUT_DIGITAL - Used for frequency counting - it's the raw signal digitised, GPIO 4
  *              No gain control on this pin.
@@ -42,19 +42,32 @@
  *      IF_OUT_TO_PI - for movement detection, post gain control
  * 26   Check the filter code to use, high or notches
  *          Take this out for the Pi. Is there an alternative out there?
+ * 40   Test all programs work
+ *      - Analogue Measurement
+ *      - Digital Detection - python
+ *      - Digital Detection - C
+ *      - Gain Control
+ *      - Sample Software
+ *      - Test Program
+ *      - Visual
+ * 41   Double check all licence headers in files.
+ * 34   Need to find a way of capturing the current values after setting. Consider having hidden values 
+ *      in the form to hide them in, alternatively have global variables
+
 
  * 37   Change the error messages to be
  *          positive responses are even numbers
  *          failed responses are odd numbers
  *          I can then change the checks to only look for a 0b00000001 to know it has failed
  *          Make all the error states different numbers.
- *  22  Updated linked lists to add a delete function
- *  24  Change gainFunctions to use typedef struct ...
+ * 22   Updated linked lists to add a delete function
+ * 24   Change gainFunctions to use typedef struct ...
  *          See the gainfunctions.h file
  *          i Split gainFunctions into user functions and internal functions
- *  7   Integrate LEDs into common library
+ * 7    Integrate LEDs into common library
  *          Not required at this time, integrate into the application instead.
  * 38   Improve the graphing, the lines are very thick!
+ * 42   Check radar visual as the file connect option from the menu is incorrect
  * 
  * 
  *  9   Code tidy up
@@ -82,7 +95,7 @@
  *      Could it be to do with the LinkedList within the structure NOT being a pointer.
  *      It would appear that the first value captured in the data timer is then not printed on the graph. I would guess it
  *      could be something to do with how I initialise the nodes within linkedlist.
-  * DONE 10  Implement the smoothing algorithm in the common code
+ * DONE 10  Implement the smoothing algorithm in the common code
  *          see filter.c and filter.h
  *          The code is very short, but it takes quite a lot of processing power to run!
  *              It’s probably clear to you, but just pass each measured level to the relevant 

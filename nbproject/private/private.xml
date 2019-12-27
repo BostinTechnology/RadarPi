@@ -7,6 +7,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="1"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/Users/matthew/Documents/Bostin%20Technology/RadarPi/common/inc/gpioFunctions.h</file>
+            <file>file:/Users/matthew/Documents/Bostin%20Technology/RadarPi/common/inc/rdr_gpio_control.h</file>
+            <file>file:/Users/matthew/Documents/Bostin%20Technology/RadarPi/Visual/inc/radarVisual.h</file>
+            <file>file:/Users/matthew/Documents/Bostin%20Technology/RadarPi/common/inc/adcFunctions.h</file>
             <file>file:/Users/matthew/Documents/Bostin%20Technology/RadarPi/Visual/src/radarVisual.c</file>
         </group>
     </open-files>
