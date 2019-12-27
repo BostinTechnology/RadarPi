@@ -26,7 +26,7 @@ struct app_widgets {
     GtkWidget       *w_btn_startstop;    
     GtkWidget       *w_btn_set_gain;
     GtkWidget       *w_scale_gainctrl;
-    GtkWidget       *w_radbut_raw;
+    GtkWidget       *w_radbut_op_to_pi;
     GtkWidget       *w_radbut_digital;
     GtkWidget       *w_radbut_adc;
     GtkAdjustment   *w_adj_gainctrl;
@@ -57,8 +57,6 @@ struct app_widgets {
 
 //ToDo: improve the commentary for the functions
 
-
-int open_serial_port(struct app_widgets *widget);
 
 // calls the library and gets the version info
 void on_main_application_window_destroy() ;

@@ -186,18 +186,6 @@
  * 
  */
 
-
-int open_serial_port( struct app_widgets *widget) {
-    
-	int		status = 1;
-    // Open the serial port
-    
-    //status = setupComms(&widget->conn);
-	printf("Opened the serial port:%d\n", widget->SPiconn);
-    
-    return status;
-}
-
 /*
  * Functions called by GUI
  */
@@ -208,14 +196,6 @@ void on_main_application_window_destroy() {
     gtk_main_quit();
     
     exit(0);
-}
-
-void on_menu_file_connect(struct app_widgets *widget) {
-    printf("In On Menu File connect\n");
-    
-	open_serial_port(widget);
-    //get_version_info(widget);
-	//get_mode_info(widget);
 }
 
 void on_btn_startstop_clicked(GtkButton *button, struct app_widgets *widget) {
@@ -229,7 +209,7 @@ void on_btn_startstop_clicked(GtkButton *button, struct app_widgets *widget) {
     if (widget->running) {
         printf("Currently Running\n");
         gtk_entry_set_text(GTK_ENTRY(widget->w_txt_status), "Running");
-        if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget->w_radbut_raw))) {
+        if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget->w_radbut_op_to_pi))) {
             reply = adcSPiInitialisation();
         }
         else if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget->w_radbut_adc))) {
@@ -242,7 +222,7 @@ void on_btn_startstop_clicked(GtkButton *button, struct app_widgets *widget) {
     else {
         printf("Currently NOT running\n");	
         gtk_entry_set_text(GTK_ENTRY(widget->w_txt_status), "Not Running");
-        if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget->w_radbut_raw))) {
+        if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget->w_radbut_op_to_pi))) {
             adcSPiEnd();
         }
         else if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget->w_radbut_adc))) {
@@ -313,18 +293,26 @@ int set_gain(GtkButton *button, struct app_widgets *widget) {
 
     //Write the new gain setting to the board    
     status = gainSPiInitialisation ();
-    if (status != SPI_ERR_NONE) {
+    if (status == SPI_ERR_NONE) {
         status = setGainControl(set_value);
-        if (status != SPI_ERR_NONE) {
+        
+        if (status == SPI_ERR_NONE) {
             // Gain has been set, now end comms and set the boxes / slider
             gainSPiEnd();
             gtk_entry_set_text(GTK_ENTRY(widget->w_txt_gain_setting), conv);
             gtk_range_set_value(GTK_RANGE(widget->w_scale_gainctrl), set_value);
+            printf("Set Gain Comms ended\n");
+        } else {
+            printf("Unable to set Gain Control, error code:%d\n", status);
         };
+    }
+    else {
+        printf("Unable to start SPI Comms, error code:%d", status);
     };
     if (status !=SPI_ERR_NONE) {
         gtk_entry_set_text(GTK_ENTRY(widget->w_txt_gain_setting), "Error");
         gtk_range_set_value(GTK_RANGE(widget->w_scale_gainctrl), 0);
+        printf("Gain Set - i think\n");
     }
 
 	return status;
@@ -344,8 +332,8 @@ void on_btn_set_clicked(GtkButton *button, struct app_widgets *widget) {
     }
     
     // Set the info box Mode    
-	if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget->w_radbut_raw))) {
-        strcpy(mode_full, "ADC Raw");
+	if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget->w_radbut_op_to_pi))) {
+        strcpy(mode_full, "Output to Pi");
     }
     else if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget->w_radbut_digital))) {
         strcpy(mode_full, "Digital");
@@ -462,10 +450,10 @@ void old_on_radiobutton_toggled(GtkButton *button, struct app_widgets *widget) {
     
     printf("Radiobuttons for mode has changed\n");
 	
-	if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget->w_radbut_raw))) {
-        printf("Raw mode selected\n");
+	if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget->w_radbut_op_to_pi))) {
+        printf("O/P to Pi mode selected\n");
 		mode = 'R';
-        strcpy(mode_full, "ADC Raw");
+        strcpy(mode_full, "O/P to Pi");
     }
     else if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget->w_radbut_digital))) {
         printf("Digital mode selected\n");
@@ -679,15 +667,12 @@ gboolean data_timer_exe(struct app_widgets *widget) {
         listSetMax(&widget->list, MAX_VOLTAGE);
         listSetMin(&widget->list, MIN_VOLTAGE);
     }
-    else if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget->w_radbut_raw))) {
+    else if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget->w_radbut_op_to_pi))) {
 
-        printf("Raw data mode selected\n");
+        printf("O/P to PI mode selected\n");
         if (reply == ADC_EXIT_SUCCESS) {
-            reply = readVoltage(&reading);
+            reply = returnFullFrequency(&reading, IF_OUT_DIGITAL);
         }
-        // In this mode, max and min are based on the voltage output of the adc, hence set to max and min here
-        listSetMax(&widget->list, MAX_VOLTAGE);
-        listSetMin(&widget->list, MIN_VOLTAGE);
     }
     else if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget->w_radbut_digital))) {
         printf("Digital data mode selected\n");
@@ -753,7 +738,7 @@ int main(int argc, char** argv) {
     // build the structure of widget pointers
     widgets->w_radbut_adc           = GTK_WIDGET(gtk_builder_get_object(builder, "radbut_adc"));
     widgets->w_radbut_digital       = GTK_WIDGET(gtk_builder_get_object(builder, "radbut_digital"));
-    widgets->w_radbut_raw           = GTK_WIDGET(gtk_builder_get_object(builder, "radbut_raw"));
+    widgets->w_radbut_op_to_pi      = GTK_WIDGET(gtk_builder_get_object(builder, "radbut_op_to_pi"));
     widgets->w_scale_gainctrl       = GTK_WIDGET(gtk_builder_get_object(builder, "scale_gainctrl"));
     widgets->w_btn_set_gain         = GTK_WIDGET(gtk_builder_get_object(builder, "btn_set_gain"));
     widgets->w_canvas_graph         = GTK_WIDGET(gtk_builder_get_object(builder, "canvas_graph"));
@@ -768,9 +753,6 @@ int main(int argc, char** argv) {
     // connect the widgets to the signal handler
     gtk_builder_connect_signals(builder, widgets);    // note: second parameter points to widgets
     g_object_unref(builder);
-    
-	// ToDo: need to get this to try and if fail, report to the user. Maybe have it only run by the menu item rather than automatic.
-    on_menu_file_connect(widgets);
 
     // Set the variables to their initial state
     widgets->running = false;                       // Not running initially

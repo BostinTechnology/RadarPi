@@ -1,0 +1,940 @@
+2019-12-27 12:17:28,151 - INFO     - 
+
+
+2019-12-27 12:17:28,152 - INFO     - [CTRL] Logging Started, current level is 10
+2019-12-27 12:17:28,574 - INFO     - [DataC] Starting Class DataCapture
+2019-12-27 12:17:28,576 - DEBUG    - [Disp] cls_RadarDisplay initialised
+2019-12-27 12:17:28,576 - INFO     - [Disp] Starting Main Frame
+2019-12-27 12:17:28,671 - DEBUG    - [Disp] Main Frame Initialised
+2019-12-27 12:17:28,672 - INFO     - [DataC] Starting Thread for Data Capture
+2019-12-27 12:17:28,673 - INFO     - [DataC] Starting Data Capturing thread:True
+2019-12-27 12:17:28,674 - DEBUG    - [DataC] Threads running
+2019-12-27 12:17:28,674 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:28,675 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:28,948 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:28,954 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:29,229 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:29,235 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:29,352 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:29,357 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:29,474 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:29,480 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:29,596 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:29,602 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:29,676 - DEBUG    - [DataC] Time has exceeded, default being used
+2019-12-27 12:17:29,718 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:29,724 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:29,840 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:29,846 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:29,962 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:29,968 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:30,084 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:30,090 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:30,206 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:30,212 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:30,328 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:30,334 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:30,450 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:30,456 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:30,572 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:30,578 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:30,678 - DEBUG    - [DataC] Time has exceeded, default being used
+2019-12-27 12:17:30,694 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:30,700 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:30,816 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:30,822 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:30,938 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:30,944 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:31,187 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:31,193 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:31,309 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:31,315 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:31,431 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:31,437 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:31,554 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:31,560 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:31,676 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:31,680 - DEBUG    - [DataC] Time has exceeded, default being used
+2019-12-27 12:17:31,680 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:31,787 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:31,793 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:31,909 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:31,915 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:32,031 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:32,037 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:32,153 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:32,159 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:32,276 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:32,282 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:32,398 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:32,404 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:32,521 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:32,533 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:32,649 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:32,655 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:32,682 - DEBUG    - [DataC] Time has exceeded, default being used
+2019-12-27 12:17:32,771 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:32,777 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:32,899 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:32,905 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:33,030 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:33,036 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:33,158 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:33,165 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:33,281 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:33,287 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:33,403 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:33,409 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:33,525 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:33,531 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:33,648 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:33,654 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:33,684 - DEBUG    - [DataC] Time has exceeded, default being used
+2019-12-27 12:17:33,770 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:33,776 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:33,892 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:33,898 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:34,015 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:34,021 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:34,145 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:34,151 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:34,268 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:34,275 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:34,392 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:34,399 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:34,516 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:34,523 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:34,639 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:34,645 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:34,686 - DEBUG    - [DataC] Time has exceeded, default being used
+2019-12-27 12:17:34,762 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:34,768 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:34,885 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:34,891 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:35,008 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:35,014 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:35,131 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:35,136 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:35,253 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:35,259 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:35,375 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:35,381 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:35,497 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:35,503 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:35,619 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:35,625 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:35,689 - DEBUG    - [DataC] Time has exceeded, default being used
+2019-12-27 12:17:35,742 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:35,748 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:35,871 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:35,877 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:36,006 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:36,012 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:36,655 - DEBUG    - [DISP] Starting state of running:False
+2019-12-27 12:17:36,661 - DEBUG    - [DISP] Start Stop wasn't running so values are being reset
+2019-12-27 12:17:36,688 - DEBUG    - [DISP] Ending state of running:True
+2019-12-27 12:17:36,691 - DEBUG    - [DataC] Time has exceeded, default being used
+2019-12-27 12:17:36,692 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:36,692 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:36,693 - INFO     - [Disp] Updating incoming data
+2019-12-27 12:17:36,699 - DEBUG    - [Disp] Trimming the dataset:117
+2019-12-27 12:17:36,715 - DEBUG    - [Disp] Object trigger level is Monitoring (new reading): 0
+2019-12-27 12:17:36,721 - INFO     - [Disp] Dataset after update and trim:[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0]
+2019-12-27 12:17:36,743 - DEBUG    - Spacing (x,y):6.0,0.56
+2019-12-27 12:17:36,753 - DEBUG    - Y Max and min:500,0
+2019-12-27 12:17:37,397 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:37,404 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:37,409 - INFO     - [Disp] Updating incoming data
+2019-12-27 12:17:37,425 - DEBUG    - [Disp] Object trigger level is Monitoring (new reading): 0
+2019-12-27 12:17:37,431 - INFO     - [Disp] Dataset after update and trim:[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0]
+2019-12-27 12:17:37,458 - DEBUG    - Spacing (x,y):6.0,0.56
+2019-12-27 12:17:37,469 - DEBUG    - Y Max and min:500,0
+2019-12-27 12:17:37,694 - DEBUG    - [DataC] Time has exceeded, default being used
+2019-12-27 12:17:38,046 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:38,052 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:38,058 - INFO     - [Disp] Updating incoming data
+2019-12-27 12:17:38,069 - DEBUG    - [Disp] Trimming the dataset:102
+2019-12-27 12:17:38,085 - DEBUG    - [Disp] Object trigger level is Monitoring (new reading): 0
+2019-12-27 12:17:38,090 - INFO     - [Disp] Dataset after update and trim:[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0]
+2019-12-27 12:17:38,122 - DEBUG    - Spacing (x,y):6.0,0.56
+2019-12-27 12:17:38,133 - DEBUG    - Y Max and min:500,0
+2019-12-27 12:17:38,696 - DEBUG    - [DataC] Time has exceeded, default being used
+2019-12-27 12:17:38,771 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:38,776 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:38,782 - INFO     - [Disp] Updating incoming data
+2019-12-27 12:17:38,793 - DEBUG    - [Disp] Trimming the dataset:102
+2019-12-27 12:17:38,809 - DEBUG    - [Disp] Object trigger level is Monitoring (new reading): 0
+2019-12-27 12:17:38,815 - INFO     - [Disp] Dataset after update and trim:[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0]
+2019-12-27 12:17:38,842 - DEBUG    - Spacing (x,y):6.0,0.56
+2019-12-27 12:17:38,852 - DEBUG    - Y Max and min:500,0
+2019-12-27 12:17:39,516 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:39,522 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:39,528 - INFO     - [Disp] Updating incoming data
+2019-12-27 12:17:39,544 - DEBUG    - [Disp] Object trigger level is Monitoring (new reading): 0
+2019-12-27 12:17:39,550 - INFO     - [Disp] Dataset after update and trim:[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0]
+2019-12-27 12:17:39,576 - DEBUG    - Spacing (x,y):6.0,0.56
+2019-12-27 12:17:39,592 - DEBUG    - Y Max and min:500,0
+2019-12-27 12:17:39,698 - DEBUG    - [DataC] Time has exceeded, default being used
+2019-12-27 12:17:40,176 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:40,182 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:40,187 - INFO     - [Disp] Updating incoming data
+2019-12-27 12:17:40,198 - DEBUG    - [Disp] Trimming the dataset:102
+2019-12-27 12:17:40,214 - DEBUG    - [Disp] Object trigger level is Monitoring (new reading): 0
+2019-12-27 12:17:40,220 - INFO     - [Disp] Dataset after update and trim:[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0]
+2019-12-27 12:17:40,247 - DEBUG    - Spacing (x,y):6.0,0.56
+2019-12-27 12:17:40,258 - DEBUG    - Y Max and min:500,0
+2019-12-27 12:17:40,701 - DEBUG    - [DataC] Time has exceeded, default being used
+2019-12-27 12:17:40,850 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:40,856 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:40,862 - INFO     - [Disp] Updating incoming data
+2019-12-27 12:17:40,872 - DEBUG    - [Disp] Trimming the dataset:102
+2019-12-27 12:17:40,889 - DEBUG    - [Disp] Object trigger level is Monitoring (new reading): 0
+2019-12-27 12:17:40,894 - INFO     - [Disp] Dataset after update and trim:[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0]
+2019-12-27 12:17:40,921 - DEBUG    - Spacing (x,y):6.0,0.56
+2019-12-27 12:17:40,932 - DEBUG    - Y Max and min:500,0
+2019-12-27 12:17:41,614 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:41,703 - DEBUG    - [DataC] Time has exceeded, default being used
+2019-12-27 12:17:41,721 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:41,722 - INFO     - [Disp] Updating incoming data
+2019-12-27 12:17:41,723 - DEBUG    - [Disp] Trimming the dataset:101
+2019-12-27 12:17:41,725 - DEBUG    - [Disp] Object trigger level is Monitoring (new reading): 0
+2019-12-27 12:17:41,730 - INFO     - [Disp] Dataset after update and trim:[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5]
+2019-12-27 12:17:41,763 - DEBUG    - Spacing (x,y):6.0,0.56
+2019-12-27 12:17:41,780 - DEBUG    - Y Max and min:500,0
+2019-12-27 12:17:42,725 - DEBUG    - [DataC] Time has exceeded, default being used
+2019-12-27 12:17:42,765 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:42,771 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:42,777 - INFO     - [Disp] Updating incoming data
+2019-12-27 12:17:42,787 - DEBUG    - [Disp] Trimming the dataset:103
+2019-12-27 12:17:42,804 - DEBUG    - [Disp] Object trigger level is Monitoring (new reading): 0
+2019-12-27 12:17:42,809 - INFO     - [Disp] Dataset after update and trim:[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0]
+2019-12-27 12:17:42,836 - DEBUG    - Spacing (x,y):6.0,0.56
+2019-12-27 12:17:42,847 - DEBUG    - Y Max and min:500,0
+2019-12-27 12:17:43,484 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:43,490 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:43,496 - INFO     - [Disp] Updating incoming data
+2019-12-27 12:17:43,512 - DEBUG    - [Disp] Object trigger level is Monitoring (new reading): 0
+2019-12-27 12:17:43,518 - INFO     - [Disp] Dataset after update and trim:[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0]
+2019-12-27 12:17:43,545 - DEBUG    - Spacing (x,y):6.0,0.56
+2019-12-27 12:17:43,556 - DEBUG    - Y Max and min:500,0
+2019-12-27 12:17:43,727 - DEBUG    - [DataC] Time has exceeded, default being used
+2019-12-27 12:17:44,137 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:44,143 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:44,149 - INFO     - [Disp] Updating incoming data
+2019-12-27 12:17:44,159 - DEBUG    - [Disp] Trimming the dataset:102
+2019-12-27 12:17:44,176 - DEBUG    - [Disp] Object trigger level is Monitoring (new reading): 0
+2019-12-27 12:17:44,181 - INFO     - [Disp] Dataset after update and trim:[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0]
+2019-12-27 12:17:44,208 - DEBUG    - Spacing (x,y):6.0,0.56
+2019-12-27 12:17:44,219 - DEBUG    - Y Max and min:500,0
+2019-12-27 12:17:44,730 - DEBUG    - [DataC] Time has exceeded, default being used
+2019-12-27 12:17:44,837 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:44,843 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:44,848 - INFO     - [Disp] Updating incoming data
+2019-12-27 12:17:44,859 - DEBUG    - [Disp] Trimming the dataset:102
+2019-12-27 12:17:44,875 - DEBUG    - [Disp] Object trigger level is Monitoring (new reading): 0
+2019-12-27 12:17:44,881 - INFO     - [Disp] Dataset after update and trim:[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0]
+2019-12-27 12:17:44,908 - DEBUG    - Spacing (x,y):6.0,0.56
+2019-12-27 12:17:44,919 - DEBUG    - Y Max and min:500,0
+2019-12-27 12:17:45,562 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:45,568 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:45,573 - INFO     - [Disp] Updating incoming data
+2019-12-27 12:17:45,589 - DEBUG    - [Disp] Object trigger level is Monitoring (new reading): 0
+2019-12-27 12:17:45,595 - INFO     - [Disp] Dataset after update and trim:[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0]
+2019-12-27 12:17:45,622 - DEBUG    - Spacing (x,y):6.0,0.56
+2019-12-27 12:17:45,633 - DEBUG    - Y Max and min:500,0
+2019-12-27 12:17:45,732 - DEBUG    - [DataC] Time has exceeded, default being used
+2019-12-27 12:17:46,210 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:46,216 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:46,222 - INFO     - [Disp] Updating incoming data
+2019-12-27 12:17:46,233 - DEBUG    - [Disp] Trimming the dataset:102
+2019-12-27 12:17:46,249 - DEBUG    - [Disp] Object trigger level is Monitoring (new reading): 0
+2019-12-27 12:17:46,255 - INFO     - [Disp] Dataset after update and trim:[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0]
+2019-12-27 12:17:46,281 - DEBUG    - Spacing (x,y):6.0,0.56
+2019-12-27 12:17:46,292 - DEBUG    - Y Max and min:500,0
+2019-12-27 12:17:46,735 - DEBUG    - [DataC] Time has exceeded, default being used
+2019-12-27 12:17:46,889 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:46,895 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:46,901 - INFO     - [Disp] Updating incoming data
+2019-12-27 12:17:46,912 - DEBUG    - [Disp] Trimming the dataset:102
+2019-12-27 12:17:46,928 - DEBUG    - [Disp] Object trigger level is Monitoring (new reading): 0
+2019-12-27 12:17:46,934 - INFO     - [Disp] Dataset after update and trim:[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0]
+2019-12-27 12:17:46,961 - DEBUG    - Spacing (x,y):6.0,0.56
+2019-12-27 12:17:46,971 - DEBUG    - Y Max and min:500,0
+2019-12-27 12:17:47,614 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:47,620 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:47,625 - INFO     - [Disp] Updating incoming data
+2019-12-27 12:17:47,641 - DEBUG    - [Disp] Object trigger level is Monitoring (new reading): 0
+2019-12-27 12:17:47,647 - INFO     - [Disp] Dataset after update and trim:[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0]
+2019-12-27 12:17:47,674 - DEBUG    - Spacing (x,y):6.0,0.56
+2019-12-27 12:17:47,690 - DEBUG    - Y Max and min:500,0
+2019-12-27 12:17:47,737 - DEBUG    - [DataC] Time has exceeded, default being used
+2019-12-27 12:17:48,278 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:48,284 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:48,289 - INFO     - [Disp] Updating incoming data
+2019-12-27 12:17:48,300 - DEBUG    - [Disp] Trimming the dataset:102
+2019-12-27 12:17:48,316 - DEBUG    - [Disp] Object trigger level is Monitoring (new reading): 0
+2019-12-27 12:17:48,322 - INFO     - [Disp] Dataset after update and trim:[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0]
+2019-12-27 12:17:48,349 - DEBUG    - Spacing (x,y):6.0,0.56
+2019-12-27 12:17:48,360 - DEBUG    - Y Max and min:500,0
+2019-12-27 12:17:48,740 - DEBUG    - [DataC] Time has exceeded, default being used
+2019-12-27 12:17:48,952 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:48,958 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:48,963 - INFO     - [Disp] Updating incoming data
+2019-12-27 12:17:48,974 - DEBUG    - [Disp] Trimming the dataset:102
+2019-12-27 12:17:48,990 - DEBUG    - [Disp] Object trigger level is Monitoring (new reading): 0
+2019-12-27 12:17:48,996 - INFO     - [Disp] Dataset after update and trim:[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0]
+2019-12-27 12:17:49,028 - DEBUG    - Spacing (x,y):6.0,0.56
+2019-12-27 12:17:49,039 - DEBUG    - Y Max and min:500,0
+2019-12-27 12:17:49,693 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:49,699 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:49,704 - INFO     - [Disp] Updating incoming data
+2019-12-27 12:17:49,720 - DEBUG    - [Disp] Object trigger level is Monitoring (new reading): 0
+2019-12-27 12:17:49,726 - INFO     - [Disp] Dataset after update and trim:[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0]
+2019-12-27 12:17:49,742 - DEBUG    - [DataC] Time has exceeded, default being used
+2019-12-27 12:17:49,743 - DEBUG    - Spacing (x,y):6.0,0.56
+2019-12-27 12:17:49,744 - DEBUG    - Y Max and min:500,0
+2019-12-27 12:17:50,366 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:50,371 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:50,377 - INFO     - [Disp] Updating incoming data
+2019-12-27 12:17:50,388 - DEBUG    - [Disp] Trimming the dataset:102
+2019-12-27 12:17:50,404 - DEBUG    - [Disp] Object trigger level is Monitoring (new reading): 0
+2019-12-27 12:17:50,410 - INFO     - [Disp] Dataset after update and trim:[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0]
+2019-12-27 12:17:50,437 - DEBUG    - Spacing (x,y):6.0,0.56
+2019-12-27 12:17:50,448 - DEBUG    - Y Max and min:500,0
+2019-12-27 12:17:50,745 - DEBUG    - [DataC] Time has exceeded, default being used
+2019-12-27 12:17:51,038 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:51,044 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:51,049 - INFO     - [Disp] Updating incoming data
+2019-12-27 12:17:51,060 - DEBUG    - [Disp] Trimming the dataset:102
+2019-12-27 12:17:51,076 - DEBUG    - [Disp] Object trigger level is Monitoring (new reading): 0
+2019-12-27 12:17:51,082 - INFO     - [Disp] Dataset after update and trim:[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0]
+2019-12-27 12:17:51,109 - DEBUG    - Spacing (x,y):6.0,0.56
+2019-12-27 12:17:51,115 - DEBUG    - Y Max and min:500,0
+2019-12-27 12:17:51,747 - DEBUG    - [DataC] Time has exceeded, default being used
+2019-12-27 12:17:51,764 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:51,769 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:51,775 - INFO     - [Disp] Updating incoming data
+2019-12-27 12:17:51,786 - DEBUG    - [Disp] Trimming the dataset:102
+2019-12-27 12:17:51,802 - DEBUG    - [Disp] Object trigger level is Monitoring (new reading): 0
+2019-12-27 12:17:51,807 - INFO     - [Disp] Dataset after update and trim:[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0]
+2019-12-27 12:17:51,834 - DEBUG    - Spacing (x,y):6.0,0.56
+2019-12-27 12:17:51,845 - DEBUG    - Y Max and min:500,0
+2019-12-27 12:17:52,483 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:52,611 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:52,616 - INFO     - [Disp] Updating incoming data
+2019-12-27 12:17:52,632 - DEBUG    - [Disp] Object trigger level is Monitoring (new reading): 0
+2019-12-27 12:17:52,638 - INFO     - [Disp] Dataset after update and trim:[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5, 0]
+2019-12-27 12:17:52,665 - DEBUG    - Spacing (x,y):6.0,0.56
+2019-12-27 12:17:52,676 - DEBUG    - Y Max and min:500,0
+2019-12-27 12:17:52,750 - DEBUG    - [DataC] Time has exceeded, default being used
+2019-12-27 12:17:53,342 - DEBUG    - [DISP] Starting state of running:True
+2019-12-27 12:17:53,353 - DEBUG    - [DISP] Ending state of running:False
+2019-12-27 12:17:53,369 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:53,375 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:53,491 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:53,497 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:53,613 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:53,619 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:53,735 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:53,741 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:53,752 - DEBUG    - [DataC] Time has exceeded, default being used
+2019-12-27 12:17:53,858 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:53,864 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:53,980 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:53,986 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:54,102 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:54,108 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:54,224 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:54,230 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:54,347 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:54,353 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:54,469 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:54,475 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:54,591 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:54,597 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:54,713 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:54,719 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:54,754 - DEBUG    - [DataC] Time has exceeded, default being used
+2019-12-27 12:17:54,835 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:54,841 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:54,958 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:54,964 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:55,080 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:55,086 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:55,202 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:55,208 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:55,324 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:55,330 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:55,446 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:55,452 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:55,568 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:55,574 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:55,691 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:55,697 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:55,756 - DEBUG    - [DataC] Time has exceeded, default being used
+2019-12-27 12:17:55,813 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:55,819 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:55,935 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:55,941 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:56,057 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:56,063 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:56,179 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:56,185 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:56,301 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:56,307 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:56,424 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:56,429 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:56,546 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:56,552 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:56,668 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:56,674 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:56,758 - DEBUG    - [DataC] Time has exceeded, default being used
+2019-12-27 12:17:56,790 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:56,796 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:56,912 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:56,918 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:57,034 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:57,040 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:57,156 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:57,162 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:57,279 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:57,284 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:57,401 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:57,406 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:57,523 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:57,529 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:57,761 - DEBUG    - [DataC] Time has exceeded, default being used
+2019-12-27 12:17:57,931 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:57,937 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:58,054 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:58,059 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:58,176 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:58,182 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:58,298 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:58,304 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:58,420 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:58,426 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:58,542 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:58,548 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:58,665 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:58,671 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:58,787 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:58,793 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:58,827 - DEBUG    - [DataC] Time has exceeded, default being used
+2019-12-27 12:17:58,909 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:58,915 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:59,031 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:59,037 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:59,154 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:59,159 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:59,276 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:59,282 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:59,398 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:59,404 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:59,520 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:59,526 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:59,642 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:59,648 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:59,764 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:59,770 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:17:59,829 - DEBUG    - [DataC] Time has exceeded, default being used
+2019-12-27 12:17:59,886 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:17:59,892 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:00,011 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:00,017 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:00,133 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:00,139 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:00,255 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:00,261 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:00,377 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:00,383 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:00,500 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:00,505 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:00,622 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:00,627 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:00,744 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:00,750 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:00,831 - DEBUG    - [DataC] Time has exceeded, default being used
+2019-12-27 12:18:00,866 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:00,872 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:00,988 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:00,994 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:01,115 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:01,120 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:01,237 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:01,243 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:01,359 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:01,365 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:01,481 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:01,487 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:01,603 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:01,609 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:01,725 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:01,731 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:01,833 - DEBUG    - [DataC] Time has exceeded, default being used
+2019-12-27 12:18:01,848 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:01,854 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:01,970 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:01,976 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:02,092 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:02,098 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:02,214 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:02,220 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:02,336 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:02,342 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:02,458 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:02,464 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:02,580 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:02,586 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:02,709 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:02,715 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:02,831 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:02,836 - DEBUG    - [DataC] Time has exceeded, default being used
+2019-12-27 12:18:02,836 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:02,943 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:02,948 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:03,065 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:03,071 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:03,187 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:03,193 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:03,309 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:03,315 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:03,431 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:03,437 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:03,553 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:03,559 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:03,675 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:03,681 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:03,797 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:03,803 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:03,838 - DEBUG    - [DataC] Time has exceeded, default being used
+2019-12-27 12:18:03,920 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:03,925 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:04,042 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:04,047 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:04,164 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:04,170 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:04,286 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:04,292 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:04,409 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:04,415 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:04,531 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:04,537 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:04,654 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:04,660 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:04,776 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:04,782 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:04,840 - DEBUG    - [DataC] Time has exceeded, default being used
+2019-12-27 12:18:04,898 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:04,904 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:05,020 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:05,026 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:05,142 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:05,148 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:05,264 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:05,270 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:05,386 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:05,392 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:05,508 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:05,514 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:05,630 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:05,637 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:05,753 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:05,759 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:05,842 - DEBUG    - [DataC] Time has exceeded, default being used
+2019-12-27 12:18:05,875 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:05,881 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:05,997 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:06,003 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:06,119 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:06,125 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:06,242 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:06,248 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:06,364 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:06,370 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:06,486 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:06,492 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:06,608 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:06,614 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:06,730 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:06,736 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:06,844 - DEBUG    - [DataC] Time has exceeded, default being used
+2019-12-27 12:18:06,853 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:06,858 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:06,975 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:06,981 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:07,097 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:07,103 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:07,219 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:07,225 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:07,341 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:07,347 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:07,463 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:07,469 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:07,585 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:07,591 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:07,767 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:07,773 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:07,846 - DEBUG    - [DataC] Time has exceeded, default being used
+2019-12-27 12:18:07,890 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:07,896 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:08,012 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:08,018 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:08,135 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:08,140 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:08,257 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:08,263 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:08,379 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:08,385 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:08,501 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:08,507 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:08,623 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:08,629 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:08,745 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:08,751 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:08,849 - DEBUG    - [DataC] Time has exceeded, default being used
+2019-12-27 12:18:08,868 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:08,873 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:08,990 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:08,996 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:09,112 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:09,118 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:09,234 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:09,240 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:09,356 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:09,362 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:09,478 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:09,484 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:09,600 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:09,606 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:09,722 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:09,728 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:09,845 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:09,850 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:09,851 - DEBUG    - [DataC] Time has exceeded, default being used
+2019-12-27 12:18:09,957 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:09,963 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:10,079 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:10,085 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:10,201 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:10,207 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:10,323 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:10,329 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:10,445 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:10,451 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:10,568 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:10,574 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:10,690 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:10,696 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:10,812 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:10,818 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:10,853 - DEBUG    - [DataC] Time has exceeded, default being used
+2019-12-27 12:18:10,938 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:10,943 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:11,060 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:11,066 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:11,182 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:11,188 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:11,304 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:11,310 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:11,426 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:11,432 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:11,548 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:11,554 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:11,670 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:11,676 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:11,792 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:11,798 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:11,855 - DEBUG    - [DataC] Time has exceeded, default being used
+2019-12-27 12:18:11,915 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:11,921 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:12,037 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:12,043 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:12,159 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:12,165 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:12,281 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:12,287 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:12,403 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:12,409 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:12,525 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:12,531 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:12,647 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:12,653 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:12,775 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:12,781 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:12,857 - DEBUG    - [DataC] Time has exceeded, default being used
+2019-12-27 12:18:12,897 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:12,903 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:13,020 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:13,025 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:13,142 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:13,148 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:13,264 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:13,270 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:13,386 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:13,392 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:13,508 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:13,514 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:13,630 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:13,646 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:13,860 - DEBUG    - [DataC] Time has exceeded, default being used
+2019-12-27 12:18:13,861 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:13,862 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:13,968 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:13,974 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:14,090 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:14,096 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:14,213 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:14,218 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:14,335 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:14,341 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:14,457 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:14,463 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:14,579 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:14,585 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:14,701 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:14,707 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:14,823 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:14,829 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:14,863 - DEBUG    - [DataC] Time has exceeded, default being used
+2019-12-27 12:18:14,946 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:14,951 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:15,068 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:15,074 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:15,190 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:15,196 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:15,312 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:15,318 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:15,434 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:15,440 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:15,556 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:15,562 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:15,678 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:15,684 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:15,801 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:15,806 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:15,865 - DEBUG    - [DataC] Time has exceeded, default being used
+2019-12-27 12:18:15,923 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:15,928 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:16,045 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:16,050 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:16,167 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:16,173 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:16,289 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:16,295 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:16,411 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:16,417 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:16,534 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:16,540 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:16,656 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:16,662 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:16,779 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:16,785 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:16,867 - DEBUG    - [DataC] Time has exceeded, default being used
+2019-12-27 12:18:16,902 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:16,907 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:17,024 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:17,030 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:17,146 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:17,152 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:17,268 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:17,274 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:17,390 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:17,396 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:17,512 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:17,518 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:17,634 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:17,640 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:17,756 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:17,762 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:17,870 - DEBUG    - [DataC] Time has exceeded, default being used
+2019-12-27 12:18:17,879 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:17,884 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:18,001 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:18,007 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:18,123 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:18,129 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:18,245 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:18,251 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:18,367 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:18,373 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:18,489 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:18,495 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:18,611 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:18,617 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:18,733 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:18,739 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:18,856 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:18,862 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:18,872 - DEBUG    - [DataC] Time has exceeded, default being used
+2019-12-27 12:18:18,978 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:18,984 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:19,100 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:19,106 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:19,228 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:19,234 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:19,350 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:19,356 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:19,472 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:19,478 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:19,594 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:19,600 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:19,745 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:19,751 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:19,867 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:19,874 - DEBUG    - [DataC] Time has exceeded, default being used
+2019-12-27 12:18:19,874 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:19,980 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:19,986 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:20,103 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:20,108 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:20,225 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:20,230 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:20,347 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:20,353 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:20,469 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:20,475 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:20,591 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:20,597 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:20,713 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:20,719 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:20,835 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:20,841 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:20,876 - DEBUG    - [DataC] Time has exceeded, default being used
+2019-12-27 12:18:20,957 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:20,963 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:21,080 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:21,085 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:21,202 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:21,208 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:21,324 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:21,330 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:21,446 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:21,452 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:21,568 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:21,574 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:21,690 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:21,696 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:21,812 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:21,818 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:21,878 - DEBUG    - [DataC] Time has exceeded, default being used
+2019-12-27 12:18:21,934 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:21,940 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:22,056 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:22,062 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:22,179 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:22,184 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:22,301 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:22,307 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:22,423 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:22,429 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:22,545 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:22,551 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:22,675 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:22,681 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:22,798 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:22,804 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:22,880 - DEBUG    - [DataC] Time has exceeded, default being used
+2019-12-27 12:18:22,920 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:22,926 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:23,042 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:23,048 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:23,164 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:23,170 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:23,287 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:23,292 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:23,409 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:23,414 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:23,531 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:23,537 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:23,653 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:23,659 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:23,775 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:23,781 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:23,882 - DEBUG    - [DataC] Time has exceeded, default being used
+2019-12-27 12:18:23,897 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:23,903 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:24,019 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:24,025 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:24,141 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:24,147 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:24,264 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:24,269 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:24,386 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:24,392 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:24,508 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:24,514 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:24,630 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:24,636 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:24,752 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:24,758 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:24,874 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:24,880 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:24,885 - DEBUG    - [DataC] Time has exceeded, default being used
+2019-12-27 12:18:24,991 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:24,996 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:25,113 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:25,119 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:25,235 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:25,241 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:25,357 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:25,363 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:25,479 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:25,485 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:25,601 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:25,607 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:25,726 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:25,732 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:25,849 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:25,855 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:25,887 - DEBUG    - [DataC] Time has exceeded, default being used
+2019-12-27 12:18:25,971 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:25,977 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:26,093 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:26,099 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:26,219 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:26,225 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:26,341 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:26,347 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:26,468 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:26,474 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:26,590 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:26,596 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:26,713 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:26,718 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:26,835 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:26,841 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:26,889 - DEBUG    - [DataC] Time has exceeded, default being used
+2019-12-27 12:18:26,957 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:26,963 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:27,079 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:27,085 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:27,201 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:27,207 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:27,323 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:27,329 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:27,446 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:27,451 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:27,568 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:27,574 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:27,690 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:27,696 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:27,812 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:27,818 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:27,891 - DEBUG    - [DataC] Time has exceeded, default being used
+2019-12-27 12:18:27,934 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:27,940 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:28,056 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:28,062 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:28,178 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:28,184 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:28,300 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:28,306 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:28,422 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:28,429 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:28,545 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:28,551 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:28,667 - DEBUG    - [DataC] GUI Update cycle starting
+2019-12-27 12:18:28,674 - INFO     - [Disp] Starting the main loop
+2019-12-27 12:18:28,798 - DEBUG    - Exiting Program
+2019-12-27 12:18:28,893 - DEBUG    - [DataC] Time has exceeded, default being used

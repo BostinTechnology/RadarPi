@@ -42,15 +42,15 @@ int chooseGPIOPin(void) {
 	char	manual_no[5];
 	
 	printf("Please choose which GPIO Pin to measure\n");
-	printf("1 - IF Out1\n");
-	printf("2 - IF Out to Pi\n");
+	printf("1 - Digital Signal\n");
+	printf("2 - O/P to Pi (with Gain)\n");
 	printf("3 - Manual Entry\n");
 	printf("e - Return to main menu\n");
 	
 	option = getchar();
 	switch (option)	{
 		case '1':
-			chosen_pin = IF_OUT1;
+			chosen_pin = IF_OUT_DIGITAL;
 			break;
 		case '2':
 			chosen_pin = IF_OUT_TO_PI;
