@@ -33,8 +33,6 @@
  * 
  * BUGS in Git!!!!
  * 
- * 39   Remerge branch into master, delete branch. 
- *      - Create a new branch for v2 boards
  * 25   Check the gpio pin connections & re-write them to reflect the new hardware
  *      IF_OUT_DIGITAL - Used for frequency counting - it's the raw signal digitised, GPIO 4
  *              No gain control on this pin.
@@ -53,8 +51,9 @@
  * 41   Double check all licence headers in files.
  * 34   Need to find a way of capturing the current values after setting. Consider having hidden values 
  *      in the form to hide them in, alternatively have global variables
-
-
+ * 42   Merge the code from DisplayDemo into radarVisual
+ *      - Lots of good ideas around control of the software
+ * 
  * 37   Change the error messages to be
  *          positive responses are even numbers
  *          failed responses are odd numbers
@@ -85,6 +84,8 @@
  *  28  Change the GUI to give control over refresh time and data collection time
  * 
  *      
+  * DONE 39   Remerge branch into master, delete branch. 
+ *          - Create a new branch for v2 boards
  *  DONE    8   Make Gain control structure contain required allowable values and use these in scale
  *  DONE    3   On GUI remove the bits at the bottom as they are not needed
  *  DONE    1   Get gain setting to only allow values available from the device
@@ -666,17 +667,8 @@ gboolean data_timer_exe(struct app_widgets *widget) {
      * returns frequency, not voltage
      * So I need to add functions to set max and set min and allow draw to use max and min.
      */
-    if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget->w_radbut_raw))) {
-
-        printf("Raw data mode selected\n");
-        if (reply == ADC_EXIT_SUCCESS) {
-            reply = readVoltage(&reading);
-        }
-        // In this mode, max and min are based on the voltage output of the adc, hence set to max and min here
-        listSetMax(&widget->list, MAX_VOLTAGE);
-        listSetMin(&widget->list, MIN_VOLTAGE);
-    }
-    else if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget->w_radbut_adc))) {
+    
+    if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget->w_radbut_adc))) {
         printf("ADC data mode selected\n");
         // Add filter here with ADC
         if (reply == ADC_EXIT_SUCCESS) {
@@ -687,10 +679,20 @@ gboolean data_timer_exe(struct app_widgets *widget) {
         listSetMax(&widget->list, MAX_VOLTAGE);
         listSetMin(&widget->list, MIN_VOLTAGE);
     }
+    else if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget->w_radbut_raw))) {
+
+        printf("Raw data mode selected\n");
+        if (reply == ADC_EXIT_SUCCESS) {
+            reply = readVoltage(&reading);
+        }
+        // In this mode, max and min are based on the voltage output of the adc, hence set to max and min here
+        listSetMax(&widget->list, MAX_VOLTAGE);
+        listSetMin(&widget->list, MIN_VOLTAGE);
+    }
     else if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget->w_radbut_digital))) {
         printf("Digital data mode selected\n");
         if (reply == GPIO_EXIT_SUCCESS) {
-            reply = returnFullFrequency(&reading, IF_OUT_TO_PI);
+            reply = returnFullFrequency(&reading, IF_OUT_DIGITAL);
         }
     };
 

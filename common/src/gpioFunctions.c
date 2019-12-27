@@ -27,6 +27,7 @@ int setupGpioFunctions(void) {
 	
 	gpio_init();
 	
+    set_gpio_for_inpu(IF_OUT_DIGITAL);
 	set_gpio_for_input(IF_OUT1);
 	set_gpio_for_input(IF_OUT_TO_PI);
 	set_gpio_for_output(SAMPLE_HOLD);
