@@ -103,7 +103,7 @@ int main(int argc, char** argv) {
 
     selectGainValueMenu();
     
-    gainSpiEnd();
+    gainSPiEnd();
     
     return 0;
 }

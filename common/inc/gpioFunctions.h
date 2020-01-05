@@ -44,7 +44,7 @@
 #define     SAMPLE_HOLD         17
 
 
-#define		MAX_WAIT_TIME		3		// The maximum time allowed to register a GPIO state time in seconds.
+#define		MAX_WAIT_TIME		2		// The maximum time allowed to register a GPIO state time in seconds.
 #define		FREQ_DEBOUNCE_TIME	500		// The time in microseconds to wait for the check time
 
 

@@ -36,6 +36,11 @@
   * G3-0 are set to 0b0001 for a gain of 10
   * SEL is set to 1 for Gain Register
   * 
+  * Example value, setting gain of 20
+  * 
+  *     76543210
+  *     00000101    = 0x05
+  * 
   */
 
 #ifndef GAINFUNCTIONS_H
@@ -44,6 +49,9 @@
 #include "rdr_spi_comms.h"
 
 #define	qtyGainValues		11		//The number of values in the gainValues structure
+
+
+// This is also slightly different, creates a gainValuesDef
 
 typedef struct GAIN_DEFINITION {
 	char	description[10];

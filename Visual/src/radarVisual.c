@@ -39,7 +39,8 @@
  *      IF_OUT_PGA - Digital output, but amplified
  *      IF_OUT_TO_PI - for movement detection, post gain control
  * 26   Check the filter code to use, high or notches
- *          Take this out for the Pi. Is there an alternative out there?
+ * DONE         Take this out for the Pi. 
+ *          Is there an alternative out there?
  * 40   Test all programs work
  *      - Analogue Measurement
  *      - Digital Detection - python
@@ -50,7 +51,8 @@
  *      - Visual
  * 41   Double check all licence headers in files.
  * 34   Need to find a way of capturing the current values after setting. Consider having hidden values 
- *      in the form to hide them in, alternatively have global variables
+ *      in the form to hide them in, alternatively have global variables.
+ *      This is required for the ignore button!
  * 42   Merge the code from DisplayDemo into radarVisual
  *      - Lots of good ideas around control of the software
  * 
@@ -248,9 +250,9 @@ int set_gain(GtkButton *button, struct app_widgets *widget) {
     int             i = 0;
     
     //ToDo: Convert this so it uses the list from gainFunctions.c
-    int             allowed_values[] = {0.2,1,10,20,30,40,60,80,120,157};
+    double          allowed_values[] = {0.2,1,10,20,30,40,60,80,120,157};
+    int             gain_values[] = {0b1001, 0b0000, 0b0001, 0b0010, 0b0011, 0b0100, 0b0101, 0b0110, 0b0111, 0b1000};
     int             allowed_values_size = sizeof(allowed_values)/sizeof(allowed_values[0]);
-    int             set_value = 0;
     CommsRetCode    status = 0;
 
     widget->gain_value = gtk_range_get_value(GTK_RANGE(widget->w_scale_gainctrl));
@@ -266,35 +268,18 @@ int set_gain(GtkButton *button, struct app_widgets *widget) {
     while(allowed_values[i] < widget->gain_value) {
         i++;
         if (i == allowed_values_size) {
+            // Reached the end of the list of values and not found
             break;
         }
     };
-    if (DEBUG1 <= widget->debug) {
-        printf("Identified Entry:%d Posn:%d\n", allowed_values[i], i);
-    }
     
-    // Got the upper position, now check what value to set_value to
-    if (i == 0) {
-        // the value selected is smaller than the lowest value in the list
-        set_value = allowed_values[0];
-    }
-    else if (i == allowed_values_size) {
-        // Reached the end of the list, set it to the max value
-        set_value = allowed_values[i-1];
-    }
-    else {
-        // Find the value between 2 limits
-        if ((widget->gain_value - allowed_values[i-1]) < (allowed_values[i] - widget->gain_value)) {
-            set_value = allowed_values[i-1];
-        }
-        else {
-            set_value = allowed_values[i];
-        }
+    if (DEBUG1 <= widget->debug) {
+        printf("Identified Entry:%0.1f Posn:%d\n", allowed_values[i], i);
     }
 
     // set values of slider and gain setting box.
     
-    sprintf(conv, "%d", set_value);
+    sprintf(conv, "%0.1f", allowed_values[i]);
     if (DEBUG1 <= widget->debug) {
         printf("Converted:%s\n", conv);
     }
@@ -302,13 +287,13 @@ int set_gain(GtkButton *button, struct app_widgets *widget) {
     //Write the new gain setting to the board    
     status = gainSPiInitialisation ();
     if (status == SPI_ERR_NONE) {
-        status = setGainControl(set_value);
+        status = setGainControl(gain_values[i]);
         
         if (status == SPI_ERR_NONE) {
             // Gain has been set, now end comms and set the boxes / slider
             gainSPiEnd();
             gtk_entry_set_text(GTK_ENTRY(widget->w_txt_gain_setting), conv);
-            gtk_range_set_value(GTK_RANGE(widget->w_scale_gainctrl), set_value);
+            gtk_range_set_value(GTK_RANGE(widget->w_scale_gainctrl), allowed_values[i]);
             if (DEBUG1 <= widget->debug) {
                 printf("Set Gain Comms ended\n");
             }
@@ -372,7 +357,7 @@ void on_btn_set_clicked(GtkButton *button, struct app_widgets *widget) {
 
 void on_btn_ignore_clicked(GtkButton *button, struct app_widgets *widget) {
 
-    // Set the gain back to teh old value
+    // Set the gain back to the old value
     printf("Not yet implemented\n");
     
     
@@ -511,7 +496,7 @@ void on_draw (GtkWidget *drawing, cairo_t *cr, struct app_widgets *widget) {
     gdouble dx = 5.0, dy = 5.0; /* Pixels between each point */
     gdouble clip_x1 = 0.0, clip_y1 = 0.0, clip_x2 = 0.0, clip_y2 = 0.0;
     gdouble left_margin = 5.0, bottom_margin = 5.0;         /* gap between edge and lines, percentage */
-    gdouble axis_width = 2.0, line_width = 1.0; /* Pixels between each point */
+    gdouble axis_width = 1.0, line_width = 1.0; /* Pixels between each point */
     
     Node *current;          // Used by the linked lists.
 

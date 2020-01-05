@@ -20,7 +20,7 @@
 #include <string.h>
 #include "../inc/gainFunctions.h"
 
-struct GAIN_DEFINITION gainValues[qtyGainValues] = {
+struct GAIN_DEFINITION gainValues[qtyGainValues] = {	
 /*! Gain Settings for G3:G0
  *  gainValues is a 2 dimensional array that contains the setting and corresponding gain value
 					G3:G0		GAIN (V/V)		SLEW RATE (V/μs)	SMALL-SIGNAL BANDWIDTH (MHz)*/
@@ -34,7 +34,7 @@ struct GAIN_DEFINITION gainValues[qtyGainValues] = {
 	{"GAIN_120",	0b0111,     120},				//18.53				2.30
 	{"GAIN_157",	0b1000,     157},				//16.49				1.78
 	{"GAIN_VCC",	0b1001,     0.2},  //(VCC = 5V)	2.86				1.95
-                                  //0.25 (VCC = 3.3V)
+										//0.25 (VCC = 3.3V)
 	{"GAIN_1X",		0b1010,     1},					//2.90				2.15
 };
 
@@ -68,7 +68,7 @@ CommsRetCode setGainControl(int gain_setting) {
     uint8_t         txBuf[msgLen];     // The outgoing message
 	CommsRetCode	ret;
     
-    //printf("DEBUG: Into settings Gain Control:%d\n", gain_setting);
+    printf("DEBUG: Into settings Gain Control:%d\n", gain_setting);
 
 	txBuf[0] = 0x00;				//set it initially before modification
 	// Set the required values for txBuf based on values set in h file and passed in
@@ -81,6 +81,8 @@ CommsRetCode setGainControl(int gain_setting) {
 	txBuf[0] = txBuf[0] + (gain_setting << 1);
 	//Bit 0 - register selection
 	txBuf[0] = txBuf[0] + (REGISTER_SELECTION);
+	
+	printf("DEBUG: SPi Comms:%x\n", txBuf[0]);
 	
     ret = SPiTransmit( txBuf, msgLen);
 	
@@ -118,7 +120,10 @@ void selectGainValueMenu(void) {
 		//printf("DEBUG: Choice Entered:%d\n", choice);
 		if (choice < 0) strcpy(option, "\0"); //option[0]="\0";			//Set option back to an empty string
 		else if (choice >= 0 && choice <= qtyGainValues) {
-			//printf("DEBUG: Setting Gain Control of %d\n", gainValues[choice].value);
+			printf("DEBUG: Gain Setting Values\n");
+			printf("		Description       :%s\n", gainValues[choice].description);
+			printf("	>>	Gain Byte Value   :%x\n", gainValues[choice].value);
+			printf("		Gain applied      :%d\n", gainValues[choice].gain);
 			ret = setGainControl(gainValues[choice].value);
 			printf("Gain has been set\n\n");
 			choice = 99;				// exit the loop now the gain has been set
