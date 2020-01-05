@@ -103,5 +103,7 @@ int main(int argc, char** argv) {
 
     selectGainValueMenu();
     
+    gainSpiEnd();
+    
     return 0;
 }

@@ -40,7 +40,19 @@ struct app_widgets {
     // also the SPI connection
     int             SPiconn;
     Linkedlist      list;
+    int             debug;
 } ;
+
+/* Debug levels in use
+ * 0 = No Debug
+ * 1 = All Messages
+ * 2 = Error messages only
+ * 3 = Program failures only
+ */
+#define     DEBUG0  0
+#define     DEBUG1  1
+#define     DEBUG2  2
+#define     DEBUG3  3
 
 // Used by Cairo draw.
 #define ZOOM_X  100.0
@@ -58,7 +70,7 @@ struct app_widgets {
 //ToDo: improve the commentary for the functions
 
 
-// calls the library and gets the version info
+// 
 void on_main_application_window_destroy() ;
 
 

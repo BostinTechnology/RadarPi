@@ -67,6 +67,8 @@
  *          Not required at this time, integrate into the application instead.
  * 38   Improve the graphing, the lines are very thick!
  * 42   Check radar visual as the file connect option from the menu is incorrect
+ * 44   Convert current debug messages into a file instead of on screen
+ *          Make it display the log file name on start if debug selected.
  * 
  * 
  *  9   Code tidy up
@@ -183,6 +185,7 @@
  * DONE 36   On the config page, I need to add in a message box to prompt either Set or Ignore.
  * DONE      I wonder if I can force it to not change screens until one or the other is pressed.
  * DONE 32   The Sample and Hold signal needs to be set to run for all modes, including ADC
+ * DONE 43   Implement arguments to turn debug on or off
  * 
  */
 
@@ -251,7 +254,9 @@ int set_gain(GtkButton *button, struct app_widgets *widget) {
     CommsRetCode    status = 0;
 
     widget->gain_value = gtk_range_get_value(GTK_RANGE(widget->w_scale_gainctrl));
-    printf("Gain Value Set:%d\n", widget->gain_value);
+    if (DEBUG1 <= widget->debug) {
+        printf("Gain Value Set:%d\n", widget->gain_value);
+    }
     
     // Need to get the value and determine where it actually is in the allowed values
     // and then write it back.
@@ -264,8 +269,9 @@ int set_gain(GtkButton *button, struct app_widgets *widget) {
             break;
         }
     };
-    
-    printf("Identified Entry:%d Posn:%d\n", allowed_values[i], i);
+    if (DEBUG1 <= widget->debug) {
+        printf("Identified Entry:%d Posn:%d\n", allowed_values[i], i);
+    }
     
     // Got the upper position, now check what value to set_value to
     if (i == 0) {
@@ -289,7 +295,9 @@ int set_gain(GtkButton *button, struct app_widgets *widget) {
     // set values of slider and gain setting box.
     
     sprintf(conv, "%d", set_value);
-    printf("Converted:%s\n", conv);
+    if (DEBUG1 <= widget->debug) {
+        printf("Converted:%s\n", conv);
+    }
 
     //Write the new gain setting to the board    
     status = gainSPiInitialisation ();
@@ -301,18 +309,26 @@ int set_gain(GtkButton *button, struct app_widgets *widget) {
             gainSPiEnd();
             gtk_entry_set_text(GTK_ENTRY(widget->w_txt_gain_setting), conv);
             gtk_range_set_value(GTK_RANGE(widget->w_scale_gainctrl), set_value);
-            printf("Set Gain Comms ended\n");
+            if (DEBUG1 <= widget->debug) {
+                printf("Set Gain Comms ended\n");
+            }
         } else {
-            printf("Unable to set Gain Control, error code:%d\n", status);
+            if (DEBUG2 <= widget->debug) {
+                printf("Unable to set Gain Control, error code:%d\n", status);
+            }
         };
     }
     else {
-        printf("Unable to start SPI Comms, error code:%d", status);
+        if (DEBUG2 <= widget->debug) {
+            printf("Unable to start SPI Comms, error code:%d", status);
+        }
     };
     if (status !=SPI_ERR_NONE) {
         gtk_entry_set_text(GTK_ENTRY(widget->w_txt_gain_setting), "Error");
         gtk_range_set_value(GTK_RANGE(widget->w_scale_gainctrl), 0);
-        printf("Gain Set - i think\n");
+        if (DEBUG1 <= widget->debug) {
+            printf("Gain Set - i think\n");
+        }
     }
 
 	return status;
@@ -495,8 +511,9 @@ void on_draw (GtkWidget *drawing, cairo_t *cr, struct app_widgets *widget) {
     gdouble dx = 5.0, dy = 5.0; /* Pixels between each point */
     gdouble clip_x1 = 0.0, clip_y1 = 0.0, clip_x2 = 0.0, clip_y2 = 0.0;
     gdouble left_margin = 5.0, bottom_margin = 5.0;         /* gap between edge and lines, percentage */
-
-    Node *current;          // USed by the linked lists.
+    gdouble axis_width = 2.0, line_width = 1.0; /* Pixels between each point */
+    
+    Node *current;          // Used by the linked lists.
 
 	
 	GdkWindow *window = gtk_widget_get_window(drawing);	// I Think this needs to be the drawing canvas
@@ -508,20 +525,20 @@ void on_draw (GtkWidget *drawing, cairo_t *cr, struct app_widgets *widget) {
             &da.width,
             &da.height);
 
-    //Debug comments
-	//printf("Got window geometry\n");
-    //printf("X coord:%d ", da.x);
-    //printf("Y coord:%d ", da.y);
-    //printf("Width  :%d ", da.width);
-    //printf("Height :%d\n", da.height);
-    // X coord:5 Y coord:5 Width  :500 Height :307
-	
+    if (DEBUG1 <= widget->debug) {  //Debug comments
+        printf("Got window geometry\n");
+        printf("X coord:%d ", da.x);
+        printf("Y coord:%d ", da.y);
+        printf("Width  :%d ", da.width);
+        printf("Height :%d\n", da.height);
+        // X coord:5 Y coord:5 Width  :500 Height :307
+	};
+    
 	/* Draw on a black background */
     cairo_set_source_rgb (cr, 0.0, 0.0, 0.0);
     cairo_paint (cr);
-	//printf("drawn on black background\n");        //Debug comment
 
-    // Set how the devie to usder layer translate - keeping it the same.
+    // Set how the device to usder layer translate - keeping it the same.
     cairo_translate (cr, 0, 0);
     
     // Move zero points:cairo_scale (cr, ZOOM_X, -ZOOM_Y);
@@ -536,6 +553,7 @@ void on_draw (GtkWidget *drawing, cairo_t *cr, struct app_widgets *widget) {
 	
     /* Draws x and y axis */
     cairo_set_source_rgb (cr, 0.0, 1.0, 0.0);
+    cairo_set_line_width (cr, axis_width);
     // horizontal axis
     cairo_move_to (cr, clip_x1+left_margin, clip_y2-bottom_margin);
     cairo_line_to (cr, clip_x2, clip_y2-bottom_margin);
@@ -543,12 +561,13 @@ void on_draw (GtkWidget *drawing, cairo_t *cr, struct app_widgets *widget) {
     cairo_move_to (cr, clip_x1+left_margin, clip_y1);
     cairo_line_to (cr, clip_x1+left_margin, clip_y2-bottom_margin);
     cairo_stroke (cr);
-	//printf("drawn x and y axis\n");        //Debug comment
 
     // No values to draw, so just return at this point.
     if (widget->list.qty_readings == 0) {
         //Noting to draw
-        printf("Nothing to draw\n");
+        if (DEBUG1 <= widget->debug) {
+            printf("Nothing to draw\n");
+        }
         return;
     }
     
@@ -559,23 +578,21 @@ void on_draw (GtkWidget *drawing, cairo_t *cr, struct app_widgets *widget) {
     // The one below sets the scale based on max and min readings.
     y_scale = ((clip_y2 - clip_x1 - bottom_margin) / (widget->list.max_reading - widget->list.min_reading));
     
-    // There was a thought to use a fixed scale of 0 to 3v3, but in one mode it reads frequency, and therefore this isn't any use
-    //y_scale = ((clip_y2 - clip_x1 - bottom_margin) / MAX_VOLTAGE);      // Y Scale is 0 to 3V3 fixed.
-    
-    cairo_set_line_width (cr, dx);
+    cairo_set_line_width (cr, line_width);
     //Debug comments
-	printf("Determined the data points\n");
-    printf("dx:%lf dy:%lf\n", dx, dy);
-    printf("clip_x1:%lf ", clip_x1);
-    printf("clip_x2:%lf ", clip_x2);
-    printf("clip_y1:%lf ", clip_y1);
-    printf("clip_y2:%lf\n", clip_y2);
-    printf("qty readings:%d ", widget->list.qty_readings);
-    printf("max reading:%f ", widget->list.max_reading);
-    printf("min reading:%f ", widget->list.min_reading);
-    printf("X scale:%lf ", x_scale);
-    printf("Y scale:%lf\n", y_scale);
-
+    if (DEBUG1 <= widget->debug) {
+        printf("Determined the data points\n");
+        printf("dx:%lf dy:%lf\n", dx, dy);
+        printf("clip_x1:%lf ", clip_x1);
+        printf("clip_x2:%lf ", clip_x2);
+        printf("clip_y1:%lf ", clip_y1);
+        printf("clip_y2:%lf\n", clip_y2);
+        printf("qty readings:%d ", widget->list.qty_readings);
+        printf("max reading:%f ", widget->list.max_reading);
+        printf("min reading:%f ", widget->list.min_reading);
+        printf("X scale:%lf ", x_scale);
+        printf("Y scale:%lf\n", y_scale);
+    }
 
     current = widget->list.listHead;
     cairo_line_to(cr, 50, 50);
@@ -612,7 +629,9 @@ void on_draw (GtkWidget *drawing, cairo_t *cr, struct app_widgets *widget) {
 }
 
 gboolean screen_timer_exe(struct app_widgets *widget) {
-    printf("In screen refresh timer trigger\n");
+    if (DEBUG1 <= widget->debug) {
+        printf("In screen refresh timer trigger\n");
+    }
     
     if (widget->running != true) {
         // It is currently not running, therefore don't refresh the screen.
@@ -629,7 +648,9 @@ gboolean screen_timer_exe(struct app_widgets *widget) {
 }
 
 gboolean data_timer_exe(struct app_widgets *widget) {
-    printf("In data timer\n");
+    if (DEBUG1 <= widget->debug) {
+        printf("In data timer\n");
+    }
     
     int reply = 0;              // the reply status from the code
     float   reading = 0.0;
@@ -657,31 +678,38 @@ gboolean data_timer_exe(struct app_widgets *widget) {
      */
     
     if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget->w_radbut_adc))) {
-        printf("ADC data mode selected\n");
+        if (DEBUG1 <= widget->debug) {
+            printf("ADC data mode selected\n");
+        }
         // Add filter here with ADC
         if (reply == ADC_EXIT_SUCCESS) {
             reply = readVoltage(&reading);
-            reading = highpass_filter (reading);
+            //reading = highpass_filter (reading);
         }
         // In this mode, max and min are based on the voltage output of the adc, hence set to max and min here
         listSetMax(&widget->list, MAX_VOLTAGE);
         listSetMin(&widget->list, MIN_VOLTAGE);
     }
     else if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget->w_radbut_op_to_pi))) {
-
-        printf("O/P to PI mode selected\n");
+        if (DEBUG1 <= widget->debug) {
+            printf("O/P to PI mode selected\n");
+        }
         if (reply == ADC_EXIT_SUCCESS) {
             reply = returnFullFrequency(&reading, IF_OUT_DIGITAL);
         }
     }
     else if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget->w_radbut_digital))) {
-        printf("Digital data mode selected\n");
+        if (DEBUG1 <= widget->debug) {
+            printf("Digital data mode selected\n");
+        }
         if (reply == GPIO_EXIT_SUCCESS) {
             reply = returnFullFrequency(&reading, IF_OUT_DIGITAL);
         }
     };
 
-    printf("Voltage read:%f\n", reading);
+    if (DEBUG1 <= widget->debug) {
+        printf("Voltage read:%f\n", reading);
+    }
     //// Add a new value to the start of the list every time it runs
     listAddHead(&widget->list, reading);
     
@@ -696,11 +724,38 @@ int main(int argc, char** argv) {
     GtkBuilder      *builder; 
     GtkWidget       *window;
     int             status;
+    int             arg_count;
     
     GError                  *err = NULL;    // holds any error that occurs within GTK
     
     // instantiate structure, allocating memory for it
     struct app_widgets	*widgets = g_slice_new(struct app_widgets);
+    
+    // Handle main program arguments
+    // Format radarVisual DEBUG x       where x is the level 0 - 4, if omitted, level = 1
+    if (argc > 1) {
+        for(arg_count=0;arg_count<argc;arg_count++) {
+            printf("\nargv[%d]: %s\n",arg_count,argv[arg_count]);
+        }
+        // Looking for argument 1 and it's not there!!
+        if (strcmp(argv[1],"DEBUG") == 0) {      //argv is 'DEBUG'
+            // atoi will either return a number or zero if it can't convert it
+            // Therefore set the debug to the number
+            if (argc >= 3) {
+                widgets->debug = atoi(argv[2]);
+            }
+            else {
+                widgets->debug = 1;
+            }
+        }
+    }
+    else {
+        widgets->debug = false;
+    };
+    
+    if (DEBUG1 <= widgets->debug) {
+        printf("Debug level: %d\n", widgets->debug);
+    }
     
     listInitialise(&widgets->list);
     init_filter();
