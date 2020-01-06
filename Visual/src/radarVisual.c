@@ -1,16 +1,22 @@
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /* 
- * File:   rfidVisual.c
+ * File:   radarVisual.c
+ * 
  * Author: Matthew Bennett <matthew.bennett@bostintechnology.com>
  *
  * Created on 30 March 2019, 09:34
+ * 
+ * Example code for providing a full GUI interface to read and configure
+ * the Radar PI
+ *
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation as version 2 of the License.
+ *
+ * For more information refer to www.BostinTechnology.com
+ *
  */
+
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -48,14 +54,12 @@
  *      - Gain Control
  *      - Sample Software
  *      - Test Program
- *      - Visual
- * 41   Double check all licence headers in files.
+ *      DONE - Visual (Current version functionality and bugs accepted)
  * 34   Need to find a way of capturing the current values after setting. Consider having hidden values 
  *      in the form to hide them in, alternatively have global variables.
  *      This is required for the ignore button!
  * 42   Merge the code from DisplayDemo into radarVisual
  *      - Lots of good ideas around control of the software
- * 
  * 37   Change the error messages to be
  *          positive responses are even numbers
  *          failed responses are odd numbers
@@ -67,8 +71,6 @@
  *          i Split gainFunctions into user functions and internal functions
  * 7    Integrate LEDs into common library
  *          Not required at this time, integrate into the application instead.
- * 38   Improve the graphing, the lines are very thick!
- * 42   Check radar visual as the file connect option from the menu is incorrect
  * 44   Convert current debug messages into a file instead of on screen
  *          Make it display the log file name on start if debug selected.
  * 
@@ -188,6 +190,9 @@
  * DONE      I wonder if I can force it to not change screens until one or the other is pressed.
  * DONE 32   The Sample and Hold signal needs to be set to run for all modes, including ADC
  * DONE 43   Implement arguments to turn debug on or off
+ * DONE 38   Improve the graphing, the lines are very thick!
+ * DONE 42   Check radar visual as the file connect option from the menu is incorrect
+ * DONE 41   Double check all licence headers in files.
  * 
  */
 

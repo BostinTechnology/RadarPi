@@ -1,12 +1,22 @@
 #!/usr/bin/env python3
+""" 
+ * File:   SystemSettings.py
+ * Author: Matthew Bennett <matthew.bennett@bostintechnology.com>
+ *
+ * Created on 21 September 2019, 10:19
+ * 
+ * Example code provides a demo interface that is designed to show the 
+   capabilitiesof the Radar module
+ *
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation as version 2 of the License.
+ *
+ * For more information refer to www.BostinTechnology.com
+ *
 """
-    This program provides a demo interface that is designed to show the capabilities
-    of the Radar module
 
-    This should be run using the Pi Display module
-
-    
-"""
 
 from tkinter import *
 from tkinter.ttk import *

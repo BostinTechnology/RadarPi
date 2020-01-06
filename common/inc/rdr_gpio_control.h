@@ -1,6 +1,6 @@
 /* 
  * File:   gpio_control.h
- * Author: Matthew
+ * Author: Matthew Bennett <mattthew.bennett@bostintechnology.com>
  *
  * Created on 22 August 2018, 15:54
  * 

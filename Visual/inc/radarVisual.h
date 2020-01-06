@@ -1,14 +1,20 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /* 
- * File:   rfidVisual.h
+ * File:   radarVisual.h
+ * 
  * Author: Matthew Bennett <matthew.bennett@bostintechnology.com>
  *
  * Created on 13 April 2019, 16:14
+ * 
+ * Example code for providing a full GUI interface to read and configure
+ * the Radar PI
+ *
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation as version 2 of the License.
+ *
+ * For more information refer to www.BostinTechnology.com
+ *
  */
 
 #ifndef RFIDVISUAL_H

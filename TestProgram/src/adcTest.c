@@ -1,8 +1,20 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/* 
+ * File:   adcTest.c
+ * Author: Matthew Bennett <matthew.bennett@bostintechnology.com>
+ *
+ * Created on 12 January 2019, 08:55
+ * 
+ * Example code to support the test program with its ADC tests
+ *
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation as version 2 of the License.
+ *
+ * For more information refer to www.BostinTechnology.com
+ *
  */
+
 
 #include <stdio.h>
 #include <stdlib.h>

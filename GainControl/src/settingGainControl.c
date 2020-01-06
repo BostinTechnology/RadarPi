@@ -1,16 +1,18 @@
-
- /******************************************************************************
-  *
-  * Example software provided by Bostin Technology Ltd
-  * 
-  * Sets the Gain Control to 10
-  *
-  * This software comes with no warrently and is provided as a demo application
-  * for use with the Bostin Technology RadarPi
-  *
-  * For more information    www.Cogniot.eu
-  *
-  ******************************************************************************/
+/* 
+ * File:   newfile.c
+ * Author: Matthew Bennett <matthew.bennett@bostintechnology.com>
+ *
+ * Created on 21 September 2019, 10:19
+ * 
+ * Example code for setting the gain control via a menu choice
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation as version 2 of the License.
+ *
+ * For more information refer to www.BostinTechnology.com
+ *
+ */
 
  /**********************************************************************
   * Development Notes

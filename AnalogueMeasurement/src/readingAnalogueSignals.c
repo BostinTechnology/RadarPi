@@ -1,24 +1,20 @@
-
- /******************************************************************************
-  *
-  * Example software provided by Bostin Technology Ltd
-  * 
-  * Reads and decodes the analogue signals received for the Radar module
-  *
-  * This software comes with no warrntly and is provided as a demo application
-  * for use with the Bostin Technology RadarPi
-  *
-  * For more information    www.Cogniot.eu
-  *
-  ******************************************************************************/
-
- 
-
-/*
- ******************************************************************************
- * INCLUDES
- ******************************************************************************
+/* 
+ * File:   readingAnalogueSignals.c
+ * Author: Matthew Bennett <matthew.bennett@bostintechnology.com>
+ *
+ * Created on 21 September 2019, 10:19
+ * 
+ * Example code for reading analogue signals from the Radar Pi and displaying
+ * them in a number of different ways.
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation as version 2 of the License.
+ *
+ * For more information refer to www.BostinTechnology.com
+ *
  */
+
 
 #include <stdio.h>
 #include <stdint.h>

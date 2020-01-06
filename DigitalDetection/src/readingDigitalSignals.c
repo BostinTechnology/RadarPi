@@ -1,16 +1,19 @@
-
- /******************************************************************************
-  *
-  * Example software provided by Bostin Technology Ltd
-  * 
-  * Reads and decodes the analogue signals received for the Radar module
-  *
-  * This software comes with no warrntly and is provided as a demo application
-  * for use with the Bostin Technology RadarPi
-  *
-  * For more information    www.Cogniot.eu
-  *
-  ******************************************************************************/
+/* 
+ * File:   newfile.c
+ * Author: Matthew Bennett <matthew.bennett@bostintechnology.com>
+ *
+ * Created on 21 September 2019, 10:19
+ * 
+ * Example code for reading and decoding the digital signals received for 
+ * the Radar module
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation as version 2 of the License.
+ *
+ * For more information refer to www.BostinTechnology.com
+ *
+ */
 
  
 
@@ -202,24 +205,26 @@ int chooseGPIOPin(void) {
 /*************************************************************************/
 void readValuesContinously(void)
 {
-	int		pin;
-    printf("DEBUG: Into read Values Continously\n");
-    float           frequency;
-    int     status;
-	
-	pin = chooseGPIOPin();
-	
-	setupGpioFunctions();
-	
-	setSampleHoldForRun();
+    int	        pin;
+    float       frequency;
+    int         status;
 
-    printf("Reading Values\n");
-    do
-    {
-        status = returnFullFrequency(&frequency, pin);
-        printf("Output of Frequency:%f\n", frequency);
-    } while (status != 0);
-    
+    printf("DEBUG: Into read Values Continously\n");
+	
+    pin = chooseGPIOPin();
+	
+    if (pin>0) {
+        setupGpioFunctions();
+        
+        setSampleHoldForRun();
+
+        printf("Reading Values\n");
+        do
+        {
+            status = returnFullFrequency(&frequency, pin);
+            printf("Output of Frequency:%f\n", frequency);
+        } while (status == 0);
+    }    
     return;
 }
 
@@ -275,7 +280,7 @@ void createDataset(void) {
     
     execute_plot(gnu_plot);
 
-    printf("Plot drawn, press any key to continue");
+    printf("Plot drawn, press ENTER key to continue");
 
     getchar();
 

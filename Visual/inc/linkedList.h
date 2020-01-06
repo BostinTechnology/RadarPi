@@ -1,5 +1,6 @@
 /* 
  * File:   linkedList.h
+ * 
  * Author: Ciaran Morgan <ciaran.morgan@bostintechnology.com>
  *
  * Created on 21 September 2019, 10:20
