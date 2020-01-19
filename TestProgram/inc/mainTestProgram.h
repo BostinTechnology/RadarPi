@@ -25,6 +25,8 @@
 #define		INPUT_VOLTAGE			2.1		// Input voltage on Volts
 #define		VOLT_TOLERANCE			0.05	// percentage of error allowed
 
+#define     ERROR_NONE              0
+
 /*!**************************************************************************
  * Overview:  Display the Bostin Technology introduction screen
  *  

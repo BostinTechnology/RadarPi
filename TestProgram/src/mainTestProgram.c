@@ -146,9 +146,51 @@ void e2promTest(void) {
     
 }
 
+// Routine added to provide testing
+int lightReading(float *reading) {
+    *reading = 0.12;
+    return 0;
+}
+
 void displayReadingsTest(void) {
     printf("To Be implemented\n");
+    // Light Sensor Value, ADC Output, Digital Frequency, Gain Setting
+    int         status;
+    float       light = 0.0, adc = 0.0, digital = 0.0;
+    int         gaincount = 0, qtygainreadings = 4;
+    int         testgainvalues[4][2] = { {0b0000, 1}, {0b0001, 10}, {0b0100, 40}, {0b1000, 157}	};
+    int         time_duration = 5;
     
+    systemloop = true;
+    
+    printf("CTRL - C to end loop\n");
+    do {
+        printf("gi\n");
+        status = (int)gainSPiInitialisation();
+        printf("gs\n");
+        status += (int)setGainControl(testgainvalues[gaincount][0]);
+        printf("ge\n");
+        status += (int)gainSPiEnd();
+        printf("lr\n");
+        status += lightReading(&light);
+        printf("ai\n");
+        status += adcSPiInitialisation();
+        printf("rv\n");
+        status += readVoltage(&adc);
+        printf("ae\n");
+        status += adcSPiEnd();
+        printf("ff\n");
+        status += returnFullFrequency(&digital, IF_OUT_TO_PI);
+        printf("\rLight:%f ADC:%f Digital:%f ADC:%d\n", light, adc, digital, testgainvalues[gaincount][1]);
+        fflush(stdout);     // Test if this line is required or if the \n above works
+        
+        // Add timer around this bit so it sticks on each gain for period of time
+        gaincount++;
+        if (gaincount > qtygainreadings) {
+            gaincount = 0;
+        }
+
+    } while ((systemloop) && (status == ERROR_NONE));
     return;
     
 }
