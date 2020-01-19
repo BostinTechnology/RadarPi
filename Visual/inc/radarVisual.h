@@ -36,6 +36,10 @@ struct app_widgets {
     GtkWidget       *w_radbut_digital;
     GtkWidget       *w_radbut_adc;
     GtkAdjustment   *w_adj_gainctrl;
+    GtkAdjustment   *w_adj_dataspeed;
+    GtkAdjustment   *w_adj_refreshspeed;
+    GtkSpinButton   *w_spn_dataspeed;
+    GtkSpinButton   *w_spn_refreshspeed;
     GtkWidget       *w_txt_mode_info;
     GtkWidget       *w_txt_gain_setting;
     GtkWidget       *w_txt_status;
@@ -67,8 +71,8 @@ struct app_widgets {
 #define GAIN_RANGE     
 
 //Timers for the application refresh / data collection - all in mS
-#define SCREEN_REFRESH_TIMER    333
-#define DATA_REFRESH_TIMER      333
+#define DEFAULT_SCREEN_REFRESH_TIMER    333
+#define DEFAULT_DATA_REFRESH_TIMER      333
 
 #define MAX_VOLTAGE             3.3
 #define MIN_VOLTAGE             0.0

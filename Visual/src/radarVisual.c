@@ -52,7 +52,8 @@ void on_btn_startstop_clicked(GtkButton *button, struct app_widgets *widget) {
     widget->running = !widget->running;
     
     if (widget->running) {
-        printf("Currently Running\n");
+        printf("Now Running\n");
+
         gtk_entry_set_text(GTK_ENTRY(widget->w_txt_status), "Running");
         if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget->w_radbut_op_to_pi))) {
             reply = adcSPiInitialisation();
@@ -65,7 +66,8 @@ void on_btn_startstop_clicked(GtkButton *button, struct app_widgets *widget) {
         }
     }
     else {
-        printf("Currently NOT running\n");	
+        printf("Now NOT running\n");
+        
         gtk_entry_set_text(GTK_ENTRY(widget->w_txt_status), "Not Running");
         if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget->w_radbut_op_to_pi))) {
             adcSPiEnd();
@@ -626,6 +628,10 @@ int main(int argc, char** argv) {
     widgets->w_txt_mode_info        = GTK_WIDGET(gtk_builder_get_object(builder, "txt_mode_info"));
     widgets->w_txt_gain_setting     = GTK_WIDGET(gtk_builder_get_object(builder, "txt_gain_setting"));
     widgets->w_adj_gainctrl         = GTK_ADJUSTMENT(gtk_builder_get_object(builder, "adj_gainctrl"));
+    widgets->w_adj_dataspeed        = GTK_ADJUSTMENT(gtk_builder_get_object(builder, "adj_dataspeed"));
+    widgets->w_adj_refreshspeed     = GTK_ADJUSTMENT(gtk_builder_get_object(builder, "adj_refreshspeed"));
+    widgets->w_spn_dataspeed        = GTK_SPIN_BUTTON(gtk_builder_get_object(builder, "spn_dataspeed"));
+    widgets->w_spn_refreshspeed     = GTK_SPIN_BUTTON(gtk_builder_get_object(builder, "spn_refreshspeed"));
     widgets->w_txt_status           = GTK_WIDGET(gtk_builder_get_object(builder, "txt_status"));
     widgets->w_lbl_user_message     = GTK_WIDGET(gtk_builder_get_object(builder, "lbl_user_message"));
     
@@ -639,10 +645,15 @@ int main(int argc, char** argv) {
 
     
     // Set a timeout running to refresh the screen
-    gdk_threads_add_timeout(SCREEN_REFRESH_TIMER, (GSourceFunc)screen_timer_exe, (gpointer)widgets);
-    gdk_threads_add_timeout(DATA_REFRESH_TIMER, (GSourceFunc)data_timer_exe, (gpointer)widgets);
-
-
+    if (DEBUG1 <= widgets->debug) {
+        float ref_speed, data_speed;
+        ref_speed = gtk_spin_button_get_value (GTK_SPIN_BUTTON(widgets->w_spn_refreshspeed));
+        printf("Refresh Speed:%f\n", ref_speed);
+        data_speed = gtk_spin_button_get_value (GTK_SPIN_BUTTON(widgets->w_spn_dataspeed));
+        printf("Data Speed:%f\n", data_speed);
+    };
+    gdk_threads_add_timeout(gtk_spin_button_get_value (GTK_SPIN_BUTTON(widgets->w_spn_refreshspeed)), (GSourceFunc)screen_timer_exe, (gpointer)widgets);
+    gdk_threads_add_timeout(gtk_spin_button_get_value (GTK_SPIN_BUTTON(widgets->w_spn_dataspeed)), (GSourceFunc)data_timer_exe, (gpointer)widgets);
     
     gtk_widget_show(window);                
     gtk_main();
