@@ -18,7 +18,6 @@
 #include <unistd.h>
 #include "../inc/ledControl.h"
 #include "../inc/rdr_gpio_control.h"
-#include "../../common/inc/rdr_utilities.h"
 
 /*!**************************************************************************
  * Overview:  Setup the LEDs for use and set them off
@@ -119,39 +118,4 @@ int controlTriggeredLED(int state)
     };
 	return status;
 }
-
-int cycleLEDs(void)
-{
-    int status = LED_ERR_NONE;
-	status = ledSetup();
-    if (status != LED_ERR_NONE) {
-        printf("CTRL - C to end loop\n");
-
-        do {
-            printf("Running LED\n");
-            status += controlTriggeredLED(LED_OFF);
-            status += controlRunningLED(LED_ON);
-            usleep(LED_TEST_SPEED);
-
-            printf("Monitoring LED\n");
-            status += controlRunningLED(LED_OFF);
-            status += controlMonitoringLED(LED_ON);
-            usleep(LED_TEST_SPEED);
-
-            printf("Triggered LED\n");
-            status += controlMonitoringLED(LED_OFF);
-            status += controlTriggeredLED(LED_ON);
-            usleep(LED_TEST_SPEED);
-
-
-        } while ((systemloop) && (status != LED_ERR_NONE));
-    }
-    if (status == LED_ERR_NONE) {
-        printf("LED test completed\n");
-    }
-    else {
-        printf("LED test failed\n");
-    }
-	return status;
-};
 

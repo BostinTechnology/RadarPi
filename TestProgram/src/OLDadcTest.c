@@ -21,7 +21,7 @@
 #include <stdbool.h>
 #include <unistd.h>
 #include "../inc/adcTest.h"
-#include "../inc/utilities.h"
+#include "../../common/inc/rdr_utilities.h"
 #include "../../common/inc/adcFunctions.h"
 
 

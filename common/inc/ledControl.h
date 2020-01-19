@@ -40,20 +40,6 @@ int controlRunningLED(int state);		//turn the Running LED on or off
 int controlMonitoringLED(int state);		//turn the Monitoring LED on or off
 int controlTriggeredLED(int state);		//turn the Triggered LED on or off
 
-/*!**************************************************************************
- * Overview:  Cycle through the LEDs to test them
- *  
- * Description: This method turns each LED on and off in a timed cycle
- *				Requires CTRL - C to exit
- *
- * Parameters:
- * param[in] none : 
- *
- * return 0         : no error
- *****************************************************************************
- */
-
-int cycleLEDs(void);					// cycle through the leds to test them
 
 #endif /* LEDCONTROL_H */
 

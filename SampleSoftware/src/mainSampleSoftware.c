@@ -92,6 +92,7 @@ void digitalDetectionFiltered(void) {
     float   freq;
     time_t  trigger_time, trigger_timeout;
     int     status;
+    bool    systemloop;
 
     trigger_timeout = (TRIGGER_TIMEOUT * CLOCKS_PER_SEC);
     systemloop = true;
@@ -100,40 +101,40 @@ void digitalDetectionFiltered(void) {
     printf("CTRL - C to exit");
     // In a loop, using systemloop to exit
     do {
-    // Read the whole frequency, using the deglitch s/w it and then report it
-    status = returnFullFrequency(&freq, IF_OUT_TO_PI);
+        // Read the whole frequency, using the deglitch s/w it and then report it
+        status = returnFullFrequency(&freq, IF_OUT_TO_PI);
 
-    // If over a threshold, turn the LED on, recording the on time
-    if (freq > FREQUENCY_TRIGGER) {
-        // frequency threshold has been exceeded, set trigger time.
-        trigger_time = clock();
-        printf("Triggered\n");
-        if (trigger_time == 0 ) {
-        // we are not currently triggered, so turn the light on
-        controlTriggeredLED(LED_ON);
-        controlRunningLED(LED_OFF);
-        }
-        else {
-        // currently triggered, flash the LEDs off then on
-        controlTriggeredLED(LED_OFF);
-        controlRunningLED(LED_ON);
-        usleep(50000);
-        controlTriggeredLED(LED_ON);
-        controlRunningLED(LED_OFF);
-        }
-    };
+        // If over a threshold, turn the LED on, recording the on time
+        if (freq > FREQUENCY_TRIGGER) {
+            // frequency threshold has been exceeded, set trigger time.
+            trigger_time = clock();
+            printf("Triggered\n");
+            if (trigger_time == 0 ) {
+            // we are not currently triggered, so turn the light on
+            controlTriggeredLED(LED_ON);
+            controlRunningLED(LED_OFF);
+            }
+            else {
+            // currently triggered, flash the LEDs off then on
+            controlTriggeredLED(LED_OFF);
+            controlRunningLED(LED_ON);
+            usleep(50000);
+            controlTriggeredLED(LED_ON);
+            controlRunningLED(LED_OFF);
+            }
+        };
 
-    // After a period, turn off the LED
-    if (clock() > (trigger_time + trigger_timeout)) {
-        // timeout has now been exceeded
-        printf("Monitoring\n");
-        controlTriggeredLED(LED_OFF);
-        controlRunningLED(LED_ON);
-        trigger_time = 0;
-    };
-    if (status !=0) {
-        systemloop = false;
-    }
+        // After a period, turn off the LED
+        if (clock() > (trigger_time + trigger_timeout)) {
+            // timeout has now been exceeded
+            printf("Monitoring\n");
+            controlTriggeredLED(LED_OFF);
+            controlRunningLED(LED_ON);
+            trigger_time = 0;
+        };
+        if (status !=0) {
+            systemloop = false;
+        }
     } 
     while (systemloop);
 };
@@ -156,6 +157,7 @@ void adcMeasurement(void) {
     float   volts;
     time_t  trigger_time, trigger_timeout;
     int     status;
+    bool    systemloop;
 
     trigger_timeout = (TRIGGER_TIMEOUT * CLOCKS_PER_SEC);
     systemloop = true;
@@ -220,8 +222,6 @@ void adcMeasurement(void) {
 int main(int argc, char** argv) {
     char option;                        // Used for menu choices
 
-    // setup the interrupt handling
-    sigSetup();
     setupGpioFunctions();
 
     splashScreen();

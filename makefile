@@ -33,7 +33,6 @@ OBJS_common = \
 	$(TARGETDIR_ALL)/rdr_spi_comms.o \
 	$(TARGETDIR_ALL)/rdr_gpio_control.o \
 	$(TARGETDIR_ALL)/ledControl.o \
-	$(TARGETDIR_ALL)/rdr_utilities.o \
 	$(TARGETDIR_ALL)/radar.o \
 	$(TARGETDIR_ALL)/filterFunctions.o \
 
@@ -44,6 +43,7 @@ OBJS_common = \
 OBJS_testProgram =  \
 	$(OBJS_common) \
 	$(TARGETDIR_ALL)/adcTest.o \
+	$(TARGETDIR_ALL)/utilities.o \
 	$(TARGETDIR_ALL)/mainTestProgram.o
 USERLIBS_testProgram = -lbcm2835 
 DEPLIBS_testProgram =  
@@ -144,9 +144,6 @@ $(TARGETDIR_ALL)/ledControl.o: $(TARGETDIR_ALL) common/src/ledControl.c
 $(TARGETDIR_ALL)/rdr_spi_comms.o: $(TARGETDIR_ALL) common/src/rdr_spi_comms.c
 	$(COMPILE.c) $(CFLAGS)  -o $@ common/src/rdr_spi_comms.c
 
-$(TARGETDIR_ALL)/rdr_utilities.o: $(TARGETDIR_ALL) common/src/rdr_utilities.c
-	$(COMPILE.c) $(CFLAGS)  -o $@ common/src/rdr_utilities.c
-
 $(TARGETDIR_ALL)/radar.o: $(TARGETDIR_ALL) common/src/radar.c
 	$(COMPILE.c) $(CFLAGS)  -o $@ common/src/radar.c
 
@@ -159,6 +156,9 @@ $(TARGETDIR_ALL)/adcTest.o: $(TARGETDIR_ALL) TestProgram/src/adcTest.c
 
 $(TARGETDIR_ALL)/ledTest.o: $(TARGETDIR_ALL) TestProgram/src/ledTest.c
 	$(COMPILE.c) $(CFLAGS)  -o $@ TestProgram/src/ledTest.c
+
+$(TARGETDIR_ALL)/utilities.o: $(TARGETDIR_ALL) TestProgram/src/utilities.c
+	$(COMPILE.c) $(CFLAGS)  -o $@ TestProgram/src/utilities.c
 
 $(TARGETDIR_ALL)/mainTestProgram.o: $(TARGETDIR_ALL) TestProgram/src/mainTestProgram.c
 	$(COMPILE.c) $(CFLAGS)  -o $@ TestProgram/src/mainTestProgram.c

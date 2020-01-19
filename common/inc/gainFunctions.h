@@ -168,11 +168,11 @@ CommsRetCode gainSPiEnd(void);
  * Overview:  Sets the Gain Control to default value
  *  
  * This method using the SPi comms to send the required data byte to set the
- * gain control to the default value
+ * gain control to the default value (DEFAULT_GAIN_VALUE) as defined above
  *
  * Gain Register setting is described above
  *
- * param[in]	gain_setting : binary value require for the desired gain for bits g3:g0
+ * param[in]	nothing   : 
  *
  * return NOTHING         : No response
  *****************************************************************************
