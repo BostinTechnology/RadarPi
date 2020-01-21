@@ -47,6 +47,7 @@
 #include <time.h>
 
 #include "../inc/utilities.h"
+#include "../inc/fileHandling.h"
 #include "../inc/mainTestProgram.h"
 #include "../../common/inc/radar.h"
 
@@ -159,35 +160,42 @@ void displayReadingsTest(void) {
     float       light = 0.0, adc = 0.0, digital = 0.0;
     int         gaincount = 0, qtygainreadings = 4;
     int         testgainvalues[4][2] = { {0b0000, 1}, {0b0001, 10}, {0b0100, 40}, {0b1000, 157}	};
-    int         time_duration = 5;
+    time_t	    currenttime, starttime;
     
     systemloop = true;
     
     printf("CTRL - C to end loop\n");
+    starttime = clock();
+    status = gainSPiInitialisation();
+    status += setGainControl(testgainvalues[gaincount][0]);
+    status += gainSPiEnd();
+
     do {
-        printf("gi\n");
-        status = (int)gainSPiInitialisation();
-        printf("gs\n");
-        status += (int)setGainControl(testgainvalues[gaincount][0]);
-        printf("ge\n");
-        status += (int)gainSPiEnd();
-        printf("lr\n");
+        //status = gainSPiInitialisation();
+        //status += setGainControl(testgainvalues[gaincount][0]);
+        //status += gainSPiEnd();
         status += lightReading(&light);
-        printf("ai\n");
-        status += adcSPiInitialisation();
-        printf("rv\n");
+        //status += adcSPiInitialisation();
         status += readVoltage(&adc);
-        printf("ae\n");
-        status += adcSPiEnd();
-        printf("ff\n");
-        status += returnFullFrequency(&digital, IF_OUT_TO_PI);
-        printf("\rLight:%f ADC:%f Digital:%f ADC:%d\n", light, adc, digital, testgainvalues[gaincount][1]);
+        //status += adcSPiEnd();
+        status += returnFullFrequency(&digital, IF_OUT_DIGITAL); //IF_OUT_TO_PI);
+        //printf("\rLight:%10.3f  ADC:%10.6f  Digital:%11.6f  ADC:%3d\n", light, adc, digital, testgainvalues[gaincount][1]);
+        printf("\rLight:%10.3f  ADC:%10.6f  Digital:%11.6f  ADC:%3d", light, adc, digital, testgainvalues[gaincount][1]);
         fflush(stdout);     // Test if this line is required or if the \n above works
+
+        currenttime = clock();
+        if (currenttime > (starttime + (TEST_TIMEOUT * CLOCKS_PER_SEC))) {
+            gaincount++;
+            if (gaincount >= qtygainreadings) {
+                gaincount = 0;
+            }
+            status += adcSPiEnd();
+            status += gainSPiInitialisation();
+            status += setGainControl(testgainvalues[gaincount][0]);
+            status += gainSPiEnd();
+            status += adcSPiInitialisation();
         
-        // Add timer around this bit so it sticks on each gain for period of time
-        gaincount++;
-        if (gaincount > qtygainreadings) {
-            gaincount = 0;
+            starttime = clock();
         }
 
     } while ((systemloop) && (status == ERROR_NONE));
@@ -202,12 +210,51 @@ void rangeTest(void) {
     
 }
 
+void debugtest() {
+    // Routine to test new functionality as it is added
+    
+    FILE    *ptr_testfile;
+    char    testfilename[15];
+    int         status;
+    
+    strcpy(testfilename, "testfilename");
+
+//Error in the next call
+//Error Message
+//Please select command (h for help) -> x
+//Debug Bit.......
+//adding header info
+//In add file header info
+//returning header info status:0
+//returning:1634624876  - this should be an int in the range 0 - 5!
+//Segmentation fault
+
+    status = openTestResultsFile(ptr_testfile, testfilename);
+    printf("Status after opening file:%d", status);
+    
+    if (status == 0) {
+        status = addTestResultToFile(ptr_testfile, testfilename);
+    }
+    printf("Status after opening file:%d", status);
+        
+
+    if (status == 0) {
+        status = closeTestResultsFile(ptr_testfile);
+    }
+    printf("Status after opening file:%d", status);
+    
+    return;
+}
+
+
+
 int main(int argc, char** argv) {
 
     char option;                        // Used for menu choices
 
     // setup the interrupt handling
     sigSetup();
+    setupGpioFunctions();
 
     splashScreen();
 
@@ -258,6 +305,12 @@ int main(int argc, char** argv) {
                 printf("Exiting.......\n");
                 option = 'e';
                 break;
+            
+            case 'x':
+                printf("Debug Bit.......\n");
+                debugtest();
+                break;
+            
 
             default:
                 printf("Unrecognised command!:>%c<\n", option);

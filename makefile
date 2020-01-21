@@ -44,6 +44,7 @@ OBJS_testProgram =  \
 	$(OBJS_common) \
 	$(TARGETDIR_ALL)/adcTest.o \
 	$(TARGETDIR_ALL)/utilities.o \
+	$(TARGETDIR_ALL)/fileHandling.o \
 	$(TARGETDIR_ALL)/mainTestProgram.o
 USERLIBS_testProgram = -lbcm2835 
 DEPLIBS_testProgram =  
@@ -154,8 +155,8 @@ $(TARGETDIR_ALL)/filterFunctions.o: $(TARGETDIR_ALL) common/src/filterFunctions.
 $(TARGETDIR_ALL)/adcTest.o: $(TARGETDIR_ALL) TestProgram/src/adcTest.c
 	$(COMPILE.c) $(CFLAGS)  -o $@ TestProgram/src/adcTest.c
 
-$(TARGETDIR_ALL)/ledTest.o: $(TARGETDIR_ALL) TestProgram/src/ledTest.c
-	$(COMPILE.c) $(CFLAGS)  -o $@ TestProgram/src/ledTest.c
+$(TARGETDIR_ALL)/fileHandling.o: $(TARGETDIR_ALL) TestProgram/src/fileHandling.c
+	$(COMPILE.c) $(CFLAGS)  -o $@ TestProgram/src/fileHandling.c
 
 $(TARGETDIR_ALL)/utilities.o: $(TARGETDIR_ALL) TestProgram/src/utilities.c
 	$(COMPILE.c) $(CFLAGS)  -o $@ TestProgram/src/utilities.c

@@ -68,7 +68,7 @@ CommsRetCode setGainControl(int gain_setting) {
     uint8_t         txBuf[msgLen];     // The outgoing message
 	CommsRetCode	ret;
     
-    printf("DEBUG: Into settings Gain Control:%d\n", gain_setting);
+    //printf("DEBUG: Into settings Gain Control:%d\n", gain_setting);
 
 	txBuf[0] = 0x00;				//set it initially before modification
 	// Set the required values for txBuf based on values set in h file and passed in
@@ -82,7 +82,7 @@ CommsRetCode setGainControl(int gain_setting) {
 	//Bit 0 - register selection
 	txBuf[0] = txBuf[0] + (REGISTER_SELECTION);
 	
-	printf("DEBUG: SPi Comms:%x\n", txBuf[0]);
+	//printf("DEBUG: SPi Comms:%x\n", txBuf[0]);
 	
     ret = SPiTransmit( txBuf, msgLen);
 	

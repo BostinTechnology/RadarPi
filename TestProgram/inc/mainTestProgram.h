@@ -76,6 +76,8 @@ int main(int argc, char** argv);
  ******************************************************************************/
 void cycleLEDs(void);					// cycle through the leds to test them
 
+/*! Used to test new routines before adding into main program */
+void debugtest();
 
 #endif /* MAINTESTPROGRAM_H */
 
