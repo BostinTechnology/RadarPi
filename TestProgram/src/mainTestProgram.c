@@ -81,6 +81,26 @@ void helpScreen(void) {
 
 void fullTestRoutine(void) {
     printf("To Be implemented\n");
+    FILE    *ptr_testfile;
+    char    testfilename[MAX_FILE_LENGTH];
+    int         status;
+    
+    status = 0;
+    
+    strcpy(testfilename, "RadarPi");
+    
+    status = openTestResultsFile(&ptr_testfile, testfilename);
+
+    
+    if (status == 0) {
+        // Add Tests into here
+        status = addTestResultToFile(&ptr_testfile, testfilename);
+    }
+        
+
+    if (status == 0) {
+        status = closeTestResultsFile(&ptr_testfile);
+    }
     
     return;
     
@@ -217,31 +237,23 @@ void debugtest() {
     char    testfilename[15];
     int         status;
     
+    status = 0;
+    
     strcpy(testfilename, "testfilename");
-
-//Error in the next call
-//Error Message
-//Please select command (h for help) -> x
-//Debug Bit.......
-//adding header info
-//In add file header info
-//returning header info status:0
-//returning:1634624876  - this should be an int in the range 0 - 5!
-//Segmentation fault
-
-    status = openTestResultsFile(ptr_testfile, testfilename);
-    printf("Status after opening file:%d", status);
+    
+    status = openTestResultsFile(&ptr_testfile, testfilename);
+    printf("Status after opening file:%d\n", status);
     
     if (status == 0) {
-        status = addTestResultToFile(ptr_testfile, testfilename);
+        status = addTestResultToFile(&ptr_testfile, testfilename);
     }
-    printf("Status after opening file:%d", status);
+    printf("Status after adding results to the file:%d\n", status);
         
 
     if (status == 0) {
-        status = closeTestResultsFile(ptr_testfile);
+        status = closeTestResultsFile(&ptr_testfile);
     }
-    printf("Status after opening file:%d", status);
+    printf("Status after closing the file:%d\n", status);
     
     return;
 }
@@ -251,6 +263,7 @@ void debugtest() {
 int main(int argc, char** argv) {
 
     char option;                        // Used for menu choices
+
 
     // setup the interrupt handling
     sigSetup();

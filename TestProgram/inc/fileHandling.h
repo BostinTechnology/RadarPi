@@ -22,7 +22,7 @@
 #include <stdio.h>
  
 #define         DATA_DIRECTORY      "testfiles/"
-#define         MAX_FILE_LENGTH     15
+#define         MAX_FILE_LENGTH     20
 #define         MIN_FILE_LENGTH     5 
 
 
@@ -32,6 +32,7 @@
 #define         ERR_FILE_EXISTS             3
 #define         ERR_UNABLE_TO_WRITE_TO_FILE 4
 #define         ERR_UNABLE_TO_CLOSE_FILE    5
+#define         ERR_UABLE_TO_CREATE_FILE    6
 
 
 /*!**************************************************************************
@@ -60,7 +61,7 @@ int checkIfFileExists(char *filename);
  *
  * return  status     : 0 - opened ok
  *****************************************************************************/
-int openTestResultsFile(FILE *fpointer, char *filename);
+int openTestResultsFile(FILE **fpointer, char *filename);
 
 /*!**************************************************************************
  * Overview:  Add the header information into the file
@@ -73,7 +74,7 @@ int openTestResultsFile(FILE *fpointer, char *filename);
  *
  * return  status     : 0 - data added
  *****************************************************************************/
-int addFileHeaderInfo(FILE *fpointer);;
+int addFileHeaderInfo(FILE **fpointer);;
 
 /*!**************************************************************************
  * Overview:  Add a test result to the file and return the status
@@ -86,7 +87,7 @@ int addFileHeaderInfo(FILE *fpointer);;
  *
  * return  status     : 0 - return ok
  ****************************************************************************/
-int addTestResultToFile(FILE *fpointer, char *testdata);
+int addTestResultToFile(FILE **fpointer, char *testdata);
 
 /*!**************************************************************************
  * Overview:  Close the file and return the status
@@ -99,7 +100,7 @@ int addTestResultToFile(FILE *fpointer, char *testdata);
  *
  * return  status     : 0 - closed ok
  *****************************************************************************/
-int closeTestResultsFile(FILE *fpointer);
+int closeTestResultsFile(FILE **fpointer);
 
 
 #endif /* FILEHANDLING_H */

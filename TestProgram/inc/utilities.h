@@ -1,5 +1,5 @@
 /* 
- * File:   rdr_utilities.h
+ * File:   utilities.h
  * Author: Matthew Bennett <matthew.bennett@bostintechnology.com>
  *
  * Created on 08 December 2018, 21:15
@@ -13,8 +13,8 @@
  * For more information refer to www.BostinTechnology.com
  */
 
-#ifndef RDR_UTILITIES_H
-#define RDR_UTILITIES_H
+#ifndef UTILITIES_H
+#define UTILITIES_H
 
 extern volatile int systemloop;
 
