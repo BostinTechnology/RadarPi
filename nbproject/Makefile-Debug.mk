@@ -41,8 +41,10 @@ OBJECTFILES= \
 	${OBJECTDIR}/common/src/adcFunctions.o \
 	${OBJECTDIR}/common/src/gainFunctions.o \
 	${OBJECTDIR}/common/src/gpioFunctions.o \
+	${OBJECTDIR}/common/src/icogFunctions.o \
 	${OBJECTDIR}/common/src/ledControl.o \
 	${OBJECTDIR}/common/src/radar.o \
+	${OBJECTDIR}/common/src/rdr_i2c_comms.o \
 	${OBJECTDIR}/common/src/rdr_utilities.o \
 	${OBJECTDIR}/default_header.o \
 	${OBJECTDIR}/nbproject/newfile1.o \
@@ -105,6 +107,11 @@ ${OBJECTDIR}/common/src/gpioFunctions.o: common/src/gpioFunctions.c nbproject/Ma
 	${RM} "$@.d"
 	$(COMPILE.c) -g -Wall -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/common/src/gpioFunctions.o common/src/gpioFunctions.c
 
+${OBJECTDIR}/common/src/icogFunctions.o: common/src/icogFunctions.c nbproject/Makefile-${CND_CONF}.mk
+	${MKDIR} -p ${OBJECTDIR}/common/src
+	${RM} "$@.d"
+	$(COMPILE.c) -g -Wall -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/common/src/icogFunctions.o common/src/icogFunctions.c
+
 ${OBJECTDIR}/common/src/ledControl.o: common/src/ledControl.c nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} -p ${OBJECTDIR}/common/src
 	${RM} "$@.d"
@@ -114,6 +121,11 @@ ${OBJECTDIR}/common/src/radar.o: common/src/radar.c nbproject/Makefile-${CND_CON
 	${MKDIR} -p ${OBJECTDIR}/common/src
 	${RM} "$@.d"
 	$(COMPILE.c) -g -Wall -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/common/src/radar.o common/src/radar.c
+
+${OBJECTDIR}/common/src/rdr_i2c_comms.o: common/src/rdr_i2c_comms.c nbproject/Makefile-${CND_CONF}.mk
+	${MKDIR} -p ${OBJECTDIR}/common/src
+	${RM} "$@.d"
+	$(COMPILE.c) -g -Wall -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/common/src/rdr_i2c_comms.o common/src/rdr_i2c_comms.c
 
 ${OBJECTDIR}/common/src/rdr_utilities.o: common/src/rdr_utilities.c nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} -p ${OBJECTDIR}/common/src

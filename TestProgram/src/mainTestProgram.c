@@ -33,6 +33,9 @@
   *     Range Test
   *         For each gain value, flash LED When Sensed
   *         CTRL-C to move to the next part of the test
+  *         Set gain to maximum, flash LED when detection
+  *             LED1 flash when any activity
+  *             LED2 flash above threshold
   * 
   * Need to capture data for each test and write it to a file with identifier
   * 
@@ -174,7 +177,6 @@ int lightReading(float *reading) {
 }
 
 void displayReadingsTest(void) {
-    printf("To Be implemented\n");
     // Light Sensor Value, ADC Output, Digital Frequency, Gain Setting
     int         status;
     float       light = 0.0, adc = 0.0, digital = 0.0;
@@ -183,6 +185,7 @@ void displayReadingsTest(void) {
     time_t	    currenttime, starttime;
     
     systemloop = true;
+    printf("Display Readings Test\n");
     
     printf("CTRL - C to end loop\n");
     starttime = clock();
@@ -191,16 +194,11 @@ void displayReadingsTest(void) {
     status += gainSPiEnd();
 
     do {
-        //status = gainSPiInitialisation();
-        //status += setGainControl(testgainvalues[gaincount][0]);
-        //status += gainSPiEnd();
+
         status += lightReading(&light);
-        //status += adcSPiInitialisation();
         status += readVoltage(&adc);
-        //status += adcSPiEnd();
         status += returnFullFrequency(&digital, IF_OUT_DIGITAL); //IF_OUT_TO_PI);
-        //printf("\rLight:%10.3f  ADC:%10.6f  Digital:%11.6f  ADC:%3d\n", light, adc, digital, testgainvalues[gaincount][1]);
-        printf("\rLight:%10.3f  ADC:%10.6f  Digital:%11.6f  ADC:%3d", light, adc, digital, testgainvalues[gaincount][1]);
+        printf("\rLight:%10.3f  ADC:%10.6f  Digital:%11.6f  Gain:%3d", light, adc, digital, testgainvalues[gaincount][1]);
         fflush(stdout);     // Test if this line is required or if the \n above works
 
         currenttime = clock();
@@ -224,8 +222,97 @@ void displayReadingsTest(void) {
 }
 
 void rangeTest(void) {
-    printf("To Be implemented\n");
+    // For a set of gain values, measure the voltage for different distances
+    // Loop for the gain values
+    //  measure the adc and if above threshold, flash the led 
+    // ADC Output, Digital Frequency, Gain Setting
+    int         status;
+    float       adc = 0.0, digital = 0.0;
+    int         gaincount = 0, qtygainreadings = 4;
+    int         testgainvalues[qtygainreadings][2] = { {0b0000, 1}, {0b0001, 10}, {0b0100, 40}, {0b1000, 157}	};
+    int         rangecount = 0, qtyrangevalues = 4;
+    float       distadcfreq[qtyrangevalues][3] = {{0.5,2.3, 500}, {1,2.5, 500}, {5,2.5, 500}, {10, 2.5, 500} };     //Distance <> adc <> frequency values
+    time_t	    currenttime, starttime;
+    bool        testpassed;
     
+    systemloop = true;
+    
+    printf("CTRL - C to end loop\n");
+
+    if (ledSetup()) {
+        controlRunningLED(LED_OFF);
+        controlMonitoringLED(LED_OFF);
+        controlTriggeredLED(LED_OFF);
+    }
+    else {
+        printf("Unable to control LEDs, test aborted\n");
+        return;
+    }
+    //ToDo: Use Status correctly
+    do {
+        // Turn the LEDs on for the start of the loop
+        status += controlRunningLED(LED_ON);
+        status += controlMonitoringLED(LED_ON);
+        // Set the various settings
+        status += adcSPiEnd();
+        status = gainSPiInitialisation();
+        status += setGainControl(testgainvalues[gaincount][0]);
+        status += gainSPiEnd();
+        status += adcSPiInitialisation();
+        
+        // Sit in inner loop waiting for trigger.
+        starttime = clock();
+        testpassed = false;
+        do {
+            status += readVoltage(&adc);
+            status += returnFullFrequency(&digital, IF_OUT_DIGITAL); //IF_OUT_TO_PI);
+
+            printf("\rDistance:%4.0f  ADC:%10.6f  Digital:%11.6f  Gain:%3d", 
+                    distadcfreq[rangecount][0], adc, digital, testgainvalues[gaincount][1]);
+            fflush(stdout);     // Test if this line is required or if the \n above works
+            
+            // Validate the results
+            if (adc > distadcfreq[rangecount][1]) {
+                printf("triggered ADC");
+                controlMonitoringLED(LED_OFF);
+                controlTriggeredLED(LED_ON);
+                usleep(250);
+                controlMonitoringLED(LED_ON);
+                controlTriggeredLED(LED_OFF);
+                testpassed = true;
+            };
+            if (digital > distadcfreq[rangecount][2]) {
+                printf("triggered Frequency");
+                controlMonitoringLED(LED_OFF);
+                controlTriggeredLED(LED_ON);
+                usleep(250);
+                controlMonitoringLED(LED_ON);
+                controlTriggeredLED(LED_OFF);
+                testpassed = true;
+            };
+            currenttime = clock();
+        } while ((testpassed == false) || (currenttime < (starttime + (TEST_TIMEOUT * CLOCKS_PER_SEC))));
+        
+        printf("\nNext gain value\n\n");
+
+        gaincount++;
+        if (gaincount >= qtygainreadings) {
+            printf("Cycling back round, starting again\n");
+            printf("CTRL - C to end test");
+            gaincount = 0;
+        }
+        if (testpassed) {
+            rangecount ++;
+            if (rangecount >= qtyrangereadings) {
+                printf("Cycling back round, starting again\n");
+                printf("CTRL - C to end test");
+                rangecount = 0;
+            }
+            testpassed = false;
+        }
+        
+    } while ((systemloop) && (status == ERROR_NONE));
+
     return;
     
 }

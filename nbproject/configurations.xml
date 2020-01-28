@@ -9,10 +9,12 @@
       <itemPath>nbproject/default_header.h</itemPath>
       <itemPath>common/inc/gainFunctions.h</itemPath>
       <itemPath>common/inc/gpioFunctions.h</itemPath>
+      <itemPath>common/inc/icogFunctions.h</itemPath>
       <itemPath>common/inc/ledControl.h</itemPath>
       <itemPath>SampleSoftware/inc/mainSampleSoftware.h</itemPath>
       <itemPath>TestProgram/inc/mainTestProgram.h</itemPath>
       <itemPath>common/inc/radar.h</itemPath>
+      <itemPath>common/inc/rdr_i2c_comms.h</itemPath>
       <itemPath>common/inc/rdr_utilities.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
@@ -27,6 +29,7 @@
       <itemPath>default_header.c</itemPath>
       <itemPath>common/src/gainFunctions.c</itemPath>
       <itemPath>common/src/gpioFunctions.c</itemPath>
+      <itemPath>common/src/icogFunctions.c</itemPath>
       <itemPath>common/src/ledControl.c</itemPath>
       <itemPath>SampleSoftware/src/mainSampleSoftware.c</itemPath>
       <itemPath>TestProgram/src/mainTestProgram.c</itemPath>
@@ -35,6 +38,7 @@
       <itemPath>newmain.c</itemPath>
       <itemPath>nbproject/newmain.c</itemPath>
       <itemPath>common/src/radar.c</itemPath>
+      <itemPath>common/src/rdr_i2c_comms.c</itemPath>
       <itemPath>common/src/rdr_utilities.c</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
@@ -158,6 +162,12 @@
                             perm="755"
                             owner="root"
                             group="bin"/>
+          <packFileListElem type="File"
+                            to="${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}"
+                            from="${OUTPUT_PATH}"
+                            perm="755"
+                            owner="root"
+                            group="bin"/>
         </packFileList>
       </packaging>
       <item path="SampleSoftware/inc/mainSampleSoftware.h"
@@ -188,9 +198,13 @@
       </item>
       <item path="common/inc/gpioFunctions.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="common/inc/icogFunctions.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="common/inc/ledControl.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="common/inc/radar.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="common/inc/rdr_i2c_comms.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="common/inc/rdr_utilities.h" ex="false" tool="3" flavor2="0">
       </item>
@@ -200,9 +214,13 @@
       </item>
       <item path="common/src/gpioFunctions.c" ex="false" tool="0" flavor2="0">
       </item>
+      <item path="common/src/icogFunctions.c" ex="false" tool="0" flavor2="0">
+      </item>
       <item path="common/src/ledControl.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="common/src/radar.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="common/src/rdr_i2c_comms.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="common/src/rdr_utilities.c" ex="false" tool="0" flavor2="0">
       </item>
@@ -273,9 +291,13 @@
       </item>
       <item path="common/inc/gpioFunctions.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="common/inc/icogFunctions.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="common/inc/ledControl.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="common/inc/radar.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="common/inc/rdr_i2c_comms.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="common/inc/rdr_utilities.h" ex="false" tool="3" flavor2="0">
       </item>
@@ -285,9 +307,13 @@
       </item>
       <item path="common/src/gpioFunctions.c" ex="false" tool="0" flavor2="0">
       </item>
+      <item path="common/src/icogFunctions.c" ex="false" tool="0" flavor2="0">
+      </item>
       <item path="common/src/ledControl.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="common/src/radar.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="common/src/rdr_i2c_comms.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="common/src/rdr_utilities.c" ex="false" tool="0" flavor2="0">
       </item>

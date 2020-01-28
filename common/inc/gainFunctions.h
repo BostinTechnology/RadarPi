@@ -103,8 +103,7 @@ typedef struct GAIN_DEFINITION {
 
 
 
-/*!
- *****************************************************************************
+/*!***************************************************************************
  * Overview:  Initialises the SPI port for the Gain Control
  *  
  * This method using the bcm2835 library to set the required settings to set the
@@ -117,8 +116,7 @@ typedef struct GAIN_DEFINITION {
  */
 CommsRetCode gainSPiInitialisation (void);
 
-/*!
- *****************************************************************************
+/*!***************************************************************************
  * Overview:  Sets the Gain Control to the given value
  *  
  * This method using the SPi comms to send the required data byte to set the
@@ -134,8 +132,7 @@ CommsRetCode gainSPiInitialisation (void);
 CommsRetCode setGainControl(int gain_setting);
 
 
-/*!
- *****************************************************************************
+/*!***************************************************************************
  * Overview:  Allows the user to select the gain value to set
  *  
  * This method allows the user to select the predefined gain values before
@@ -163,8 +160,7 @@ void selectGainValueMenu(void);
  */
 CommsRetCode gainSPiEnd(void);
 
-/*!
- *****************************************************************************
+/*!***************************************************************************
  * Overview:  Sets the Gain Control to default value
  *  
  * This method using the SPi comms to send the required data byte to set the

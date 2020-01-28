@@ -30,6 +30,7 @@ OBJS_common = \
 	$(TARGETDIR_ALL)/adcFunctions.o \
 	$(TARGETDIR_ALL)/gainFunctions.o \
 	$(TARGETDIR_ALL)/gpioFunctions.o \
+	$(TARGETDIR_ALL)/icogFunctions.o \
 	$(TARGETDIR_ALL)/rdr_spi_comms.o \
 	$(TARGETDIR_ALL)/rdr_gpio_control.o \
 	$(TARGETDIR_ALL)/ledControl.o \
@@ -136,6 +137,9 @@ $(TARGETDIR_ALL)/gainFunctions.o: $(TARGETDIR_ALL) common/src/gainFunctions.c
 $(TARGETDIR_ALL)/gpioFunctions.o: $(TARGETDIR_ALL) common/src/gpioFunctions.c
 	$(COMPILE.c) $(CFLAGS)  -o $@ common/src/gpioFunctions.c
 
+$(TARGETDIR_ALL)/icogFunctions.o: $(TARGETDIR_ALL) common/src/icogFunctions.c
+	$(COMPILE.c) $(CFLAGS)  -o $@ common/src/icogFunctions.c
+	
 $(TARGETDIR_ALL)/rdr_gpio_control.o: $(TARGETDIR_ALL) common/src/rdr_gpio_control.c
 	$(COMPILE.c) $(CFLAGS)  -o $@ common/src/rdr_gpio_control.c
 

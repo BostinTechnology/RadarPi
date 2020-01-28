@@ -70,6 +70,7 @@
  *  
  * This method using the bcm2835 library to read the value from the ADC chip
  * and convert it to a real voltage reading
+ * It assumes the adc initialisation has previously been completed.
  *
  * param[out] reading   : the value of the adc port 
  *
