@@ -21,12 +21,13 @@
 
 #define     I2C_COMMS_PORT                      "/dev/i2c-2"        this will nbeed to be changed as there are 2 buses to write / read with
 
-#define     ICOG_ADDRESS                           there is also the id_iot chip and the HAT chip
 
 #define    I2C_ERR_NONE                         0 /*! No error occurred */
 #define    I2C_ERR_INITIALISATION               1 /*! Unable to initialise the I2C comms */
 #define    I2C_ERR_COMMS                        2 /*! Communications failure has occurred */
 #define    I2C_ERR_PARAMETERS                   3 /*! Incorrect parameters provided to the function */
+#define    I2C_ERR_WRITE                        4 /*! Incorrect parameters provided to the function */
+
 
 /*****************************************************************************
  * Overview: 
@@ -64,7 +65,7 @@ int I2CInitialisation(uint8_t *i2cbus);
  * return I2C_ERR_INITILISATION     : Initialisation Error
  * return I2C_ERR_COMMS             : Comms failure
  ******************************************************************************/
-int I2CEnd(uint8_t *i2cbus, );
+int I2CEnd(void);
 
 /*!***************************************************************************
  * Overview:  Perform a I2C comms transmit and receive
@@ -73,17 +74,10 @@ int I2CEnd(uint8_t *i2cbus, );
  * Assumption is the transmit and receive buffers are the same length as defined in
  * the parameters provided
  * 
- * param[in]  *i2cbus   : The bus that has been opened for use
- * param[in]  *i2ctxBuf : The data to be sent
- * param[out] *i2crxBuf : The data that has been received
- * param[in]  i2cbufLen : The length of the send and receive buffers
+ * param[in]  ??        : 
  *
- * return I2C_ERR_NONE              : No error
- * return I2C_ERR_INITILISATION     : Initialisation Error
- * return I2C_ERR_COMMS             : Comms failure
- *****************************************************************************
- */
-
+ * return I2C_ERR_NONE        : No error
+ ******************************************************************************/
 int I2CTranscieve(uint8_t *i2cbus, uint8_t *SPitxBuf, uint8_t *SPirxBuf, uint8_t SPibufLen);
 
 /*!***************************************************************************
@@ -93,13 +87,14 @@ int I2CTranscieve(uint8_t *i2cbus, uint8_t *SPitxBuf, uint8_t *SPirxBuf, uint8_t
  * Assumption is the receive buffer is of sufficient size
  * 
  * param[in]  *i2cbus   : The bus that has been opened for use
- * param[out] *i2crxBuf  : The data that has been received
+ * param[in]  startAddr : The first address to read
+ * param[out] *i2crxBuf : A pointer to the data that has been received
  * param[in]  i2cbufLen : The length of the expected buffer
  *
  * return I2C_ERR_NONE              : No error
- * return I2C_ERR_COMMS             : Comms failure
+ *      Due to the process used, it doesn't return anything else.
  *****************************************************************************/
-int I2CRead(uint8_t *i2cbus, uint8_t *i2crxBuf, uint8_t i2cbufLen);
+int I2CRead(uint8_t *i2cbus, uint8_t startAddr, uint8_t *i2crxBuf, uint8_t i2cbufLen);
 
 /*!***************************************************************************
  * Overview:  Perform a I2C comms write only
@@ -109,13 +104,14 @@ int I2CRead(uint8_t *i2cbus, uint8_t *i2crxBuf, uint8_t i2cbufLen);
  * on the i2c port provided i2cbus
  * 
  * param[in]  *i2cbus   : The bus that has been opened for use
+ * param[in]  startAddr : The first address to be written to  
  * param[out] *i2ctxBuf : The data that has been received
  * param[in]  i2cbufLen : The length of the data to be sent buffer
  *
  * return I2C_ERR_NONE              : No error
  * return I2C_ERR_COMMS             : Comms failure
  *****************************************************************************/
-int I2CWrite(uint8_t *i2cbus, uint8_t *i2ctxBuf, uint8_t i2cbufLen);
+int I2CWrite(uint8_t *i2cbus, uint8_t startAddr, uint8_t *i2ctxBuf, uint8_t i2cbufLen)
 
 #endif /* RDR_I2C_COMMS_H */
 

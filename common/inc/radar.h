@@ -24,6 +24,7 @@
 #include    "ledControl.h"
 #include    "filterFunctions.h"
 #include    "rdr_gpio_control.h"
+#include    "icogLs1Functions.h"
 
 
 /*! *****************************************************************************

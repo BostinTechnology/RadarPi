@@ -74,6 +74,7 @@ void helpScreen(void) {
         printf("f - Run Full Test Routine\n");
         printf("l - LED Test\n");
         printf("2 - E2PROM Test\n");
+        printf("i - Light iCog Test\n");
         printf("d - Display readings Test\n");
         printf("r - Range Test\n");
         printf("h - Display the help screen\n");
@@ -172,6 +173,8 @@ void e2promTest(void) {
 
 // Routine added to provide testing
 int lightReading(float *reading) {
+    printf("Not Yet completed, in progress\n");
+    
     *reading = 0.12;
     return 0;
 }
@@ -345,7 +348,32 @@ void debugtest() {
     return;
 }
 
-
+void icogTest() {
+    printf("Still in progress\n");
+    
+    int     *i2cbus;
+    int     status;
+    
+    status = icogI2CInitialisation (i2cbus);
+    if (status != ICOG_EXIT_SUCCESS) {
+        printf("Failed to initialise iCog, please check.\n");
+        return;
+    };
+    
+    status= icogTurnOffSensor(i2cbus);
+    if (status != ICOG_EXIT_SUCCESS) {
+        printf("Failed to turn off iCog, please check.\n");
+        return;
+    };
+    
+    status = iCogI2CEnd();
+    if (status != ICOG_EXIT_SUCCESS) {
+        printf("Failed to end comms with the iCog, please check.\n");
+        return;
+    };
+    
+    return;    
+}
 
 int main(int argc, char** argv) {
 
@@ -384,6 +412,11 @@ int main(int argc, char** argv) {
             case '2':
                 /* E2PROM Test */
                 e2promTest();
+                break;
+
+            case 'i':
+                /* E2PROM Test */
+                iCogTest();
                 break;
 
             case 'd':

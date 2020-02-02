@@ -42,6 +42,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/common/src/gainFunctions.o \
 	${OBJECTDIR}/common/src/gpioFunctions.o \
 	${OBJECTDIR}/common/src/icogFunctions.o \
+	${OBJECTDIR}/common/src/icogLs1Functions.o \
 	${OBJECTDIR}/common/src/ledControl.o \
 	${OBJECTDIR}/common/src/radar.o \
 	${OBJECTDIR}/common/src/rdr_i2c_comms.o \
@@ -111,6 +112,11 @@ ${OBJECTDIR}/common/src/icogFunctions.o: common/src/icogFunctions.c
 	${MKDIR} -p ${OBJECTDIR}/common/src
 	${RM} "$@.d"
 	$(COMPILE.c) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/common/src/icogFunctions.o common/src/icogFunctions.c
+
+${OBJECTDIR}/common/src/icogLs1Functions.o: common/src/icogLs1Functions.c
+	${MKDIR} -p ${OBJECTDIR}/common/src
+	${RM} "$@.d"
+	$(COMPILE.c) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/common/src/icogLs1Functions.o common/src/icogLs1Functions.c
 
 ${OBJECTDIR}/common/src/ledControl.o: common/src/ledControl.c
 	${MKDIR} -p ${OBJECTDIR}/common/src

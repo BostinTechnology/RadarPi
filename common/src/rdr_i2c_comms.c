@@ -19,32 +19,35 @@
 #include <fcntl.h>				//Needed for I2C port
 #include <sys/ioctl.h>			//Needed for I2C port
 #include <linux/i2c-dev.h>		//Needed for I2C port
+//Wiring Pi libraries
+#include <wiringpi.h>
+#include <wiringPiI2C.h>
 
 #include    "../inc/rdr_i2c_comms.h"
 
 
-int I2CInitialisation(uint8_t *i2cbus) {
+int I2CInitialisation(uint8_t *i2cbus, int address) {
     int file;
-    if ((file = open(I2C_COMMS_PORT, O_RDWR)) < 0) {
-        /* ERROR HANDLING: you can check errno to see what went wrong */
-        printf("Failed to open the i2c bus\n");
-        return I2C_ERR_INITIALISATION;
-    }
     
-    if (ioctl(file, I2C_SLAVE, ICOG_ADDRESS) < 0) {         address will have to be passed in, depending on what is being written to!
+    //wiringPiSetup();
+    file = wiringPiI2CSetup(address);
+
+    if (file < 0) {                 //error is -1
         printf("Failed to acquire bus access and/or talk to slave.\n");
         /* ERROR HANDLING; you can check errno to see what went wrong */
         return I2C_ERR_INITIALISATION;
     }
-    
-    need to make i2cbus equal to the file parameter above!
+
+    //need to make i2c bus equal to the file parameter above!
+    i2cbus = file;
             
     return I2C_ERR_NONE;
 };
 
-int I2CEnd(uint8_t *i2cbus) {
+int I2CEnd(void) {
     
-    
+    // No action required.
+    return I2C_ERR_NONE;
 };
 
 int I2CTranscieve(uint8_t *i2cbus, uint8_t *SPitxBuf, uint8_t *SPirxBuf, uint8_t SPibufLen) {
@@ -52,42 +55,35 @@ int I2CTranscieve(uint8_t *i2cbus, uint8_t *SPitxBuf, uint8_t *SPirxBuf, uint8_t
     
 };
 
-int I2CRead(uint8_t *i2cbus, uint8_t *i2crxBuf, uint8_t i2cbufLen) {
+int I2CRead(uint8_t *i2cbus, uint8_t startAddr, uint8_t *i2crxBuf, uint8_t i2cbufLen) {
     
-    convert this to look similar to the spi comms for checking and data setup
-            
-	//----- READ BYTES -----
-	length = 4;			//<<< Number of bytes to read
-	if (read(file_i2c, buffer, length) != length)		//read() returns the number of bytes actually read, if it doesn't match then an error occurred (e.g. no response from the device)
-	{
-		//ERROR HANDLING: i2c transaction failed
-		printf("Failed to read from the i2c bus.\n");
-	}
-	else
-	{
-		printf("Data read: %s\n", buffer);
-	}
+    int     counter = 0;
+    
+    do {
+        i2crxBuf[counter] = wiringPiI2CReadReg8(i2cbus, (startAddr + counter));
+        counter ++;
+    } while (counter < i2cbufLen);
+    
+    return I2C_ERR_NONE;
+};
 
-    transfer data into the right buffer
+int I2CWrite(uint8_t *i2cbus, uint8_t startAddr, uint8_t *i2ctxBuf, uint8_t i2cbufLen) {
+    
+    int     status = I2C_ERR_NONE;
+    int     counter = 0;
+    
+    do {
+        status = wiringPiI2CWriteReg8(i2cbus, startAddr, i2ctxBuf[counter]);
+        if (status != 0) {
+            printf("Error Occurred, status: %d\n", status);
+            status = I2C_ERR_WRITE;
+            break;
+        }
+        counter ++;
+    } while (counter < i2cbufLen);
+    
+    return status;
 };
 
 
-int I2CWrite(uint8_t *i2cbus, uint8_t *i2ctxBuf, uint8_t i2cbufLen) {
-    
-     convert this to look similar to the spi comms for checking and data setup
-
-    transfer data into the buffers before sending
-             
-    	//----- WRITE BYTES -----
-	buffer[0] = 0x01;
-	buffer[1] = 0x02;
-	length = 2;			//<<< Number of bytes to write
-	if (write(file_i2c, buffer, length) != length)		//write() returns the number of bytes actually written, if it doesn't match then an error occurred (e.g. no response from the device)
-	{
-		/* ERROR HANDLING: i2c transaction failed */
-		printf("Failed to write to the i2c bus.\n");
-	}
-    
-    return correct status
-};
 

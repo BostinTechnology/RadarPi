@@ -32,6 +32,7 @@ OBJS_common = \
 	$(TARGETDIR_ALL)/gpioFunctions.o \
 	$(TARGETDIR_ALL)/icogFunctions.o \
 	$(TARGETDIR_ALL)/rdr_spi_comms.o \
+	$(TARGETDIR_ALL)/rdr_i2c_comms.o \
 	$(TARGETDIR_ALL)/rdr_gpio_control.o \
 	$(TARGETDIR_ALL)/ledControl.o \
 	$(TARGETDIR_ALL)/radar.o \
