@@ -19,6 +19,9 @@
 #ifndef RDR_I2C_COMMS_H
 #define RDR_I2C_COMMS_H
 
+#include <stdio.h>
+#include <stdint.h>
+
 #define     I2C_COMMS_PORT                      "/dev/i2c-2"        this will nbeed to be changed as there are 2 buses to write / read with
 
 
@@ -51,7 +54,7 @@
  * return I2C_ERR_NONE              : No error
  * return I2C_ERR_INITILISATION     : Initialisation Error
  ******************************************************************************/
-int I2CInitialisation(uint8_t *i2cbus);
+int I2CInitialisation(int *i2cbus, int address);
 
 /*!***************************************************************************
  * Overview:  Close the I2C comms port
@@ -78,7 +81,7 @@ int I2CEnd(void);
  *
  * return I2C_ERR_NONE        : No error
  ******************************************************************************/
-int I2CTranscieve(uint8_t *i2cbus, uint8_t *SPitxBuf, uint8_t *SPirxBuf, uint8_t SPibufLen);
+int I2CTranscieve(int *i2cbus, int *SPitxBuf, int *SPirxBuf, int SPibufLen);
 
 /*!***************************************************************************
  * Overview:  Perform a I2C comms read only
@@ -94,7 +97,7 @@ int I2CTranscieve(uint8_t *i2cbus, uint8_t *SPitxBuf, uint8_t *SPirxBuf, uint8_t
  * return I2C_ERR_NONE              : No error
  *      Due to the process used, it doesn't return anything else.
  *****************************************************************************/
-int I2CRead(uint8_t *i2cbus, uint8_t startAddr, uint8_t *i2crxBuf, uint8_t i2cbufLen);
+int I2CRead(int *i2cbus, int startAddr, int *i2crxBuf, int i2cbufLen);
 
 /*!***************************************************************************
  * Overview:  Perform a I2C comms write only
@@ -111,7 +114,8 @@ int I2CRead(uint8_t *i2cbus, uint8_t startAddr, uint8_t *i2crxBuf, uint8_t i2cbu
  * return I2C_ERR_NONE              : No error
  * return I2C_ERR_COMMS             : Comms failure
  *****************************************************************************/
-int I2CWrite(uint8_t *i2cbus, uint8_t startAddr, uint8_t *i2ctxBuf, uint8_t i2cbufLen)
+int I2CWrite(int *i2cbus, int startAddr, int *i2ctxBuf, int i2cbufLen);
+
 
 #endif /* RDR_I2C_COMMS_H */
 

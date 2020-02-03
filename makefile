@@ -30,7 +30,7 @@ OBJS_common = \
 	$(TARGETDIR_ALL)/adcFunctions.o \
 	$(TARGETDIR_ALL)/gainFunctions.o \
 	$(TARGETDIR_ALL)/gpioFunctions.o \
-	$(TARGETDIR_ALL)/icogFunctions.o \
+	$(TARGETDIR_ALL)/icogLs1Functions.o \
 	$(TARGETDIR_ALL)/rdr_spi_comms.o \
 	$(TARGETDIR_ALL)/rdr_i2c_comms.o \
 	$(TARGETDIR_ALL)/rdr_gpio_control.o \
@@ -48,7 +48,7 @@ OBJS_testProgram =  \
 	$(TARGETDIR_ALL)/utilities.o \
 	$(TARGETDIR_ALL)/fileHandling.o \
 	$(TARGETDIR_ALL)/mainTestProgram.o
-USERLIBS_testProgram = -lbcm2835 
+USERLIBS_testProgram = -lbcm2835 -lwiringPi
 DEPLIBS_testProgram =  
 LDLIBS_testProgram = $(USERLIBS_testProgram)
 
@@ -58,7 +58,7 @@ LDLIBS_testProgram = $(USERLIBS_testProgram)
 OBJS_analogueMeasurement =  \
 	$(OBJS_common) \
 	$(TARGETDIR_ALL)/readingAnalogueSignals.o
-USERLIBS_analogueMeasurement = -lbcm2835 
+USERLIBS_analogueMeasurement = -lbcm2835  -lwiringPi
 DEPLIBS_analogueMeasurement =  
 LDLIBS_analogueMeasurement = $(USERLIBS_analogueMeasurement)
 
@@ -68,7 +68,7 @@ LDLIBS_analogueMeasurement = $(USERLIBS_analogueMeasurement)
 OBJS_settingGainControl =  \
 	$(OBJS_common) \
 	$(TARGETDIR_ALL)/settingGainControl.o
-USERLIBS_settingGainControl = -lbcm2835 
+USERLIBS_settingGainControl = -lbcm2835  -lwiringPi
 DEPLIBS_settingGainControl =  
 LDLIBS_settingGainControl = $(USERLIBS_settingGainControl)
 
@@ -79,7 +79,7 @@ LDLIBS_settingGainControl = $(USERLIBS_settingGainControl)
 OBJS_digitalDetection =  \
 	$(OBJS_common) \
 	$(TARGETDIR_ALL)/readingDigitalSignals.o
-USERLIBS_digitalDetection = -lbcm2835 
+USERLIBS_digitalDetection = -lbcm2835  -lwiringPi
 DEPLIBS_digitalDetection =  
 LDLIBS_digitalDetection = $(USERLIBS_digitalDetection)
 
@@ -89,7 +89,7 @@ LDLIBS_digitalDetection = $(USERLIBS_digitalDetection)
 OBJS_sampleSoftware =  \
 	$(OBJS_common) \
 	$(TARGETDIR_ALL)/mainSampleSoftware.o
-USERLIBS_sampleSoftware = -lbcm2835 
+USERLIBS_sampleSoftware = -lbcm2835  -lwiringPi
 DEPLIBS_sampleSoftware =  
 LDLIBS_sampleSoftware = $(USERLIBS_sampleSoftware)
 
@@ -101,7 +101,7 @@ OBJS_radarVisual =  \
 	$(TARGETDIR_ALL)/linkedList.o \
 	$(TARGETDIR_ALL)/radarVisual.o
 
-USERLIBS_radarVisual = -lbcm2835 -lm
+USERLIBS_radarVisual = -lbcm2835 -lm -lwiringPi
 GTKLIB =`pkg-config --cflags --libs gtk+-3.0`
 DEPLIBS_radarVisual =  
 LDLIBS_radarVisual = $(PTHREAD) $(USERLIBS_radarVisual) -export-dynamic
@@ -138,8 +138,8 @@ $(TARGETDIR_ALL)/gainFunctions.o: $(TARGETDIR_ALL) common/src/gainFunctions.c
 $(TARGETDIR_ALL)/gpioFunctions.o: $(TARGETDIR_ALL) common/src/gpioFunctions.c
 	$(COMPILE.c) $(CFLAGS)  -o $@ common/src/gpioFunctions.c
 
-$(TARGETDIR_ALL)/icogFunctions.o: $(TARGETDIR_ALL) common/src/icogFunctions.c
-	$(COMPILE.c) $(CFLAGS)  -o $@ common/src/icogFunctions.c
+$(TARGETDIR_ALL)/icogLs1Functions.o: $(TARGETDIR_ALL) common/src/icogLs1Functions.c
+	$(COMPILE.c) $(CFLAGS)  -o $@ common/src/icogLs1Functions.c
 	
 $(TARGETDIR_ALL)/rdr_gpio_control.o: $(TARGETDIR_ALL) common/src/rdr_gpio_control.c
 	$(COMPILE.c) $(CFLAGS)  -o $@ common/src/rdr_gpio_control.c
@@ -150,6 +150,9 @@ $(TARGETDIR_ALL)/ledControl.o: $(TARGETDIR_ALL) common/src/ledControl.c
 $(TARGETDIR_ALL)/rdr_spi_comms.o: $(TARGETDIR_ALL) common/src/rdr_spi_comms.c
 	$(COMPILE.c) $(CFLAGS)  -o $@ common/src/rdr_spi_comms.c
 
+$(TARGETDIR_ALL)/rdr_i2c_comms.o: $(TARGETDIR_ALL) common/src/rdr_i2c_comms.c
+	$(COMPILE.c) $(CFLAGS)  -o $@ common/src/rdr_i2c_comms.c
+	
 $(TARGETDIR_ALL)/radar.o: $(TARGETDIR_ALL) common/src/radar.c
 	$(COMPILE.c) $(CFLAGS)  -o $@ common/src/radar.c
 

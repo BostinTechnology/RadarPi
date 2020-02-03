@@ -48,7 +48,7 @@
  *                   : ICOG_EXIT_SUCCESS
  *        i2cbus     : The file handler for the device
  ******************************************************************************/
-int icogI2CInitialisation (uint8_t *i2cbus);
+int icogI2CInitialisation (int *i2cbus);
 
 /*!***************************************************************************
  * Overview:  Ends the I2C port for the iCog  Control
@@ -71,7 +71,7 @@ int icogI2CEnd(void);
  *
  * return none   : nothing
  ******************************************************************************/
-int icogTurnOffSensor(uint8_t *i2cbus);
+int icogTurnOffSensor(int *i2cbus);
 
 /*!***************************************************************************
  * Overview:  Sets the Light iCog into Ambient Light Sensing (ALS) mode
@@ -166,7 +166,7 @@ int icogReadADCClockCycles(void);
  *
  * return none   : nothing
  ******************************************************************************/
-int icogReadADCClockCycles(void);
+int icogReadFSR(void);
 
 /*!***************************************************************************
  * Overview:  Reads the Sensor Operating mode from the iCog and returns it.

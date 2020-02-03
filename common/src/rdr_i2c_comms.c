@@ -20,24 +20,28 @@
 #include <sys/ioctl.h>			//Needed for I2C port
 #include <linux/i2c-dev.h>		//Needed for I2C port
 //Wiring Pi libraries
-#include <wiringpi.h>
+#include <wiringPi.h>
 #include <wiringPiI2C.h>
 
 #include    "../inc/rdr_i2c_comms.h"
 
 
-int I2CInitialisation(uint8_t *i2cbus, int address) {
+int I2CInitialisation(int *i2cbus, int address) {
     int file;
     
-    //wiringPiSetup();
+    printf("Into I2C Initilisation, address:%x\n", address);
+    wiringPiSetup();
+    printf(".\n");
     file = wiringPiI2CSetup(address);
-
+    
+    printf("response:%d\n", file);
     if (file < 0) {                 //error is -1
         printf("Failed to acquire bus access and/or talk to slave.\n");
         /* ERROR HANDLING; you can check errno to see what went wrong */
         return I2C_ERR_INITIALISATION;
     }
 
+    printf(".\n");
     //need to make i2c bus equal to the file parameter above!
     i2cbus = file;
             
@@ -50,30 +54,31 @@ int I2CEnd(void) {
     return I2C_ERR_NONE;
 };
 
-int I2CTranscieve(uint8_t *i2cbus, uint8_t *SPitxBuf, uint8_t *SPirxBuf, uint8_t SPibufLen) {
-    
+int I2CTranscieve(int *i2cbus, int *SPitxBuf, int *SPirxBuf, int SPibufLen) {
+    printf("To Be Implementerd\n");
+    return 0;
     
 };
 
-int I2CRead(uint8_t *i2cbus, uint8_t startAddr, uint8_t *i2crxBuf, uint8_t i2cbufLen) {
+int I2CRead(int *i2cbus, int startAddr, int *i2crxBuf, int i2cbufLen) {
     
     int     counter = 0;
     
     do {
-        i2crxBuf[counter] = wiringPiI2CReadReg8(i2cbus, (startAddr + counter));
+        i2crxBuf[counter] = wiringPiI2CReadReg8(*i2cbus, (startAddr + counter));
         counter ++;
     } while (counter < i2cbufLen);
     
     return I2C_ERR_NONE;
 };
 
-int I2CWrite(uint8_t *i2cbus, uint8_t startAddr, uint8_t *i2ctxBuf, uint8_t i2cbufLen) {
+int I2CWrite(int *i2cbus, int startAddr, int *i2ctxBuf, int i2cbufLen) {
     
     int     status = I2C_ERR_NONE;
     int     counter = 0;
     
     do {
-        status = wiringPiI2CWriteReg8(i2cbus, startAddr, i2ctxBuf[counter]);
+        status = wiringPiI2CWriteReg8(*i2cbus, startAddr, i2ctxBuf[counter]);
         if (status != 0) {
             printf("Error Occurred, status: %d\n", status);
             status = I2C_ERR_WRITE;

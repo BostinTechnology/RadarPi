@@ -232,9 +232,9 @@ void rangeTest(void) {
     int         status;
     float       adc = 0.0, digital = 0.0;
     int         gaincount = 0, qtygainreadings = 4;
-    int         testgainvalues[qtygainreadings][2] = { {0b0000, 1}, {0b0001, 10}, {0b0100, 40}, {0b1000, 157}	};
     int         rangecount = 0, qtyrangevalues = 4;
-    float       distadcfreq[qtyrangevalues][3] = {{0.5,2.3, 500}, {1,2.5, 500}, {5,2.5, 500}, {10, 2.5, 500} };     //Distance <> adc <> frequency values
+    int         testgainvalues[4][2] = {{0b0000, 1}, {0b0001, 10}, {0b0100, 40}, {0b1000, 157}};
+    float       distadcfreq[4][3] = {{0.5,2.3, 500}, {1,2.5, 500}, {5,2.5, 500}, {10, 2.5, 500} };     //Distance <> adc <> frequency values
     time_t	    currenttime, starttime;
     bool        testpassed;
     
@@ -306,7 +306,7 @@ void rangeTest(void) {
         }
         if (testpassed) {
             rangecount ++;
-            if (rangecount >= qtyrangereadings) {
+            if (rangecount >= qtyrangevalues) {
                 printf("Cycling back round, starting again\n");
                 printf("CTRL - C to end test");
                 rangecount = 0;
@@ -351,7 +351,7 @@ void debugtest() {
 void icogTest() {
     printf("Still in progress\n");
     
-    int     *i2cbus;
+    int     *i2cbus = 0;
     int     status;
     
     status = icogI2CInitialisation (i2cbus);
@@ -366,7 +366,7 @@ void icogTest() {
         return;
     };
     
-    status = iCogI2CEnd();
+    status = icogI2CEnd();
     if (status != ICOG_EXIT_SUCCESS) {
         printf("Failed to end comms with the iCog, please check.\n");
         return;
@@ -416,7 +416,7 @@ int main(int argc, char** argv) {
 
             case 'i':
                 /* E2PROM Test */
-                iCogTest();
+                icogTest();
                 break;
 
             case 'd':
