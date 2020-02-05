@@ -43,7 +43,7 @@ int I2CInitialisation(int *i2cbus, int address) {
 
     printf(".\n");
     //need to make i2c bus equal to the file parameter above!
-    i2cbus = file;
+    *i2cbus = file;
             
     return I2C_ERR_NONE;
 };
@@ -54,20 +54,21 @@ int I2CEnd(void) {
     return I2C_ERR_NONE;
 };
 
-int I2CTranscieve(int *i2cbus, int *SPitxBuf, int *SPirxBuf, int SPibufLen) {
+int I2CTranscieve(int *i2cbus, int *i2ctxBuf, int *i2crxBuf, int i2cbufLen) {
     printf("To Be Implementerd\n");
     return 0;
     
 };
 
-int I2CRead(int *i2cbus, int startAddr, int *i2crxBuf, int i2cbufLen) {
+int I2CRead(int *i2cbus, int startAddr, int *i2crxBuf) {
     
-    int     counter = 0;
+    printf("Into I2C Read:%d\n", *i2cbus);
     
-    do {
-        i2crxBuf[counter] = wiringPiI2CReadReg8(*i2cbus, (startAddr + counter));
-        counter ++;
-    } while (counter < i2cbufLen);
+    //      int wiringPiI2CReadReg8 (int fd, int reg) ;
+    //*i2crxBuf = wiringPiI2CReadReg8(*i2cbus, startAddr);
+    
+    *i2crxBuf = 4;
+    printf("...\n");
     
     return I2C_ERR_NONE;
 };

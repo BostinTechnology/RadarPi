@@ -86,18 +86,17 @@ int I2CTranscieve(int *i2cbus, int *SPitxBuf, int *SPirxBuf, int SPibufLen);
 /*!***************************************************************************
  * Overview:  Perform a I2C comms read only
  *  
- * Utilising the xxxxx libraries, perform a read of the device only.
- * Assumption is the receive buffer is of sufficient size
+ * Utilising the wiringpi libraries, perform a BYTE read of the address given,
+ * putting the result in i2crxBuf
  * 
  * param[in]  *i2cbus   : The bus that has been opened for use
- * param[in]  startAddr : The first address to read
+ * param[in]  startAddr : The address to read
  * param[out] *i2crxBuf : A pointer to the data that has been received
- * param[in]  i2cbufLen : The length of the expected buffer
  *
  * return I2C_ERR_NONE              : No error
  *      Due to the process used, it doesn't return anything else.
  *****************************************************************************/
-int I2CRead(int *i2cbus, int startAddr, int *i2crxBuf, int i2cbufLen);
+int I2CRead(int *i2cbus, int startAddr, int *i2crxBuf);
 
 /*!***************************************************************************
  * Overview:  Perform a I2C comms write only

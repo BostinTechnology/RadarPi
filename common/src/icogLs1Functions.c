@@ -28,10 +28,10 @@ int icogI2CInitialisation (int *i2cbus) {
     
     printf("Into iCog Initialisation\n");
     int status = ICOG_EXIT_SUCCESS;
-    int *fd = malloc (sizeof(int*));
     printf(".\n");
-    status = I2CInitialisation(fd, ICOG_ADDRESS);
+    status = I2CInitialisation(i2cbus, ICOG_ADDRESS);
     
+    printf("iCog Init:%d\n", *i2cbus);
     if (status != I2C_ERR_NONE) {
         printf("I2C Initialisation error\n");
         status = ICOG_SETUP_ERROR;
@@ -55,13 +55,15 @@ int icogTurnOffSensor(int *i2cbus) {
     int     shift;
     int     mode;
     int     towrite;
-    int     *byte = 0;
+    int     *byte = malloc (sizeof(int*));
+    
+    printf("Into iCog Turn Off Sensor\n");
     
     mask = 0b11100000;
     shift = 5;
     mode = 0b000;
     
-    status = I2CRead(i2cbus, COMMAND_I_REGISTER, byte, 1);
+    status = I2CRead(i2cbus, COMMAND_I_REGISTER, byte);
     printf("Command Register Before turning off (0x00):%d\n", *byte);
     if ((*byte & mask) != (mode << shift)) {
         // Modify the register to set bits 7 to 5= 0b000
@@ -69,7 +71,7 @@ int icogTurnOffSensor(int *i2cbus) {
         printf("Byte to write to turn off %d\n", towrite);
         status = I2CWrite(i2cbus, COMMAND_I_REGISTER, (int*)towrite, 1);
         usleep(WAITTIME);
-        status = I2CRead(i2cbus, COMMAND_I_REGISTER, byte, 1);
+        status = I2CRead(i2cbus, COMMAND_I_REGISTER, byte);
         printf("Command Register After turning off (0x00):%x\n", *byte);
         if ((*byte & mask) == (mode << shift)) {
             printf("Sensor Turned on\n");
@@ -79,7 +81,7 @@ int icogTurnOffSensor(int *i2cbus) {
         };
     } 
     else {
-        printf("Sensor already Turned on\n");
+        printf("Sensor already Turned off\n");
     }
     return status;
 };

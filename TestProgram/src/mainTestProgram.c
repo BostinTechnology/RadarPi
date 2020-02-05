@@ -351,16 +351,17 @@ void debugtest() {
 void icogTest() {
     printf("Still in progress\n");
     
-    int     *i2cbus = 0;
+    int     i2cbus = 0;
     int     status;
     
-    status = icogI2CInitialisation (i2cbus);
+    status = icogI2CInitialisation (&i2cbus);
     if (status != ICOG_EXIT_SUCCESS) {
         printf("Failed to initialise iCog, please check.\n");
         return;
     };
-    
-    status= icogTurnOffSensor(i2cbus);
+    printf("Bus Number:%d\n", i2cbus);
+    printf("Turning Off Sensor\n");
+    status= icogTurnOffSensor(&i2cbus);
     if (status != ICOG_EXIT_SUCCESS) {
         printf("Failed to turn off iCog, please check.\n");
         return;
