@@ -62,11 +62,13 @@ int I2CTranscieve(int *i2cbus, int *i2ctxBuf, int *i2crxBuf, int i2cbufLen) {
 
 int I2CRead(int *i2cbus, int startAddr, int *i2crxBuf) {
     
-    printf("Into I2C Read:%d\n", *i2cbus);
+    printf("Into I2C Read\n");
+    printf("Bus:%d, Address:%d\n", *i2cbus, startAddr);
     
-    //      int wiringPiI2CReadReg8 (int fd, int reg) ;
+    // This line doesn't work
     //*i2crxBuf = wiringPiI2CReadReg8(*i2cbus, startAddr);
     
+    // Trying this to see if I can figure it out, but it also doesn't work
     *i2crxBuf = 4;
     printf("...\n");
     

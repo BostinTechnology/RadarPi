@@ -86,7 +86,7 @@ int icogTurnOffSensor(int *i2cbus);
  *
  * return none   : nothing
  ******************************************************************************/
-int icogSetALSMode(void);
+int icogSetALSMode(int *i2cbus);
 
 /*!***************************************************************************
  * Overview:  Sets the Light iCog into Infra Red (IR) mode

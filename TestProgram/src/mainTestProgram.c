@@ -359,7 +359,14 @@ void icogTest() {
         printf("Failed to initialise iCog, please check.\n");
         return;
     };
-    printf("Bus Number:%d\n", i2cbus);
+
+    printf("Setting ALS Sensor\n");
+    status= icogSetALSMode(&i2cbus);
+    if (status != ICOG_EXIT_SUCCESS) {
+        printf("Failed to set ALS mode of iCog, please check.\n");
+        return;
+    };
+    
     printf("Turning Off Sensor\n");
     status= icogTurnOffSensor(&i2cbus);
     if (status != ICOG_EXIT_SUCCESS) {
