@@ -101,19 +101,17 @@ int I2CByteRead(int *i2cbus, int startAddr, int *i2crxBuf);
 /*!***************************************************************************
  * Overview:  Perform a I2C comms write only
  *  
- * Utilising the xxxxx libraries, perform a transmit of data provided.
- * Data of length i2cbufLen will be read from the i2ctxBuf register and sent
- * on the i2c port provided i2cbus
+ * Utilising the wiringpi libraries, perform a transmit of a byte of data provided.
+ * Will read from the i2ctxBuf register and send on the i2c port provided i2cbus
  * 
  * param[in]  *i2cbus   : The bus that has been opened for use
  * param[in]  startAddr : The first address to be written to  
- * param[out] *i2ctxBuf : The data that has been received
- * param[in]  i2cbufLen : The length of the data to be sent buffer
+ * param[out] i2ctxBuf  : The data that has been sent
  *
  * return I2C_ERR_NONE              : No error
  * return I2C_ERR_COMMS             : Comms failure
  *****************************************************************************/
-int I2CByteWrite(int *i2cbus, int startAddr, int *i2ctxBuf, int i2cbufLen);
+int I2CByteWrite(int *i2cbus, int startAddr, int i2ctxBuf);
 
 
 #endif /* RDR_I2C_COMMS_H */
