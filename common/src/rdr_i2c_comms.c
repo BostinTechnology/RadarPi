@@ -77,6 +77,9 @@ int I2CRead(int *i2cbus, int startAddr, int *i2crxBuf) {
 
 int I2CWrite(int *i2cbus, int startAddr, int *i2ctxBuf, int i2cbufLen) {
     
+    printf("Into I2C Write\n");
+    printf("Bus:%d, Address:%d Data to Write:%x\n", *i2cbus, startAddr, *i2ctxBuf);
+    
     int     status = I2C_ERR_NONE;
     int     counter = 0;
     

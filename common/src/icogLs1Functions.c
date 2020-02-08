@@ -55,7 +55,7 @@ int icogTurnOffSensor(int *i2cbus) {
     int     shift;
     int     mode;
     int     towrite;
-    int     *byte = malloc (sizeof(int*));
+    int     byte = 0;
     
     printf("Into iCog Turn Off Sensor\n");
     
@@ -63,17 +63,17 @@ int icogTurnOffSensor(int *i2cbus) {
     shift = 5;
     mode = 0b000;
     
-    status = I2CRead(i2cbus, COMMAND_I_REGISTER, byte);
-    printf("Command Register Before turning off (0x00):%d\n", *byte);
-    if ((*byte & mask) != (mode << shift)) {
+    status = I2CRead(i2cbus, COMMAND_I_REGISTER, &byte);
+    printf("Command Register Before turning off (0x00):%d\n", byte);
+    if ((byte & mask) != (mode << shift)) {
         // Modify the register to set bits 7 to 5= 0b000
-        towrite = ((*byte & ~mask) | (mode << shift));
+        towrite = ((byte & ~mask) | (mode << shift));
         printf("Byte to write to turn off %d\n", towrite);
-        status = I2CWrite(i2cbus, COMMAND_I_REGISTER, (int*)towrite, 1);
+        status = I2CWrite(i2cbus, COMMAND_I_REGISTER, &towrite, 1);
         usleep(WAITTIME);
         status = I2CRead(i2cbus, COMMAND_I_REGISTER, byte);
-        printf("Command Register After turning off (0x00):%x\n", *byte);
-        if ((*byte & mask) == (mode << shift)) {
+        printf("Command Register After turning off (0x00):%x\n", byte);
+        if ((byte & mask) == (mode << shift)) {
             printf("Sensor Turned on\n");
         }
         else {
@@ -105,25 +105,24 @@ int icogSetALSMode(int *i2cbus) {
     mode = 0b101;
     
     status = I2CRead(i2cbus, COMMAND_I_REGISTER, &byte);
-    //Segmentation fault before this line
-    printf("Command Register Before turning on ALS mode (0x00):%x", byte);
+    printf("Command Register Before turning on ALS mode (0x00):%x\n", byte);
     if ((byte & mask) != (mode << shift)) {
         // Modify the register to set bits 7 to 5 = 0b101
         towrite = ((byte & ~mask) | (mode << shift));
-        printf("Byte to write to turn on ALS mode %x", towrite);
-        status = I2CWrite(i2cbus, COMMAND_I_REGISTER, (int*)towrite, 1);
+        printf("Byte to write to turn on ALS mode:%x\n", towrite);
+        status = I2CWrite(i2cbus, COMMAND_I_REGISTER, &towrite, 1);
         usleep(WAITTIME);
         status = I2CRead(i2cbus, COMMAND_I_REGISTER, &byte);
-        printf("Command Register After turning on ALS mode (0x00):%x", byte);
+        printf("Command Register After turning on ALS mode (0x00):%x\n", byte);
         if ((byte & mask) == (mode << shift)) {
-            printf("Sensor Turned on in ALS mode");
+            printf("Sensor Turned on in ALS mode\n");
         }
         else {
-            printf("Sensor Not in ALS mode");
+            printf("Sensor Not in ALS mode\n");
         }
     }
     else {
-        printf("Sensor Turned on in ALS mode");
+        printf("Sensor Turned on in ALS mode\n");
     };        
     return status;
 };
