@@ -60,38 +60,33 @@ int I2CTranscieve(int *i2cbus, int *i2ctxBuf, int *i2crxBuf, int i2cbufLen) {
     
 };
 
-int I2CRead(int *i2cbus, int startAddr, int *i2crxBuf) {
+int I2CByteRead(int *i2cbus, int startAddr, int *i2crxBuf) {
     
     printf("Into I2C Read\n");
     printf("Bus:%d, Address:%d\n", *i2cbus, startAddr);
     
     // This line doesn't work
-    //*i2crxBuf = wiringPiI2CReadReg8(*i2cbus, startAddr);
+    *i2crxBuf = wiringPiI2CReadReg8(*i2cbus, startAddr);
     
     // Trying this to see if I can figure it out, but it also doesn't work
-    *i2crxBuf = 4;
+    //*i2crxBuf = 4;
     printf("...\n");
     
     return I2C_ERR_NONE;
 };
 
-int I2CWrite(int *i2cbus, int startAddr, int *i2ctxBuf, int i2cbufLen) {
+int I2CByteWrite(int *i2cbus, int startAddr, int *i2ctxBuf, int i2cbufLen) {
     
     printf("Into I2C Write\n");
     printf("Bus:%d, Address:%d Data to Write:%x\n", *i2cbus, startAddr, *i2ctxBuf);
     
     int     status = I2C_ERR_NONE;
-    int     counter = 0;
     
-    do {
-        status = wiringPiI2CWriteReg8(*i2cbus, startAddr, i2ctxBuf[counter]);
-        if (status != 0) {
-            printf("Error Occurred, status: %d\n", status);
-            status = I2C_ERR_WRITE;
-            break;
-        }
-        counter ++;
-    } while (counter < i2cbufLen);
+    status = wiringPiI2CWriteReg8(*i2cbus, startAddr, i2ctxBuf[counter]);
+    if (status != 0) {
+        printf("Error Occurred, status: %d\n", status);
+        status = I2C_ERR_WRITE;
+    }
     
     return status;
 };

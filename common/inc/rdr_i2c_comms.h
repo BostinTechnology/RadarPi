@@ -96,7 +96,7 @@ int I2CTranscieve(int *i2cbus, int *SPitxBuf, int *SPirxBuf, int SPibufLen);
  * return I2C_ERR_NONE              : No error
  *      Due to the process used, it doesn't return anything else.
  *****************************************************************************/
-int I2CRead(int *i2cbus, int startAddr, int *i2crxBuf);
+int I2CByteRead(int *i2cbus, int startAddr, int *i2crxBuf);
 
 /*!***************************************************************************
  * Overview:  Perform a I2C comms write only
@@ -113,7 +113,7 @@ int I2CRead(int *i2cbus, int startAddr, int *i2crxBuf);
  * return I2C_ERR_NONE              : No error
  * return I2C_ERR_COMMS             : Comms failure
  *****************************************************************************/
-int I2CWrite(int *i2cbus, int startAddr, int *i2ctxBuf, int i2cbufLen);
+int I2CByteWrite(int *i2cbus, int startAddr, int *i2ctxBuf, int i2cbufLen);
 
 
 #endif /* RDR_I2C_COMMS_H */
