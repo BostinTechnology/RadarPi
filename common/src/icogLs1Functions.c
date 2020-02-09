@@ -242,15 +242,16 @@ int icogReadDataRegisters(int *i2cbus, int *reading) {
     
     int     status = ICOG_EXIT_SUCCESS;
     int     data_l = 0, data_h = 0;
+    int     shift = 8;
 
     printf("In Read Data Registers\n");
     
     status = I2CByteRead(i2cbus, DATA_REGISTER_LOW, &data_l);
     if (status == ICOG_EXIT_SUCCESS) {
         status = I2CByteRead(i2cbus, DATA_REGISTER_HIGH, &data_h);
-        printf("Data Register values (0x03/0x02):%x /%x\n", data_h, data_l);
+        printf("Data Register values (0x03/0x02):%x / %x\n", data_h, data_l);
         if (status == ICOG_EXIT_SUCCESS) {
-            *reading = (data_h << 8) + data_l;
+            *reading = (data_h << shift) + data_l;
             printf("Data Register combined %x\n", *reading);
             status = ICOG_EXIT_SUCCESS;
         }
@@ -437,24 +438,28 @@ int icogCalculateLux(int *i2cbus, float *luxvalue) {
     status = icogReadFSR(i2cbus, &fullscale);
     if (status != ICOG_EXIT_SUCCESS) {
         status = ICOG_READ_ERROR;
+        printf("Failed to Read FSR\n");
         *luxvalue = 0;
     }
     else {
         status = icogReadADCResolution(i2cbus, &adcres);
         if (status != ICOG_EXIT_SUCCESS) {
             status = ICOG_READ_ERROR;
+            printf("Failed to Read ADC Resolution\n");
             *luxvalue = 0;
         }
         else {
             status = icogReadDataRegisters(i2cbus, &data);
             if (status != ICOG_EXIT_SUCCESS) {
                 status = ICOG_READ_ERROR;
+                printf("Failed to read Data Registers\n");
                 *luxvalue = 0;
             }
             else {
                 // Calculate Lux
-                printf("Full Scale:%d, ADC Resolution:%d, Data:%d\n", fullscale, adcres, data);
-                *luxvalue = (fullscale / (float)adcres) * data;
+                printf("Calculating Lux - fullscale:%d, adcres:%d, data:%d", fullres, adcres, data);
+                *luxvalue = (fullscale / adcres) * data;
+
             };
         };
     };
