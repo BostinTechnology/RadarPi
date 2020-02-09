@@ -291,17 +291,21 @@ int icogReadADCResolution(int *i2cbus, int *resolution) {
             case 0b00:
                 // 2 ^ 16
                 *resolution = ICOG_ADC_MODE_2_16;
+                break;
             case 0b01:
                 // 2 ^ 12
                 *resolution = ICOG_ADC_MODE_2_12;
+                break;
             case 0b10:
                 // 2 ^ 8
                 *resolution = ICOG_ADC_MODE_2_8;
+                break;
             case 0b11:
                 // 2 ^ 4
                 *resolution = ICOG_ADC_MODE_2_4;
+                break;
             default:
-                printf("Unable retrieve ADC Resolution\n");
+                printf("Unable to retrieve ADC Resolution\n");
                 status = ICOG_READ_ERROR;
                 *resolution= 0;
         }
@@ -336,14 +340,19 @@ int icogReadSensorMode(int *i2cbus, int *sensormode) {
         switch (omb) {
             case 0b000:
                 mode = 0;
+                break;
             case 0b001:
                 mode = ICOG_AMBIENT_MODE;
+                break;
             case 0b010:
                 mode = ICOG_INFRARED_MODE;
+                break;
             case 0b101:
                 mode = ICOG_AMBIENT_MODE;
+                break;
             case 0b110:
                 mode = ICOG_INFRARED_MODE;
+                break;
             default:
                 mode = 0;
         };
@@ -393,15 +402,19 @@ int icogReadFSR(int *i2cbus, int *fsrvalue) {
                     case 0b00:
                         // Range 1
                         *fsrvalue = ICOG_FSR_READING_1K;
+                        break;
                     case 0b01:
                         // Range 2
                         *fsrvalue = ICOG_FSR_READING_4K;
+                        break;
                     case 0b10:
                         // Range 3
                         *fsrvalue = ICOG_FSR_READING_16K;
+                        break;
                     case 0b11:
                         // Range 4
                         *fsrvalue = ICOG_FSR_READING_64K;
+                        break;
                 };
             };
         };
