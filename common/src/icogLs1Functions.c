@@ -28,7 +28,6 @@ int icogI2CInitialisation (int *i2cbus) {
     
     printf("Into iCog Initialisation\n");
     int status = ICOG_EXIT_SUCCESS;
-    printf(".\n");
     status = I2CInitialisation(i2cbus, ICOG_ADDRESS);
     
     printf("iCog Init:%d\n", *i2cbus);
@@ -310,6 +309,7 @@ int icogReadADCResolution(int *i2cbus, int *resolution) {
                 *resolution= 0;
         }
     }
+    printf("ADC Resolution:%d\n", *resolution);
     return status;
 };
 
@@ -428,6 +428,7 @@ int icogCalculateLux(int *i2cbus, float *luxvalue) {
     int     fullscale = 0;
     int     adcres = 0;
     int     data = 0;
+    float   answer = 0.0;
     
     printf("iCog Calculate Lux Value\n");
     
@@ -452,7 +453,8 @@ int icogCalculateLux(int *i2cbus, float *luxvalue) {
             }
             else {
                 // Calculate Lux
-                *luxvalue = (fullscale / adcres) * data;
+                printf("Full Scale:%d, ADC Resolution:%d, Data:%d\n", fullscale, adcres, data);
+                *luxvalue = (fullscale / (float)adcres) * data;
             };
         };
     };

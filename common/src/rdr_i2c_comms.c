@@ -31,7 +31,6 @@ int I2CInitialisation(int *i2cbus, int address) {
     
     printf("Into I2C Initilisation, address:%x\n", address);
     wiringPiSetup();
-    printf(".\n");
     file = wiringPiI2CSetup(address);
     
     printf("response:%d\n", file);
@@ -41,7 +40,6 @@ int I2CInitialisation(int *i2cbus, int address) {
         return I2C_ERR_INITIALISATION;
     }
 
-    printf(".\n");
     //need to make i2c bus equal to the file parameter above!
     *i2cbus = file;
             
@@ -67,10 +65,6 @@ int I2CByteRead(int *i2cbus, int startAddr, int *i2crxBuf) {
     
     // This line doesn't work
     *i2crxBuf = wiringPiI2CReadReg8(*i2cbus, startAddr);
-    
-    // Trying this to see if I can figure it out, but it also doesn't work
-    //*i2crxBuf = 4;
-    printf("...\n");
     
     return I2C_ERR_NONE;
 };

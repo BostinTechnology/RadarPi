@@ -141,7 +141,7 @@ int icogSetIRContinuousMode(int *i2cbus);
  *      samples the photodiode current signal for a measurement. The ONLY 16-bit
  *      ADC resolution is capable of rejecting 50Hz and 60Hz flicker caused by
  *      artificial light sources. Table 9 lists the possible ADC resolution.
- *      Setting         B3  B2      NUMBER OF CLOCK CYCLES  n-BIT ADC
+ *      Setting             B3  B2      NUMBER OF CLOCK CYCLES  n-BIT ADC
  *      ICOG_SET_ADC_16     0   0       216 = 65,536            16
  *      ICOG_SET_ADC_12     0   1       212 = 4,096             12
  *      ICOG_SET_ADC_8      1   0       28 = 256                8

@@ -349,7 +349,6 @@ void debugtest() {
 }
 
 void icogTest() {
-    printf("Still in progress\n");
     
     int     i2cbus = 0;
     int     status;
@@ -360,13 +359,13 @@ void icogTest() {
         printf("Failed to initialise iCog, please check.\n");
         return;
     };
-    
+
     printf("Set ADC Resolution");
-    status = icogSetADCResolution(&i2cbus, ICOG_SET_ADC_16);
+    status = icogSetADCResolution(&i2cbus, ICOG_SET_ADC_4);
     if (status != ICOG_EXIT_SUCCESS) {
         printf("Failed to set ADC RESOLUTION of iCog, please check.\n");
         return;
-    };
+    };  
     
     printf("Set FSR Range\n");
     status = icogSetFSRRange(&i2cbus, ICOG_SET_FSR_64K);
@@ -381,7 +380,7 @@ void icogTest() {
         printf("Failed to set ALS mode of iCog, please check.\n");
         return;
     };
-    
+   
     printf("Reading Lux Value\n");
     status = icogCalculateLux(&i2cbus, &luxvalue);
     if (status != ICOG_EXIT_SUCCESS) {
