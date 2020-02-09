@@ -271,7 +271,6 @@ int icogReadADCResolution(int *i2cbus, int *resolution) {
     int     mask;
     int     byte;
     int     shift;
-    int     resolution = 0;
     int     adc = 0;
     
     printf("In Read ADC Clock Cycles\n");
@@ -286,8 +285,8 @@ int icogReadADCResolution(int *i2cbus, int *resolution) {
     }
     else {
         //Decode the values
-        *adc = (byte & mask) >> 2;
-        printf("ADC Resolution Bit %s", *adc);
+        adc = (byte & mask) >> shift;
+        printf("ADC Resolution Bit %d", adc);
         switch (adc) {
             case 0b00:
                 // 2 ^ 16
@@ -366,7 +365,7 @@ int icogReadFSR(int *i2cbus, int *fsrvalue) {
     
     mask = 0b00000011;
 
-    status = icogReadSensorMode(*i2cbus, &opmode);
+    status = icogReadSensorMode(i2cbus, &opmode);
     if (status != ICOG_EXIT_SUCCESS) {
         status = ICOG_READ_ERROR;
         *fsrvalue = 0;
@@ -422,19 +421,19 @@ int icogCalculateLux(int *i2cbus, float *luxvalue) {
     
     // calculate and return the Lux value
     *luxvalue = 0;
-    status = icogReadFSR(*i2cbus, &fullscale);
+    status = icogReadFSR(i2cbus, &fullscale);
     if (status != ICOG_EXIT_SUCCESS) {
         status = ICOG_READ_ERROR;
         *luxvalue = 0;
     }
     else {
-        status = icogReadADCResolution(*i2cbus, &adcres);
+        status = icogReadADCResolution(i2cbus, &adcres);
         if (status != ICOG_EXIT_SUCCESS) {
             status = ICOG_READ_ERROR;
             *luxvalue = 0;
         }
         else {
-            status = icogReadDataRegisters(*i2cbus, &data);
+            status = icogReadDataRegisters(i2cbus, &data);
             if (status != ICOG_EXIT_SUCCESS) {
                 status = ICOG_READ_ERROR;
                 *luxvalue = 0;
@@ -456,7 +455,7 @@ int icogFastCalculateLux(int *i2cbus, int fsrvalue, int adcres, float *luxvalue)
     int     data = 0;
     
     printf("In iCog Fast Calculation of Lux\n");
-    status = icogReadDataRegisters(*i2cbus, &data);
+    status = icogReadDataRegisters(i2cbus, &data);
     if (status != ICOG_EXIT_SUCCESS) {
         status = ICOG_READ_ERROR;
         *luxvalue = 0;
