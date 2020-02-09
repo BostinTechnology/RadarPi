@@ -75,14 +75,14 @@ int I2CByteRead(int *i2cbus, int startAddr, int *i2crxBuf) {
     return I2C_ERR_NONE;
 };
 
-int I2CByteWrite(int *i2cbus, int startAddr, int i2ctxBuf, int i2cbufLen) {
+int I2CByteWrite(int *i2cbus, int startAddr, int i2ctxBuf) {
     
     printf("Into I2C Write\n");
-    printf("Bus:%d, Address:%d Data to Write:%x\n", *i2cbus, startAddr, *i2ctxBuf);
+    printf("Bus:%d, Address:%d Data to Write:%x\n", *i2cbus, startAddr, i2ctxBuf);
     
     int     status = I2C_ERR_NONE;
     
-    status = wiringPiI2CWriteReg8(*i2cbus, startAddr, i2ctxBuf;
+    status = wiringPiI2CWriteReg8(*i2cbus, startAddr, i2ctxBuf);
     if (status != 0) {
         printf("Error Occurred, status: %d\n", status);
         status = I2C_ERR_WRITE;

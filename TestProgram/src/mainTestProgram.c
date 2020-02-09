@@ -258,7 +258,7 @@ void rangeTest(void) {
         status += controlMonitoringLED(LED_ON);
         // Set the various settings
         status += adcSPiEnd();
-        status = gainSPiInitialisation();
+        status += gainSPiInitialisation();
         status += setGainControl(testgainvalues[gaincount][0]);
         status += gainSPiEnd();
         status += adcSPiInitialisation();
@@ -353,6 +353,7 @@ void icogTest() {
     
     int     i2cbus = 0;
     int     status;
+    float   luxvalue = 0.0;
     
     status = icogI2CInitialisation (&i2cbus);
     if (status != ICOG_EXIT_SUCCESS) {
@@ -361,11 +362,21 @@ void icogTest() {
     };
 
     printf("Setting ALS Sensor\n");
-    status= icogSetALSMode(&i2cbus);
+    status= icogSetALSContinuousMode(&i2cbus);
     if (status != ICOG_EXIT_SUCCESS) {
         printf("Failed to set ALS mode of iCog, please check.\n");
         return;
     };
+    
+    printf("Reading Lux Value\n");
+    status = icogCalculateLux(&i2cbus, &luxvalue);
+    if (status != ICOG_EXIT_SUCCESS) {
+        printf("Failed to read LUX value of iCog, please check.\n");
+        return;
+    }
+    else {
+        printf("Lux Value:%f\n", luxvalue);
+    }
     
     printf("Turning Off Sensor\n");
     status= icogTurnOffSensor(&i2cbus);
