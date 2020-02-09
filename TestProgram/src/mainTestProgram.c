@@ -360,7 +360,21 @@ void icogTest() {
         printf("Failed to initialise iCog, please check.\n");
         return;
     };
-
+    
+    printf("Set ADC Resolution");
+    status = icogSetADCResolution(&i2cbus, ICOG_SET_ADC_16);
+    if (status != ICOG_EXIT_SUCCESS) {
+        printf("Failed to set ADC RESOLUTION of iCog, please check.\n");
+        return;
+    };
+    
+    printf("Set FSR Range\n");
+    status = icogSetFSRRange(&i2cbus, ICOG_SET_FSR_64K);
+    if (status != ICOG_EXIT_SUCCESS) {
+        printf("Failed to set FSR Range of iCog, please check.\n");
+        return;
+    };
+    
     printf("Setting ALS Sensor\n");
     status= icogSetALSContinuousMode(&i2cbus);
     if (status != ICOG_EXIT_SUCCESS) {

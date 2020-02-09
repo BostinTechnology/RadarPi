@@ -279,14 +279,14 @@ int icogReadADCResolution(int *i2cbus, int *resolution) {
     shift = 2;
 
     status = I2CByteRead(i2cbus, COMMAND_II_REGISTER, &byte);
-    printf("ADC Data Resolution reading (bits 2 & 3 of 0x01):%x", byte);
+    printf("ADC Data Resolution reading (bits 2 & 3 of 0x01):%x\n", byte);
     if (status != ICOG_EXIT_SUCCESS) {
         status = ICOG_READ_ERROR;
     }
     else {
         //Decode the values
         adc = (byte & mask) >> shift;
-        printf("ADC Resolution Bit %d", adc);
+        printf("ADC Resolution Bit %d\n", adc);
         switch (adc) {
             case 0b00:
                 // 2 ^ 16
@@ -301,7 +301,7 @@ int icogReadADCResolution(int *i2cbus, int *resolution) {
                 // 2 ^ 4
                 *resolution = ICOG_ADC_MODE_2_4;
             default:
-                printf("Unable retrieve ADC Resolution");
+                printf("Unable retrieve ADC Resolution\n");
                 status = ICOG_READ_ERROR;
                 *resolution= 0;
         }
@@ -324,7 +324,7 @@ int icogReadSensorMode(int *i2cbus, int *sensormode) {
     shift = 5;
 
     status = I2CByteRead(i2cbus, COMMAND_I_REGISTER, &byte);
-    printf("Sensor Mode Register setting (0x00):%x", byte);
+    printf("Sensor Mode Register setting (0x00):%x\n", byte);
     if (status != ICOG_EXIT_SUCCESS) {
         status = ICOG_READ_ERROR;
     }
@@ -332,7 +332,7 @@ int icogReadSensorMode(int *i2cbus, int *sensormode) {
         status = ICOG_EXIT_SUCCESS;
         // Operation Mode Bits
         omb = (byte & mask) >> shift;
-        printf("Operation Mode Bits %x",omb);
+        printf("Operation Mode Bits %x\n",omb);
         switch (omb) {
             case 0b000:
                 mode = 0;
@@ -348,16 +348,15 @@ int icogReadSensorMode(int *i2cbus, int *sensormode) {
                 mode = 0;
         };
     };
-    printf("Sensor Mode of Operation :%d",mode);
+    printf("Sensor Mode of Operation :%d\n",mode);
     return status;
 };
 
 int icogReadFSR(int *i2cbus, int *fsrvalue) {
     
     int     status = 0;
-    int     mode;
     int     mask;
-    int     byte;
+    int     byte = 0;
     int     fcr;
     int     opmode = 0;
     
@@ -371,7 +370,7 @@ int icogReadFSR(int *i2cbus, int *fsrvalue) {
         *fsrvalue = 0;
     }
     else {
-        if (mode == ICOG_INFRARED_MODE) {
+        if (opmode == ICOG_INFRARED_MODE) {
             printf("Full Scale Range mode is IR, returning 65535\n");
             *fsrvalue = ICOG_FSR_READING_MAX;
             status = ICOG_EXIT_SUCCESS;
@@ -442,7 +441,7 @@ int icogCalculateLux(int *i2cbus, float *luxvalue) {
                 // Calculate Lux
                 *luxvalue = (fullscale / adcres) * data;
             };
-        }:
+        };
     };
     printf("Calculated LUX Value: %f\n", *luxvalue);
     

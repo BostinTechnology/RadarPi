@@ -162,7 +162,7 @@ int icogSetADCResolution(int *i2cbus, int resolution);
  *      wider ALS lux value. Table 8 lists the possible values of FSR for the 
  *      499kΩ REXT resistor.
  * 
- *      Setting         B0  B1  k   RANGE(k)    FSR(LUX)@ALS SENSING   FSR@IR SENSING
+ *      Setting             B0  B1  k   RANGE(k)    FSR(LUX)@ALS SENSING   FSR@IR SENSING
  *      ICOG_SET_FSR_1K     0   0   1   Range1      1,000                   65535
  *      ICOG_SET_FSR_4K     0   1   2   Range2      4,000                   65535
  *      ICOG_SET_FSR_16K    1   0   3   Range3      16,000                  65535
