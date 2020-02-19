@@ -63,6 +63,12 @@
 #define     ICOG_FSR_READING_16K    16000
 #define     ICOG_FSR_READING_64K    64000
 #define     ICOG_FSR_READING_MAX    65535
+
+#define     ICOG_FSR_RANGE_1K       1
+#define     ICOG_FSR_RANGE_4K       2
+#define     ICOG_FSR_RANGE_16K      3
+#define     ICOG_FSR_RANGE_64K      4
+
          
 /*!***************************************************************************
  * Overview:  Initialises the I2C port for the iCog
@@ -142,10 +148,10 @@ int icogSetIRContinuousMode(int *i2cbus);
  *      ADC resolution is capable of rejecting 50Hz and 60Hz flicker caused by
  *      artificial light sources. Table 9 lists the possible ADC resolution.
  *      Setting             B3  B2      NUMBER OF CLOCK CYCLES  n-BIT ADC
- *      ICOG_SET_ADC_16     0   0       216 = 65,536            16
- *      ICOG_SET_ADC_12     0   1       212 = 4,096             12
- *      ICOG_SET_ADC_8      1   0       28 = 256                8
- *      ICOG_SET_ADC_4      1   1       24 = 16                 4
+ *      ICOG_SET_ADC_16     0   0       2^16 = 65,536            16
+ *      ICOG_SET_ADC_12     0   1       2^12 = 4,096             12
+ *      ICOG_SET_ADC_8      1   0       2^8 = 256                8
+ *      ICOG_SET_ADC_4      1   1       2^4 = 16                 4
  *
  * param[in] i2cbus : A pointer to the bus ID
  *      [in] resolution : See table above 
@@ -249,18 +255,19 @@ int icogReadSensorMode(int *i2cbus, int *sensormode);
  * Overview:  Reads the Full Scale Range (FSR) from the iCog and returns the
  *            maximum lux value obtainable
  *  
- * This method reads the Full Scale Range (FSR) has four different selectable 
- * ranges. Each range has a maximum allowable lux value. Higher range values 
- * offer wider ALS lux value. The table below lists the possible values of FSR.
- *      Range value             FSR
- *      ICOG_FSR_READING_1K     1000
- *      ICOG_FSR_READING_4K     4000
- *      ICOG_FSR_READING_16K    16000
- *      ICOG_FSR_READING_64K    64000
- *      ICOG_FSR_READING_MAX    65535
+ * This method reads the Full Scale Range (FSR) has four different range 
+ * values corresponding to the range in operation. Each range has a maximum 
+ * allowable lux value. Higher range values offer wider ALS lux value. 
+ * The table below lists the possible values of FSR.
+ *      Range value             RANGE   FSR(ALS)        FSR(IR)
+ *      ICOG_FSR_RANGE_1K       1       1,000           65535
+ *      ICOG_FSR_RANGE_4K       2       4,000           65535
+ *      ICOG_FSR_RANGE_16K      3       16,000          65535
+ *      ICOG_FSR_RANGE_64K      4       64,000          65535
  *
  * param[in]  i2cbus     : A pointer to the bus ID 
- *      [out] fsrvalue   : The value from above depending on mode.
+ *      [out] fsrvalue   : The RANGE value (1-4) from above depending on mode,
+ *                          NOT the FSR value
  * 
  * return status   : //ToDo
  ******************************************************************************/

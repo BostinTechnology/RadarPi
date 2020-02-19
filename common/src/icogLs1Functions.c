@@ -429,7 +429,8 @@ int icogCalculateLux(int *i2cbus, float *luxvalue) {
     int     fullscale = 0;
     int     adcres = 0;
     int     data = 0;
-    float   answer = 0.0;
+    //float    k = 0.0, a = 0.0, d = 0.0;
+     
     
     printf("iCog Calculate Lux Value\n");
     
@@ -457,8 +458,16 @@ int icogCalculateLux(int *i2cbus, float *luxvalue) {
             }
             else {
                 // Calculate Lux
-                printf("Calculating Lux - fullscale:%d, adcres:%d, data:%d", fullres, adcres, data);
-                *luxvalue = (fullscale / adcres) * data;
+                printf("Calculating Lux - fullscale:%d, adcres:%d, data:%d\n", fullscale, adcres, data);
+                //printf("Return value part1:%f\n", (fullscale / adcres));
+                //printf("Return value part2:%f\n", ((fullscale / adcres) * data));
+                //k = (float)fullscale;
+                //a = (float)adcres;
+                //d = (float)data;
+                //printf("Float values - fullscale:%f, adcres:%f, data:%f\n", k, a, d);
+                //printf("Return value float:%f\n", ((k / a) * d));
+                *luxvalue = (float)(fullscale / (float)adcres);
+                *luxvalue = *luxvalue * (float)data;
 
             };
         };

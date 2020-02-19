@@ -361,14 +361,14 @@ void icogTest() {
     };
 
     printf("Set ADC Resolution");
-    status = icogSetADCResolution(&i2cbus, ICOG_SET_ADC_4);
+    status = icogSetADCResolution(&i2cbus, ICOG_SET_ADC_12);
     if (status != ICOG_EXIT_SUCCESS) {
         printf("Failed to set ADC RESOLUTION of iCog, please check.\n");
         return;
     };  
     
     printf("Set FSR Range\n");
-    status = icogSetFSRRange(&i2cbus, ICOG_SET_FSR_64K);
+    status = icogSetFSRRange(&i2cbus, ICOG_SET_FSR_1K);
     if (status != ICOG_EXIT_SUCCESS) {
         printf("Failed to set FSR Range of iCog, please check.\n");
         return;
