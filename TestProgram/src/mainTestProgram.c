@@ -353,6 +353,10 @@ void icogTest() {
     int     i2cbus = 0;
     int     status;
     float   luxvalue = 0.0;
+    int     adcvalues[4] = {ICOG_SET_ADC_16,ICOG_SET_ADC_12,ICOG_SET_ADC_8,ICOG_SET_ADC_4};
+    int     fsrvalues[4] = {ICOG_SET_FSR_1K,ICOG_SET_FSR_4K,ICOG_SET_FSR_16K,ICOG_SET_FSR_64K};
+    int     adccount = 0;
+    int     fsrcount = 0;
     
     status = icogI2CInitialisation (&i2cbus);
     if (status != ICOG_EXIT_SUCCESS) {
@@ -360,44 +364,51 @@ void icogTest() {
         return;
     };
 
-    printf("Set ADC Resolution");
-    status = icogSetADCResolution(&i2cbus, ICOG_SET_ADC_12);
-    if (status != ICOG_EXIT_SUCCESS) {
-        printf("Failed to set ADC RESOLUTION of iCog, please check.\n");
-        return;
-    };  
-    
-    printf("Set FSR Range\n");
-    status = icogSetFSRRange(&i2cbus, ICOG_SET_FSR_1K);
-    if (status != ICOG_EXIT_SUCCESS) {
-        printf("Failed to set FSR Range of iCog, please check.\n");
-        return;
-    };
-    
-    printf("Setting ALS Sensor\n");
-    status= icogSetALSContinuousMode(&i2cbus);
-    if (status != ICOG_EXIT_SUCCESS) {
-        printf("Failed to set ALS mode of iCog, please check.\n");
-        return;
-    };
-   
-    printf("Reading Lux Value\n");
-    status = icogCalculateLux(&i2cbus, &luxvalue);
-    if (status != ICOG_EXIT_SUCCESS) {
-        printf("Failed to read LUX value of iCog, please check.\n");
-        return;
-    }
-    else {
-        printf("Lux Value:%f\n", luxvalue);
-    }
-    
-    printf("Turning Off Sensor\n");
-    status= icogTurnOffSensor(&i2cbus);
-    if (status != ICOG_EXIT_SUCCESS) {
-        printf("Failed to turn off iCog, please check.\n");
-        return;
-    };
-    
+    do {
+        printf("Set ADC Resolution");
+        status = icogSetADCResolution(&i2cbus, adcvalues[adccount]);
+        if (status != ICOG_EXIT_SUCCESS) {
+            printf("Failed to set ADC RESOLUTION of iCog, please check.\n");
+            return;
+        };
+        do {
+            
+            printf("Set FSR Range\n");
+            status = icogSetFSRRange(&i2cbus, ICOG_SET_FSR_1K);
+            if (status != ICOG_EXIT_SUCCESS) {
+                printf("Failed to set FSR Range of iCog, please check.\n");
+                return;
+            };
+
+            printf("Setting ALS Sensor\n");
+            status= icogSetALSContinuousMode(&i2cbus);
+            if (status != ICOG_EXIT_SUCCESS) {
+                printf("Failed to set ALS mode of iCog, please check.\n");
+                return;
+            };
+
+            printf("Reading Lux Value\n");
+            status = icogCalculateLux(&i2cbus, &luxvalue);
+            if (status != ICOG_EXIT_SUCCESS) {
+                printf("Failed to read LUX value of iCog, please check.\n");
+                return;
+            }
+            else {
+                printf("Lux Value:%f\n", luxvalue);
+            }
+
+            printf("Turning Off Sensor\n");
+            status= icogTurnOffSensor(&i2cbus);
+            if (status != ICOG_EXIT_SUCCESS) {
+                printf("Failed to turn off iCog, please check.\n");
+                return;
+            };
+            fsrcount ++;
+
+        } while (fsrcount < 4);
+        adccount ++;
+
+    } while (adccount <4);
     status = icogI2CEnd();
     if (status != ICOG_EXIT_SUCCESS) {
         printf("Failed to end comms with the iCog, please check.\n");
