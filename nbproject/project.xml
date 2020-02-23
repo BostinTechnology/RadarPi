@@ -3,7 +3,7 @@
     <type>org.netbeans.modules.cnd.makeproject</type>
     <configuration>
         <data xmlns="http://www.netbeans.org/ns/make-project/1">
-            <name>Radar</name>
+            <name>RadarPi</name>
             <c-extensions>c</c-extensions>
             <cpp-extensions/>
             <header-extensions>h</header-extensions>
@@ -14,12 +14,8 @@
             </sourceRootList>
             <confList>
                 <confElem>
-                    <name>Debug</name>
-                    <type>1</type>
-                </confElem>
-                <confElem>
-                    <name>Release</name>
-                    <type>1</type>
+                    <name>Default</name>
+                    <type>0</type>
                 </confElem>
             </confList>
             <formatting>

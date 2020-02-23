@@ -374,7 +374,7 @@ void icogTest() {
         do {
             
             printf("Set FSR Range\n");
-            status = icogSetFSRRange(&i2cbus, ICOG_SET_FSR_1K);
+            status = icogSetFSRRange(&i2cbus, fsrvalues[fsrcount]);
             if (status != ICOG_EXIT_SUCCESS) {
                 printf("Failed to set FSR Range of iCog, please check.\n");
                 return;

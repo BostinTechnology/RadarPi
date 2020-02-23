@@ -73,10 +73,10 @@ int icogTurnOffSensor(int *i2cbus) {
         status = I2CByteRead(i2cbus, COMMAND_I_REGISTER, &byte);
         printf("Command Register After turning off (0x00):%x\n", byte);
         if ((byte & mask) == (mode << shift)) {
-            printf("Sensor Turned on\n");
+            printf("Sensor Turned off\n");
         }
         else {
-            printf("Sensor Turned off\n");
+            printf("Sensor Turned on\n");
         };
     } 
     else {

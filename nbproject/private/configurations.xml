@@ -1,23 +1,128 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configurationDescriptor version="100">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <df root="." name="0">
+      <df name="AnalogueMeasurement">
+        <df name="inc">
+        </df>
+        <df name="src">
+          <in>readingAnalogueSignals.c</in>
+        </df>
+      </df>
+      <df name="build">
+      </df>
+      <df name="common">
+        <df name="inc">
+          <in>adcFunctions.h</in>
+          <in>filterFunctions.h</in>
+          <in>gainFunctions.h</in>
+          <in>gpioFunctions.h</in>
+          <in>icogLs1Functions.h</in>
+          <in>ledControl.h</in>
+          <in>radar.h</in>
+          <in>rdr_gpio_control.h</in>
+          <in>rdr_i2c_comms.h</in>
+          <in>rdr_spi_comms.h</in>
+        </df>
+        <df name="src">
+          <in>adcFunctions.c</in>
+          <in>filterFunctions.c</in>
+          <in>gainFunctions.c</in>
+          <in>gpioFunctions.c</in>
+          <in>icogLs1Functions.c</in>
+          <in>ledControl.c</in>
+          <in>radar.c</in>
+          <in>rdr_gpio_control.c</in>
+          <in>rdr_i2c_comms.c</in>
+          <in>rdr_spi_comms.c</in>
+        </df>
+      </df>
+      <df name="DigitalDetection">
+        <df name="inc">
+        </df>
+        <df name="python">
+        </df>
+        <df name="src">
+          <in>readingDigitalSignals.c</in>
+        </df>
+      </df>
+      <df name="GainControl">
+        <df name="inc">
+        </df>
+        <df name="src">
+          <in>settingGainControl.c</in>
+        </df>
+      </df>
+      <df name="SampleSoftware">
+        <df name="inc">
+          <in>mainSampleSoftware.h</in>
+        </df>
+        <df name="src">
+          <in>mainSampleSoftware.c</in>
+        </df>
+      </df>
+      <df name="TestProgram">
+        <df name="inc">
+          <in>adcTest.h</in>
+          <in>fileHandling.h</in>
+          <in>mainTestProgram.h</in>
+          <in>utilities.h</in>
+        </df>
+        <df name="src">
+          <in>OLDadcTest.c</in>
+          <in>OLDmainTestProgram.c</in>
+          <in>adcTest.c</in>
+          <in>fileHandling.c</in>
+          <in>mainTestProgram.c</in>
+          <in>utilities.c</in>
+        </df>
+      </df>
+      <df name="Visual">
+        <df name="gui">
+        </df>
+        <df name="inc">
+          <in>linkedList.h</in>
+          <in>radarVisual.h</in>
+        </df>
+        <df name="src">
+          <in>linkedList.c</in>
+          <in>radarVisual.c</in>
+        </df>
+      </df>
+      <in>default_header.c</in>
+      <in>default_header.h</in>
+    </df>
+  </logicalFolder>
   <projectmakefile>makefile</projectmakefile>
   <confs>
-    <conf name="Debug" type="1">
+    <conf name="Default" type="0">
       <toolsSet>
         <developmentServer>pi@rpi3b06:22</developmentServer>
         <platform>2</platform>
       </toolsSet>
+      <compile>
+        <compiledirpicklist>
+          <compiledirpicklistitem>.</compiledirpicklistitem>
+          <compiledirpicklistitem>${AUTO_FOLDER}</compiledirpicklistitem>
+        </compiledirpicklist>
+        <compiledir>${AUTO_FOLDER}</compiledir>
+        <compilecommandpicklist>
+          <compilecommandpicklistitem>${MAKE} ${ITEM_NAME}.o</compilecommandpicklistitem>
+          <compilecommandpicklistitem>${AUTO_COMPILE}</compilecommandpicklistitem>
+        </compilecommandpicklist>
+        <compilecommand>${AUTO_COMPILE}</compilecommand>
+      </compile>
       <dbx_gdbdebugger version="1">
         <gdb_pathmaps>
         </gdb_pathmaps>
         <gdb_interceptlist>
           <gdbinterceptoptions gdb_all="false" gdb_unhandled="true" gdb_unexpected="true"/>
         </gdb_interceptlist>
+        <gdb_signals>
+        </gdb_signals>
         <gdb_options>
           <DebugOptions>
-            <option name="gdb_source_dirs" value="."/>
-            <option name="debug_dir"
-                    value="/Users/matthew/Documents/Bostin Technology/RadarPi/."/>
+            <option name="debug_command" value="&quot;sudo ${OUTPUT_PATH}/testProgram&quot;"/>
           </DebugOptions>
         </gdb_options>
         <gdb_buildfirst gdb_buildfirst_overriden="false" gdb_buildfirst_old="false"/>
@@ -27,47 +132,18 @@
       </nativedebugger>
       <runprofile version="9">
         <runcommandpicklist>
-          <runcommandpicklistitem>"sudo ./testProgram"</runcommandpicklistitem>
-          <runcommandpicklistitem>"testProgram"</runcommandpicklistitem>
+          <runcommandpicklistitem>sudo "${OUTPUT_PATH}"/testProgram</runcommandpicklistitem>
           <runcommandpicklistitem>"${OUTPUT_PATH}"</runcommandpicklistitem>
+          <runcommandpicklistitem>sudo "${OUTPUT_PATH}"</runcommandpicklistitem>
+          <runcommandpicklistitem>/testProgram</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}"sudo ./testProgram</runcommandpicklistitem>
+          <runcommandpicklistitem>"sudo ${OUTPUT_PATH}/testProgram"</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}/testProgram"</runcommandpicklistitem>
         </runcommandpicklist>
-        <runcommand>"${OUTPUT_PATH}"</runcommand>
-        <rundir>/Users/matthew/Documents/Bostin Technology/RadarPi/build</rundir>
-        <buildfirst>true</buildfirst>
-        <console-type>2</console-type>
-        <terminal-type>0</terminal-type>
-        <remove-instrumentation>0</remove-instrumentation>
-        <environment>
-        </environment>
-      </runprofile>
-    </conf>
-    <conf name="Release" type="1">
-      <toolsSet>
-        <developmentServer>localhost</developmentServer>
-        <platform>4</platform>
-      </toolsSet>
-      <dbx_gdbdebugger version="1">
-        <gdb_pathmaps>
-        </gdb_pathmaps>
-        <gdb_interceptlist>
-          <gdbinterceptoptions gdb_all="false" gdb_unhandled="true" gdb_unexpected="true"/>
-        </gdb_interceptlist>
-        <gdb_options>
-          <DebugOptions>
-          </DebugOptions>
-        </gdb_options>
-        <gdb_buildfirst gdb_buildfirst_overriden="false" gdb_buildfirst_old="false"/>
-      </dbx_gdbdebugger>
-      <nativedebugger version="1">
-        <engine>gdb</engine>
-      </nativedebugger>
-      <runprofile version="9">
-        <runcommandpicklist>
-          <runcommandpicklistitem>"${OUTPUT_PATH}"</runcommandpicklistitem>
-        </runcommandpicklist>
-        <runcommand>"${OUTPUT_PATH}"</runcommand>
-        <rundir></rundir>
-        <buildfirst>true</buildfirst>
+        <runcommand>"${OUTPUT_PATH}/testProgram"</runcommand>
+        <rundir>/Users/matthew/Documents/Bostin Technology/RadarPi/build/</rundir>
+        <buildfirst>false</buildfirst>
+        <console-type>1</console-type>
         <terminal-type>0</terminal-type>
         <remove-instrumentation>0</remove-instrumentation>
         <environment>

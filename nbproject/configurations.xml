@@ -1,349 +1,254 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configurationDescriptor version="100">
   <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
-    <logicalFolder name="HeaderFiles"
-                   displayName="Header Files"
-                   projectFiles="true">
-      <itemPath>common/inc/adcFunctions.h</itemPath>
-      <itemPath>TestProgram/inc/adcTest.h</itemPath>
-      <itemPath>nbproject/default_header.h</itemPath>
-      <itemPath>common/inc/gainFunctions.h</itemPath>
-      <itemPath>common/inc/gpioFunctions.h</itemPath>
-      <itemPath>common/inc/icogFunctions.h</itemPath>
-      <itemPath>common/inc/icogLs1Functions.h</itemPath>
-      <itemPath>common/inc/ledControl.h</itemPath>
-      <itemPath>SampleSoftware/inc/mainSampleSoftware.h</itemPath>
-      <itemPath>TestProgram/inc/mainTestProgram.h</itemPath>
-      <itemPath>common/inc/radar.h</itemPath>
-      <itemPath>common/inc/rdr_i2c_comms.h</itemPath>
-      <itemPath>common/inc/rdr_utilities.h</itemPath>
-    </logicalFolder>
-    <logicalFolder name="ResourceFiles"
-                   displayName="Resource Files"
-                   projectFiles="true">
-    </logicalFolder>
-    <logicalFolder name="SourceFiles"
-                   displayName="Source Files"
-                   projectFiles="true">
-      <itemPath>common/src/adcFunctions.c</itemPath>
-      <itemPath>TestProgram/src/adcTest.c</itemPath>
-      <itemPath>default_header.c</itemPath>
-      <itemPath>common/src/gainFunctions.c</itemPath>
-      <itemPath>common/src/gpioFunctions.c</itemPath>
-      <itemPath>common/src/icogFunctions.c</itemPath>
-      <itemPath>common/src/icogLs1Functions.c</itemPath>
-      <itemPath>common/src/ledControl.c</itemPath>
-      <itemPath>SampleSoftware/src/mainSampleSoftware.c</itemPath>
-      <itemPath>TestProgram/src/mainTestProgram.c</itemPath>
-      <itemPath>nbproject/newfile1.c</itemPath>
-      <itemPath>nbproject/newfile2.c</itemPath>
-      <itemPath>newmain.c</itemPath>
-      <itemPath>nbproject/newmain.c</itemPath>
-      <itemPath>common/src/radar.c</itemPath>
-      <itemPath>common/src/rdr_i2c_comms.c</itemPath>
-      <itemPath>common/src/rdr_utilities.c</itemPath>
-    </logicalFolder>
-    <logicalFolder name="TestFiles"
-                   displayName="Test Files"
-                   projectFiles="false"
-                   kind="TEST_LOGICAL_FOLDER">
-    </logicalFolder>
+    <df root="." name="0">
+      <df name="AnalogueMeasurement">
+        <df name="src">
+          <in>readingAnalogueSignals.c</in>
+        </df>
+      </df>
+      <df name="common">
+        <df name="src">
+          <in>adcFunctions.c</in>
+          <in>filterFunctions.c</in>
+          <in>gainFunctions.c</in>
+          <in>gpioFunctions.c</in>
+          <in>icogLs1Functions.c</in>
+          <in>ledControl.c</in>
+          <in>radar.c</in>
+          <in>rdr_gpio_control.c</in>
+          <in>rdr_i2c_comms.c</in>
+          <in>rdr_spi_comms.c</in>
+        </df>
+      </df>
+      <df name="DigitalDetection">
+        <df name="src">
+          <in>readingDigitalSignals.c</in>
+        </df>
+      </df>
+      <df name="GainControl">
+        <df name="src">
+          <in>settingGainControl.c</in>
+        </df>
+      </df>
+      <df name="SampleSoftware">
+        <df name="src">
+          <in>mainSampleSoftware.c</in>
+        </df>
+      </df>
+      <df name="TestProgram">
+        <df name="src">
+          <in>adcTest.c</in>
+          <in>fileHandling.c</in>
+          <in>mainTestProgram.c</in>
+          <in>utilities.c</in>
+        </df>
+      </df>
+      <df name="Visual">
+        <df name="src">
+          <in>linkedList.c</in>
+          <in>radarVisual.c</in>
+        </df>
+      </df>
+    </df>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
                    projectFiles="false"
                    kind="IMPORTANT_FILES_FOLDER">
-      <itemPath>Makefile</itemPath>
+      <itemPath>nbproject/private/launcher.properties</itemPath>
+      <itemPath>makefile</itemPath>
     </logicalFolder>
-    <itemPath>Visual/src/errorText</itemPath>
-    <itemPath>nbproject/licenseheader.txt</itemPath>
-    <itemPath>makefile</itemPath>
-    <itemPath>newComplexMakefile</itemPath>
-    <itemPath>build/readme.txt</itemPath>
   </logicalFolder>
+  <sourceFolderFilter>^(nbproject)$</sourceFolderFilter>
   <sourceRootList>
     <Elem>.</Elem>
   </sourceRootList>
   <projectmakefile>makefile</projectmakefile>
   <confs>
-    <conf name="Debug" type="1">
-      <toolsSet>
-        <compilerSet>GNU|GNU</compilerSet>
-        <dependencyChecking>true</dependencyChecking>
-        <rebuildPropChanged>true</rebuildPropChanged>
-      </toolsSet>
-      <compileType>
-        <cTool>
-          <warningLevel>2</warningLevel>
-        </cTool>
-        <asmTool>
-          <commandlineTool>as</commandlineTool>
-        </asmTool>
-        <linkerTool>
-          <output>${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/RadarPi</output>
-        </linkerTool>
-      </compileType>
-      <packaging>
-        <packType>Zip</packType>
-        <packFileList>
-          <packFileListElem type="File"
-                            to="${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}"
-                            from="${OUTPUT_PATH}"
-                            perm="644"
-                            owner="root"
-                            group="bin"/>
-          <packFileListElem type="File"
-                            to="${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}"
-                            from="${OUTPUT_PATH}"
-                            perm="755"
-                            owner="root"
-                            group="bin"/>
-          <packFileListElem type="File"
-                            to="${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}"
-                            from="${OUTPUT_PATH}"
-                            perm="755"
-                            owner="root"
-                            group="bin"/>
-          <packFileListElem type="File"
-                            to="${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}"
-                            from="${OUTPUT_PATH}"
-                            perm="755"
-                            owner="root"
-                            group="bin"/>
-          <packFileListElem type="File"
-                            to="${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}"
-                            from="${OUTPUT_PATH}"
-                            perm="755"
-                            owner="root"
-                            group="bin"/>
-          <packFileListElem type="File"
-                            to="${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}"
-                            from="${OUTPUT_PATH}"
-                            perm="755"
-                            owner="root"
-                            group="bin"/>
-          <packFileListElem type="File"
-                            to="${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}"
-                            from="${OUTPUT_PATH}"
-                            perm="755"
-                            owner="root"
-                            group="bin"/>
-          <packFileListElem type="File"
-                            to="${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}"
-                            from="${OUTPUT_PATH}"
-                            perm="755"
-                            owner="root"
-                            group="bin"/>
-          <packFileListElem type="File"
-                            to="${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}"
-                            from="${OUTPUT_PATH}"
-                            perm="755"
-                            owner="root"
-                            group="bin"/>
-          <packFileListElem type="File"
-                            to="${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}"
-                            from="${OUTPUT_PATH}"
-                            perm="755"
-                            owner="root"
-                            group="bin"/>
-          <packFileListElem type="File"
-                            to="${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}"
-                            from="${OUTPUT_PATH}"
-                            perm="755"
-                            owner="root"
-                            group="bin"/>
-          <packFileListElem type="File"
-                            to="${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}"
-                            from="${OUTPUT_PATH}"
-                            perm="755"
-                            owner="root"
-                            group="bin"/>
-          <packFileListElem type="File"
-                            to="${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}"
-                            from="${OUTPUT_PATH}"
-                            perm="755"
-                            owner="root"
-                            group="bin"/>
-          <packFileListElem type="File"
-                            to="${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}"
-                            from="${OUTPUT_PATH}"
-                            perm="755"
-                            owner="root"
-                            group="bin"/>
-        </packFileList>
-      </packaging>
-      <item path="SampleSoftware/inc/mainSampleSoftware.h"
-            ex="false"
-            tool="3"
-            flavor2="0">
-      </item>
-      <item path="SampleSoftware/src/mainSampleSoftware.c"
-            ex="false"
-            tool="0"
-            flavor2="0">
-      </item>
-      <item path="TestProgram/inc/adcTest.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="TestProgram/inc/mainTestProgram.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="TestProgram/src/adcTest.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="TestProgram/src/mainTestProgram.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="Visual/src/errorText" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="build/readme.txt" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="common/inc/adcFunctions.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="common/inc/gainFunctions.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="common/inc/gpioFunctions.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="common/inc/icogFunctions.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="common/inc/icogLs1Functions.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="common/inc/ledControl.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="common/inc/radar.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="common/inc/rdr_i2c_comms.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="common/inc/rdr_utilities.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="common/src/adcFunctions.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="common/src/gainFunctions.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="common/src/gpioFunctions.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="common/src/icogFunctions.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="common/src/icogLs1Functions.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="common/src/ledControl.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="common/src/radar.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="common/src/rdr_i2c_comms.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="common/src/rdr_utilities.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="default_header.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="makefile" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="nbproject/default_header.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="nbproject/licenseheader.txt" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="nbproject/newfile1.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="nbproject/newfile2.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="nbproject/newmain.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="newComplexMakefile" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="newmain.c" ex="false" tool="0" flavor2="0">
-      </item>
-    </conf>
-    <conf name="Release" type="1">
+    <conf name="Default" type="0">
       <toolsSet>
         <compilerSet>default</compilerSet>
-        <dependencyChecking>true</dependencyChecking>
+        <dependencyChecking>false</dependencyChecking>
         <rebuildPropChanged>false</rebuildPropChanged>
       </toolsSet>
-      <compileType>
-        <cTool>
-          <developmentMode>5</developmentMode>
-        </cTool>
-        <ccTool>
-          <developmentMode>5</developmentMode>
-        </ccTool>
-        <fortranCompilerTool>
-          <developmentMode>5</developmentMode>
-        </fortranCompilerTool>
-        <asmTool>
-          <developmentMode>5</developmentMode>
-        </asmTool>
-      </compileType>
-      <item path="SampleSoftware/inc/mainSampleSoftware.h"
+      <flagsDictionary>
+        <element flagsID="0" commonFlags="-g -g"/>
+      </flagsDictionary>
+      <codeAssistance>
+      </codeAssistance>
+      <makefileType>
+        <makeTool>
+          <buildCommandWorkingDir>.</buildCommandWorkingDir>
+          <buildCommand>${MAKE} -f makefile</buildCommand>
+          <cleanCommand>${MAKE} -f makefile clean</cleanCommand>
+          <executablePath>build</executablePath>
+        </makeTool>
+        <preBuild>
+          <preBuildCommandWorkingDir>.</preBuildCommandWorkingDir>
+          <preBuildCommand></preBuildCommand>
+        </preBuild>
+      </makefileType>
+      <item path="AnalogueMeasurement/src/readingAnalogueSignals.c"
             ex="false"
-            tool="3"
+            tool="0"
             flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="DigitalDetection/src/readingDigitalSignals.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="GainControl/src/settingGainControl.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+        <cTool flags="0">
+        </cTool>
       </item>
       <item path="SampleSoftware/src/mainSampleSoftware.c"
             ex="false"
             tool="0"
             flavor2="0">
-      </item>
-      <item path="TestProgram/inc/adcTest.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="TestProgram/inc/mainTestProgram.h" ex="false" tool="3" flavor2="0">
+        <cTool flags="0">
+        </cTool>
       </item>
       <item path="TestProgram/src/adcTest.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="TestProgram/src/fileHandling.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
       </item>
       <item path="TestProgram/src/mainTestProgram.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
       </item>
-      <item path="Visual/src/errorText" ex="false" tool="3" flavor2="0">
+      <item path="TestProgram/src/utilities.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
       </item>
-      <item path="build/readme.txt" ex="false" tool="3" flavor2="0">
+      <item path="Visual/src/linkedList.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+          <incDir>
+            <pElem>.</pElem>
+          </incDir>
+        </cTool>
       </item>
-      <item path="common/inc/adcFunctions.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="common/inc/gainFunctions.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="common/inc/gpioFunctions.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="common/inc/icogFunctions.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="common/inc/icogLs1Functions.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="common/inc/ledControl.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="common/inc/radar.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="common/inc/rdr_i2c_comms.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="common/inc/rdr_utilities.h" ex="false" tool="3" flavor2="0">
+      <item path="Visual/src/radarVisual.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+          <incDir>
+            <pElem>/usr/include/gtk-3.0</pElem>
+            <pElem>/usr/include/at-spi2-atk/2.0</pElem>
+            <pElem>/usr/include/at-spi-2.0</pElem>
+            <pElem>/usr/include/dbus-1.0</pElem>
+            <pElem>/usr/lib/arm-linux-gnueabihf/dbus-1.0/include</pElem>
+            <pElem>/usr/include/gio-unix-2.0</pElem>
+            <pElem>/usr/include/cairo</pElem>
+            <pElem>/usr/include/libdrm</pElem>
+            <pElem>/usr/include/pango-1.0</pElem>
+            <pElem>/usr/include/harfbuzz</pElem>
+            <pElem>/usr/include/fribidi</pElem>
+            <pElem>/usr/include/atk-1.0</pElem>
+            <pElem>/usr/include/pixman-1</pElem>
+            <pElem>/usr/include/freetype2</pElem>
+            <pElem>/usr/include/libpng16</pElem>
+            <pElem>/usr/include/gdk-pixbuf-2.0</pElem>
+            <pElem>/usr/include/libmount</pElem>
+            <pElem>/usr/include/blkid</pElem>
+            <pElem>/usr/include/uuid</pElem>
+            <pElem>/usr/include/glib-2.0</pElem>
+            <pElem>/usr/lib/arm-linux-gnueabihf/glib-2.0/include</pElem>
+            <pElem>.</pElem>
+          </incDir>
+        </cTool>
       </item>
       <item path="common/src/adcFunctions.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="common/src/filterFunctions.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
       </item>
       <item path="common/src/gainFunctions.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
       </item>
       <item path="common/src/gpioFunctions.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="common/src/icogFunctions.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
       </item>
       <item path="common/src/icogLs1Functions.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
       </item>
       <item path="common/src/ledControl.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
       </item>
       <item path="common/src/radar.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="common/src/rdr_gpio_control.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
       </item>
       <item path="common/src/rdr_i2c_comms.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
       </item>
-      <item path="common/src/rdr_utilities.c" ex="false" tool="0" flavor2="0">
+      <item path="common/src/rdr_spi_comms.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
       </item>
-      <item path="default_header.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="makefile" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="nbproject/default_header.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="nbproject/licenseheader.txt" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="nbproject/newfile1.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="nbproject/newfile2.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="nbproject/newmain.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="newComplexMakefile" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="newmain.c" ex="false" tool="0" flavor2="0">
-      </item>
+      <folder path="0/AnalogueMeasurement">
+        <cTool>
+          <incDir>
+            <pElem>.</pElem>
+          </incDir>
+        </cTool>
+      </folder>
+      <folder path="0/DigitalDetection">
+        <cTool>
+          <incDir>
+            <pElem>.</pElem>
+          </incDir>
+        </cTool>
+      </folder>
+      <folder path="0/GainControl">
+        <cTool>
+          <incDir>
+            <pElem>.</pElem>
+          </incDir>
+        </cTool>
+      </folder>
+      <folder path="0/SampleSoftware">
+        <cTool>
+          <incDir>
+            <pElem>.</pElem>
+          </incDir>
+        </cTool>
+      </folder>
+      <folder path="0/TestProgram">
+        <cTool>
+          <incDir>
+            <pElem>.</pElem>
+          </incDir>
+        </cTool>
+      </folder>
+      <folder path="0/common">
+        <cTool>
+          <incDir>
+            <pElem>.</pElem>
+          </incDir>
+        </cTool>
+      </folder>
     </conf>
   </confs>
 </configurationDescriptor>

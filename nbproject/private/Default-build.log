@@ -1,0 +1,34 @@
+gcc -g -Wall   -c -g -Wall  -o build/adcFunctions.o common/src/adcFunctions.c
+gcc -g -Wall   -c -g -Wall  -o build/gainFunctions.o common/src/gainFunctions.c
+gcc -g -Wall   -c -g -Wall  -o build/gpioFunctions.o common/src/gpioFunctions.c
+gcc -g -Wall   -c -g -Wall  -o build/icogLs1Functions.o common/src/icogLs1Functions.c
+gcc -g -Wall   -c -g -Wall  -o build/rdr_spi_comms.o common/src/rdr_spi_comms.c
+gcc -g -Wall   -c -g -Wall  -o build/rdr_i2c_comms.o common/src/rdr_i2c_comms.c
+gcc -g -Wall   -c -g -Wall  -o build/rdr_gpio_control.o common/src/rdr_gpio_control.c
+gcc -g -Wall   -c -g -Wall  -o build/ledControl.o common/src/ledControl.c
+gcc -g -Wall   -c -g -Wall  -o build/radar.o common/src/radar.c
+gcc -g -Wall   -c -g -Wall  -o build/filterFunctions.o common/src/filterFunctions.c
+gcc -g -Wall   -c -g -Wall  -o build/settingGainControl.o GainControl/src/settingGainControl.c
+gcc -g -Wall    -g -Wall  -o build/gainControl build/adcFunctions.o build/gainFunctions.o build/gpioFunctions.o build/icogLs1Functions.o build/rdr_spi_comms.o build/rdr_i2c_comms.o build/rdr_gpio_control.o build/ledControl.o build/radar.o build/filterFunctions.o  build/settingGainControl.o  -lbcm2835  -lwiringPi
+gcc -g -Wall   -c -g -Wall  -o build/readingAnalogueSignals.o AnalogueMeasurement/src/readingAnalogueSignals.c
+gcc -g -Wall    -g -Wall  -o build/analogueMeasurement build/adcFunctions.o build/gainFunctions.o build/gpioFunctions.o build/icogLs1Functions.o build/rdr_spi_comms.o build/rdr_i2c_comms.o build/rdr_gpio_control.o build/ledControl.o build/radar.o build/filterFunctions.o  build/readingAnalogueSignals.o  -lbcm2835  -lwiringPi
+gcc -g -Wall   -c -g -Wall  -o build/adcTest.o TestProgram/src/adcTest.c
+gcc -g -Wall   -c -g -Wall  -o build/utilities.o TestProgram/src/utilities.c
+gcc -g -Wall   -c -g -Wall  -o build/fileHandling.o TestProgram/src/fileHandling.c
+gcc -g -Wall   -c -g -Wall  -o build/mainTestProgram.o TestProgram/src/mainTestProgram.c
+TestProgram/src/mainTestProgram.c: In function ‘icogTest’:
+TestProgram/src/mainTestProgram.c:357:13: warning: unused variable ‘fsrvalues’ [-Wunused-variable]
+     int     fsrvalues[4] = {ICOG_SET_FSR_1K,ICOG_SET_FSR_4K,ICOG_SET_FSR_16K,ICOG_SET_FSR_64K};
+             ^~~~~~~~~
+gcc -g -Wall    -g -Wall  -o build/testProgram build/adcFunctions.o build/gainFunctions.o build/gpioFunctions.o build/icogLs1Functions.o build/rdr_spi_comms.o build/rdr_i2c_comms.o build/rdr_gpio_control.o build/ledControl.o build/radar.o build/filterFunctions.o  build/adcTest.o build/utilities.o build/fileHandling.o build/mainTestProgram.o  -lbcm2835 -lwiringPi
+gcc -g -Wall   -c -g -Wall  -o build/readingDigitalSignals.o DigitalDetection/src/readingDigitalSignals.c
+gcc -g -Wall    -g -Wall  -o build/digitalDetection build/adcFunctions.o build/gainFunctions.o build/gpioFunctions.o build/icogLs1Functions.o build/rdr_spi_comms.o build/rdr_i2c_comms.o build/rdr_gpio_control.o build/ledControl.o build/radar.o build/filterFunctions.o  build/readingDigitalSignals.o  -lbcm2835  -lwiringPi	
+gcc -g -Wall   -c -g -Wall  -o build/mainSampleSoftware.o SampleSoftware/src/mainSampleSoftware.c
+gcc -g -Wall    -g -Wall  -o build/sampleSoftware build/adcFunctions.o build/gainFunctions.o build/gpioFunctions.o build/icogLs1Functions.o build/rdr_spi_comms.o build/rdr_i2c_comms.o build/rdr_gpio_control.o build/ledControl.o build/radar.o build/filterFunctions.o  build/mainSampleSoftware.o  -lbcm2835  -lwiringPi		
+gcc -g -Wall   -c -g -Wall  -o build/linkedList.o Visual/src/linkedList.c
+gcc -g -Wall   -c `pkg-config --cflags --libs gtk+-3.0` -g -Wall  -o build/radarVisual.o Visual/src/radarVisual.c
+Visual/src/radarVisual.c: In function ‘on_btn_startstop_clicked’:
+Visual/src/radarVisual.c:49:17: warning: variable ‘reply’ set but not used [-Wunused-but-set-variable]
+     int         reply;
+                 ^~~~~
+gcc -g -Wall    -g -Wall  `pkg-config --cflags --libs gtk+-3.0` -o build/radarVisual build/adcFunctions.o build/gainFunctions.o build/gpioFunctions.o build/icogLs1Functions.o build/rdr_spi_comms.o build/rdr_i2c_comms.o build/rdr_gpio_control.o build/ledControl.o build/radar.o build/filterFunctions.o  build/linkedList.o build/radarVisual.o  -pthread -lbcm2835 -lm -lwiringPi -export-dynamic
