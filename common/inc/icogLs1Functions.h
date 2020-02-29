@@ -30,7 +30,7 @@
 #define     DATA_REGISTER_HIGH          0x03
 
 // Parameters
-#define     WAITTIME                250             // The time in mS between write and subsequent read
+#define     WAITTIME                250000             // The time in uS between write and subsequent read
 
 // The list below is the failure modes possible
 #define     ICOG_EXIT_SUCCESS        0

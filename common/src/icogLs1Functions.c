@@ -26,11 +26,11 @@
 
 int icogI2CInitialisation (int *i2cbus) {
     
-    printf("Into iCog Initialisation\n");
+    //printf("Into iCog Initialisation\n");
     int status = ICOG_EXIT_SUCCESS;
     status = I2CInitialisation(i2cbus, ICOG_ADDRESS);
     
-    printf("iCog Init:%d\n", *i2cbus);
+    //printf("iCog Init:%d\n", *i2cbus);
     if (status != I2C_ERR_NONE) {
         printf("I2C Initialisation error\n");
         status = ICOG_SETUP_ERROR;
@@ -56,22 +56,22 @@ int icogTurnOffSensor(int *i2cbus) {
     int     towrite;
     int     byte = 0;
     
-    printf("Into iCog Turn Off Sensor\n");
+    //printf("Into iCog Turn Off Sensor\n");
     
     mask = 0b11100000;
     shift = 5;
     mode = 0b000;
     
     status = I2CByteRead(i2cbus, COMMAND_I_REGISTER, &byte);
-    printf("Command Register Before turning off (0x00):%d\n", byte);
+    //printf("Command Register Before turning off (0x00):%d\n", byte);
     if ((byte & mask) != (mode << shift)) {
         // Modify the register to set bits 7 to 5= 0b000
         towrite = ((byte & ~mask) | (mode << shift));
-        printf("Byte to write to turn off %d\n", towrite);
+        //printf("Byte to write to turn off %d\n", towrite);
         status = I2CByteWrite(i2cbus, COMMAND_I_REGISTER, towrite);
         usleep(WAITTIME);
         status = I2CByteRead(i2cbus, COMMAND_I_REGISTER, &byte);
-        printf("Command Register After turning off (0x00):%x\n", byte);
+        //printf("Command Register After turning off (0x00):%x\n", byte);
         if ((byte & mask) == (mode << shift)) {
             printf("Sensor Turned off\n");
         }
@@ -94,7 +94,7 @@ int icogSetALSContinuousMode(int *i2cbus) {
     int     towrite;
     int     byte = 0;
     
-    printf("Into iCog Set ALS Mode\n");
+    //printf("Into iCog Set ALS Mode\n");
     status = 0;
         
     //set bits 5-7 of the Command Register 0x00 to 0b101
@@ -104,15 +104,15 @@ int icogSetALSContinuousMode(int *i2cbus) {
     mode = 0b101;
     
     status = I2CByteRead(i2cbus, COMMAND_I_REGISTER, &byte);
-    printf("Command Register Before turning on ALS mode (0x00):%x\n", byte);
+    //printf("Command Register Before turning on ALS mode (0x00):%x\n", byte);
     if ((byte & mask) != (mode << shift)) {
         // Modify the register to set bits 7 to 5 = 0b101
         towrite = ((byte & ~mask) | (mode << shift));
-        printf("Byte to write to turn on ALS mode:%x\n", towrite);
+        //printf("Byte to write to turn on ALS mode:%x\n", towrite);
         status = I2CByteWrite(i2cbus, COMMAND_I_REGISTER, towrite);
         usleep(WAITTIME);
         status = I2CByteRead(i2cbus, COMMAND_I_REGISTER, &byte);
-        printf("Command Register After turning on ALS mode (0x00):%x\n", byte);
+        //printf("Command Register After turning on ALS mode (0x00):%x\n", byte);
         if ((byte & mask) == (mode << shift)) {
             printf("Sensor Turned on in ALS mode\n");
         }
@@ -134,7 +134,7 @@ int icogSetIRContinuousMode(int *i2cbus) {
     int     towrite;
     int     byte = 0;
     
-    printf("Into iCog Set IR Mode\n");
+    //printf("Into iCog Set IR Mode\n");
     status = 0;
         
     //set bits 5-7 of the Command Register 0x00 to 0b101
@@ -144,15 +144,15 @@ int icogSetIRContinuousMode(int *i2cbus) {
     mode = 0b110;
     
     status = I2CByteRead(i2cbus, COMMAND_I_REGISTER, &byte);
-    printf("Command Register Before turning on IR mode (0x00):%x\n", byte);
+    //printf("Command Register Before turning on IR mode (0x00):%x\n", byte);
     if ((byte & mask) != (mode << shift)) {
         // Modify the register to set bits 7 to 5 = 0b101
         towrite = ((byte & ~mask) | (mode << shift));
-        printf("Byte to write to turn on IR mode:%x\n", towrite);
+        //printf("Byte to write to turn on IR mode:%x\n", towrite);
         status = I2CByteWrite(i2cbus, COMMAND_I_REGISTER, towrite);
         usleep(WAITTIME);
         status = I2CByteRead(i2cbus, COMMAND_I_REGISTER, &byte);
-        printf("Command Register After turning on IR mode (0x00):%x\n", byte);
+        //printf("Command Register After turning on IR mode (0x00):%x\n", byte);
         if ((byte & mask) == (mode << shift)) {
             printf("Sensor Turned on in IR mode\n");
         }
@@ -174,22 +174,22 @@ int icogSetADCResolution(int *i2cbus, int resolution) {
     int     towrite;
     int     byte = 0;
     
-    printf("Into iCog Set ADC Resolution\n");
+    //printf("Into iCog Set ADC Resolution\n");
     status = 0;
 
     mask = 0b00001100;
     shift = 2;
     
     status = I2CByteRead(i2cbus, COMMAND_II_REGISTER, &byte);
-    printf("Command Register Before setting the ADC Resolution:%x\n", byte);
+    //printf("Command Register Before setting the ADC Resolution:%x\n", byte);
     if ((byte & mask) != (resolution << shift)) {
         // Modify the register to set bits 7 to 5 = 0b101
         towrite = ((byte & ~mask) | (resolution << shift));
-        printf("Byte to write to set ADC Resolution:%x\n", towrite);
+        //printf("Byte to write to set ADC Resolution:%x\n", towrite);
         status = I2CByteWrite(i2cbus, COMMAND_II_REGISTER, towrite);
         usleep(WAITTIME);
         status = I2CByteRead(i2cbus, COMMAND_II_REGISTER, &byte);
-        printf("Command Register After setting ADC Resolution:%x\n", byte);
+        //printf("Command Register After setting ADC Resolution:%x\n", byte);
         if ((byte & mask) == (resolution << shift)) {
             printf("ADC Resolution Set\n");
         }
@@ -210,21 +210,21 @@ int icogSetFSRRange(int *i2cbus, int fsrrange) {
     int     towrite;
     int     byte = 0;
     
-    printf("Into iCog Set Full Scale Range\n");
+    //printf("Into iCog Set Full Scale Range\n");
     status = 0;
 
     mask = 0b00000011;
     
     status = I2CByteRead(i2cbus, COMMAND_II_REGISTER, &byte);
-    printf("Command Register Before setting the FSR:%x\n", byte);
+    //printf("Command Register Before setting the FSR:%x\n", byte);
     if ((byte & mask) != fsrrange) {
         // Modify the register to set bits 7 to 5 = 0b101
         towrite = ((byte & ~mask) | fsrrange);
-        printf("Byte to write to set FSR:%x\n", towrite);
+        //printf("Byte to write to set FSR:%x\n", towrite);
         status = I2CByteWrite(i2cbus, COMMAND_II_REGISTER, towrite);
         usleep(WAITTIME);
         status = I2CByteRead(i2cbus, COMMAND_II_REGISTER, &byte);
-        printf("Command Register After setting FSR:%x\n", byte);
+        //printf("Command Register After setting FSR:%x\n", byte);
         if ((byte & mask) == fsrrange) {
             printf("Full Scale Range Set\n");
         }
@@ -244,15 +244,15 @@ int icogReadDataRegisters(int *i2cbus, int *reading) {
     int     data_l = 0, data_h = 0;
     int     shift = 8;
 
-    printf("In Read Data Registers\n");
+    //printf("In Read Data Registers\n");
     
     status = I2CByteRead(i2cbus, DATA_REGISTER_LOW, &data_l);
     if (status == ICOG_EXIT_SUCCESS) {
         status = I2CByteRead(i2cbus, DATA_REGISTER_HIGH, &data_h);
-        printf("Data Register values (0x03/0x02):%x / %x\n", data_h, data_l);
+        //printf("Data Register values (0x03/0x02):%x / %x\n", data_h, data_l);
         if (status == ICOG_EXIT_SUCCESS) {
             *reading = (data_h << shift) + data_l;
-            printf("Data Register combined %x\n", *reading);
+            //printf("Data Register combined %x\n", *reading);
             status = ICOG_EXIT_SUCCESS;
         }
         else {
@@ -273,20 +273,20 @@ int icogReadADCResolution(int *i2cbus, int *resolution) {
     int     shift;
     int     adc = 0;
     
-    printf("In Read ADC Clock Cycles\n");
+    //printf("In Read ADC Clock Cycles\n");
     
     mask = 0b00001100;
     shift = 2;
 
     status = I2CByteRead(i2cbus, COMMAND_II_REGISTER, &byte);
-    printf("ADC Data Resolution reading (bits 2 & 3 of 0x01):%x\n", byte);
+    //printf("ADC Data Resolution reading (bits 2 & 3 of 0x01):%x\n", byte);
     if (status != ICOG_EXIT_SUCCESS) {
         status = ICOG_READ_ERROR;
     }
     else {
         //Decode the values
         adc = (byte & mask) >> shift;
-        printf("ADC Resolution Bit %d\n", adc);
+        //printf("ADC Resolution Bit %d\n", adc);
         switch (adc) {
             case 0b00:
                 // 2 ^ 16
@@ -324,12 +324,12 @@ int icogReadSensorMode(int *i2cbus, int *sensormode) {
     int     mode = 0;
     
     
-    printf("In iCog Read Sensor Mode\n");
+    //printf("In iCog Read Sensor Mode\n");
     mask = 0b11100000;
     shift = 5;
 
     status = I2CByteRead(i2cbus, COMMAND_I_REGISTER, &byte);
-    printf("Sensor Mode Register setting (0x00):%x\n", byte);
+    //printf("Sensor Mode Register setting (0x00):%x\n", byte);
     if (status != ICOG_EXIT_SUCCESS) {
         status = ICOG_READ_ERROR;
     }
@@ -337,7 +337,7 @@ int icogReadSensorMode(int *i2cbus, int *sensormode) {
         status = ICOG_EXIT_SUCCESS;
         // Operation Mode Bits
         omb = (byte & mask) >> shift;
-        printf("Operation Mode Bits %x\n",omb);
+        //printf("Operation Mode Bits %x\n",omb);
         switch (omb) {
             case 0b000:
                 mode = 0;
@@ -370,7 +370,7 @@ int icogReadFSR(int *i2cbus, int *fsrvalue) {
     int     fcr;
     int     opmode = 0;
     
-    printf("In iCog Read FSR Routine\n");
+    //printf("In iCog Read FSR Routine\n");
     
     mask = 0b00000011;
 
@@ -393,11 +393,11 @@ int icogReadFSR(int *i2cbus, int *fsrvalue) {
                 *fsrvalue = 0;
             }
             else {
-                printf("Full Scale Range reading:%x\n", byte);
+                //printf("Full Scale Range reading:%x\n", byte);
 
                 // Full Scale Range bits
                 fcr = (byte & mask);
-                printf("Full Scale Range Selection %d\n",fcr);
+                //printf("Full Scale Range Selection %d\n",fcr);
                 *fsrvalue = 0;
                 switch (fcr) {
                     case 0b00:
@@ -432,7 +432,7 @@ int icogCalculateLux(int *i2cbus, float *luxvalue) {
     //float    k = 0.0, a = 0.0, d = 0.0;
      
     
-    printf("iCog Calculate Lux Value\n");
+    //printf("iCog Calculate Lux Value\n");
     
     // calculate and return the Lux value
     *luxvalue = 0;
@@ -472,7 +472,7 @@ int icogCalculateLux(int *i2cbus, float *luxvalue) {
             };
         };
     };
-    printf("Calculated LUX Value: %f\n", *luxvalue);
+    //printf("Calculated LUX Value: %f\n", *luxvalue);
     
     return status;
 };
@@ -482,7 +482,7 @@ int icogFastCalculateLux(int *i2cbus, int fsrvalue, int adcres, float *luxvalue)
     int     status = 0;
     int     data = 0;
     
-    printf("In iCog Fast Calculation of Lux\n");
+    //printf("In iCog Fast Calculation of Lux\n");
     status = icogReadDataRegisters(i2cbus, &data);
     if (status != ICOG_EXIT_SUCCESS) {
         status = ICOG_READ_ERROR;
