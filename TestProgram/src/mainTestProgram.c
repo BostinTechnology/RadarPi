@@ -353,13 +353,16 @@ void icogTest() {
     int     i2cbus = 0;
     int     status;
     float   luxvalue = 0.0;
-    int     adcvalues[4] = {ICOG_SET_ADC_16,ICOG_SET_ADC_12,ICOG_SET_ADC_8,ICOG_SET_ADC_4};
+    int     adcvalues[4] = {ICOG_SET_ADC_4,ICOG_SET_ADC_8,ICOG_SET_ADC_12,ICOG_SET_ADC_16};
     int     fsrvalues[4] = {ICOG_SET_FSR_1K,ICOG_SET_FSR_4K,ICOG_SET_FSR_16K,ICOG_SET_FSR_64K};
     int     adccount = 0;
     int     fsrcount = 0;
     int     luxcount = 0;
     float   luxaverage = 0.0;
+    float   luxvalues[4][4];
+    int     adcmodes[4] = {ICOG_ADC_MODE_2_4, ICOG_ADC_MODE_2_8, ICOG_ADC_MODE_2_12, ICOG_ADC_MODE_2_16};
     
+    printf("reading . . . \n");
     status = icogI2CInitialisation (&i2cbus);
     if (status != ICOG_EXIT_SUCCESS) {
         printf("Failed to initialise iCog, please check.\n");
@@ -400,13 +403,14 @@ void icogTest() {
                     return;
                 }
                 else {
-                    printf("Lux Value:%f\n", luxvalue);
+                    //printf("Lux Value:%f\n", luxvalue);
                     luxaverage += luxvalue;
                 }
                 luxcount ++;
             } while (luxcount < 5);
             luxaverage = luxaverage / 5;
-            printf("Lux Average:%f\n", luxaverage);
+            luxvalues[fsrcount][adccount] = luxaverage;
+            //printf("Lux Average:%f\n", luxaverage);
 
             //printf("Turning Off Sensor\n");
             status= icogTurnOffSensor(&i2cbus);
@@ -426,7 +430,22 @@ void icogTest() {
         printf("Failed to end comms with the iCog, please check.\n");
         return;
     };
-    
+
+    printf("R E S U L T S\n");
+    printf("=============\n");
+    adccount = 0;
+    fsrcount = 0;
+    printf("ADC \\ FSR | %11d | %11d | %11d | %11d\n", ICOG_FSR_READING_1K, ICOG_FSR_READING_4K, ICOG_FSR_READING_16K, ICOG_FSR_READING_64K); 
+    do {
+        printf("    %5d ", adcmodes[adccount]);
+        do {
+            printf("\ %11f ", luxvalues[fsrcount][adccount]);
+            fsrcount ++;
+        } while (fsrcount < 4);
+        fsrcount = 0;
+        printf("\n");
+        adccount ++;
+    } while (adccount < 4);
     return;    
 }
 

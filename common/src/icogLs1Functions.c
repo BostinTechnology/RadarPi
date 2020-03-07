@@ -73,14 +73,14 @@ int icogTurnOffSensor(int *i2cbus) {
         status = I2CByteRead(i2cbus, COMMAND_I_REGISTER, &byte);
         //printf("Command Register After turning off (0x00):%x\n", byte);
         if ((byte & mask) == (mode << shift)) {
-            printf("Sensor Turned off\n");
+            //printf("Sensor Turned off\n");
         }
         else {
-            printf("Sensor Turned on\n");
+            //printf("Sensor Turned on\n");
         };
     } 
     else {
-        printf("Sensor already Turned off\n");
+        //printf("Sensor already Turned off\n");
     }
     return status;
 };
@@ -114,14 +114,14 @@ int icogSetALSContinuousMode(int *i2cbus) {
         status = I2CByteRead(i2cbus, COMMAND_I_REGISTER, &byte);
         //printf("Command Register After turning on ALS mode (0x00):%x\n", byte);
         if ((byte & mask) == (mode << shift)) {
-            printf("Sensor Turned on in ALS mode\n");
+            //printf("Sensor Turned on in ALS mode\n");
         }
         else {
-            printf("Sensor Not in ALS mode\n");
+            //printf("Sensor Not in ALS mode\n");
         }
     }
     else {
-        printf("Sensor already in ALS mode\n");
+        //printf("Sensor already in ALS mode\n");
     };        
     return status;
 };
@@ -154,14 +154,14 @@ int icogSetIRContinuousMode(int *i2cbus) {
         status = I2CByteRead(i2cbus, COMMAND_I_REGISTER, &byte);
         //printf("Command Register After turning on IR mode (0x00):%x\n", byte);
         if ((byte & mask) == (mode << shift)) {
-            printf("Sensor Turned on in IR mode\n");
+            //printf("Sensor Turned on in IR mode\n");
         }
         else {
-            printf("Sensor Not in IR mode\n");
+            //printf("Sensor Not in IR mode\n");
         }
     }
     else {
-        printf("Sensor already in IR mode\n");
+        //printf("Sensor already in IR mode\n");
     };
     return status;
 };
@@ -191,14 +191,14 @@ int icogSetADCResolution(int *i2cbus, int resolution) {
         status = I2CByteRead(i2cbus, COMMAND_II_REGISTER, &byte);
         //printf("Command Register After setting ADC Resolution:%x\n", byte);
         if ((byte & mask) == (resolution << shift)) {
-            printf("ADC Resolution Set\n");
+            //printf("ADC Resolution Set\n");
         }
         else {
-            printf("ADC Resolution NOT Set\n");
+            //printf("ADC Resolution NOT Set\n");
         }
     }
     else {
-        printf("ADC Resolution already set\n");
+        //printf("ADC Resolution already set\n");
     };      
     return status;
 };
@@ -226,14 +226,14 @@ int icogSetFSRRange(int *i2cbus, int fsrrange) {
         status = I2CByteRead(i2cbus, COMMAND_II_REGISTER, &byte);
         //printf("Command Register After setting FSR:%x\n", byte);
         if ((byte & mask) == fsrrange) {
-            printf("Full Scale Range Set\n");
+            //printf("Full Scale Range Set\n");
         }
         else {
-            printf("Full Scale Range NOT Set\n");
+            //printf("Full Scale Range NOT Set\n");
         }
     }
     else {
-        printf("Full Scale Range already set\n");
+        //printf("Full Scale Range already set\n");
     };
     return status;
 }
@@ -310,7 +310,7 @@ int icogReadADCResolution(int *i2cbus, int *resolution) {
                 *resolution= 0;
         }
     }
-    printf("ADC Resolution:%d\n", *resolution);
+    //printf("ADC Resolution:%d\n", *resolution);
     return status;
 };
 
@@ -358,7 +358,7 @@ int icogReadSensorMode(int *i2cbus, int *sensormode) {
                 mode = 0;
         };
     };
-    printf("Sensor Mode of Operation :%d\n",mode);
+    //printf("Sensor Mode of Operation :%d\n",mode);
     return status;
 };
 
@@ -420,7 +420,7 @@ int icogReadFSR(int *i2cbus, int *fsrvalue) {
             };
         };
     };
-    printf("Full Scale Range (in ALS mode) value : %d\n", *fsrvalue);
+    //printf("Full Scale Range (in ALS mode) value : %d\n", *fsrvalue);
     return status;
 };
 
@@ -458,7 +458,7 @@ int icogCalculateLux(int *i2cbus, float *luxvalue) {
             }
             else {
                 // Calculate Lux
-                printf("Calculating Lux - fullscale:%d, adcres:%d, data:%d\n", fullscale, adcres, data);
+                //printf("Calculating Lux - fullscale:%d, adcres:%d, data:%d\n", fullscale, adcres, data);
                 //printf("Return value part1:%f\n", (fullscale / adcres));
                 //printf("Return value part2:%f\n", ((fullscale / adcres) * data));
                 //k = (float)fullscale;
