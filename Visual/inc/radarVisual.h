@@ -73,10 +73,16 @@ struct app_widgets {
 #define MAX_VOLTAGE             3.3
 #define MIN_VOLTAGE             0.0
 
-//ToDo: improve the commentary for the functions
-
-
-// 
+/*
+ *****************************************************************************
+ * Overview: Closes the GUI Application. This is typically called from the 
+ *          GUI application
+ *
+ * param[in] none :  
+ *
+ * No value is returned
+ *****************************************************************************
+ */
 void on_main_application_window_destroy() ;
 
 

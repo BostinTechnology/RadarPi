@@ -251,7 +251,6 @@ void rangeTest(void) {
         printf("Unable to control LEDs, test aborted\n");
         return;
     }
-    //ToDo: Use Status correctly
     do {
         // Turn the LEDs on for the start of the loop
         status += controlRunningLED(LED_ON);

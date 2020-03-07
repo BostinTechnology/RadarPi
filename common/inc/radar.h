@@ -13,8 +13,6 @@
  * For more information refer to www.BostinTechnology.com
  */
 
-//ToDo: Update headers for all files based on new template.
-
 #ifndef RADAR_H
 #define RADAR_H
 

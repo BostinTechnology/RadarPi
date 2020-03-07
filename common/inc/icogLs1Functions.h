@@ -91,7 +91,7 @@ int icogI2CInitialisation (int *i2cbus);
  *
  * param[in/out] ?? : nothing 
  *
- * return status   : nothing  //ToDo: Set status'
+ * return status   : Currently returns I2C_ERR_NONE only
  ******************************************************************************/
 int icogI2CEnd(void);
 
@@ -103,7 +103,7 @@ int icogI2CEnd(void);
  *
  * param[in/out] ?? : nothing 
  *
- * return status   : nothing    //ToDo: Set status'
+ * return status   : I2C_ERR_NONE or I2C_ERR_WRITE
  ******************************************************************************/
 int icogTurnOffSensor(int *i2cbus);
 
@@ -118,7 +118,7 @@ int icogTurnOffSensor(int *i2cbus);
  *
  * param[in] i2cbus : A pointer to the bus ID 
  *
- * return status   : nothing        //ToDo: Set status'
+ * return status   : I2C_ERR_NONE or I2C_ERR_WRITE
  ******************************************************************************/
 int icogSetALSContinuousMode(int *i2cbus);
 
@@ -133,7 +133,7 @@ int icogSetALSContinuousMode(int *i2cbus);
  *
  * param[in] i2cbus : A pointer to the bus ID 
  *
- * return status   : nothing        //ToDo: Set status'
+ * return status   : I2C_ERR_NONE or I2C_ERR_WRITE
  ******************************************************************************/
 int icogSetIRContinuousMode(int *i2cbus);
 
@@ -156,7 +156,7 @@ int icogSetIRContinuousMode(int *i2cbus);
  * param[in] i2cbus : A pointer to the bus ID
  *      [in] resolution : See table above 
  *
- * return status   : //ToDo
+ * return status   : I2C_ERR_NONE or I2C_ERR_WRITE
  ******************************************************************************/
 int icogSetADCResolution(int *i2cbus, int resolution);
 
@@ -177,7 +177,7 @@ int icogSetADCResolution(int *i2cbus, int resolution);
  * param[in] i2cbus     : A pointer to the bus ID
  *      [in] FSRrange   : See table above 
  *
- * return status   : //ToDo
+ * return status   : I2C_ERR_NONE or I2C_ERR_WRITE
  ******************************************************************************/
 int icogSetFSRRange(int *i2cbus, int fsrrange);
 
@@ -202,7 +202,7 @@ int icogSetFSRRange(int *i2cbus, int fsrrange);
  * param[in] i2cbus     : A pointer to the bus ID
  *      [out] reading   : a pointer for the reading to be stored in 
  *
- * return none   : //ToDo
+ * return none   : I2C_ERR_NONE or ICOG_READ_ERROR
  ******************************************************************************/
 int icogReadDataRegisters(int *i2cbus, int *reading);
 
@@ -220,7 +220,7 @@ int icogReadDataRegisters(int *i2cbus, int *reading);
  * param[in]  i2cbus     : A pointer to the bus ID 
  *      [out] resolution : Returns resolution
  *
- * return status   : //ToDo
+ * return status   : I2C_ERR_NONE or ICOG_READ_ERROR
  ******************************************************************************/
 int icogReadADCResolution(int *i2cbus, int *resolution);
 
@@ -247,7 +247,7 @@ int icogReadADCResolution(int *i2cbus, int *resolution);
  * param[in]  i2cbus     : A pointer to the bus ID 
  *      [out] sensormode : the operating mode defined above   
  *
- * return none   : nothing
+ * return status   : I2C_ERR_NONE or ICOG_READ_ERROR
  ******************************************************************************/
 int icogReadSensorMode(int *i2cbus, int *sensormode);
 
@@ -269,7 +269,7 @@ int icogReadSensorMode(int *i2cbus, int *sensormode);
  *      [out] fsrvalue   : The RANGE value (1-4) from above depending on mode,
  *                          NOT the FSR value
  * 
- * return status   : //ToDo
+ * return status   : I2C_ERR_NONE or ICOG_READ_ERROR
  ******************************************************************************/
 int icogReadFSR(int *i2cbus, int *fsrvalue);
 
@@ -291,7 +291,7 @@ int icogReadFSR(int *i2cbus, int *fsrvalue);
  * param[in]  i2cbus    : A pointer to the bus ID
  *      [out[ luxvalue  : The Lux reading
  *
- * return none   : nothing
+ * return status   : I2C_ERR_NONE or ICOG_READ_ERROR
  ******************************************************************************/
 int icogCalculateLux(int *i2cbus, float *luxvalue);
 
@@ -316,7 +316,7 @@ int icogCalculateLux(int *i2cbus, float *luxvalue);
  *      [in]  adcres    : The ADC resolution currently set
  *      [out[ luxvalue  : The Lux reading
  *
- * return none   : nothing
+ * return status   : I2C_ERR_NONE or ICOG_READ_ERROR
  ******************************************************************************/
 int icogFastCalculateLux(int *i2cbus, int fsrvalue, int adcres, float *luxvalue);
 

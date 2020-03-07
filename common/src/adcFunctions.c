@@ -30,7 +30,6 @@ int adcSPiInitialisation(void) {
 						BCM2835_SPI_BIT_ORDER_MSBFIRST,
 						BCM2835_SPI_CS0);
 	
-    //ToDo: Update response based on status
     if (status != SPI_ERR_NONE) {
         return ADC_SETUP_ERROR;
     }

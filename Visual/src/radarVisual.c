@@ -213,7 +213,6 @@ void old_on_btn_set_gain_clicked(GtkButton *button, struct app_widgets *widget) 
     char            conv[15];               // location for temporary conversion
     int             i = 0;
     
-    //ToDo: Convert this so it uses the list from gainFunctions.c
     int             allowed_values[] = {0.2,1,10,20,30,40,60,80,120,157};
     int             allowed_values_size = sizeof(allowed_values)/sizeof(allowed_values[0]);
     int             set_value = 0;
