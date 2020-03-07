@@ -1,6 +1,6 @@
-#**RadarPi**
+# RadarPi
 
-##Overview
+## Overview
 **RadarPi** is a Raspberry Pi add on board that provides capability for a Radar module and a light
 sensor. These can be used in many applications including wildlife monitoring, movement detection and
 many others.
@@ -12,16 +12,16 @@ This repository consists of a set of library functions that enable any user to i
 the hardware on the **RadarPi** board, plus a number of sample applications to help. Below is a
 breakdown of each of the various repositories. 
 
-By default, when the repository is compiled, executables are in the * */build* * directory.
+By default, when the repository is compiled, executables are in the */build* directory.
 
 Due to the low level communications used, all the applications need to be run using elevated privileges.
 
-##Licence
+## Licence
 This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation as version 2 of the License.
 
-##How To Use
+## How To Use
 When building your own applications, include radar.h in your application to access the libraries.
 
 When compiling it, you need to also include the following in your makefile:-
@@ -35,7 +35,7 @@ When building the visual application, you would also need to include:-
     ```
 
 
-##common
+## common
 Contained within this folder are a number of functions to access the various parts of the **RadarPi**
 
 Any file that begins with `rdr` are not normally required to be used as they are helper functions
@@ -50,7 +50,7 @@ attempt to do the following
 
 As can be seen below, this function returns an Int as status, but also requires 2 parameters, a float
 pointer to put the result in ([out]) but also which pin to use for measuring purposes.
-
+```
 /*!**************************************************************************
  * Overview: Function to return the frequency from the GPIO pins
  *  
@@ -65,25 +65,25 @@ pointer to put the result in ([out]) but also which pin to use for measuring pur
  * return		status       : 0 = success
  *****************************************************************************/
 int returnRawFrequency(float *frequency, int measuring_pin);
+```
 
-
-##radarVisual
+## radarVisual
 A GUI based application that utilises teh GTK and Cairo libaries to provide a visual solution
 
-##testProgram
+## testProgram
 A program that is used to validate the manufacturing of the boards
 
-##sampleSoftware
+## sampleSoftware
 Some simple routines that demonstrate some of the functionality of the **RadarPi**
 
-##gainControl
+## gainControl
 A small program that sets the gain values of the gain device.
-Note: The gain chip does * *not* * respond to commands, hence it is therefore write only
+Note: The gain chip does *not* respond to commands, hence it is therefore write only
 
-##digitalDetection
+## digitalDetection
 Uses various additional libraries to capture and then graph data from the digital signals
 
-##analogueMeasurement
+## analogueMeasurement
 Using various additional libraries to capture and then graph data from the ADC
 
 
