@@ -193,8 +193,9 @@ void e2promTest(void) {
                 }
             }
         }
+        status = icogSetDataByte(&idioti2cbus, dataaddress, 0x00);
     }
-    
+    icogI2CEnd();
     return;
     
 }
