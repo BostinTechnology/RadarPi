@@ -39,6 +39,21 @@ int icogI2CInitialisation (int *i2cbus) {
     return status;
 };
 
+int icogIDIoTI2CInitialisation (int *i2cbus) {
+    
+    //printf("Into iCog Initialisation\n");
+    int status = ICOG_EXIT_SUCCESS;
+    status = I2CInitialisation(i2cbus, ID_IOT_ADDRESS);
+    
+    //printf("iCog Init:%d\n", *i2cbus);
+    if (status != I2C_ERR_NONE) {
+        printf("I2C Initialisation error\n");
+        status = ICOG_SETUP_ERROR;
+    }
+    
+    return status;
+};
+
 int icogI2CEnd(void) {
     
     int     status;
@@ -321,7 +336,6 @@ int icogReadSensorMode(int *i2cbus, int *sensormode) {
     int     omb;
     int     mask;
     int     shift;
-    int     mode = 0;
     
     
     //printf("In iCog Read Sensor Mode\n");
@@ -340,22 +354,22 @@ int icogReadSensorMode(int *i2cbus, int *sensormode) {
         //printf("Operation Mode Bits %x\n",omb);
         switch (omb) {
             case 0b000:
-                mode = 0;
+                *sensormode = 0;
                 break;
             case 0b001:
-                mode = ICOG_AMBIENT_MODE;
+                *sensormode = ICOG_AMBIENT_MODE;
                 break;
             case 0b010:
-                mode = ICOG_INFRARED_MODE;
+                *sensormode = ICOG_INFRARED_MODE;
                 break;
             case 0b101:
-                mode = ICOG_AMBIENT_MODE;
+                *sensormode = ICOG_AMBIENT_MODE;
                 break;
             case 0b110:
-                mode = ICOG_INFRARED_MODE;
+                *sensormode = ICOG_INFRARED_MODE;
                 break;
             default:
-                mode = 0;
+                *sensormode = 0;
         };
     };
     //printf("Sensor Mode of Operation :%d\n",mode);
@@ -458,14 +472,6 @@ int icogCalculateLux(int *i2cbus, float *luxvalue) {
             }
             else {
                 // Calculate Lux
-                //printf("Calculating Lux - fullscale:%d, adcres:%d, data:%d\n", fullscale, adcres, data);
-                //printf("Return value part1:%f\n", (fullscale / adcres));
-                //printf("Return value part2:%f\n", ((fullscale / adcres) * data));
-                //k = (float)fullscale;
-                //a = (float)adcres;
-                //d = (float)data;
-                //printf("Float values - fullscale:%f, adcres:%f, data:%f\n", k, a, d);
-                //printf("Return value float:%f\n", ((k / a) * d));
                 *luxvalue = (float)(fullscale / (float)adcres);
                 *luxvalue = *luxvalue * (float)data;
 
@@ -490,9 +496,54 @@ int icogFastCalculateLux(int *i2cbus, int fsrvalue, int adcres, float *luxvalue)
     }
     else {
         // Calculate Lux
-        *luxvalue = (fsrvalue / adcres) * data;
+        *luxvalue = (float)(fsrvalue / (float)adcres);
+        *luxvalue = *luxvalue * (float)data;
         status = ICOG_EXIT_SUCCESS;
     };
     
     return status;
 }
+
+int icogSetDataByte(int *i2cbus, int dataaddress, int byte) {
+    
+    int     status;
+    int     readback = 0;
+    
+    //printf("Into iCog Set Data Byte\n");
+    status = 0;
+
+    status = I2CByteWrite(i2cbus, dataaddress, byte);
+    usleep(WAITTIME);
+    status = I2CByteRead(i2cbus, dataaddress, &readback);
+    //printf("Data Byte After setting value:%x\n", byte);
+    if (readback == byte) {
+        //printf("Data Byte Set\n");
+    }
+    else {
+        //printf("Data Byte NOT Set\n");
+        status = ICOG_WRITE_ERROR;
+    }
+    return status;
+};
+
+int icogReadDataByte(int *i2cbus, int dataaddress, int *byte) {
+    
+    int     status;
+    int     readback = 0;
+    
+    //printf("Into iCog Read Data Byte\n");
+    status = 0;
+
+    status = I2CByteRead(i2cbus, dataaddress, &readback);
+    //printf("Data Byte After reading value:%x\n", byte);
+    if (status == ICOG_EXIT_SUCCESS) {
+        //printf("Data Byte Set\n");
+        *byte = readback;
+    }
+    else {
+        //printf("Data Byte NOT Set\n");
+        status = ICOG_WRITE_ERROR;
+        *byte = 0;
+    }
+    return status;
+};

@@ -22,7 +22,7 @@
 #include <stdio.h>
 #include <stdint.h>
 
-#define     I2C_COMMS_PORT                      "/dev/i2c-2"        this will nbeed to be changed as there are 2 buses to write / read with
+#define     I2C_COMMS_PORT                      "/dev/i2c-2"        //this will nbeed to be changed as there are 2 buses to write / read with
 
 
 #define    I2C_ERR_NONE                         0 /*! No error occurred */

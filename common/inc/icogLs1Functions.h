@@ -20,7 +20,7 @@
 
 // Addresses of device
 #define     ICOG_ADDRESS                0x44        //there is also the id_iot chip and the HAT chip
-#define     ID_IOT_ADDRESS              0x60        // Address of the EEPROM chip on the board
+#define     ID_IOT_ADDRESS              0x50        // Address of the EEPROM chip on the board
 
 
 // Register values
@@ -37,6 +37,7 @@
 #define     ICOG_NO_RESPONSE         1
 #define     ICOG_SETUP_ERROR         2
 #define     ICOG_READ_ERROR          3
+#define     ICOG_WRITE_ERROR         4
 
 
 // Mode Setting values
@@ -85,7 +86,21 @@
 int icogI2CInitialisation (int *i2cbus);
 
 /*!***************************************************************************
- * Overview:  Ends the I2C port for the iCog  Control
+ * Overview:  Initialises the I2C port for the iCog ID-IoT (EEPROM)
+ *  
+ * This method using the Wiring Pi library to set the required settings to set the
+ * I2C port for the iCog ID-IoT chip
+ *
+ * param[in] *i2cbus :  Nothing
+ *
+ * return status     : ICOG_SETUP_ERROR
+ *                   : ICOG_EXIT_SUCCESS
+ *        i2cbus     : The file handler for the device
+ ******************************************************************************/
+int icogIDIoTI2CInitialisation (int *i2cbus);
+
+/*!***************************************************************************
+ * Overview:  Ends the I2C port for the iCog Sensor or Id-Iot (EEPROM)
  *  
  * This method releases the I2C port for the iCog
  *
@@ -320,6 +335,29 @@ int icogCalculateLux(int *i2cbus, float *luxvalue);
  ******************************************************************************/
 int icogFastCalculateLux(int *i2cbus, int fsrvalue, int adcres, float *luxvalue);
 
+ /*!***************************************************************************
+ * Overview: Write a data byte to the address given for the device that
+ *         has been setup on the i2cbus given
+ *  
+ * param[in]  i2cbus        : A pointer to the bus ID
+ *      [in]  dataaddress   : The address to be written to
+ *      [in]  byte          : The value to write
+ *
+ * return status   : I2C_ERR_NONE or ICOG_WRITE_ERROR
+ ******************************************************************************/
+int icogSetDataByte(int *i2cbus, int dataaddress, int byte);
+
+/*!***************************************************************************
+ * Overview: Read a data byte to the address given for the device that
+ *         has been setup on the i2cbus given
+ *  
+ * param[in]  i2cbus        : A pointer to the bus ID
+ *      [in]  dataaddress   : The address to be written to
+ *      [out] byte          : The reading
+ *
+ * return status   : I2C_ERR_NONE or ICOG_WRITE_ERROR
+ ******************************************************************************/
+int icogReadDataByte(int *i2cbus, int dataaddress, int *byte);
 
 #endif /* ICOGLS1FUNCTIONS_H */
 

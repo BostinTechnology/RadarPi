@@ -85,6 +85,9 @@ void helpScreen(void) {
 
 void fullTestRoutine(void) {
     printf("To Be implemented\n");
+    // Set to just return at present so it can be used by others.
+    return;
+    
     FILE    *ptr_testfile;
     char    testfilename[MAX_FILE_LENGTH];
     int         status;
@@ -165,18 +168,35 @@ void cycleLEDs(void) {
 
 
 void e2promTest(void) {
-    printf("To Be implemented\n");
+    printf("Testing Id-IoT chip\n");
+    
+    int     idioti2cbus = 0;
+    int     status = ERROR_NONE;
+    int     dataaddress = 0x2A;
+    int     testvalue = 0x42;
+    int     valueread = 0;
+    
+    status = icogIDIoTI2CInitialisation(&idioti2cbus);
+    if (status == ERROR_NONE) {
+        // Initialisation successful
+        status = icogSetDataByte(&idioti2cbus, dataaddress, testvalue);
+        if (status == ERROR_NONE) {
+            // Written data
+            status = icogReadDataByte(&idioti2cbus, dataaddress, &valueread);
+            if (status == ERROR_NONE) {
+                //validate values
+                if (testvalue != valueread) {
+                    printf("Failed to read and write value for the ID-IoT Chip\n");
+                }
+                else {
+                    printf("Read and Write test of ID-Iot Test Passed\n");
+                }
+            }
+        }
+    }
     
     return;
     
-}
-
-// Routine added to provide testing
-int lightReading(float *reading) {
-    printf("Not Yet completed, in progress\n");
-    
-    *reading = 0.12;
-    return 0;
 }
 
 void displayReadingsTest(void) {
@@ -186,6 +206,7 @@ void displayReadingsTest(void) {
     int         gaincount = 0, qtygainreadings = 4;
     int         testgainvalues[4][2] = { {0b0000, 1}, {0b0001, 10}, {0b0100, 40}, {0b1000, 157}	};
     time_t	    currenttime, starttime;
+    int         i2cbus = 0;
     
     systemloop = true;
     printf("Display Readings Test\n");
@@ -195,10 +216,17 @@ void displayReadingsTest(void) {
     status = gainSPiInitialisation();
     status += setGainControl(testgainvalues[gaincount][0]);
     status += gainSPiEnd();
+    
+    status += icogI2CInitialisation (&i2cbus);
+    status += icogSetADCResolution(&i2cbus, ICOG_SET_ADC_16);
+    status += icogSetFSRRange(&i2cbus, ICOG_SET_FSR_16K);
+    status += icogSetALSContinuousMode(&i2cbus);
+
+
 
     do {
 
-        status += lightReading(&light);
+        status += icogFastCalculateLux(&i2cbus, ICOG_FSR_READING_16K, ICOG_ADC_MODE_2_16, &light);
         status += readVoltage(&adc);
         status += returnFullFrequency(&digital, IF_OUT_DIGITAL); //IF_OUT_TO_PI);
         printf("\rLight:%10.3f  ADC:%10.6f  Digital:%11.6f  Gain:%3d", light, adc, digital, testgainvalues[gaincount][1]);
@@ -347,6 +375,35 @@ void debugtest() {
     return;
 }
 
+void fastLuxTest() {
+    // Light Sensor Value
+    int         status = ERROR_NONE;
+    float       light = 0.0;
+
+    int         i2cbus = 0;
+    
+    systemloop = true;
+    printf("FAST Lux Readings Test\n");
+    
+    printf("CTRL - C to end loop\n");
+    
+    status += icogI2CInitialisation (&i2cbus);
+    status += icogSetADCResolution(&i2cbus, ICOG_SET_ADC_16);
+    status += icogSetFSRRange(&i2cbus, ICOG_SET_FSR_16K);
+    status += icogSetALSContinuousMode(&i2cbus);
+
+    do {
+
+        status += icogFastCalculateLux(&i2cbus, ICOG_FSR_READING_16K, ICOG_ADC_MODE_2_16, &light);
+        printf("\rLight:%10.3f\n", light);
+        fflush(stdout);     // Test if this line is required or if the \n above works
+
+    } while ((systemloop) && (status == ERROR_NONE));
+    
+    return;
+    
+}
+
 void icogTest() {
     
     int     i2cbus = 0;
@@ -438,7 +495,7 @@ void icogTest() {
     do {
         printf("    %5d ", adcmodes[adccount]);
         do {
-            printf("\ %11f ", luxvalues[fsrcount][adccount]);
+            printf("\\ %11f ", luxvalues[fsrcount][adccount]);
             fsrcount ++;
         } while (fsrcount < 4);
         fsrcount = 0;
@@ -517,7 +574,11 @@ int main(int argc, char** argv) {
                 debugtest();
                 break;
             
-
+            case 't':
+                printf("Debug Bit.......\n");
+                fastLuxTest();
+                break;
+                
             default:
                 printf("Unrecognised command!:>%c<\n", option);
                 break;

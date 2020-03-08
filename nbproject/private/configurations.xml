@@ -69,8 +69,6 @@
           <in>utilities.h</in>
         </df>
         <df name="src">
-          <in>OLDadcTest.c</in>
-          <in>OLDmainTestProgram.c</in>
           <in>adcTest.c</in>
           <in>fileHandling.c</in>
           <in>mainTestProgram.c</in>
