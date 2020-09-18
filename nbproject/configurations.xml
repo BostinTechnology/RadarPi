@@ -15,6 +15,8 @@
           <in>gpioFunctions.c</in>
           <in>icogLs1Functions.c</in>
           <in>ledControl.c</in>
+          <in>newfile.cpp</in>
+          <in>newmain.c</in>
           <in>radar.c</in>
           <in>rdr_gpio_control.c</in>
           <in>rdr_i2c_comms.c</in>
@@ -58,6 +60,7 @@
       <itemPath>nbproject/private/launcher.properties</itemPath>
       <itemPath>makefile</itemPath>
     </logicalFolder>
+    <itemPath>setup.sh</itemPath>
   </logicalFolder>
   <sourceFolderFilter>^(nbproject)$</sourceFolderFilter>
   <sourceRootList>
@@ -67,7 +70,7 @@
   <confs>
     <conf name="Default" type="0">
       <toolsSet>
-        <compilerSet>default</compilerSet>
+        <compilerSet>GNU|GNU</compilerSet>
         <dependencyChecking>false</dependencyChecking>
         <rebuildPropChanged>false</rebuildPropChanged>
       </toolsSet>
@@ -191,6 +194,10 @@
         <cTool flags="0">
         </cTool>
       </item>
+      <item path="common/src/newfile.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="common/src/newmain.c" ex="false" tool="0" flavor2="0">
+      </item>
       <item path="common/src/radar.c" ex="false" tool="0" flavor2="0">
         <cTool flags="0">
         </cTool>
@@ -249,6 +256,8 @@
           </incDir>
         </cTool>
       </folder>
+      <item path="setup.sh" ex="false" tool="3" flavor2="0">
+      </item>
     </conf>
   </confs>
 </configurationDescriptor>

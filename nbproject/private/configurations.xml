@@ -31,6 +31,8 @@
           <in>gpioFunctions.c</in>
           <in>icogLs1Functions.c</in>
           <in>ledControl.c</in>
+          <in>newfile.cpp</in>
+          <in>newmain.c</in>
           <in>radar.c</in>
           <in>rdr_gpio_control.c</in>
           <in>rdr_i2c_comms.c</in>
@@ -90,6 +92,7 @@
       <in>default_header.c</in>
       <in>default_header.h</in>
     </df>
+    <itemPath>setup.sh</itemPath>
   </logicalFolder>
   <projectmakefile>makefile</projectmakefile>
   <confs>
