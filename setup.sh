@@ -1,12 +1,10 @@
-#!/bin/sh
+#!/bin/bash
 # 
 # File:   setup.sh
 # Author: matthew
 #
 # Created on 18-Sep-2020, 08:19:56
 #
-
-#!/bin/bash
 
 
 # Colour Scheme
@@ -21,7 +19,7 @@
 
 
 # removed -o errexit  so I can trap errors manually.
-set -o nounset -o noclobber -o pipefail
+set -o nounset -o noclobber
 
 # Variable declarations
 APPS="gnuplot glade libcairo2-dev libgtk-3-dev"
@@ -30,6 +28,7 @@ DEBUG=0
 
 COMMAND_LINE_ARGS=""
 RUNNING_FUNCTION=""
+CURRENT_USER=""
 
 # This function requires an additional parameter to be passed that is the task it was performing
 # before it failed.
