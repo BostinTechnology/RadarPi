@@ -127,6 +127,32 @@ install_gtk()
 
 }
 
+install_bcm2835()
+{
+    if [ "$DEBUG" == 1 ]; then
+        echo -e "\e[97;105mInstalling bcm2835 libaries .....\e[0m"
+    fi
+    mkdir -p ~/tmp
+    cd ~/tmp
+    wget http://www.airspayce.com/mikem/bcm2835/bcm2835-1.58.tar.gz
+    if [ $? != 0 ]; then
+        error_encountered "downloading bcm2835"
+    fi
+    tar zxvf bcm2835-1.58.tar.gz
+    cd bcm2835-1.58
+    ./configure
+    make
+    sudo make check
+    sudo make install
+    if [ $? != 0 ]; then
+        error_encountered "building and installing bcm2835"
+    fi
+    rm -Rf ~/tmp
+
+    echo -e "\e[1;97;42m.\e[0m"
+}
+
+
 #Display information about how to use the script
 usage()
 {
@@ -214,6 +240,7 @@ fi
 
 system_update
 comms_setup
+install_bcm2835
 install_apps
 
 make
