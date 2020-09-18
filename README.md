@@ -16,6 +16,10 @@ By default, when the repository is compiled, executables are in the */build* dir
 
 Due to the low level communications used, all the applications need to be run using elevated privileges.
 
+To setup and compile the application, simply run ```setup.sh``` from the RadarPi directory. This will install
+the required libaries for the application, and compile the code. Once compiled, the applications are located
+in the **build** directory
+
 ## Licence
 This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
