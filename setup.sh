@@ -237,11 +237,12 @@ if [ "$DEBUG" == 1 ]; then
     debug
 fi
 
-system_update
-comms_setup
-install_bcm2835
-install_apps
+#system_update
+#comms_setup
+#install_bcm2835
+#install_apps
 
+echo $(dirname $0)
 make
 
 echo -e "\e[1;97;42m*************************************************************************\e[0m"
