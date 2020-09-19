@@ -218,7 +218,7 @@ set_user()
     fi
 
 }
-#------------------------------------------------------------------------------
+#-------------------git add *-----------------------------------------------------------
 #
 #  MAIN
 #
@@ -237,10 +237,10 @@ if [ "$DEBUG" == 1 ]; then
     debug
 fi
 
-#system_update
-#comms_setup
-#install_bcm2835
-#install_apps
+system_update
+comms_setup
+install_bcm2835
+install_apps
 
 echo $(dirname $0)
 make
