@@ -47,6 +47,9 @@
 #define		MAX_WAIT_TIME		2		// The maximum time allowed to register a GPIO state time in seconds.
 #define		FREQ_DEBOUNCE_TIME	500		// The time in microseconds to wait for the check time
 
+#define     THRESHOLD           100     // The frequency in Hz above which it is considered to be triggered
+#define     LED_BLINK_TIME      0.25    // The time in seconds that the LED flashes for when detected.
+
 
 
 

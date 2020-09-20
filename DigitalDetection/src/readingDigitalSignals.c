@@ -32,6 +32,7 @@
 #include <unistd.h>
 
 #include "../../common/inc/radar.h"
+#include "../inc/utilities.h"
 
 
 
@@ -208,8 +209,13 @@ void readValuesContinously(void)
     int	        pin;
     float       frequency;
     int         status;
+    time_t		ledstarttime;
+    
+    systemloop = true;
 
-    printf("DEBUG: Into read Values Continously\n");
+    printf("DEBUG: Into read Values Continuously\n");
+    printf("CTRL - C to end loop\n");
+
 	
     pin = chooseGPIOPin();
 	
@@ -223,8 +229,20 @@ void readValuesContinously(void)
         {
             status = returnFullFrequency(&frequency, pin);
             printf("Output of Frequency:%f\n", frequency);
-        } while (status == 0);
-    }    
+            
+            // Add in LED control here. It needs to be non blocking though, 
+            if (frequency > THRESHOLD) {
+                starttime = clock();
+                controlTriggeredLED(LED_ON);
+            }
+            if (clock() > (starttime + (LED_BLINK_TIME * CLOCKS_PER_SEC))) {
+                controlTriggeredLED(LED_OFF);
+            }
+        } while ((systemloop) && (status == ERROR_NONE));
+    }
+    else {
+        printf("Incorrect pin chosen, returning\n");
+    }
     return;
 }
 
@@ -245,6 +263,8 @@ void createDataset(void) {
     struct		readings dataset[max_readings];
     FILE        *gnu_plot = prepare_plot();         // create instance for plotting
     int         status;
+    time_t		ledstarttime;
+
 
 	pin = chooseGPIOPin();
 
@@ -267,6 +287,13 @@ void createDataset(void) {
             dataset[i].readtime = testcurrenttime;
             //printf("Dataset:%d  Test Time:%ld  frequency:%d\n", dataset[i].element, dataset[i].readtime, dataset[i].frequency);
             i++;
+        }
+        if (frequency > THRESHOLD) {
+            ledstarttime = clock();
+            controlTriggeredLED(LED_ON);
+        }
+        if (clock() > (ledstarttime + (LED_BLINK_TIME * CLOCKS_PER_SEC))) {
+            controlTriggeredLED(LED_OFF);
         }
     } while ((testcurrenttime < testendtime) & (i < max_readings));
 

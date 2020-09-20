@@ -41,18 +41,22 @@
       </df>
       <df name="DigitalDetection">
         <df name="inc">
+          <in>utilities.h</in>
         </df>
         <df name="python">
         </df>
         <df name="src">
           <in>readingDigitalSignals.c</in>
+          <in>utilities.c</in>
         </df>
       </df>
       <df name="GainControl">
         <df name="inc">
+          <in>utilities.h</in>
         </df>
         <df name="src">
           <in>settingGainControl.c</in>
+          <in>utilities.c</in>
         </df>
       </df>
       <df name="SampleSoftware">
@@ -91,6 +95,7 @@
       </df>
       <in>default_header.c</in>
       <in>default_header.h</in>
+      <in>utilities.c</in>
     </df>
     <itemPath>setup.sh</itemPath>
   </logicalFolder>
