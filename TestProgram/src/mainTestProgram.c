@@ -258,7 +258,7 @@ void rangeTest(void) {
     // Loop for the gain values
     //  measure the adc and if above threshold, flash the led 
     // ADC Output, Digital Frequency, Gain Setting
-    int         status;
+    int         status = 0;
     float       adc = 0.0, digital = 0.0;
     int         gaincount = 0, qtygainreadings = 4;
     int         rangecount = 0, qtyrangevalues = 4;
@@ -271,7 +271,7 @@ void rangeTest(void) {
     
     printf("CTRL - C to end loop\n");
 
-    if (ledSetup()) {
+    if (ledSetup() == LED_ERR_NONE) {
         controlRunningLED(LED_OFF);
         controlMonitoringLED(LED_OFF);
         controlTriggeredLED(LED_OFF);
@@ -297,32 +297,33 @@ void rangeTest(void) {
         do {
             status += readVoltage(&adc);
             status += returnFullFrequency(&digital, IF_OUT_DIGITAL); //IF_OUT_TO_PI);
+            //printf("DEBUG: Status:%d\n", status);
 
-            printf("\rDistance:%4.0f  ADC:%10.6f  Digital:%11.6f  Gain:%3d", 
+            printf("\rDistance:%4.1f  ADC:%10.6f  Digital:%11.6f  Gain:%3d", 
                     distadcfreq[rangecount][0], adc, digital, testgainvalues[gaincount][1]);
             fflush(stdout);     // Test if this line is required or if the \n above works
             
             // Validate the results
             if (adc > distadcfreq[rangecount][1]) {
-                printf("triggered ADC");
+                printf("\ntriggered ADC\n");
                 controlMonitoringLED(LED_OFF);
                 controlTriggeredLED(LED_ON);
-                usleep(250);
+                usleep(250 * 1000);
                 controlMonitoringLED(LED_ON);
                 controlTriggeredLED(LED_OFF);
                 testpassed = true;
             };
             if (digital > distadcfreq[rangecount][2]) {
-                printf("triggered Frequency");
+                printf("\ntriggered Frequency\n");
                 controlMonitoringLED(LED_OFF);
                 controlTriggeredLED(LED_ON);
-                usleep(250);
+                usleep(250 * 1000);
                 controlMonitoringLED(LED_ON);
                 controlTriggeredLED(LED_OFF);
                 testpassed = true;
             };
             currenttime = clock();
-        } while ((testpassed == false) || (currenttime < (starttime + (TEST_TIMEOUT * CLOCKS_PER_SEC))));
+        } while ((systemloop) &&  ((testpassed == false) || (currenttime < (starttime + (TEST_TIMEOUT * CLOCKS_PER_SEC)))));
         
         printf("\nNext gain value\n\n");
 

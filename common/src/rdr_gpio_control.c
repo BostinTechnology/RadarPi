@@ -32,6 +32,7 @@ int gpio_init() {
   
   int gpio_mem;
   //void *gpio_map;
+  //printf("DEBUG: Initialising GPIO memory\n");
   
   // Open the map
   gpio_mem = open("/dev/gpiomem", O_RDWR | O_SYNC);

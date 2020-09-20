@@ -37,9 +37,12 @@ int ledSetup(void)
     
 	status = gpio_init();
 	
+    //printf("DEBUG: Status after init:%d\n", status);
     status += set_gpio_for_output(LED_RUNNING);
 	status += set_gpio_for_output(LED_MONITORING);
 	status += set_gpio_for_output(LED_TRIGGERED);
+
+    //printf("DEBUG: Status after set for output:%d\n", status);
 	
     if (status == GPIO_EXIT_SUCCESS) {
     	status += set_gpio_value(LED_RUNNING,LED_OFF);
@@ -49,6 +52,8 @@ int ledSetup(void)
     if (status != GPIO_EXIT_SUCCESS) {
         status = LED_ERR_SETUP;
     };
+        //printf("DEBUG: Final Status:%d\n", status);
+
 	return status;
 }
 
@@ -71,7 +76,8 @@ int controlRunningLED(int state)
     if (status != GPIO_EXIT_SUCCESS) {
         status = LED_ERR_SET_LED_RUNNING;
     };
-	return status;
+    //printf("DEBUG: controlRunningLED returned status:%d\n", status);
+    return status;
 }
 
 
