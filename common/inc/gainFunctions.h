@@ -145,7 +145,7 @@ CommsRetCode setGainControl(int gain_setting);
  * return NOTHING         : No response
  *****************************************************************************
  */
-void selectGainValueMenu(void);
+int selectGainValueMenu(void);
 
 /*!
  *****************************************************************************
@@ -155,7 +155,7 @@ void selectGainValueMenu(void);
  *
  * param[in/out] ?? : nothing 
  *
- * return none   : nothing
+ * return none   : chosen gain value - 99 for exit
  *****************************************************************************
  */
 CommsRetCode gainSPiEnd(void);
@@ -170,7 +170,7 @@ CommsRetCode gainSPiEnd(void);
  *
  * param[in]	nothing   : 
  *
- * return NOTHING         : No response
+ * return NOTHING         : noting
  *****************************************************************************
  */
 void setGainDefaultValue(void);

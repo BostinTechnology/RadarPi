@@ -23,5 +23,5 @@ void waitTimer(float duration);				//wait for the given time (float)
 void sigHandler(int sig);
 void sigSetup(void);
 
-#endif /* RDR_UTILITIES_H */
+#endif /* UTILITIES_H */
 

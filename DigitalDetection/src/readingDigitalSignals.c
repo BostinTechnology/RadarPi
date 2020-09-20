@@ -232,13 +232,13 @@ void readValuesContinously(void)
             
             // Add in LED control here. It needs to be non blocking though, 
             if (frequency > THRESHOLD) {
-                starttime = clock();
+                ledstarttime = clock();
                 controlTriggeredLED(LED_ON);
             }
-            if (clock() > (starttime + (LED_BLINK_TIME * CLOCKS_PER_SEC))) {
+            if (clock() > (ledstarttime + (LED_BLINK_TIME * CLOCKS_PER_SEC))) {
                 controlTriggeredLED(LED_OFF);
             }
-        } while ((systemloop) && (status == ERROR_NONE));
+        } while ((systemloop) && (status == LED_ERR_NONE));
     }
     else {
         printf("Incorrect pin chosen, returning\n");

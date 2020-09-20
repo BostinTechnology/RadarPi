@@ -53,7 +53,6 @@
 #include <time.h>           // to enable time functions
 
 #include "../../common/inc/radar.h"
-#include "../inc/utilities.h"
 
 // Creates a dataset that includes a voltage float value and a time based time value
 struct readings {
@@ -96,21 +95,18 @@ int splashscreen(void)
 
 int main(int argc, char** argv) {
 
-    systemloop = true;
+    int chosen = 0;
     
-    //gainSPiInitialisation();
     // main menu
 
     printf(" \n\n");
     printf("**************************************************************************\n");
     printf("Setting Gain Control \n\n");
-    printf("CTRL - C to end loop\n");
 
     do {
-        selectGainValueMenu();
+        chosen = selectGainValueMenu();
     
-    } while (systemloop);
-    //gainSPiEnd();
+    } while (chosen != 99);
     
     return 0;
 }

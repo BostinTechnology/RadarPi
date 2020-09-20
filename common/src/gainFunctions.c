@@ -94,7 +94,7 @@ CommsRetCode setGainControl(int gain_setting) {
 };
 
 //ToDo: This function should be in the setting gain program 
-void selectGainValueMenu(void) {
+int selectGainValueMenu(void) {
 	
 	int				i;
 	char			option[5];
@@ -104,16 +104,16 @@ void selectGainValueMenu(void) {
 	ret = gainSPiInitialisation();
 	
 	if (ret != SPI_ERR_NONE) {
-		return;
+		return 99;
 	}
 	
 	printf("Choose the Gain Setting desired:\n\n");
-	printf("Choice	Gain Value\n");
-	for(i=0; i < qtyGainValues; i++) {
-		printf("%d	-	%s\n", i, gainValues[i].description);
-	};
-	printf("99	-	return to main menu\n");
 	do {
+		printf("Choice	Gain Value\n");
+		for(i=0; i < qtyGainValues; i++) {
+			printf("%d	-	%s\n", i, gainValues[i].description);
+		};
+		printf("99	-	return to main menu\n");
 		fgets(option, 5, stdin);
 		//getchar();			//consumes the extra enter - not sure this is needed
 		choice = atoi (option);
@@ -126,12 +126,12 @@ void selectGainValueMenu(void) {
 			printf("		Gain applied      :%d\n", gainValues[choice].gain);
 			ret = setGainControl(gainValues[choice].value);
 			printf("Gain has been set\n\n");
-			choice = 99;				// exit the loop now the gain has been set
+			//choice = 99;				// exit the loop now the gain has been set
 		}
 	} while (choice != 99);
 	
 	ret = gainSPiEnd();
-	return;
+	return choice;
 };
 
 //ToDo: Maybe this should also be in the setting gain control

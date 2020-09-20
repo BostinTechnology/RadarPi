@@ -78,6 +78,7 @@ LDLIBS_settingGainControl = $(USERLIBS_settingGainControl)
 # ----------------------------------------------------------------------------------------------------------------
 OBJS_digitalDetection =  \
 	$(OBJS_common) \
+	$(TARGETDIR_ALL)/utilities.o \
 	$(TARGETDIR_ALL)/readingDigitalSignals.o
 USERLIBS_digitalDetection = -lbcm2835  -lwiringPi
 DEPLIBS_digitalDetection =  
