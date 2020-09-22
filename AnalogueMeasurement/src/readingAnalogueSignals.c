@@ -24,6 +24,7 @@
 #include <time.h>           // to enable time functions
 
 #include "../../common/inc/radar.h"
+#include "../inc/utilities.h"
 
 
 /*
@@ -154,13 +155,16 @@ void readValuesContinously(void)
     printf("DEBUG: Into read Values Continuously\n");
     float           voltage;
     int             status;
+    
+    systemloop = true;
 
     printf("Reading Values\n");
+    printf("CTRL-C to exit");
     do
     {
         status = readVoltage(&voltage);
         printf("Output from A-D:%f\n", voltage);
-    } while (!status);
+    } while ((systemloop) && (status == ERROR_NONE)); //(!status);
     
     return;
 }
