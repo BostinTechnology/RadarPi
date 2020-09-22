@@ -57,6 +57,7 @@ LDLIBS_testProgram = $(USERLIBS_testProgram)
 # ----------------------------------------------------------------------------------------------------------------
 OBJS_analogueMeasurement =  \
 	$(OBJS_common) \
+	$(TARGETDIR_ALL)/utilities.o \
 	$(TARGETDIR_ALL)/readingAnalogueSignals.o
 USERLIBS_analogueMeasurement = -lbcm2835  -lwiringPi
 DEPLIBS_analogueMeasurement =  

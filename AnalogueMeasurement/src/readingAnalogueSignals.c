@@ -23,8 +23,8 @@
 #include <bcm2835.h>        // hardware definition library file
 #include <time.h>           // to enable time functions
 
-#include "../../common/inc/radar.h"
 #include "../inc/utilities.h"
+#include "../../common/inc/radar.h"
 
 
 /*
@@ -164,7 +164,7 @@ void readValuesContinously(void)
     {
         status = readVoltage(&voltage);
         printf("Output from A-D:%f\n", voltage);
-    } while ((systemloop) && (status == ERROR_NONE)); //(!status);
+    } while ((systemloop) && (status == ADC_EXIT_SUCCESS)); //(!status);
     
     return;
 }
